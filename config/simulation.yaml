@@ -68,6 +68,8 @@ sensors:
   desk_vacancy_timeout_s: 180
   # Share of desks fitted with an occupancy sensor (0-1).
   desk_sensor_coverage: 1.0
+  # Installation date recorded on every generated sensor.
+  installed_at: "2025-01-01"
 
 batch:
   # Environment reading interval for historical generation (seconds).

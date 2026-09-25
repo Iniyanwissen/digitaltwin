@@ -20,12 +20,13 @@ def test_health_reports_all_components(client) -> None:
     assert set(body["components"]) == {
         "config",
         "database",
+        "master_data",
         "event_bus",
         "state_store",
         "simulation_engine",
         "event_processor",
     }
-    assert body["components"]["database"]["info"]["schema_revision"] == "0001_baseline"
+    assert body["components"]["database"]["info"]["schema_revision"] == "0002_master_config_sim_ops"
 
 
 def test_health_is_down_without_migrations(settings) -> None:

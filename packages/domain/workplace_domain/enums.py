@@ -163,6 +163,49 @@ class SimCommand(StrEnum):
     GENERATE_HISTORY = "GENERATE_HISTORY"
 
 
+class EmploymentType(StrEnum):
+    FULL_TIME = "FULL_TIME"
+    CONTRACTOR = "CONTRACTOR"
+    INTERN = "INTERN"
+
+
+class PlannedMode(StrEnum):
+    OFFICE = "OFFICE"
+    REMOTE = "REMOTE"
+    FLEX = "FLEX"
+
+
+class AccessDirection(StrEnum):
+    IN = "IN"
+    OUT = "OUT"
+    IN_OUT = "IN_OUT"
+
+
+class SpaceStatus(StrEnum):
+    ACTIVE = "ACTIVE"
+    UNAVAILABLE = "UNAVAILABLE"
+
+
+class SensorType(StrEnum):
+    DESK_OCCUPANCY = "DESK_OCCUPANCY"
+    ROOM_COUNT = "ROOM_COUNT"
+    ENVIRONMENT = "ENVIRONMENT"
+
+
+class SensorTarget(StrEnum):
+    WORKSPACE = "WORKSPACE"
+    ROOM = "ROOM"
+    ZONE = "ZONE"
+
+
+class MetricType(StrEnum):
+    TEMPERATURE = "TEMPERATURE"
+    HUMIDITY = "HUMIDITY"
+    CO2 = "CO2"
+    LIGHT = "LIGHT"
+    NOISE = "NOISE"
+
+
 class ComponentStatus(StrEnum):
     OK = "ok"
     DEGRADED = "degraded"

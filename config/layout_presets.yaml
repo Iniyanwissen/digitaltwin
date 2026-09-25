@@ -1,0 +1,66 @@
+# Presets for the LayoutGenerator, which writes explicit layout files into config/layouts/.
+# Regenerate a layout with:  uv run python -m twin_server layout --preset medium
+# Every floor is a grid of modules: a top row and a bottom row of `modules_per_row` modules,
+# separated by a corridor. Top row: desk zones + 1 meeting zone. Bottom row: desk zones +
+# 1 meeting zone + 1 amenity (cafeteria on floor 1, cabins on assigned floors, else
+# collaboration/lounge alternating). Units are metres.
+
+# Seats per meeting room type.
+room_capacity: { SMALL_MEETING: 4, MEDIUM_MEETING: 8, LARGE_CONFERENCE: 14, AUDITORIUM: 80 }
+# Capacity of each amenity common area.
+amenity_capacity: { CAFETERIA: 150, COLLABORATION: 40, LOUNGE: 30 }
+
+presets:
+  small:
+    building_id: BLD01
+    building_name: Building A
+    floors: 2
+    modules_per_row: 3
+    module_width: 30          # metres per module
+    module_depth: 27
+    corridor_depth: 6
+    desk_rows: 4              # desks per desk zone = desk_rows x desk_cols
+    desk_cols: 6
+    desk_pitch_x: 4.0
+    desk_pitch_y: 5.5
+    room_mix: [SMALL_MEETING, MEDIUM_MEETING, SMALL_MEETING, LARGE_CONFERENCE]
+    cabins_per_block: 4
+    assigned_floors: [2]      # floors with ASSIGNED desk policy; others are HOT_DESK
+    entrances: 1
+    occupancy_factor: 1.3     # floor max occupancy = workspaces x factor
+
+  medium:
+    building_id: BLD01
+    building_name: Building A
+    floors: 4
+    modules_per_row: 4
+    module_width: 30
+    module_depth: 27
+    corridor_depth: 6
+    desk_rows: 5
+    desk_cols: 8
+    desk_pitch_x: 3.4
+    desk_pitch_y: 4.8
+    room_mix: [SMALL_MEETING, SMALL_MEETING, MEDIUM_MEETING, MEDIUM_MEETING, LARGE_CONFERENCE, SMALL_MEETING]
+    cabins_per_block: 8
+    assigned_floors: [4]
+    entrances: 2
+    occupancy_factor: 1.3
+
+  large:
+    building_id: BLD01
+    building_name: Building A
+    floors: 6
+    modules_per_row: 6
+    module_width: 30
+    module_depth: 27
+    corridor_depth: 6
+    desk_rows: 5
+    desk_cols: 8
+    desk_pitch_x: 3.4
+    desk_pitch_y: 4.8
+    room_mix: [SMALL_MEETING, SMALL_MEETING, MEDIUM_MEETING, MEDIUM_MEETING, LARGE_CONFERENCE, SMALL_MEETING]
+    cabins_per_block: 8
+    assigned_floors: [5, 6]
+    entrances: 3
+    occupancy_factor: 1.3

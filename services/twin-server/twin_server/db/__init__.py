@@ -30,13 +30,24 @@ def create_db_engine(url: str) -> Engine:
     return engine
 
 
-def run_migrations(url: str) -> None:
+def _alembic_config(url: str) -> AlembicConfig:
     if url.startswith("sqlite:///"):
         Path(url.removeprefix("sqlite:///")).parent.mkdir(parents=True, exist_ok=True)
     cfg = AlembicConfig()
     cfg.set_main_option("script_location", str(_MIGRATIONS_DIR))
     cfg.set_main_option("sqlalchemy.url", url)
+    return cfg
+
+
+def run_migrations(url: str) -> None:
+    command.upgrade(_alembic_config(url), "head")
+
+
+def create_revision(url: str, message: str, rev_id: str | None = None) -> None:
+    """Autogenerate a migration by diffing db/tables.py against an up-to-date database."""
+    cfg = _alembic_config(url)
     command.upgrade(cfg, "head")
+    command.revision(cfg, message=message, autogenerate=True, rev_id=rev_id)
 
 
 def check_database(engine: Engine) -> ComponentHealth:

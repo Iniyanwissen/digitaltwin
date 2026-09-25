@@ -1,0 +1,75 @@
+# Organization used to generate synthetic master data (departments, teams, employees).
+# Validated by workplace_domain.config.organization.OrganizationConfig.
+
+org_id: ORG01
+name: Northwind Technologies
+# Domain for generated employee emails (reserved .example TLD, never routable).
+email_domain: northwind.example
+
+# Departments. `share` is the fraction of employees (must sum to 1.0).
+# `lead_role` is given to each team's lead; other members draw from `roles`.
+departments:
+  - { code: ENG, name: Engineering, share: 0.36, lead_role: Engineering Manager,
+      roles: [Software Engineer, Senior Software Engineer, QA Engineer, DevOps Engineer] }
+  - { code: PRD, name: Product, share: 0.08, lead_role: Group Product Manager,
+      roles: [Product Manager, Product Owner, Business Analyst] }
+  - { code: DES, name: Design, share: 0.05, lead_role: Design Lead,
+      roles: [Product Designer, UX Researcher] }
+  - { code: DAT, name: Data & Analytics, share: 0.10, lead_role: Analytics Manager,
+      roles: [Data Engineer, Data Analyst, Data Scientist] }
+  - { code: SAL, name: Sales, share: 0.13, lead_role: Sales Manager,
+      roles: [Account Executive, Sales Development Rep, Solutions Consultant] }
+  - { code: MKT, name: Marketing, share: 0.07, lead_role: Marketing Manager,
+      roles: [Marketing Specialist, Content Strategist, Growth Analyst] }
+  - { code: FIN, name: Finance, share: 0.06, lead_role: Finance Manager,
+      roles: [Financial Analyst, Accountant] }
+  - { code: PPL, name: People, share: 0.05, lead_role: HR Business Partner,
+      roles: [Recruiter, People Operations Specialist] }
+  - { code: OPS, name: Operations, share: 0.10, lead_role: Operations Manager,
+      roles: [Operations Analyst, Facilities Coordinator, IT Support Engineer] }
+
+# Team sizes within a department (people per team).
+team_size: { min: 6, mean: 10, max: 16 }
+
+# Team display names, assigned in shuffled order. A number is appended if teams outnumber names.
+team_names: [Atlas, Beacon, Cobalt, Delta, Ember, Falcon, Granite, Harbor, Iris, Juniper,
+  Kestrel, Lumen, Meridian, Nimbus, Orion, Pioneer, Quartz, Raven, Summit, Tundra,
+  Umbra, Vertex, Willow, Xenon, Yarrow, Zephyr, Aurora, Basalt, Cedar, Dune, Echo, Fjord,
+  Glacier, Helix, Indigo, Jade, Keystone, Lotus, Monsoon, Nova, Onyx, Prism, Quill, Ridge,
+  Sierra, Tidal, Unity, Vega, Wren, Zenith, Anchor, Blaze, Comet, Drift, Everest, Flint,
+  Garnet, Horizon, Ivy, Jasper, Kite, Lagoon, Mosaic, Nectar, Opal, Pulse, Quasar, Rover,
+  Sable, Topaz, Umber, Vista, Wave, Axis, Birch, Canyon, Dynamo, Ellipse, Forge, Gale,
+  Haven, Inlet, Jetty, Kinetic, Lynx, Magnet, Nexus, Oasis, Pixel, Relay, Signal, Tempo,
+  Upland, Vortex, Wharf, Yield, Zinc, Apex, Bolt, Crest, Delta Ray, Evergreen, Frontier]
+
+# Team office days: each team gets count_min..count_max weekdays, drawn with these weights.
+office_days:
+  count_min: 2
+  count_max: 3
+  weekday_weights: { MON: 0.12, TUE: 0.28, WED: 0.30, THU: 0.25, FRI: 0.05 }
+
+# Planned weekly pattern for HYBRID employees.
+work_pattern:
+  # Probability a hybrid employee plans OFFICE on one of the team's office days (else FLEX).
+  hybrid_office_on_team_day: 0.85
+  # Probability a hybrid employee plans REMOTE on other weekdays (else FLEX).
+  hybrid_remote_on_other_day: 0.65
+
+# Share of employees per employment type. Must sum to 1.0.
+employment_type_mix: { FULL_TIME: 0.85, CONTRACTOR: 0.10, INTERN: 0.05 }
+
+# Hire dates are drawn uniformly in this range.
+hire_date_range: { start: "2014-01-01", end: "2026-06-30" }
+
+# Bundled name lists for synthetic employees (combined at random, seeded).
+first_names: [Aarav, Aditi, Akash, Ananya, Arjun, Bhavna, Chetan, Deepa, Dev, Divya,
+  Farhan, Gauri, Harsh, Ishaan, Isha, Jaya, Karan, Kavya, Lakshmi, Manish, Meera, Neha,
+  Nikhil, Pooja, Priya, Rahul, Riya, Rohan, Sahil, Sanjana, Shreya, Siddharth, Sneha,
+  Tanvi, Varun, Vikram, Yash, Zoya, Alex, Amelia, Benjamin, Chloe, Daniel, Elena, Ethan,
+  Fatima, Grace, Hannah, Hiro, Ibrahim, Jonas, Julia, Kenji, Leila, Liam, Lucia, Mateo,
+  Maya, Noah, Olivia, Omar, Ravi, Sara, Sofia, Thomas, Wei, Yuki, Zara]
+last_names: [Agarwal, Bhat, Chandra, Das, Desai, Gupta, Iyer, Jain, Joshi, Kapoor, Khan,
+  Kulkarni, Kumar, Menon, Mehta, Mishra, Nair, Patel, Pillai, Rao, Reddy, Saxena, Shah,
+  Sharma, Singh, Srinivasan, Subramaniam, Varma, Verma, Yadav, Anderson, Brown, Chen,
+  Costa, Fischer, Garcia, Hughes, Ito, Kim, Lopez, Martin, Müller, Nguyen, Novak, Okafor,
+  Rossi, Santos, Schmidt, Silva, Tanaka, Taylor, Walker, Wang, Wilson, Zhang]

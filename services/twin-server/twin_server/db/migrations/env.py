@@ -5,13 +5,15 @@ from __future__ import annotations
 from alembic import context
 from sqlalchemy import create_engine
 
+from twin_server.db.tables import metadata
+
 config = context.config
 _url = config.get_main_option("sqlalchemy.url")
 if not _url:
     raise RuntimeError("sqlalchemy.url is not set")
 url: str = _url
 
-target_metadata = None  # models arrive in Phase 2
+target_metadata = metadata
 
 
 def run_offline() -> None:

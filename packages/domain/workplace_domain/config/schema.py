@@ -7,7 +7,7 @@ silently ignored. Business logic reads these values; nothing is hardcoded elsewh
 from __future__ import annotations
 
 from collections.abc import Iterable
-from datetime import time
+from datetime import date, time
 from typing import Annotated
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
@@ -111,6 +111,7 @@ class SensorsConfig(_Strict):
     environment_poll_interval: PositiveInt
     desk_vacancy_timeout_s: PositiveInt
     desk_sensor_coverage: Probability
+    installed_at: date
 
 
 class BatchConfig(_Strict):

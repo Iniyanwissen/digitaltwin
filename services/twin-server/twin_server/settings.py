@@ -28,6 +28,9 @@ class Settings(BaseSettings):
     # Wall-clock interval for service heartbeat log lines (operational only).
     heartbeat_interval_s: float = 30.0
 
+    # Generate master data at startup when missing or when config/ changed.
+    auto_seed: bool = True
+
     @property
     def resolved_database_url(self) -> str:
         if self.database_url:

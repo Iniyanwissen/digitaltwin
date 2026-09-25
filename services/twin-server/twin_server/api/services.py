@@ -21,12 +21,20 @@ def _out(h: ComponentHealth) -> ComponentHealthOut:
     return ComponentHealthOut(status=h.status, detail=h.detail, info=dict(h.info))
 
 
+def _master_health(ctx: AppContext) -> ComponentHealth:
+    try:
+        return ctx.master.health()
+    except Exception as exc:
+        return ComponentHealth(ComponentStatus.DOWN, f"{type(exc).__name__}: {exc}")
+
+
 async def get_health(ctx: AppContext) -> HealthOut:
     config = ComponentHealth(
-        ComponentStatus.OK, "simulation.yaml valid", {"content_hash": ctx.config_hash[:12]}
+        ComponentStatus.OK, "config valid", {"content_hash": ctx.config.content_hash[:12]}
     )
-    database, bus, state, engine, processor = await asyncio.gather(
+    database, master, bus, state, engine, processor = await asyncio.gather(
         run_in_threadpool(check_database, ctx.db),
+        run_in_threadpool(_master_health, ctx),
         ctx.bus.health(),
         ctx.state.health(),
         ctx.engine.health(),
@@ -35,6 +43,7 @@ async def get_health(ctx: AppContext) -> HealthOut:
     components = {
         "config": config,
         "database": database,
+        "master_data": master,
         "event_bus": bus,
         "state_store": state,
         "simulation_engine": engine,
@@ -49,7 +58,7 @@ async def get_health(ctx: AppContext) -> HealthOut:
 
 
 def get_meta(ctx: AppContext) -> MetaOut:
-    cfg = ctx.config
+    cfg = ctx.config.simulation
     core = cfg.simulation.core_hours
     return MetaOut(
         name="Smart Workplace Digital Twin",
@@ -57,10 +66,11 @@ def get_meta(ctx: AppContext) -> MetaOut:
         environment=ctx.settings.environment,
         server_time=datetime.now(UTC),
         config=ConfigSummaryOut(
-            content_hash=ctx.config_hash,
+            content_hash=ctx.config.content_hash,
             seed=cfg.seed,
             timezone=cfg.timezone,
             scale_preset=cfg.scale_preset,
+            organization=ctx.config.organization.name,
             employee_count=cfg.employees.count,
             layout_files=list(cfg.office.layout_files),
             default_speed=cfg.simulation.speed,

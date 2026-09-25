@@ -19,7 +19,7 @@
 
 | Architecture doc | Light implementation | Notes |
 |---|---|---|
-| PostgreSQL `workplace` (master, config, sim, ops) | SQLite `data/workplace.db` | SQLAlchemy 2 + Alembic (batch mode for ALTERs). `jsonb` → JSON, `text[]`/`smallint[]` → JSON arrays. |
+| PostgreSQL `workplace` (master, config, sim, ops) | SQLite `data/workplace.db`, tables prefixed `master_`/`config_`/`sim_`/`ops_` | SQLAlchemy 2 + Alembic (batch mode for ALTERs). `jsonb` → JSON, `text[]`/`smallint[]` → JSON arrays. |
 | PostgreSQL `workplace_saas` | SQLite `data/saas.db` | Owned only by mock-saas. Reached only via its REST API (§8.4 preserved). |
 | Redis Streams (event bus) | `InMemoryPublisher` / `InMemoryConsumer` (asyncio queues per stream) | Same stream names as `event-model.md` §6. |
 | Redis current state | `InMemoryStateStore` | Same key/field model as `data-model.md` §4. |
@@ -91,9 +91,10 @@ Frontend dependencies (npm, project-local): react, vite, typescript, tailwindcss
 | `dev` | start all three processes |
 | `test` / `lint` / `fmt` | pytest + vitest / ruff + mypy + eslint + tsc / formatters |
 | `migrate` | Alembic upgrade for both SQLite databases |
-| `seed` | generate master data from config + seed |
+| `seed` | generate master data from config + seed (`-- --force` to regenerate; also automatic at startup when config changes) |
 | `generate-history` | batch-generate N days (`--days 30`) |
 | `dbt-build` | load RAW + dbt build + swap |
+| `layout` | write `config/layouts/building_a.yaml` from a preset (`-- --preset small\|medium\|large`) |
 | `reset` | delete `data/` runtime files |
 | `doctor` | check tool versions, free ports (8000, 8100, 5173), writable `data/` |
 

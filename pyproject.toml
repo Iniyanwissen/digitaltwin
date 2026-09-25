@@ -36,6 +36,8 @@ dev = [
 dev = { cmd = "python scripts/dev.py", help = "Start twin-server and the frontend dev server" }
 server = { cmd = "python -m twin_server", help = "Start twin-server only" }
 migrate = { cmd = "python -m twin_server migrate", help = "Apply database migrations" }
+seed = { cmd = "python -m twin_server seed", help = "Generate master data (add --force to redo)" }
+layout = { cmd = "python -m twin_server layout", help = "Write config/layouts/building_a.yaml from a preset (--preset small|medium|large)" }
 doctor = { cmd = "python scripts/doctor.py", help = "Check tools, ports and data directory" }
 check-rng = { cmd = "python scripts/check_rng.py", help = "Fail on randomness outside RngFactory" }
 fmt = { shell = "ruff format . && ruff check --fix .", help = "Format and autofix Python" }

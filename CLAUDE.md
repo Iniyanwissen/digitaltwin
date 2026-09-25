@@ -12,11 +12,14 @@ data sources observe it; everything downstream consumes only observed events.
 - `packages/domain/workplace_domain`: config schema, enums, event envelope + identity table, adapter Protocols
 - `services/twin-server/twin_server`: `api/`, `engine/`, `processor/`, `adapters/`, `db/` in one process
 - `frontend/`: React + TS + Vite + Tailwind; sidebar sections defined in `src/app/navigation.ts`
-- `config/*.yaml`: all business numbers
+- `config/*.yaml`: all business numbers (`simulation.yaml`, `organization.yaml`, `layout_presets.yaml`, `layouts/`)
+- `twin_server/engine/generators/`: master data generators; `twin_server/masterdata/`: store, reader, service
 
 ## Commands (Windows, from repo root)
 - `uv run poe dev`: server on :8000 + UI on :5173
 - `uv run poe test`, `uv run poe lint`, `uv run poe fmt`, `uv run poe doctor`
+- `uv run poe seed [--force]`: regenerate master data; `uv run poe layout --preset medium`: rewrite the layout file
+- Schema change: edit `twin_server/db/tables.py`, then `uv run python -m twin_server revision -m "..." --rev-id 000N_name`
 - Use `npm.cmd` (not `npm`) in PowerShell if script execution is restricted
 
 ## Rules
