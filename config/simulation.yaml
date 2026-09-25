@@ -1,0 +1,98 @@
+# Smart Workplace Digital Twin - simulation configuration.
+# Validated at startup by workplace_domain.config.schema.SimulationConfig.
+# Unknown keys are rejected, so typos fail fast.
+
+# Root seed for every random stream (RngFactory). Same seed + same config = same simulation.
+seed: 12345
+# IANA timezone of the building. All business timestamps use this zone.
+timezone: Asia/Kolkata
+# Size preset for generated layouts: small | medium | large | custom
+scale_preset: medium
+
+office:
+  # Layout files (relative to config/) defining buildings, floors, zones, desks and rooms.
+  layout_files: [layouts/building_a.yaml]
+
+employees:
+  # Total synthetic employees generated as master data.
+  count: 1000
+  # Share of employees per work mode. Must sum to 1.0.
+  work_mode_mix: { OFFICE: 0.25, HYBRID: 0.60, REMOTE: 0.15 }
+  # Share of employees per behavioral profile (config/profiles.yaml). Must sum to 1.0.
+  profile_mix:
+    EARLY_BIRD: 0.12
+    STANDARD: 0.45
+    LATE_STARTER: 0.12
+    MEETING_HEAVY: 0.13
+    REMOTE_HEAVY: 0.08
+    MOBILE_WORKER: 0.10
+
+simulation:
+  # Default live speed multiplier (sim seconds per wall second).
+  speed: 30
+  # Speeds offered in the Simulation Control panel.
+  allowed_speeds: [1, 5, 10, 30, 60]
+  # Fast-forward through empty nights in live mode.
+  skip_night: true
+  # Core hours used by utilization metrics.
+  core_hours: { start: "08:00", end: "18:00" }
+
+attendance:
+  # Target average share of active employees in the office on a working day (percent).
+  average_daily_percentage: 65
+  # Sigma of the per-team, per-day log-normal attendance multiplier (team correlation).
+  team_correlation_sigma: 0.15
+  # Multiplier on attendance probability per weekday.
+  weekday_factor: { MON: 0.90, TUE: 1.05, WED: 1.10, THU: 1.05, FRI: 0.75 }
+  # Probability an employee is on leave on a given working day.
+  leave_rate: 0.04
+
+meetings:
+  # Average meetings per attending employee per day.
+  average_per_employee: 2.3
+  # Probability a participant does not show up.
+  no_show_probability: 0.08
+  # Probability a booked meeting is attended by nobody.
+  ghost_booking_probability: 0.07
+  # Share of room usage that happens without a booking.
+  walk_in_share: 0.05
+
+sensors:
+  # Heartbeat interval for desk sensors (seconds).
+  desk_poll_interval: 300
+  # Heartbeat interval for room/common-area count sensors (seconds).
+  room_poll_interval: 300
+  # Environment reading interval in live mode (seconds).
+  environment_poll_interval: 60
+  # Seconds without presence before a desk sensor reports vacant.
+  desk_vacancy_timeout_s: 180
+  # Share of desks fitted with an occupancy sensor (0-1).
+  desk_sensor_coverage: 1.0
+
+batch:
+  # Environment reading interval for historical generation (seconds).
+  environment_poll_interval: 900
+  # Emit sensor heartbeats during historical generation (large volume).
+  emit_heartbeats: false
+  # Worker processes for parallel day generation.
+  parallel_workers: 4
+
+bms:
+  # How often the building management system evaluates automation rules (seconds).
+  evaluation_interval_s: 60
+
+# Delivery anomalies. All 0 until the data-quality phase (Phase 9).
+anomalies:
+  duplicate_event_probability: 0.0
+  late_event_probability: 0.0
+  out_of_order_probability: 0.0
+  missing_event_probability: 0.0
+  sensor_failure_probability: 0.0
+
+processing:
+  # Max entries retained per in-memory event stream. The raw archive is the durable history.
+  stream_maxlen: 200000
+  # How often live events and state deltas are flushed to WebSocket clients (wall ms).
+  live_flush_ms: 500
+  # Events whose ingest_time - event_time exceeds this are flagged late downstream (seconds).
+  late_threshold_seconds: 300

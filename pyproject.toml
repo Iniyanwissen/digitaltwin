@@ -1,0 +1,99 @@
+[project]
+name = "smart-workplace-twin"
+version = "0.1.0"
+description = "Smart Workplace Digital Twin simulator (proof of value)"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "workplace-domain",
+    "twin-server",
+]
+
+[tool.uv]
+package = false
+link-mode = "copy"  # uv cache (C:) and project (D:) are on different drives
+
+[tool.uv.workspace]
+members = ["packages/domain", "services/twin-server"]
+
+[tool.uv.sources]
+workplace-domain = { workspace = true }
+twin-server = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "httpx>=0.28",
+    "httpx2>=2.13.1",
+    "mypy>=1.15",
+    "poethepoet>=0.34",
+    "pytest>=8.3",
+    "pytest-asyncio>=0.25",
+    "ruff>=0.11",
+    "types-PyYAML>=6.0",
+]
+
+# ---------------------------------------------------------------- tasks
+[tool.poe.tasks]
+dev = { cmd = "python scripts/dev.py", help = "Start twin-server and the frontend dev server" }
+server = { cmd = "python -m twin_server", help = "Start twin-server only" }
+migrate = { cmd = "python -m twin_server migrate", help = "Apply database migrations" }
+doctor = { cmd = "python scripts/doctor.py", help = "Check tools, ports and data directory" }
+check-rng = { cmd = "python scripts/check_rng.py", help = "Fail on randomness outside RngFactory" }
+fmt = { shell = "ruff format . && ruff check --fix .", help = "Format and autofix Python" }
+
+[tool.poe.tasks.test-py]
+cmd = "pytest"
+help = "Run Python tests"
+
+[tool.poe.tasks.test-web]
+shell = "npm --prefix frontend run test"
+help = "Run frontend tests"
+
+[tool.poe.tasks.test]
+sequence = ["test-py", "test-web"]
+help = "Run all tests"
+
+[tool.poe.tasks.lint-py]
+sequence = [
+    { cmd = "ruff check ." },
+    { cmd = "ruff format --check ." },
+    { cmd = "mypy" },
+    { ref = "check-rng" },
+]
+help = "Lint Python"
+
+[tool.poe.tasks.lint-web]
+shell = "npm --prefix frontend run lint && npm --prefix frontend run typecheck"
+help = "Lint frontend"
+
+[tool.poe.tasks.lint]
+sequence = ["lint-py", "lint-web"]
+help = "Run all linters"
+
+# ---------------------------------------------------------------- tooling
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["frontend", "data", "docs"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "SIM", "RUF", "ASYNC"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["workplace_domain", "twin_server"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["packages/domain/workplace_domain", "services/twin-server/twin_server"]
+plugins = ["pydantic.mypy"]
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["workplace_domain.*", "twin_server.engine.*"]
+strict = true
+
+[tool.pytest.ini_options]
+testpaths = ["packages/domain/tests", "services/twin-server/tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+addopts = "--import-mode=importlib"

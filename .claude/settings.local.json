@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Move-Item D:\\\\DT\\\\services\\\\twin-server\\\\twin_server\\\\logging.py D:\\\\DT\\\\services\\\\twin-server\\\\twin_server\\\\log_setup.py)",
+      "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); cd D:\\\\DT; uv sync --python 3.12 2>&1 | Select-Object -Last 15)",
+      "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); cd D:\\\\DT; uv run ruff format --check . 2>&1 | Select-String \"Would reformat\"; Get-ChildItem docs | Select-Object Name, Length)",
+      "PowerShell($env:Path = [Environment]::GetEnvironmentVariable\\('Path','Machine'\\) + ';' + [Environment]::GetEnvironmentVariable\\('Path','User'\\); cd D:\\\\DT; uv run ruff check --fix . 2>&1 | Select-Object -Last 20; uv run ruff format . | Select-Object -Last 3; \"== lint-py\"; uv run poe lint-py 2>&1 | Select-Object -Last 15; \"== tests\"; uv run pytest -q 2>&1 | Select-Object -Last 3)"
+    ]
+  }
+}
