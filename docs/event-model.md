@@ -1,6 +1,7 @@
 # Event Model
 
-> Status: DRAFT v0.1. Related: `architecture.md`, `simulation-engine.md`, `data-model.md`
+> Status: DRAFT v0.2 (adds internal area access and room panel check-in). Related: `architecture.md`, `simulation-engine.md`, `data-model.md`, `live-streaming.md`
+> Reference implementation: `reference/refsim/engine.py` emits every event type below except `SENSOR_STATUS_CHANGED` and the anomaly variants.
 
 ---
 
@@ -90,7 +91,8 @@ Fields added by the event processor (wall clock, not part of the published envel
 
 | Source | Identity class | Represents | Device ID |
 |---|---|---|---|
-| `ACCESS_CONTROL` | IDENTIFIED | badge readers at entrances | access point ID |
+| `ACCESS_CONTROL` | IDENTIFIED | badge readers: building entrance, floor lift lobbies, secure zones, room doors | access point ID |
+| `ROOM_PANEL` | IDENTIFIED | meeting-room door panel (booking check-in) | panel ID (`PANEL_<room_id>`) |
 | `WORKSTATION` | IDENTIFIED | desk login system / docking | workspace ID |
 | `DESK_SENSOR` | ANONYMOUS | under-desk PIR occupancy sensor | sensor ID |
 | `ROOM_SENSOR` | ANONYMOUS | people-count sensor in rooms and common areas | sensor ID |
@@ -109,6 +111,9 @@ SaaS sources (`BOOKING_SYSTEM`, `VISITOR_SYSTEM`, `HR_SYSTEM`) are record-based 
 |---|---|---|---|---|
 | `ACCESS_IN` | ACCESS_CONTROL | IDENTIFIED | EMPLOYEE / VISITOR | `ev.access` |
 | `ACCESS_OUT` | ACCESS_CONTROL | IDENTIFIED | EMPLOYEE / VISITOR | `ev.access` |
+| `AREA_ACCESS` | ACCESS_CONTROL | IDENTIFIED | EMPLOYEE / VISITOR | `ev.access` |
+| `ACCESS_DENIED` | ACCESS_CONTROL | IDENTIFIED | EMPLOYEE / VISITOR | `ev.access` |
+| `ROOM_CHECK_IN` | ROOM_PANEL | IDENTIFIED | EMPLOYEE | `ev.access` |
 | `WORKSPACE_LOGIN` | WORKSTATION | IDENTIFIED | EMPLOYEE | `ev.workspace` |
 | `WORKSPACE_LOGOUT` | WORKSTATION | IDENTIFIED | EMPLOYEE | `ev.workspace` |
 | `OCCUPANCY_CHANGED` | DESK_SENSOR | ANONYMOUS | WORKSPACE | `ev.occupancy` |
@@ -151,17 +156,56 @@ SaaS sources (`BOOKING_SYSTEM`, `VISITOR_SYSTEM`, `HR_SYSTEM`) are record-based 
 - `special_event_id`: set for visitor badges issued for a special event
 - Realistic imperfections (handled by the observer, not the payload): tailgating produces a missing `ACCESS_IN`; forgetting to badge out produces a missing `ACCESS_OUT`. The processor closes open visits at end of day with an inferred exit (state only, never a fabricated event).
 
+### 5.1a `AREA_ACCESS` (internal readers)
+
+```json
+{
+  "access_point_id": "AP_BLD01_F03_LOBBY",
+  "reader_type": "FLOOR_LOBBY",
+  "area_type": "FLOOR",
+  "area_id": "BLD01_F03",
+  "direction": "IN",
+  "result": "GRANTED"
+}
+```
+
+- `reader_type`: `FLOOR_LOBBY` | `SECURE_ZONE` | `ROOM_DOOR`
+- `area_type`: `FLOOR` | `ZONE` | `ROOM`
+- Internal readers are **entry-only**, so exits are inferred downstream (next reader, desk login elsewhere, or building exit).
+- Emitted when a person's ground-truth move crosses a reader:
+  - changing floors → the destination floor's lobby reader (the ground floor has no lobby reader; the entrance covers it)
+  - entering a room that has a door reader (config `layout.door_reader_room_types`)
+  - entering a restricted zone → the secure-zone reader
+- `internal_badge_compliance` (default 95%) models people walking through open doors without badging. Secure-zone readers always badge.
+- `ACCESS_DENIED` (same payload, `result = DENIED`) is produced when someone without permission tries a secure zone. It is off by default and enabled in the data-quality/security scenarios.
+- Privacy: this is access control, so identity is legitimate here. It never flows into anonymous sensor data. A room can show "5 counted (sensor)" and "3 badged in (door reader)"; the difference is an analytical insight, not something to reconcile.
+
+### 5.1b `ROOM_CHECK_IN` (room panel)
+
+```json
+{
+  "room_id": "ROOM_BLD01_F02_014",
+  "booking_id": "BKG-20260923-0142",
+  "meeting_id": "MTG-20260923-0142"
+}
+```
+
+- Emitted when the organizer confirms the booking on the door panel shortly after the meeting starts (`meetings.room_check_in_probability`, default 70%).
+- Used for booking effectiveness: booked + checked-in + sensor-occupied vs ghost bookings.
+
 ### 5.2 `WORKSPACE_LOGIN`
 
 ```json
 {
   "workspace_id": "DESK_BLD01_F02_045",
   "login_method": "BADGE_TAP",
+  "device_type": "DOCKING_STATION",
   "assignment_type": "HOT_DESK"
 }
 ```
 
 - `login_method`: `BADGE_TAP` | `DOCKING` | `PASSWORD`
+- `device_type`: `DOCKING_STATION` | `DESK_PC` | `THIN_CLIENT` (from `workspace.device_type`)
 - `assignment_type`: `ASSIGNED` | `HOT_DESK` | `OVERFLOW`
 
 ### 5.3 `WORKSPACE_LOGOUT`
@@ -327,7 +371,7 @@ One event per sensor per reading, containing all metrics of that sensor.
 
 | Stream key | Event types | Max length (approx trim) |
 |---|---|---|
-| `ev.access` | ACCESS_IN, ACCESS_OUT | 1,000,000 |
+| `ev.access` | ACCESS_IN, ACCESS_OUT, AREA_ACCESS, ACCESS_DENIED, ROOM_CHECK_IN | 1,000,000 |
 | `ev.workspace` | WORKSPACE_LOGIN, WORKSPACE_LOGOUT | 1,000,000 |
 | `ev.occupancy` | OCCUPANCY_CHANGED, ROOM_OCCUPANCY_CHANGED, desk/room heartbeats | 2,000,000 |
 | `ev.environment` | ENVIRONMENT_READING | 2,000,000 |

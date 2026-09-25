@@ -1,0 +1,5 @@
+floor_id,building_id,floor_number,name,desk_policy,plan_width,plan_height,max_occupancy,desk_count
+BLD01_F01,BLD01,1,Floor 1,HOT_DESK,120,72,660,200
+BLD01_F02,BLD01,2,Floor 2,HOT_DESK,120,72,324,200
+BLD01_F03,BLD01,3,Floor 3,HOT_DESK,120,72,324,200
+BLD01_F04,BLD01,4,Floor 4,ASSIGNED,120,72,324,200

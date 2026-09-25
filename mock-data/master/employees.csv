@@ -1,0 +1,1001 @@
+employee_id,employee_name,email,team_id,department_id,department,job_role,manager_id,home_floor_id,preferred_zone_id,employment_type,work_mode,behavior_profile,active_flag
+EMP000001,Yuki Chandran,yuki.chandran.1@example-corp.com,TEAM_001,DEP_ENG,Engineering,Head of Engineering,,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000002,Yuki Pillai,yuki.pillai.2@example-corp.com,TEAM_001,DEP_ENG,Engineering,QA Engineer,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,EARLY_BIRD,True
+EMP000003,Janani Iyer,janani.iyer.3@example-corp.com,TEAM_001,DEP_ENG,Engineering,Software Engineer,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000004,Arjun Sharma,arjun.sharma.4@example-corp.com,TEAM_001,DEP_ENG,Engineering,Data Engineer,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000005,Emma Rao,emma.rao.5@example-corp.com,TEAM_001,DEP_ENG,Engineering,Senior Software Engineer,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000006,Swathi Garcia,swathi.garcia.6@example-corp.com,TEAM_001,DEP_ENG,Engineering,QA Engineer,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000007,Suresh Khan,suresh.khan.7@example-corp.com,TEAM_001,DEP_ENG,Engineering,QA Engineer,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000008,Daniel Rao,daniel.rao.8@example-corp.com,TEAM_001,DEP_ENG,Engineering,Data Engineer,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000009,Sneha Krishnan,sneha.krishnan.9@example-corp.com,TEAM_001,DEP_ENG,Engineering,DevOps Engineer,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000010,Suresh Reddy,suresh.reddy.10@example-corp.com,TEAM_001,DEP_ENG,Engineering,DevOps Engineer,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000011,Lakshmi Reddy,lakshmi.reddy.11@example-corp.com,TEAM_002,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZB,INTERN,REMOTE,STANDARD,True
+EMP000012,Daniel Gupta,daniel.gupta.12@example-corp.com,TEAM_002,DEP_ENG,Engineering,Software Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000013,Sarah Mehta,sarah.mehta.13@example-corp.com,TEAM_002,DEP_ENG,Engineering,QA Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000014,Diya Sharma,diya.sharma.14@example-corp.com,TEAM_002,DEP_ENG,Engineering,Data Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,CONTRACTOR,REMOTE,MEETING_HEAVY,True
+EMP000015,Pooja Rao,pooja.rao.15@example-corp.com,TEAM_002,DEP_ENG,Engineering,DevOps Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000016,Isha Rao,isha.rao.16@example-corp.com,TEAM_002,DEP_ENG,Engineering,Senior Software Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000017,Sneha Srinivasan,sneha.srinivasan.17@example-corp.com,TEAM_002,DEP_ENG,Engineering,DevOps Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,CONTRACTOR,HYBRID,MOBILE_WORKER,True
+EMP000018,Karthik Ali,karthik.ali.18@example-corp.com,TEAM_002,DEP_ENG,Engineering,QA Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000019,Lakshmi Wang,lakshmi.wang.19@example-corp.com,TEAM_002,DEP_ENG,Engineering,Data Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000020,Arjun Pillai,arjun.pillai.20@example-corp.com,TEAM_002,DEP_ENG,Engineering,DevOps Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000021,Swathi Bose,swathi.bose.21@example-corp.com,TEAM_002,DEP_ENG,Engineering,Senior Software Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000022,Ananya Smith,ananya.smith.22@example-corp.com,TEAM_002,DEP_ENG,Engineering,DevOps Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000023,Harish Reddy,harish.reddy.23@example-corp.com,TEAM_002,DEP_ENG,Engineering,Data Engineer,EMP000011,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000024,Mateo Bose,mateo.bose.24@example-corp.com,TEAM_003,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000025,Rohan Nair,rohan.nair.25@example-corp.com,TEAM_003,DEP_ENG,Engineering,Data Engineer,EMP000024,BLD01_F01,BLD01_F01_ZC,FULL_TIME,REMOTE,MEETING_HEAVY,True
+EMP000026,Sarah Gupta,sarah.gupta.26@example-corp.com,TEAM_003,DEP_ENG,Engineering,Software Engineer,EMP000024,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000027,Meera Subramanian,meera.subramanian.27@example-corp.com,TEAM_003,DEP_ENG,Engineering,Software Engineer,EMP000024,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000028,Rahul Müller,rahul.muller.28@example-corp.com,TEAM_003,DEP_ENG,Engineering,QA Engineer,EMP000024,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000029,Deepa Smith,deepa.smith.29@example-corp.com,TEAM_003,DEP_ENG,Engineering,QA Engineer,EMP000024,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000030,Ashwin Subramanian,ashwin.subramanian.30@example-corp.com,TEAM_003,DEP_ENG,Engineering,Senior Software Engineer,EMP000024,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000031,Swathi Pillai,swathi.pillai.31@example-corp.com,TEAM_003,DEP_ENG,Engineering,Data Engineer,EMP000024,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000032,Swathi Mehta,swathi.mehta.32@example-corp.com,TEAM_004,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000033,Emma Smith,emma.smith.33@example-corp.com,TEAM_004,DEP_ENG,Engineering,DevOps Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000034,Noah Varma,noah.varma.34@example-corp.com,TEAM_004,DEP_ENG,Engineering,Senior Software Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000035,Aarav Tanaka,aarav.tanaka.35@example-corp.com,TEAM_004,DEP_ENG,Engineering,Data Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000036,Lakshmi Das,lakshmi.das.36@example-corp.com,TEAM_004,DEP_ENG,Engineering,Senior Software Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000037,Priya Das,priya.das.37@example-corp.com,TEAM_004,DEP_ENG,Engineering,QA Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000038,Daniel Garcia,daniel.garcia.38@example-corp.com,TEAM_004,DEP_ENG,Engineering,Senior Software Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000039,Suresh Chandran,suresh.chandran.39@example-corp.com,TEAM_004,DEP_ENG,Engineering,Senior Software Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000040,Deepa Ali,deepa.ali.40@example-corp.com,TEAM_004,DEP_ENG,Engineering,DevOps Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000041,Suresh Sharma,suresh.sharma.41@example-corp.com,TEAM_004,DEP_ENG,Engineering,Software Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000042,Siddharth Müller,siddharth.muller.42@example-corp.com,TEAM_004,DEP_ENG,Engineering,DevOps Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000043,Ashwin Srinivasan,ashwin.srinivasan.43@example-corp.com,TEAM_004,DEP_ENG,Engineering,Data Engineer,EMP000032,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000044,Ashwin Silva,ashwin.silva.44@example-corp.com,TEAM_005,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000045,Sarah Silva,sarah.silva.45@example-corp.com,TEAM_005,DEP_ENG,Engineering,Software Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000046,Rahul Garcia,rahul.garcia.46@example-corp.com,TEAM_005,DEP_ENG,Engineering,DevOps Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000047,Sneha Chandran,sneha.chandran.47@example-corp.com,TEAM_005,DEP_ENG,Engineering,DevOps Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,OFFICE,REMOTE_HEAVY,True
+EMP000048,Vikram Pillai,vikram.pillai.48@example-corp.com,TEAM_005,DEP_ENG,Engineering,QA Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000049,Karthik Pillai,karthik.pillai.49@example-corp.com,TEAM_005,DEP_ENG,Engineering,Data Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000050,Kavya Rao,kavya.rao.50@example-corp.com,TEAM_005,DEP_ENG,Engineering,Senior Software Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000051,Sarah Bose,sarah.bose.51@example-corp.com,TEAM_005,DEP_ENG,Engineering,QA Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000052,Pooja Kim,pooja.kim.52@example-corp.com,TEAM_005,DEP_ENG,Engineering,Data Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000053,Lena Rao,lena.rao.53@example-corp.com,TEAM_005,DEP_ENG,Engineering,Software Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000054,Emma Bose,emma.bose.54@example-corp.com,TEAM_005,DEP_ENG,Engineering,QA Engineer,EMP000044,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000055,Aditya Ali,aditya.ali.55@example-corp.com,TEAM_006,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000056,Diya Reddy,diya.reddy.56@example-corp.com,TEAM_006,DEP_ENG,Engineering,Senior Software Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000057,Naveen Gupta,naveen.gupta.57@example-corp.com,TEAM_006,DEP_ENG,Engineering,DevOps Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000058,Nila Ali,nila.ali.58@example-corp.com,TEAM_006,DEP_ENG,Engineering,QA Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000059,Harish Nair,harish.nair.59@example-corp.com,TEAM_006,DEP_ENG,Engineering,QA Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000060,Ananya Pillai,ananya.pillai.60@example-corp.com,TEAM_006,DEP_ENG,Engineering,Software Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000061,Ananya Sharma,ananya.sharma.61@example-corp.com,TEAM_006,DEP_ENG,Engineering,DevOps Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000062,Suresh Rao,suresh.rao.62@example-corp.com,TEAM_006,DEP_ENG,Engineering,Software Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000063,Sneha Subramanian,sneha.subramanian.63@example-corp.com,TEAM_006,DEP_ENG,Engineering,QA Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000064,Varun Garcia,varun.garcia.64@example-corp.com,TEAM_006,DEP_ENG,Engineering,Senior Software Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000065,Ashwin Subramanian,ashwin.subramanian.65@example-corp.com,TEAM_006,DEP_ENG,Engineering,QA Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000066,Manoj Gupta,manoj.gupta.66@example-corp.com,TEAM_006,DEP_ENG,Engineering,Senior Software Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000067,Meera Chandran,meera.chandran.67@example-corp.com,TEAM_006,DEP_ENG,Engineering,DevOps Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,CONTRACTOR,OFFICE,EARLY_BIRD,True
+EMP000068,Vikram Kim,vikram.kim.68@example-corp.com,TEAM_006,DEP_ENG,Engineering,DevOps Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000069,Vikram Wang,vikram.wang.69@example-corp.com,TEAM_006,DEP_ENG,Engineering,Data Engineer,EMP000055,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000070,Fatima Wang,fatima.wang.70@example-corp.com,TEAM_007,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000071,Varun Joshi,varun.joshi.71@example-corp.com,TEAM_007,DEP_ENG,Engineering,Software Engineer,EMP000070,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000072,Deepa Fernandes,deepa.fernandes.72@example-corp.com,TEAM_007,DEP_ENG,Engineering,Data Engineer,EMP000070,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000073,Lena Varma,lena.varma.73@example-corp.com,TEAM_007,DEP_ENG,Engineering,Data Engineer,EMP000070,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000074,Kavya Menon,kavya.menon.74@example-corp.com,TEAM_007,DEP_ENG,Engineering,QA Engineer,EMP000070,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000075,Aarav Subramanian,aarav.subramanian.75@example-corp.com,TEAM_007,DEP_ENG,Engineering,Data Engineer,EMP000070,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000076,Deepa Bose,deepa.bose.76@example-corp.com,TEAM_007,DEP_ENG,Engineering,Senior Software Engineer,EMP000070,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000077,Noah Fernandes,noah.fernandes.77@example-corp.com,TEAM_007,DEP_ENG,Engineering,DevOps Engineer,EMP000070,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,HYBRID,MOBILE_WORKER,True
+EMP000078,Kavya Mehta,kavya.mehta.78@example-corp.com,TEAM_007,DEP_ENG,Engineering,DevOps Engineer,EMP000070,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000079,Janani Fernandes,janani.fernandes.79@example-corp.com,TEAM_007,DEP_ENG,Engineering,DevOps Engineer,EMP000070,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000080,Emma Garcia,emma.garcia.80@example-corp.com,TEAM_008,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000081,Chen Menon,chen.menon.81@example-corp.com,TEAM_008,DEP_ENG,Engineering,DevOps Engineer,EMP000080,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000082,Kavya Silva,kavya.silva.82@example-corp.com,TEAM_008,DEP_ENG,Engineering,QA Engineer,EMP000080,BLD01_F01,BLD01_F01_ZB,INTERN,REMOTE,MEETING_HEAVY,True
+EMP000083,Keerthi Bose,keerthi.bose.83@example-corp.com,TEAM_008,DEP_ENG,Engineering,QA Engineer,EMP000080,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000084,Emma Pillai,emma.pillai.84@example-corp.com,TEAM_008,DEP_ENG,Engineering,DevOps Engineer,EMP000080,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000085,Lakshmi Rossi,lakshmi.rossi.85@example-corp.com,TEAM_008,DEP_ENG,Engineering,QA Engineer,EMP000080,BLD01_F01,BLD01_F01_ZB,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000086,Lena Subramanian,lena.subramanian.86@example-corp.com,TEAM_008,DEP_ENG,Engineering,Software Engineer,EMP000080,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000087,Meera Reddy,meera.reddy.87@example-corp.com,TEAM_008,DEP_ENG,Engineering,DevOps Engineer,EMP000080,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000088,Lakshmi Rao,lakshmi.rao.88@example-corp.com,TEAM_008,DEP_ENG,Engineering,Data Engineer,EMP000080,BLD01_F01,BLD01_F01_ZB,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000089,Manoj Chandran,manoj.chandran.89@example-corp.com,TEAM_009,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000090,Sarah Gupta,sarah.gupta.90@example-corp.com,TEAM_009,DEP_ENG,Engineering,Software Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000091,Rohan Garcia,rohan.garcia.91@example-corp.com,TEAM_009,DEP_ENG,Engineering,Senior Software Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000092,Lakshmi Rossi,lakshmi.rossi.92@example-corp.com,TEAM_009,DEP_ENG,Engineering,Senior Software Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000093,Suresh Das,suresh.das.93@example-corp.com,TEAM_009,DEP_ENG,Engineering,Data Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000094,Isha Krishnan,isha.krishnan.94@example-corp.com,TEAM_009,DEP_ENG,Engineering,QA Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000095,Vikram Krishnan,vikram.krishnan.95@example-corp.com,TEAM_009,DEP_ENG,Engineering,QA Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000096,Siddharth Das,siddharth.das.96@example-corp.com,TEAM_009,DEP_ENG,Engineering,QA Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000097,Harish Varma,harish.varma.97@example-corp.com,TEAM_009,DEP_ENG,Engineering,Software Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000098,Karthik Das,karthik.das.98@example-corp.com,TEAM_009,DEP_ENG,Engineering,DevOps Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000099,Aarav Wang,aarav.wang.99@example-corp.com,TEAM_009,DEP_ENG,Engineering,Software Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,REMOTE,EARLY_BIRD,True
+EMP000100,Naveen Kumar,naveen.kumar.100@example-corp.com,TEAM_009,DEP_ENG,Engineering,QA Engineer,EMP000089,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000101,Kavya Tanaka,kavya.tanaka.101@example-corp.com,TEAM_010,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000102,Swathi Iyer,swathi.iyer.102@example-corp.com,TEAM_010,DEP_ENG,Engineering,Senior Software Engineer,EMP000101,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000103,Ashwin Bose,ashwin.bose.103@example-corp.com,TEAM_010,DEP_ENG,Engineering,Senior Software Engineer,EMP000101,BLD01_F01,BLD01_F01_ZB,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000104,Isha Menon,isha.menon.104@example-corp.com,TEAM_010,DEP_ENG,Engineering,Data Engineer,EMP000101,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000105,Omar Nair,omar.nair.105@example-corp.com,TEAM_010,DEP_ENG,Engineering,Software Engineer,EMP000101,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000106,Harish Chandran,harish.chandran.106@example-corp.com,TEAM_010,DEP_ENG,Engineering,Software Engineer,EMP000101,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000107,Janani Brown,janani.brown.107@example-corp.com,TEAM_010,DEP_ENG,Engineering,Data Engineer,EMP000101,BLD01_F01,BLD01_F01_ZB,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000108,Emma Das,emma.das.108@example-corp.com,TEAM_010,DEP_ENG,Engineering,Software Engineer,EMP000101,BLD01_F01,BLD01_F01_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000109,Rohan Bose,rohan.bose.109@example-corp.com,TEAM_010,DEP_ENG,Engineering,Software Engineer,EMP000101,BLD01_F01,BLD01_F01_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000110,Ananya Pillai,ananya.pillai.110@example-corp.com,TEAM_010,DEP_ENG,Engineering,Senior Software Engineer,EMP000101,BLD01_F01,BLD01_F01_ZB,FULL_TIME,REMOTE,MOBILE_WORKER,True
+EMP000111,Pooja Varma,pooja.varma.111@example-corp.com,TEAM_011,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000112,Pooja Krishnan,pooja.krishnan.112@example-corp.com,TEAM_011,DEP_ENG,Engineering,Data Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000113,Priya Brown,priya.brown.113@example-corp.com,TEAM_011,DEP_ENG,Engineering,QA Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000114,Sarah Tanaka,sarah.tanaka.114@example-corp.com,TEAM_011,DEP_ENG,Engineering,Software Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000115,Diya Brown,diya.brown.115@example-corp.com,TEAM_011,DEP_ENG,Engineering,Data Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000116,Omar Gupta,omar.gupta.116@example-corp.com,TEAM_011,DEP_ENG,Engineering,Senior Software Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000117,Nila Sharma,nila.sharma.117@example-corp.com,TEAM_011,DEP_ENG,Engineering,DevOps Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000118,Diya Kumar,diya.kumar.118@example-corp.com,TEAM_011,DEP_ENG,Engineering,QA Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000119,Diya Pillai,diya.pillai.119@example-corp.com,TEAM_011,DEP_ENG,Engineering,Senior Software Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000120,Yuki Silva,yuki.silva.120@example-corp.com,TEAM_011,DEP_ENG,Engineering,Software Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,INTERN,OFFICE,LATE_STARTER,True
+EMP000121,Fatima Joshi,fatima.joshi.121@example-corp.com,TEAM_011,DEP_ENG,Engineering,DevOps Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000122,Meera Rao,meera.rao.122@example-corp.com,TEAM_011,DEP_ENG,Engineering,QA Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000123,Mateo Khan,mateo.khan.123@example-corp.com,TEAM_011,DEP_ENG,Engineering,DevOps Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000124,Siddharth Ali,siddharth.ali.124@example-corp.com,TEAM_011,DEP_ENG,Engineering,Data Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000125,Sarah Rao,sarah.rao.125@example-corp.com,TEAM_011,DEP_ENG,Engineering,Data Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000126,Vikram Das,vikram.das.126@example-corp.com,TEAM_011,DEP_ENG,Engineering,QA Engineer,EMP000111,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000127,Sneha Tanaka,sneha.tanaka.127@example-corp.com,TEAM_012,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,EARLY_BIRD,True
+EMP000128,Lakshmi Mehta,lakshmi.mehta.128@example-corp.com,TEAM_012,DEP_ENG,Engineering,QA Engineer,EMP000127,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000129,Aarav Garcia,aarav.garcia.129@example-corp.com,TEAM_012,DEP_ENG,Engineering,Data Engineer,EMP000127,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000130,Omar Krishnan,omar.krishnan.130@example-corp.com,TEAM_012,DEP_ENG,Engineering,Data Engineer,EMP000127,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000131,Rohan Gupta,rohan.gupta.131@example-corp.com,TEAM_012,DEP_ENG,Engineering,Software Engineer,EMP000127,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000132,Suresh Silva,suresh.silva.132@example-corp.com,TEAM_012,DEP_ENG,Engineering,Software Engineer,EMP000127,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000133,Omar Fernandes,omar.fernandes.133@example-corp.com,TEAM_012,DEP_ENG,Engineering,Data Engineer,EMP000127,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000134,Pooja Iyer,pooja.iyer.134@example-corp.com,TEAM_012,DEP_ENG,Engineering,Software Engineer,EMP000127,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000135,Diya Joshi,diya.joshi.135@example-corp.com,TEAM_012,DEP_ENG,Engineering,QA Engineer,EMP000127,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000136,Vikram Kim,vikram.kim.136@example-corp.com,TEAM_013,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000137,Pooja Das,pooja.das.137@example-corp.com,TEAM_013,DEP_ENG,Engineering,QA Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000138,Diya Kumar,diya.kumar.138@example-corp.com,TEAM_013,DEP_ENG,Engineering,DevOps Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000139,Lena Tanaka,lena.tanaka.139@example-corp.com,TEAM_013,DEP_ENG,Engineering,DevOps Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,REMOTE,STANDARD,True
+EMP000140,Siddharth Garcia,siddharth.garcia.140@example-corp.com,TEAM_013,DEP_ENG,Engineering,Software Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000141,Pooja Rossi,pooja.rossi.141@example-corp.com,TEAM_013,DEP_ENG,Engineering,Senior Software Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,REMOTE,EARLY_BIRD,True
+EMP000142,Naveen Silva,naveen.silva.142@example-corp.com,TEAM_013,DEP_ENG,Engineering,QA Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000143,Janani Silva,janani.silva.143@example-corp.com,TEAM_013,DEP_ENG,Engineering,DevOps Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,INTERN,HYBRID,MOBILE_WORKER,True
+EMP000144,Priya Srinivasan,priya.srinivasan.144@example-corp.com,TEAM_013,DEP_ENG,Engineering,Data Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,REMOTE,STANDARD,True
+EMP000145,Keerthi Srinivasan,keerthi.srinivasan.145@example-corp.com,TEAM_013,DEP_ENG,Engineering,Software Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000146,Swathi Pillai,swathi.pillai.146@example-corp.com,TEAM_013,DEP_ENG,Engineering,QA Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000147,Kavya Pillai,kavya.pillai.147@example-corp.com,TEAM_013,DEP_ENG,Engineering,Data Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,HYBRID,REMOTE_HEAVY,True
+EMP000148,Siddharth Nair,siddharth.nair.148@example-corp.com,TEAM_013,DEP_ENG,Engineering,Software Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000149,Siddharth Das,siddharth.das.149@example-corp.com,TEAM_013,DEP_ENG,Engineering,DevOps Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000150,Arjun Joshi,arjun.joshi.150@example-corp.com,TEAM_013,DEP_ENG,Engineering,Senior Software Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000151,Lakshmi Ali,lakshmi.ali.151@example-corp.com,TEAM_013,DEP_ENG,Engineering,QA Engineer,EMP000136,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000152,Diya Tanaka,diya.tanaka.152@example-corp.com,TEAM_014,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000153,Suresh Kumar,suresh.kumar.153@example-corp.com,TEAM_014,DEP_ENG,Engineering,QA Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000154,Diya Garcia,diya.garcia.154@example-corp.com,TEAM_014,DEP_ENG,Engineering,DevOps Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000155,Arjun Rossi,arjun.rossi.155@example-corp.com,TEAM_014,DEP_ENG,Engineering,Data Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,REMOTE,EARLY_BIRD,True
+EMP000156,Swathi Iyer,swathi.iyer.156@example-corp.com,TEAM_014,DEP_ENG,Engineering,Data Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000157,Siddharth Smith,siddharth.smith.157@example-corp.com,TEAM_014,DEP_ENG,Engineering,Data Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000158,Rahul Subramanian,rahul.subramanian.158@example-corp.com,TEAM_014,DEP_ENG,Engineering,QA Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000159,Rahul Garcia,rahul.garcia.159@example-corp.com,TEAM_014,DEP_ENG,Engineering,QA Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000160,Karthik Srinivasan,karthik.srinivasan.160@example-corp.com,TEAM_014,DEP_ENG,Engineering,Senior Software Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000161,Pooja Reddy,pooja.reddy.161@example-corp.com,TEAM_014,DEP_ENG,Engineering,QA Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000162,Noah Subramanian,noah.subramanian.162@example-corp.com,TEAM_014,DEP_ENG,Engineering,QA Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000163,Rahul Brown,rahul.brown.163@example-corp.com,TEAM_014,DEP_ENG,Engineering,Data Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,REMOTE,STANDARD,True
+EMP000164,Lena Kim,lena.kim.164@example-corp.com,TEAM_014,DEP_ENG,Engineering,Data Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000165,Isha Pillai,isha.pillai.165@example-corp.com,TEAM_014,DEP_ENG,Engineering,Senior Software Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000166,Rahul Garcia,rahul.garcia.166@example-corp.com,TEAM_014,DEP_ENG,Engineering,DevOps Engineer,EMP000152,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000167,Deepa Reddy,deepa.reddy.167@example-corp.com,TEAM_015,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,EARLY_BIRD,True
+EMP000168,Ananya Ali,ananya.ali.168@example-corp.com,TEAM_015,DEP_ENG,Engineering,QA Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000169,Divya Brown,divya.brown.169@example-corp.com,TEAM_015,DEP_ENG,Engineering,QA Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000170,Sneha Bose,sneha.bose.170@example-corp.com,TEAM_015,DEP_ENG,Engineering,Data Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000171,Keerthi Müller,keerthi.muller.171@example-corp.com,TEAM_015,DEP_ENG,Engineering,DevOps Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,MEETING_HEAVY,True
+EMP000172,Sarah Müller,sarah.muller.172@example-corp.com,TEAM_015,DEP_ENG,Engineering,Senior Software Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000173,Suresh Silva,suresh.silva.173@example-corp.com,TEAM_015,DEP_ENG,Engineering,Senior Software Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000174,Deepa Müller,deepa.muller.174@example-corp.com,TEAM_015,DEP_ENG,Engineering,Data Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000175,Lakshmi Kim,lakshmi.kim.175@example-corp.com,TEAM_015,DEP_ENG,Engineering,Senior Software Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000176,Ashwin Wang,ashwin.wang.176@example-corp.com,TEAM_015,DEP_ENG,Engineering,Data Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000177,Deepa Nair,deepa.nair.177@example-corp.com,TEAM_015,DEP_ENG,Engineering,Senior Software Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000178,Karthik Varma,karthik.varma.178@example-corp.com,TEAM_015,DEP_ENG,Engineering,Senior Software Engineer,EMP000167,BLD01_F01,BLD01_F01_ZA,CONTRACTOR,OFFICE,STANDARD,True
+EMP000179,Pooja Chandran,pooja.chandran.179@example-corp.com,TEAM_016,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000180,Arjun Pillai,arjun.pillai.180@example-corp.com,TEAM_016,DEP_ENG,Engineering,Data Engineer,EMP000179,BLD01_F01,BLD01_F01_ZD,INTERN,HYBRID,MEETING_HEAVY,True
+EMP000181,Fatima Tanaka,fatima.tanaka.181@example-corp.com,TEAM_016,DEP_ENG,Engineering,Software Engineer,EMP000179,BLD01_F01,BLD01_F01_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000182,Meera Chandran,meera.chandran.182@example-corp.com,TEAM_016,DEP_ENG,Engineering,DevOps Engineer,EMP000179,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000183,Yuki Joshi,yuki.joshi.183@example-corp.com,TEAM_016,DEP_ENG,Engineering,Senior Software Engineer,EMP000179,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000184,Rahul Iyer,rahul.iyer.184@example-corp.com,TEAM_016,DEP_ENG,Engineering,Data Engineer,EMP000179,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000185,Varun Srinivasan,varun.srinivasan.185@example-corp.com,TEAM_016,DEP_ENG,Engineering,DevOps Engineer,EMP000179,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000186,Lakshmi Nair,lakshmi.nair.186@example-corp.com,TEAM_016,DEP_ENG,Engineering,QA Engineer,EMP000179,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,OFFICE,STANDARD,True
+EMP000187,Omar Kim,omar.kim.187@example-corp.com,TEAM_016,DEP_ENG,Engineering,Data Engineer,EMP000179,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000188,Priya Pillai,priya.pillai.188@example-corp.com,TEAM_016,DEP_ENG,Engineering,Senior Software Engineer,EMP000179,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000189,Aditya Rossi,aditya.rossi.189@example-corp.com,TEAM_017,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000190,Siddharth Sharma,siddharth.sharma.190@example-corp.com,TEAM_017,DEP_ENG,Engineering,Software Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,CONTRACTOR,HYBRID,STANDARD,True
+EMP000191,Ananya Reddy,ananya.reddy.191@example-corp.com,TEAM_017,DEP_ENG,Engineering,Senior Software Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000192,Arjun Nair,arjun.nair.192@example-corp.com,TEAM_017,DEP_ENG,Engineering,Data Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000193,Aarav Rao,aarav.rao.193@example-corp.com,TEAM_017,DEP_ENG,Engineering,Senior Software Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000194,Ravi Mehta,ravi.mehta.194@example-corp.com,TEAM_017,DEP_ENG,Engineering,DevOps Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000195,Aarav Joshi,aarav.joshi.195@example-corp.com,TEAM_017,DEP_ENG,Engineering,QA Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000196,Emma Krishnan,emma.krishnan.196@example-corp.com,TEAM_017,DEP_ENG,Engineering,Data Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000197,Lakshmi Chandran,lakshmi.chandran.197@example-corp.com,TEAM_017,DEP_ENG,Engineering,DevOps Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000198,Karthik Ali,karthik.ali.198@example-corp.com,TEAM_017,DEP_ENG,Engineering,DevOps Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000199,Priya Pillai,priya.pillai.199@example-corp.com,TEAM_017,DEP_ENG,Engineering,Data Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,INTERN,HYBRID,STANDARD,True
+EMP000200,Janani Chandran,janani.chandran.200@example-corp.com,TEAM_017,DEP_ENG,Engineering,Data Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000201,Keerthi Sharma,keerthi.sharma.201@example-corp.com,TEAM_017,DEP_ENG,Engineering,DevOps Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000202,Naveen Kumar,naveen.kumar.202@example-corp.com,TEAM_017,DEP_ENG,Engineering,Software Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000203,Priya Iyer,priya.iyer.203@example-corp.com,TEAM_017,DEP_ENG,Engineering,Senior Software Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000204,Naveen Wang,naveen.wang.204@example-corp.com,TEAM_017,DEP_ENG,Engineering,Software Engineer,EMP000189,BLD01_F01,BLD01_F01_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000205,Chen Krishnan,chen.krishnan.205@example-corp.com,TEAM_018,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000206,Noah Srinivasan,noah.srinivasan.206@example-corp.com,TEAM_018,DEP_ENG,Engineering,Data Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000207,Deepa Brown,deepa.brown.207@example-corp.com,TEAM_018,DEP_ENG,Engineering,QA Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000208,Omar Iyer,omar.iyer.208@example-corp.com,TEAM_018,DEP_ENG,Engineering,Data Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000209,Ravi Smith,ravi.smith.209@example-corp.com,TEAM_018,DEP_ENG,Engineering,DevOps Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000210,Ananya Varma,ananya.varma.210@example-corp.com,TEAM_018,DEP_ENG,Engineering,Data Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000211,Nila Müller,nila.muller.211@example-corp.com,TEAM_018,DEP_ENG,Engineering,Data Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000212,Arjun Iyer,arjun.iyer.212@example-corp.com,TEAM_018,DEP_ENG,Engineering,Senior Software Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000213,Rohan Sharma,rohan.sharma.213@example-corp.com,TEAM_018,DEP_ENG,Engineering,DevOps Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000214,Diya Srinivasan,diya.srinivasan.214@example-corp.com,TEAM_018,DEP_ENG,Engineering,Software Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,REMOTE,STANDARD,True
+EMP000215,Siddharth Varma,siddharth.varma.215@example-corp.com,TEAM_018,DEP_ENG,Engineering,Senior Software Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000216,Kavya Reddy,kavya.reddy.216@example-corp.com,TEAM_018,DEP_ENG,Engineering,Senior Software Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000217,Mateo Khan,mateo.khan.217@example-corp.com,TEAM_018,DEP_ENG,Engineering,Data Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,INTERN,OFFICE,EARLY_BIRD,True
+EMP000218,Naveen Chandran,naveen.chandran.218@example-corp.com,TEAM_018,DEP_ENG,Engineering,Senior Software Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000219,Naveen Varma,naveen.varma.219@example-corp.com,TEAM_018,DEP_ENG,Engineering,Software Engineer,EMP000205,BLD01_F01,BLD01_F01_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000220,Omar Nair,omar.nair.220@example-corp.com,TEAM_019,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000221,Naveen Krishnan,naveen.krishnan.221@example-corp.com,TEAM_019,DEP_ENG,Engineering,Data Engineer,EMP000220,BLD01_F01,BLD01_F01_ZC,INTERN,REMOTE,REMOTE_HEAVY,True
+EMP000222,Naveen Chandran,naveen.chandran.222@example-corp.com,TEAM_019,DEP_ENG,Engineering,DevOps Engineer,EMP000220,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000223,Varun Rossi,varun.rossi.223@example-corp.com,TEAM_019,DEP_ENG,Engineering,DevOps Engineer,EMP000220,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000224,Suresh Bose,suresh.bose.224@example-corp.com,TEAM_019,DEP_ENG,Engineering,Senior Software Engineer,EMP000220,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000225,Keerthi Ali,keerthi.ali.225@example-corp.com,TEAM_019,DEP_ENG,Engineering,Senior Software Engineer,EMP000220,BLD01_F01,BLD01_F01_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000226,Daniel Mehta,daniel.mehta.226@example-corp.com,TEAM_019,DEP_ENG,Engineering,Software Engineer,EMP000220,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000227,Rahul Silva,rahul.silva.227@example-corp.com,TEAM_019,DEP_ENG,Engineering,Software Engineer,EMP000220,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000228,Deepa Joshi,deepa.joshi.228@example-corp.com,TEAM_020,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000229,Rahul Srinivasan,rahul.srinivasan.229@example-corp.com,TEAM_020,DEP_ENG,Engineering,DevOps Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000230,Priya Kumar,priya.kumar.230@example-corp.com,TEAM_020,DEP_ENG,Engineering,QA Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000231,Lakshmi Subramanian,lakshmi.subramanian.231@example-corp.com,TEAM_020,DEP_ENG,Engineering,Senior Software Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000232,Noah Müller,noah.muller.232@example-corp.com,TEAM_020,DEP_ENG,Engineering,QA Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000233,Lena Rao,lena.rao.233@example-corp.com,TEAM_020,DEP_ENG,Engineering,Data Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000234,Omar Menon,omar.menon.234@example-corp.com,TEAM_020,DEP_ENG,Engineering,DevOps Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000235,Lakshmi Silva,lakshmi.silva.235@example-corp.com,TEAM_020,DEP_ENG,Engineering,QA Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000236,Rohan Kim,rohan.kim.236@example-corp.com,TEAM_020,DEP_ENG,Engineering,QA Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000237,Sneha Sharma,sneha.sharma.237@example-corp.com,TEAM_020,DEP_ENG,Engineering,Software Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,OFFICE,LATE_STARTER,True
+EMP000238,Suresh Rossi,suresh.rossi.238@example-corp.com,TEAM_020,DEP_ENG,Engineering,Software Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000239,Isha Kim,isha.kim.239@example-corp.com,TEAM_020,DEP_ENG,Engineering,Data Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000240,Isha Smith,isha.smith.240@example-corp.com,TEAM_020,DEP_ENG,Engineering,Software Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,CONTRACTOR,OFFICE,MEETING_HEAVY,True
+EMP000241,Ananya Srinivasan,ananya.srinivasan.241@example-corp.com,TEAM_020,DEP_ENG,Engineering,Senior Software Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000242,Naveen Kim,naveen.kim.242@example-corp.com,TEAM_020,DEP_ENG,Engineering,Data Engineer,EMP000228,BLD01_F01,BLD01_F01_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000243,Fatima Fernandes,fatima.fernandes.243@example-corp.com,TEAM_021,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F01,BLD01_F01_ZC,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000244,Lena Reddy,lena.reddy.244@example-corp.com,TEAM_021,DEP_ENG,Engineering,QA Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000245,Swathi Rossi,swathi.rossi.245@example-corp.com,TEAM_021,DEP_ENG,Engineering,DevOps Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,INTERN,HYBRID,MOBILE_WORKER,True
+EMP000246,Nila Khan,nila.khan.246@example-corp.com,TEAM_021,DEP_ENG,Engineering,Data Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000247,Priya Subramanian,priya.subramanian.247@example-corp.com,TEAM_021,DEP_ENG,Engineering,QA Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000248,Meera Silva,meera.silva.248@example-corp.com,TEAM_021,DEP_ENG,Engineering,DevOps Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000249,Isha Khan,isha.khan.249@example-corp.com,TEAM_021,DEP_ENG,Engineering,QA Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000250,Vikram Garcia,vikram.garcia.250@example-corp.com,TEAM_021,DEP_ENG,Engineering,QA Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000251,Varun Ali,varun.ali.251@example-corp.com,TEAM_021,DEP_ENG,Engineering,DevOps Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000252,Pooja Müller,pooja.muller.252@example-corp.com,TEAM_021,DEP_ENG,Engineering,QA Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000253,Divya Gupta,divya.gupta.253@example-corp.com,TEAM_021,DEP_ENG,Engineering,DevOps Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000254,Suresh Bose,suresh.bose.254@example-corp.com,TEAM_021,DEP_ENG,Engineering,QA Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000255,Swathi Silva,swathi.silva.255@example-corp.com,TEAM_021,DEP_ENG,Engineering,Software Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000256,Priya Rao,priya.rao.256@example-corp.com,TEAM_021,DEP_ENG,Engineering,Senior Software Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000257,Noah Iyer,noah.iyer.257@example-corp.com,TEAM_021,DEP_ENG,Engineering,DevOps Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000258,Naveen Das,naveen.das.258@example-corp.com,TEAM_021,DEP_ENG,Engineering,Senior Software Engineer,EMP000243,BLD01_F01,BLD01_F01_ZC,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000259,Emma Reddy,emma.reddy.259@example-corp.com,TEAM_022,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZA,INTERN,HYBRID,MEETING_HEAVY,True
+EMP000260,Rahul Khan,rahul.khan.260@example-corp.com,TEAM_022,DEP_ENG,Engineering,QA Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000261,Yuki Chandran,yuki.chandran.261@example-corp.com,TEAM_022,DEP_ENG,Engineering,QA Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,INTERN,HYBRID,STANDARD,True
+EMP000262,Chen Krishnan,chen.krishnan.262@example-corp.com,TEAM_022,DEP_ENG,Engineering,DevOps Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000263,Nila Nair,nila.nair.263@example-corp.com,TEAM_022,DEP_ENG,Engineering,Software Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,CONTRACTOR,OFFICE,MOBILE_WORKER,True
+EMP000264,Varun Srinivasan,varun.srinivasan.264@example-corp.com,TEAM_022,DEP_ENG,Engineering,Software Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000265,Yuki Brown,yuki.brown.265@example-corp.com,TEAM_022,DEP_ENG,Engineering,DevOps Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000266,Karthik Silva,karthik.silva.266@example-corp.com,TEAM_022,DEP_ENG,Engineering,DevOps Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000267,Vikram Tanaka,vikram.tanaka.267@example-corp.com,TEAM_022,DEP_ENG,Engineering,Data Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000268,Swathi Smith,swathi.smith.268@example-corp.com,TEAM_022,DEP_ENG,Engineering,Senior Software Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,CONTRACTOR,OFFICE,STANDARD,True
+EMP000269,Vikram Varma,vikram.varma.269@example-corp.com,TEAM_022,DEP_ENG,Engineering,DevOps Engineer,EMP000259,BLD01_F02,BLD01_F02_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000270,Priya Smith,priya.smith.270@example-corp.com,TEAM_023,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000271,Aarav Fernandes,aarav.fernandes.271@example-corp.com,TEAM_023,DEP_ENG,Engineering,Senior Software Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000272,Varun Krishnan,varun.krishnan.272@example-corp.com,TEAM_023,DEP_ENG,Engineering,QA Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000273,Deepa Chandran,deepa.chandran.273@example-corp.com,TEAM_023,DEP_ENG,Engineering,Software Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000274,Aarav Varma,aarav.varma.274@example-corp.com,TEAM_023,DEP_ENG,Engineering,QA Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000275,Aarav Nair,aarav.nair.275@example-corp.com,TEAM_023,DEP_ENG,Engineering,Software Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000276,Omar Gupta,omar.gupta.276@example-corp.com,TEAM_023,DEP_ENG,Engineering,Data Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000277,Arjun Rossi,arjun.rossi.277@example-corp.com,TEAM_023,DEP_ENG,Engineering,DevOps Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000278,Naveen Gupta,naveen.gupta.278@example-corp.com,TEAM_023,DEP_ENG,Engineering,Data Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000279,Rahul Khan,rahul.khan.279@example-corp.com,TEAM_023,DEP_ENG,Engineering,DevOps Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000280,Nila Garcia,nila.garcia.280@example-corp.com,TEAM_023,DEP_ENG,Engineering,Data Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000281,Lena Bose,lena.bose.281@example-corp.com,TEAM_023,DEP_ENG,Engineering,Senior Software Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000282,Siddharth Ali,siddharth.ali.282@example-corp.com,TEAM_023,DEP_ENG,Engineering,Software Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000283,Sneha Chandran,sneha.chandran.283@example-corp.com,TEAM_023,DEP_ENG,Engineering,DevOps Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000284,Aarav Tanaka,aarav.tanaka.284@example-corp.com,TEAM_023,DEP_ENG,Engineering,QA Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000285,Manoj Pillai,manoj.pillai.285@example-corp.com,TEAM_023,DEP_ENG,Engineering,Data Engineer,EMP000270,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000286,Deepa Bose,deepa.bose.286@example-corp.com,TEAM_024,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000287,Aarav Rao,aarav.rao.287@example-corp.com,TEAM_024,DEP_ENG,Engineering,Data Engineer,EMP000286,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,LATE_STARTER,True
+EMP000288,Priya Khan,priya.khan.288@example-corp.com,TEAM_024,DEP_ENG,Engineering,DevOps Engineer,EMP000286,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000289,Nila Khan,nila.khan.289@example-corp.com,TEAM_024,DEP_ENG,Engineering,Senior Software Engineer,EMP000286,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000290,Ravi Müller,ravi.muller.290@example-corp.com,TEAM_024,DEP_ENG,Engineering,Software Engineer,EMP000286,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000291,Kavya Subramanian,kavya.subramanian.291@example-corp.com,TEAM_024,DEP_ENG,Engineering,Data Engineer,EMP000286,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,OFFICE,STANDARD,True
+EMP000292,Kavya Brown,kavya.brown.292@example-corp.com,TEAM_024,DEP_ENG,Engineering,DevOps Engineer,EMP000286,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000293,Varun Rao,varun.rao.293@example-corp.com,TEAM_024,DEP_ENG,Engineering,Senior Software Engineer,EMP000286,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000294,Yuki Garcia,yuki.garcia.294@example-corp.com,TEAM_024,DEP_ENG,Engineering,Software Engineer,EMP000286,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000295,Keerthi Pillai,keerthi.pillai.295@example-corp.com,TEAM_025,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000296,Siddharth Mehta,siddharth.mehta.296@example-corp.com,TEAM_025,DEP_ENG,Engineering,Software Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000297,Nila Joshi,nila.joshi.297@example-corp.com,TEAM_025,DEP_ENG,Engineering,Data Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000298,Sarah Nair,sarah.nair.298@example-corp.com,TEAM_025,DEP_ENG,Engineering,Senior Software Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000299,Yuki Khan,yuki.khan.299@example-corp.com,TEAM_025,DEP_ENG,Engineering,Senior Software Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000300,Emma Krishnan,emma.krishnan.300@example-corp.com,TEAM_025,DEP_ENG,Engineering,Senior Software Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000301,Varun Subramanian,varun.subramanian.301@example-corp.com,TEAM_025,DEP_ENG,Engineering,QA Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000302,Sneha Silva,sneha.silva.302@example-corp.com,TEAM_025,DEP_ENG,Engineering,DevOps Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000303,Varun Sharma,varun.sharma.303@example-corp.com,TEAM_025,DEP_ENG,Engineering,QA Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000304,Fatima Sharma,fatima.sharma.304@example-corp.com,TEAM_025,DEP_ENG,Engineering,DevOps Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000305,Diya Garcia,diya.garcia.305@example-corp.com,TEAM_025,DEP_ENG,Engineering,QA Engineer,EMP000295,BLD01_F02,BLD01_F02_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000306,Lena Menon,lena.menon.306@example-corp.com,TEAM_026,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000307,Manoj Srinivasan,manoj.srinivasan.307@example-corp.com,TEAM_026,DEP_ENG,Engineering,Senior Software Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000308,Swathi Menon,swathi.menon.308@example-corp.com,TEAM_026,DEP_ENG,Engineering,Software Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000309,Swathi Nair,swathi.nair.309@example-corp.com,TEAM_026,DEP_ENG,Engineering,QA Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000310,Rahul Kim,rahul.kim.310@example-corp.com,TEAM_026,DEP_ENG,Engineering,Senior Software Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000311,Yuki Wang,yuki.wang.311@example-corp.com,TEAM_026,DEP_ENG,Engineering,Senior Software Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000312,Pooja Brown,pooja.brown.312@example-corp.com,TEAM_026,DEP_ENG,Engineering,QA Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000313,Harish Tanaka,harish.tanaka.313@example-corp.com,TEAM_026,DEP_ENG,Engineering,Software Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000314,Daniel Garcia,daniel.garcia.314@example-corp.com,TEAM_026,DEP_ENG,Engineering,QA Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000315,Isha Brown,isha.brown.315@example-corp.com,TEAM_026,DEP_ENG,Engineering,Senior Software Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000316,Naveen Iyer,naveen.iyer.316@example-corp.com,TEAM_026,DEP_ENG,Engineering,QA Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000317,Naveen Varma,naveen.varma.317@example-corp.com,TEAM_026,DEP_ENG,Engineering,Data Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000318,Sneha Subramanian,sneha.subramanian.318@example-corp.com,TEAM_026,DEP_ENG,Engineering,Senior Software Engineer,EMP000306,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000319,Vikram Srinivasan,vikram.srinivasan.319@example-corp.com,TEAM_027,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000320,Manoj Gupta,manoj.gupta.320@example-corp.com,TEAM_027,DEP_ENG,Engineering,Senior Software Engineer,EMP000319,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000321,Siddharth Menon,siddharth.menon.321@example-corp.com,TEAM_027,DEP_ENG,Engineering,DevOps Engineer,EMP000319,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000322,Siddharth Subramanian,siddharth.subramanian.322@example-corp.com,TEAM_027,DEP_ENG,Engineering,Senior Software Engineer,EMP000319,BLD01_F02,BLD01_F02_ZA,INTERN,OFFICE,MEETING_HEAVY,True
+EMP000323,Pooja Chandran,pooja.chandran.323@example-corp.com,TEAM_027,DEP_ENG,Engineering,Senior Software Engineer,EMP000319,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000324,Divya Joshi,divya.joshi.324@example-corp.com,TEAM_027,DEP_ENG,Engineering,QA Engineer,EMP000319,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000325,Keerthi Rao,keerthi.rao.325@example-corp.com,TEAM_027,DEP_ENG,Engineering,Senior Software Engineer,EMP000319,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000326,Daniel Müller,daniel.muller.326@example-corp.com,TEAM_027,DEP_ENG,Engineering,Data Engineer,EMP000319,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000327,Sarah Srinivasan,sarah.srinivasan.327@example-corp.com,TEAM_027,DEP_ENG,Engineering,Software Engineer,EMP000319,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000328,Ashwin Pillai,ashwin.pillai.328@example-corp.com,TEAM_028,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000329,Suresh Das,suresh.das.329@example-corp.com,TEAM_028,DEP_ENG,Engineering,Software Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000330,Lakshmi Mehta,lakshmi.mehta.330@example-corp.com,TEAM_028,DEP_ENG,Engineering,Data Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000331,Aarav Reddy,aarav.reddy.331@example-corp.com,TEAM_028,DEP_ENG,Engineering,Senior Software Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000332,Chen Müller,chen.muller.332@example-corp.com,TEAM_028,DEP_ENG,Engineering,Senior Software Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000333,Meera Srinivasan,meera.srinivasan.333@example-corp.com,TEAM_028,DEP_ENG,Engineering,Data Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000334,Ravi Fernandes,ravi.fernandes.334@example-corp.com,TEAM_028,DEP_ENG,Engineering,QA Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000335,Noah Fernandes,noah.fernandes.335@example-corp.com,TEAM_028,DEP_ENG,Engineering,Software Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000336,Yuki Varma,yuki.varma.336@example-corp.com,TEAM_028,DEP_ENG,Engineering,DevOps Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,MEETING_HEAVY,True
+EMP000337,Manoj Müller,manoj.muller.337@example-corp.com,TEAM_028,DEP_ENG,Engineering,QA Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000338,Rahul Fernandes,rahul.fernandes.338@example-corp.com,TEAM_028,DEP_ENG,Engineering,DevOps Engineer,EMP000328,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000339,Ravi Reddy,ravi.reddy.339@example-corp.com,TEAM_029,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000340,Manoj Menon,manoj.menon.340@example-corp.com,TEAM_029,DEP_ENG,Engineering,Senior Software Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000341,Harish Mehta,harish.mehta.341@example-corp.com,TEAM_029,DEP_ENG,Engineering,DevOps Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000342,Vikram Bose,vikram.bose.342@example-corp.com,TEAM_029,DEP_ENG,Engineering,Senior Software Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,CONTRACTOR,OFFICE,STANDARD,True
+EMP000343,Diya Das,diya.das.343@example-corp.com,TEAM_029,DEP_ENG,Engineering,Software Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000344,Aditya Gupta,aditya.gupta.344@example-corp.com,TEAM_029,DEP_ENG,Engineering,Data Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000345,Priya Subramanian,priya.subramanian.345@example-corp.com,TEAM_029,DEP_ENG,Engineering,Data Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000346,Fatima Rao,fatima.rao.346@example-corp.com,TEAM_029,DEP_ENG,Engineering,Senior Software Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,FULL_TIME,REMOTE,STANDARD,True
+EMP000347,Deepa Garcia,deepa.garcia.347@example-corp.com,TEAM_029,DEP_ENG,Engineering,QA Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000348,Noah Brown,noah.brown.348@example-corp.com,TEAM_029,DEP_ENG,Engineering,DevOps Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000349,Divya Das,divya.das.349@example-corp.com,TEAM_029,DEP_ENG,Engineering,QA Engineer,EMP000339,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000350,Ravi Sharma,ravi.sharma.350@example-corp.com,TEAM_030,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000351,Keerthi Smith,keerthi.smith.351@example-corp.com,TEAM_030,DEP_ENG,Engineering,Senior Software Engineer,EMP000350,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000352,Ravi Müller,ravi.muller.352@example-corp.com,TEAM_030,DEP_ENG,Engineering,Senior Software Engineer,EMP000350,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000353,Meera Kumar,meera.kumar.353@example-corp.com,TEAM_030,DEP_ENG,Engineering,Software Engineer,EMP000350,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000354,Nila Kim,nila.kim.354@example-corp.com,TEAM_030,DEP_ENG,Engineering,Senior Software Engineer,EMP000350,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000355,Keerthi Das,keerthi.das.355@example-corp.com,TEAM_030,DEP_ENG,Engineering,Senior Software Engineer,EMP000350,BLD01_F02,BLD01_F02_ZA,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000356,Rohan Sharma,rohan.sharma.356@example-corp.com,TEAM_030,DEP_ENG,Engineering,QA Engineer,EMP000350,BLD01_F02,BLD01_F02_ZA,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000357,Yuki Joshi,yuki.joshi.357@example-corp.com,TEAM_030,DEP_ENG,Engineering,Data Engineer,EMP000350,BLD01_F02,BLD01_F02_ZA,CONTRACTOR,HYBRID,STANDARD,True
+EMP000358,Arjun Chandran,arjun.chandran.358@example-corp.com,TEAM_030,DEP_ENG,Engineering,QA Engineer,EMP000350,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000359,Manoj Joshi,manoj.joshi.359@example-corp.com,TEAM_030,DEP_ENG,Engineering,Senior Software Engineer,EMP000350,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000360,Ananya Chandran,ananya.chandran.360@example-corp.com,TEAM_031,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000361,Keerthi Bose,keerthi.bose.361@example-corp.com,TEAM_031,DEP_ENG,Engineering,DevOps Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000362,Fatima Tanaka,fatima.tanaka.362@example-corp.com,TEAM_031,DEP_ENG,Engineering,Software Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000363,Manoj Mehta,manoj.mehta.363@example-corp.com,TEAM_031,DEP_ENG,Engineering,Software Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000364,Isha Müller,isha.muller.364@example-corp.com,TEAM_031,DEP_ENG,Engineering,Data Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000365,Sarah Rossi,sarah.rossi.365@example-corp.com,TEAM_031,DEP_ENG,Engineering,QA Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,HYBRID,MOBILE_WORKER,True
+EMP000366,Omar Kim,omar.kim.366@example-corp.com,TEAM_031,DEP_ENG,Engineering,Data Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000367,Priya Silva,priya.silva.367@example-corp.com,TEAM_031,DEP_ENG,Engineering,Senior Software Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000368,Arjun Brown,arjun.brown.368@example-corp.com,TEAM_031,DEP_ENG,Engineering,Senior Software Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,OFFICE,EARLY_BIRD,True
+EMP000369,Swathi Bose,swathi.bose.369@example-corp.com,TEAM_031,DEP_ENG,Engineering,QA Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000370,Suresh Subramanian,suresh.subramanian.370@example-corp.com,TEAM_031,DEP_ENG,Engineering,Data Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000371,Sarah Wang,sarah.wang.371@example-corp.com,TEAM_031,DEP_ENG,Engineering,Software Engineer,EMP000360,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000372,Janani Krishnan,janani.krishnan.372@example-corp.com,TEAM_032,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000373,Emma Srinivasan,emma.srinivasan.373@example-corp.com,TEAM_032,DEP_ENG,Engineering,DevOps Engineer,EMP000372,BLD01_F02,BLD01_F02_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000374,Chen Pillai,chen.pillai.374@example-corp.com,TEAM_032,DEP_ENG,Engineering,Senior Software Engineer,EMP000372,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000375,Rohan Silva,rohan.silva.375@example-corp.com,TEAM_032,DEP_ENG,Engineering,DevOps Engineer,EMP000372,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000376,Ravi Ali,ravi.ali.376@example-corp.com,TEAM_032,DEP_ENG,Engineering,DevOps Engineer,EMP000372,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000377,Lena Brown,lena.brown.377@example-corp.com,TEAM_032,DEP_ENG,Engineering,QA Engineer,EMP000372,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000378,Manoj Tanaka,manoj.tanaka.378@example-corp.com,TEAM_032,DEP_ENG,Engineering,Senior Software Engineer,EMP000372,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000379,Rahul Rossi,rahul.rossi.379@example-corp.com,TEAM_032,DEP_ENG,Engineering,QA Engineer,EMP000372,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000380,Harish Rossi,harish.rossi.380@example-corp.com,TEAM_033,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZB,INTERN,HYBRID,STANDARD,True
+EMP000381,Sarah Iyer,sarah.iyer.381@example-corp.com,TEAM_033,DEP_ENG,Engineering,Data Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000382,Ashwin Rossi,ashwin.rossi.382@example-corp.com,TEAM_033,DEP_ENG,Engineering,Senior Software Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000383,Naveen Chandran,naveen.chandran.383@example-corp.com,TEAM_033,DEP_ENG,Engineering,Senior Software Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000384,Priya Gupta,priya.gupta.384@example-corp.com,TEAM_033,DEP_ENG,Engineering,DevOps Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000385,Divya Silva,divya.silva.385@example-corp.com,TEAM_033,DEP_ENG,Engineering,DevOps Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000386,Sneha Garcia,sneha.garcia.386@example-corp.com,TEAM_033,DEP_ENG,Engineering,Software Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000387,Meera Kumar,meera.kumar.387@example-corp.com,TEAM_033,DEP_ENG,Engineering,DevOps Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000388,Divya Varma,divya.varma.388@example-corp.com,TEAM_033,DEP_ENG,Engineering,Data Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,CONTRACTOR,OFFICE,MEETING_HEAVY,True
+EMP000389,Diya Das,diya.das.389@example-corp.com,TEAM_033,DEP_ENG,Engineering,Software Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000390,Chen Rao,chen.rao.390@example-corp.com,TEAM_033,DEP_ENG,Engineering,Senior Software Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000391,Kavya Krishnan,kavya.krishnan.391@example-corp.com,TEAM_033,DEP_ENG,Engineering,Data Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000392,Siddharth Chandran,siddharth.chandran.392@example-corp.com,TEAM_033,DEP_ENG,Engineering,DevOps Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000393,Vikram Ali,vikram.ali.393@example-corp.com,TEAM_033,DEP_ENG,Engineering,Data Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000394,Suresh Das,suresh.das.394@example-corp.com,TEAM_033,DEP_ENG,Engineering,QA Engineer,EMP000380,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000395,Naveen Varma,naveen.varma.395@example-corp.com,TEAM_034,DEP_ENG,Engineering,Team Lead,EMP000001,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000396,Karthik Krishnan,karthik.krishnan.396@example-corp.com,TEAM_034,DEP_ENG,Engineering,QA Engineer,EMP000395,BLD01_F02,BLD01_F02_ZA,INTERN,HYBRID,STANDARD,True
+EMP000397,Naveen Wang,naveen.wang.397@example-corp.com,TEAM_034,DEP_ENG,Engineering,Senior Software Engineer,EMP000395,BLD01_F02,BLD01_F02_ZA,CONTRACTOR,OFFICE,LATE_STARTER,True
+EMP000398,Omar Tanaka,omar.tanaka.398@example-corp.com,TEAM_034,DEP_ENG,Engineering,QA Engineer,EMP000395,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000399,Manoj Das,manoj.das.399@example-corp.com,TEAM_034,DEP_ENG,Engineering,DevOps Engineer,EMP000395,BLD01_F02,BLD01_F02_ZA,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000400,Karthik Rao,karthik.rao.400@example-corp.com,TEAM_034,DEP_ENG,Engineering,Data Engineer,EMP000395,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000401,Karthik Khan,karthik.khan.401@example-corp.com,TEAM_035,DEP_OPE,Operations,Head of Operations,,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000402,Deepa Brown,deepa.brown.402@example-corp.com,TEAM_035,DEP_OPE,Operations,Program Coordinator,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000403,Swathi Joshi,swathi.joshi.403@example-corp.com,TEAM_035,DEP_OPE,Operations,Program Coordinator,EMP000401,BLD01_F02,BLD01_F02_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000404,Janani Reddy,janani.reddy.404@example-corp.com,TEAM_035,DEP_OPE,Operations,Program Coordinator,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000405,Daniel Subramanian,daniel.subramanian.405@example-corp.com,TEAM_035,DEP_OPE,Operations,Program Coordinator,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000406,Rahul Kim,rahul.kim.406@example-corp.com,TEAM_035,DEP_OPE,Operations,Program Coordinator,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000407,Priya Rossi,priya.rossi.407@example-corp.com,TEAM_035,DEP_OPE,Operations,Operations Associate,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000408,Emma Smith,emma.smith.408@example-corp.com,TEAM_035,DEP_OPE,Operations,Operations Analyst,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,EARLY_BIRD,True
+EMP000409,Manoj Wang,manoj.wang.409@example-corp.com,TEAM_035,DEP_OPE,Operations,Program Coordinator,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000410,Yuki Iyer,yuki.iyer.410@example-corp.com,TEAM_035,DEP_OPE,Operations,Operations Analyst,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000411,Keerthi Varma,keerthi.varma.411@example-corp.com,TEAM_035,DEP_OPE,Operations,Program Coordinator,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,LATE_STARTER,True
+EMP000412,Aarav Wang,aarav.wang.412@example-corp.com,TEAM_035,DEP_OPE,Operations,Operations Analyst,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000413,Emma Müller,emma.muller.413@example-corp.com,TEAM_035,DEP_OPE,Operations,Operations Analyst,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000414,Sneha Joshi,sneha.joshi.414@example-corp.com,TEAM_036,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000415,Harish Fernandes,harish.fernandes.415@example-corp.com,TEAM_036,DEP_OPE,Operations,Operations Associate,EMP000414,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000416,Keerthi Subramanian,keerthi.subramanian.416@example-corp.com,TEAM_036,DEP_OPE,Operations,Program Coordinator,EMP000414,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000417,Deepa Müller,deepa.muller.417@example-corp.com,TEAM_036,DEP_OPE,Operations,Operations Associate,EMP000414,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,MEETING_HEAVY,True
+EMP000418,Sarah Kumar,sarah.kumar.418@example-corp.com,TEAM_036,DEP_OPE,Operations,Operations Analyst,EMP000414,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000419,Rahul Joshi,rahul.joshi.419@example-corp.com,TEAM_036,DEP_OPE,Operations,Program Coordinator,EMP000414,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000420,Sarah Sharma,sarah.sharma.420@example-corp.com,TEAM_036,DEP_OPE,Operations,Operations Analyst,EMP000414,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000421,Vikram Sharma,vikram.sharma.421@example-corp.com,TEAM_036,DEP_OPE,Operations,Operations Associate,EMP000414,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000422,Divya Tanaka,divya.tanaka.422@example-corp.com,TEAM_036,DEP_OPE,Operations,Operations Associate,EMP000414,BLD01_F02,BLD01_F02_ZC,INTERN,HYBRID,STANDARD,True
+EMP000423,Fatima Subramanian,fatima.subramanian.423@example-corp.com,TEAM_036,DEP_OPE,Operations,Operations Associate,EMP000414,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000424,Deepa Nair,deepa.nair.424@example-corp.com,TEAM_037,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000425,Sneha Khan,sneha.khan.425@example-corp.com,TEAM_037,DEP_OPE,Operations,Program Coordinator,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000426,Yuki Menon,yuki.menon.426@example-corp.com,TEAM_037,DEP_OPE,Operations,Operations Associate,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000427,Vikram Garcia,vikram.garcia.427@example-corp.com,TEAM_037,DEP_OPE,Operations,Program Coordinator,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000428,Ananya Smith,ananya.smith.428@example-corp.com,TEAM_037,DEP_OPE,Operations,Operations Associate,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000429,Sneha Kumar,sneha.kumar.429@example-corp.com,TEAM_037,DEP_OPE,Operations,Operations Associate,EMP000424,BLD01_F02,BLD01_F02_ZA,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000430,Siddharth Krishnan,siddharth.krishnan.430@example-corp.com,TEAM_037,DEP_OPE,Operations,Operations Analyst,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000431,Arjun Varma,arjun.varma.431@example-corp.com,TEAM_037,DEP_OPE,Operations,Program Coordinator,EMP000424,BLD01_F02,BLD01_F02_ZA,INTERN,OFFICE,STANDARD,True
+EMP000432,Meera Bose,meera.bose.432@example-corp.com,TEAM_037,DEP_OPE,Operations,Operations Analyst,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000433,Fatima Joshi,fatima.joshi.433@example-corp.com,TEAM_037,DEP_OPE,Operations,Operations Analyst,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000434,Harish Brown,harish.brown.434@example-corp.com,TEAM_037,DEP_OPE,Operations,Program Coordinator,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000435,Ravi Joshi,ravi.joshi.435@example-corp.com,TEAM_037,DEP_OPE,Operations,Operations Analyst,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000436,Keerthi Nair,keerthi.nair.436@example-corp.com,TEAM_037,DEP_OPE,Operations,Program Coordinator,EMP000424,BLD01_F02,BLD01_F02_ZA,INTERN,HYBRID,STANDARD,True
+EMP000437,Lena Bose,lena.bose.437@example-corp.com,TEAM_037,DEP_OPE,Operations,Program Coordinator,EMP000424,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000438,Aditya Joshi,aditya.joshi.438@example-corp.com,TEAM_038,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000439,Swathi Reddy,swathi.reddy.439@example-corp.com,TEAM_038,DEP_OPE,Operations,Program Coordinator,EMP000438,BLD01_F02,BLD01_F02_ZB,FULL_TIME,REMOTE,STANDARD,True
+EMP000440,Siddharth Reddy,siddharth.reddy.440@example-corp.com,TEAM_038,DEP_OPE,Operations,Operations Associate,EMP000438,BLD01_F02,BLD01_F02_ZB,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000441,Deepa Garcia,deepa.garcia.441@example-corp.com,TEAM_038,DEP_OPE,Operations,Program Coordinator,EMP000438,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000442,Deepa Varma,deepa.varma.442@example-corp.com,TEAM_038,DEP_OPE,Operations,Operations Analyst,EMP000438,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000443,Chen Srinivasan,chen.srinivasan.443@example-corp.com,TEAM_038,DEP_OPE,Operations,Operations Analyst,EMP000438,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000444,Sneha Fernandes,sneha.fernandes.444@example-corp.com,TEAM_038,DEP_OPE,Operations,Program Coordinator,EMP000438,BLD01_F02,BLD01_F02_ZB,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000445,Manoj Rossi,manoj.rossi.445@example-corp.com,TEAM_038,DEP_OPE,Operations,Operations Analyst,EMP000438,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000446,Noah Rossi,noah.rossi.446@example-corp.com,TEAM_039,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000447,Kavya Menon,kavya.menon.447@example-corp.com,TEAM_039,DEP_OPE,Operations,Program Coordinator,EMP000446,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000448,Rohan Subramanian,rohan.subramanian.448@example-corp.com,TEAM_039,DEP_OPE,Operations,Operations Associate,EMP000446,BLD01_F02,BLD01_F02_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000449,Aarav Brown,aarav.brown.449@example-corp.com,TEAM_039,DEP_OPE,Operations,Program Coordinator,EMP000446,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000450,Manoj Smith,manoj.smith.450@example-corp.com,TEAM_039,DEP_OPE,Operations,Program Coordinator,EMP000446,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000451,Harish Das,harish.das.451@example-corp.com,TEAM_039,DEP_OPE,Operations,Operations Analyst,EMP000446,BLD01_F02,BLD01_F02_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000452,Rohan Subramanian,rohan.subramanian.452@example-corp.com,TEAM_039,DEP_OPE,Operations,Operations Analyst,EMP000446,BLD01_F02,BLD01_F02_ZD,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000453,Keerthi Reddy,keerthi.reddy.453@example-corp.com,TEAM_039,DEP_OPE,Operations,Operations Associate,EMP000446,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000454,Suresh Rossi,suresh.rossi.454@example-corp.com,TEAM_039,DEP_OPE,Operations,Program Coordinator,EMP000446,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000455,Arjun Gupta,arjun.gupta.455@example-corp.com,TEAM_039,DEP_OPE,Operations,Operations Associate,EMP000446,BLD01_F02,BLD01_F02_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000456,Suresh Tanaka,suresh.tanaka.456@example-corp.com,TEAM_039,DEP_OPE,Operations,Operations Analyst,EMP000446,BLD01_F02,BLD01_F02_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000457,Manoj Reddy,manoj.reddy.457@example-corp.com,TEAM_039,DEP_OPE,Operations,Operations Associate,EMP000446,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000458,Divya Tanaka,divya.tanaka.458@example-corp.com,TEAM_040,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000459,Divya Varma,divya.varma.459@example-corp.com,TEAM_040,DEP_OPE,Operations,Operations Associate,EMP000458,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000460,Ashwin Srinivasan,ashwin.srinivasan.460@example-corp.com,TEAM_040,DEP_OPE,Operations,Program Coordinator,EMP000458,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000461,Janani Khan,janani.khan.461@example-corp.com,TEAM_040,DEP_OPE,Operations,Program Coordinator,EMP000458,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000462,Lena Silva,lena.silva.462@example-corp.com,TEAM_040,DEP_OPE,Operations,Operations Analyst,EMP000458,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000463,Isha Reddy,isha.reddy.463@example-corp.com,TEAM_040,DEP_OPE,Operations,Operations Analyst,EMP000458,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000464,Naveen Subramanian,naveen.subramanian.464@example-corp.com,TEAM_040,DEP_OPE,Operations,Operations Analyst,EMP000458,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000465,Priya Iyer,priya.iyer.465@example-corp.com,TEAM_040,DEP_OPE,Operations,Program Coordinator,EMP000458,BLD01_F02,BLD01_F02_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000466,Arjun Sharma,arjun.sharma.466@example-corp.com,TEAM_040,DEP_OPE,Operations,Program Coordinator,EMP000458,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000467,Suresh Khan,suresh.khan.467@example-corp.com,TEAM_041,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F02,BLD01_F02_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000468,Divya Pillai,divya.pillai.468@example-corp.com,TEAM_041,DEP_OPE,Operations,Operations Analyst,EMP000467,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000469,Sarah Pillai,sarah.pillai.469@example-corp.com,TEAM_041,DEP_OPE,Operations,Operations Analyst,EMP000467,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000470,Lakshmi Reddy,lakshmi.reddy.470@example-corp.com,TEAM_041,DEP_OPE,Operations,Program Coordinator,EMP000467,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000471,Keerthi Pillai,keerthi.pillai.471@example-corp.com,TEAM_041,DEP_OPE,Operations,Program Coordinator,EMP000467,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000472,Diya Sharma,diya.sharma.472@example-corp.com,TEAM_041,DEP_OPE,Operations,Program Coordinator,EMP000467,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000473,Mateo Tanaka,mateo.tanaka.473@example-corp.com,TEAM_041,DEP_OPE,Operations,Operations Associate,EMP000467,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000474,Mateo Iyer,mateo.iyer.474@example-corp.com,TEAM_041,DEP_OPE,Operations,Operations Analyst,EMP000467,BLD01_F02,BLD01_F02_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000475,Aditya Khan,aditya.khan.475@example-corp.com,TEAM_041,DEP_OPE,Operations,Operations Associate,EMP000467,BLD01_F02,BLD01_F02_ZA,FULL_TIME,REMOTE,MOBILE_WORKER,True
+EMP000476,Nila Menon,nila.menon.476@example-corp.com,TEAM_041,DEP_OPE,Operations,Program Coordinator,EMP000467,BLD01_F02,BLD01_F02_ZA,INTERN,OFFICE,STANDARD,True
+EMP000477,Omar Menon,omar.menon.477@example-corp.com,TEAM_042,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000478,Meera Joshi,meera.joshi.478@example-corp.com,TEAM_042,DEP_OPE,Operations,Operations Analyst,EMP000477,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000479,Pooja Rossi,pooja.rossi.479@example-corp.com,TEAM_042,DEP_OPE,Operations,Operations Associate,EMP000477,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000480,Divya Silva,divya.silva.480@example-corp.com,TEAM_042,DEP_OPE,Operations,Operations Analyst,EMP000477,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000481,Emma Iyer,emma.iyer.481@example-corp.com,TEAM_042,DEP_OPE,Operations,Operations Associate,EMP000477,BLD01_F02,BLD01_F02_ZB,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000482,Aarav Kumar,aarav.kumar.482@example-corp.com,TEAM_042,DEP_OPE,Operations,Operations Associate,EMP000477,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000483,Deepa Srinivasan,deepa.srinivasan.483@example-corp.com,TEAM_042,DEP_OPE,Operations,Program Coordinator,EMP000477,BLD01_F02,BLD01_F02_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000484,Siddharth Nair,siddharth.nair.484@example-corp.com,TEAM_042,DEP_OPE,Operations,Program Coordinator,EMP000477,BLD01_F02,BLD01_F02_ZB,CONTRACTOR,HYBRID,REMOTE_HEAVY,True
+EMP000485,Vikram Rao,vikram.rao.485@example-corp.com,TEAM_042,DEP_OPE,Operations,Operations Analyst,EMP000477,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000486,Keerthi Nair,keerthi.nair.486@example-corp.com,TEAM_042,DEP_OPE,Operations,Operations Associate,EMP000477,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000487,Ashwin Silva,ashwin.silva.487@example-corp.com,TEAM_042,DEP_OPE,Operations,Operations Analyst,EMP000477,BLD01_F02,BLD01_F02_ZB,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000488,Yuki Kumar,yuki.kumar.488@example-corp.com,TEAM_042,DEP_OPE,Operations,Program Coordinator,EMP000477,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000489,Sarah Garcia,sarah.garcia.489@example-corp.com,TEAM_042,DEP_OPE,Operations,Operations Analyst,EMP000477,BLD01_F02,BLD01_F02_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000490,Meera Iyer,meera.iyer.490@example-corp.com,TEAM_043,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000491,Harish Nair,harish.nair.491@example-corp.com,TEAM_043,DEP_OPE,Operations,Operations Associate,EMP000490,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000492,Ravi Reddy,ravi.reddy.492@example-corp.com,TEAM_043,DEP_OPE,Operations,Program Coordinator,EMP000490,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000493,Janani Brown,janani.brown.493@example-corp.com,TEAM_043,DEP_OPE,Operations,Program Coordinator,EMP000490,BLD01_F02,BLD01_F02_ZC,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000494,Yuki Iyer,yuki.iyer.494@example-corp.com,TEAM_043,DEP_OPE,Operations,Program Coordinator,EMP000490,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000495,Naveen Krishnan,naveen.krishnan.495@example-corp.com,TEAM_043,DEP_OPE,Operations,Program Coordinator,EMP000490,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000496,Divya Tanaka,divya.tanaka.496@example-corp.com,TEAM_043,DEP_OPE,Operations,Program Coordinator,EMP000490,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,STANDARD,True
+EMP000497,Rahul Ali,rahul.ali.497@example-corp.com,TEAM_043,DEP_OPE,Operations,Operations Analyst,EMP000490,BLD01_F02,BLD01_F02_ZC,FULL_TIME,REMOTE,STANDARD,True
+EMP000498,Karthik Pillai,karthik.pillai.498@example-corp.com,TEAM_043,DEP_OPE,Operations,Operations Analyst,EMP000490,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000499,Fatima Iyer,fatima.iyer.499@example-corp.com,TEAM_043,DEP_OPE,Operations,Operations Associate,EMP000490,BLD01_F02,BLD01_F02_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000500,Swathi Joshi,swathi.joshi.500@example-corp.com,TEAM_044,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000501,Siddharth Chandran,siddharth.chandran.501@example-corp.com,TEAM_044,DEP_OPE,Operations,Operations Associate,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000502,Vikram Menon,vikram.menon.502@example-corp.com,TEAM_044,DEP_OPE,Operations,Operations Associate,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000503,Aditya Silva,aditya.silva.503@example-corp.com,TEAM_044,DEP_OPE,Operations,Program Coordinator,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000504,Lakshmi Garcia,lakshmi.garcia.504@example-corp.com,TEAM_044,DEP_OPE,Operations,Operations Analyst,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000505,Vikram Brown,vikram.brown.505@example-corp.com,TEAM_044,DEP_OPE,Operations,Operations Associate,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000506,Manoj Menon,manoj.menon.506@example-corp.com,TEAM_044,DEP_OPE,Operations,Program Coordinator,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000507,Meera Fernandes,meera.fernandes.507@example-corp.com,TEAM_044,DEP_OPE,Operations,Operations Associate,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000508,Priya Müller,priya.muller.508@example-corp.com,TEAM_044,DEP_OPE,Operations,Program Coordinator,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,LATE_STARTER,True
+EMP000509,Suresh Menon,suresh.menon.509@example-corp.com,TEAM_044,DEP_OPE,Operations,Program Coordinator,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000510,Noah Müller,noah.muller.510@example-corp.com,TEAM_044,DEP_OPE,Operations,Operations Associate,EMP000500,BLD01_F02,BLD01_F02_ZD,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000511,Arjun Reddy,arjun.reddy.511@example-corp.com,TEAM_045,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000512,Pooja Joshi,pooja.joshi.512@example-corp.com,TEAM_045,DEP_OPE,Operations,Operations Analyst,EMP000511,BLD01_F03,BLD01_F03_ZA,CONTRACTOR,HYBRID,STANDARD,True
+EMP000513,Manoj Joshi,manoj.joshi.513@example-corp.com,TEAM_045,DEP_OPE,Operations,Operations Analyst,EMP000511,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000514,Swathi Chandran,swathi.chandran.514@example-corp.com,TEAM_045,DEP_OPE,Operations,Program Coordinator,EMP000511,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000515,Ananya Menon,ananya.menon.515@example-corp.com,TEAM_045,DEP_OPE,Operations,Program Coordinator,EMP000511,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000516,Lena Smith,lena.smith.516@example-corp.com,TEAM_045,DEP_OPE,Operations,Operations Associate,EMP000511,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000517,Rahul Srinivasan,rahul.srinivasan.517@example-corp.com,TEAM_045,DEP_OPE,Operations,Program Coordinator,EMP000511,BLD01_F03,BLD01_F03_ZA,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000518,Priya Gupta,priya.gupta.518@example-corp.com,TEAM_045,DEP_OPE,Operations,Operations Associate,EMP000511,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000519,Keerthi Nair,keerthi.nair.519@example-corp.com,TEAM_045,DEP_OPE,Operations,Operations Analyst,EMP000511,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000520,Deepa Krishnan,deepa.krishnan.520@example-corp.com,TEAM_045,DEP_OPE,Operations,Operations Associate,EMP000511,BLD01_F03,BLD01_F03_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000521,Arjun Garcia,arjun.garcia.521@example-corp.com,TEAM_045,DEP_OPE,Operations,Program Coordinator,EMP000511,BLD01_F03,BLD01_F03_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000522,Meera Srinivasan,meera.srinivasan.522@example-corp.com,TEAM_045,DEP_OPE,Operations,Operations Associate,EMP000511,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000523,Ravi Tanaka,ravi.tanaka.523@example-corp.com,TEAM_045,DEP_OPE,Operations,Operations Associate,EMP000511,BLD01_F03,BLD01_F03_ZA,CONTRACTOR,OFFICE,REMOTE_HEAVY,True
+EMP000524,Aarav Srinivasan,aarav.srinivasan.524@example-corp.com,TEAM_046,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000525,Arjun Varma,arjun.varma.525@example-corp.com,TEAM_046,DEP_OPE,Operations,Program Coordinator,EMP000524,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000526,Harish Brown,harish.brown.526@example-corp.com,TEAM_046,DEP_OPE,Operations,Operations Analyst,EMP000524,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000527,Isha Menon,isha.menon.527@example-corp.com,TEAM_046,DEP_OPE,Operations,Operations Analyst,EMP000524,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000528,Isha Iyer,isha.iyer.528@example-corp.com,TEAM_046,DEP_OPE,Operations,Operations Analyst,EMP000524,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000529,Janani Tanaka,janani.tanaka.529@example-corp.com,TEAM_046,DEP_OPE,Operations,Operations Analyst,EMP000524,BLD01_F03,BLD01_F03_ZB,INTERN,HYBRID,STANDARD,True
+EMP000530,Aditya Iyer,aditya.iyer.530@example-corp.com,TEAM_046,DEP_OPE,Operations,Operations Analyst,EMP000524,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000531,Karthik Das,karthik.das.531@example-corp.com,TEAM_046,DEP_OPE,Operations,Operations Associate,EMP000524,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000532,Divya Tanaka,divya.tanaka.532@example-corp.com,TEAM_047,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F03,BLD01_F03_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000533,Ravi Kim,ravi.kim.533@example-corp.com,TEAM_047,DEP_OPE,Operations,Operations Analyst,EMP000532,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000534,Mateo Kim,mateo.kim.534@example-corp.com,TEAM_047,DEP_OPE,Operations,Operations Associate,EMP000532,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000535,Fatima Krishnan,fatima.krishnan.535@example-corp.com,TEAM_047,DEP_OPE,Operations,Operations Associate,EMP000532,BLD01_F03,BLD01_F03_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000536,Meera Iyer,meera.iyer.536@example-corp.com,TEAM_047,DEP_OPE,Operations,Program Coordinator,EMP000532,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000537,Varun Garcia,varun.garcia.537@example-corp.com,TEAM_047,DEP_OPE,Operations,Program Coordinator,EMP000532,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000538,Keerthi Smith,keerthi.smith.538@example-corp.com,TEAM_047,DEP_OPE,Operations,Operations Analyst,EMP000532,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000539,Naveen Bose,naveen.bose.539@example-corp.com,TEAM_047,DEP_OPE,Operations,Operations Associate,EMP000532,BLD01_F03,BLD01_F03_ZC,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000540,Ashwin Tanaka,ashwin.tanaka.540@example-corp.com,TEAM_047,DEP_OPE,Operations,Program Coordinator,EMP000532,BLD01_F03,BLD01_F03_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000541,Harish Mehta,harish.mehta.541@example-corp.com,TEAM_048,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F03,BLD01_F03_ZD,INTERN,HYBRID,STANDARD,True
+EMP000542,Nila Rao,nila.rao.542@example-corp.com,TEAM_048,DEP_OPE,Operations,Operations Associate,EMP000541,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000543,Varun Fernandes,varun.fernandes.543@example-corp.com,TEAM_048,DEP_OPE,Operations,Operations Associate,EMP000541,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000544,Mateo Mehta,mateo.mehta.544@example-corp.com,TEAM_048,DEP_OPE,Operations,Operations Analyst,EMP000541,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,HYBRID,MOBILE_WORKER,True
+EMP000545,Lakshmi Kumar,lakshmi.kumar.545@example-corp.com,TEAM_048,DEP_OPE,Operations,Operations Associate,EMP000541,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000546,Lena Wang,lena.wang.546@example-corp.com,TEAM_048,DEP_OPE,Operations,Program Coordinator,EMP000541,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000547,Sarah Ali,sarah.ali.547@example-corp.com,TEAM_048,DEP_OPE,Operations,Operations Analyst,EMP000541,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000548,Deepa Rossi,deepa.rossi.548@example-corp.com,TEAM_048,DEP_OPE,Operations,Operations Analyst,EMP000541,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000549,Naveen Menon,naveen.menon.549@example-corp.com,TEAM_049,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000550,Divya Subramanian,divya.subramanian.550@example-corp.com,TEAM_049,DEP_OPE,Operations,Operations Analyst,EMP000549,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,HYBRID,MOBILE_WORKER,True
+EMP000551,Siddharth Bose,siddharth.bose.551@example-corp.com,TEAM_049,DEP_OPE,Operations,Program Coordinator,EMP000549,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000552,Harish Chandran,harish.chandran.552@example-corp.com,TEAM_049,DEP_OPE,Operations,Operations Analyst,EMP000549,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000553,Fatima Sharma,fatima.sharma.553@example-corp.com,TEAM_049,DEP_OPE,Operations,Program Coordinator,EMP000549,BLD01_F03,BLD01_F03_ZB,FULL_TIME,REMOTE,STANDARD,True
+EMP000554,Sneha Joshi,sneha.joshi.554@example-corp.com,TEAM_049,DEP_OPE,Operations,Operations Associate,EMP000549,BLD01_F03,BLD01_F03_ZB,FULL_TIME,REMOTE,STANDARD,True
+EMP000555,Ravi Pillai,ravi.pillai.555@example-corp.com,TEAM_049,DEP_OPE,Operations,Program Coordinator,EMP000549,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000556,Suresh Ali,suresh.ali.556@example-corp.com,TEAM_049,DEP_OPE,Operations,Operations Analyst,EMP000549,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000557,Deepa Wang,deepa.wang.557@example-corp.com,TEAM_049,DEP_OPE,Operations,Operations Associate,EMP000549,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000558,Lena Subramanian,lena.subramanian.558@example-corp.com,TEAM_049,DEP_OPE,Operations,Operations Associate,EMP000549,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000559,Deepa Smith,deepa.smith.559@example-corp.com,TEAM_049,DEP_OPE,Operations,Operations Analyst,EMP000549,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000560,Harish Srinivasan,harish.srinivasan.560@example-corp.com,TEAM_050,DEP_OPE,Operations,Team Lead,EMP000401,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,OFFICE,STANDARD,True
+EMP000561,Divya Iyer,divya.iyer.561@example-corp.com,TEAM_050,DEP_OPE,Operations,Operations Analyst,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000562,Naveen Rao,naveen.rao.562@example-corp.com,TEAM_050,DEP_OPE,Operations,Operations Analyst,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000563,Ravi Brown,ravi.brown.563@example-corp.com,TEAM_050,DEP_OPE,Operations,Operations Analyst,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000564,Chen Tanaka,chen.tanaka.564@example-corp.com,TEAM_050,DEP_OPE,Operations,Operations Associate,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,MEETING_HEAVY,True
+EMP000565,Kavya Nair,kavya.nair.565@example-corp.com,TEAM_050,DEP_OPE,Operations,Program Coordinator,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,LATE_STARTER,True
+EMP000566,Pooja Garcia,pooja.garcia.566@example-corp.com,TEAM_050,DEP_OPE,Operations,Program Coordinator,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000567,Diya Bose,diya.bose.567@example-corp.com,TEAM_050,DEP_OPE,Operations,Program Coordinator,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000568,Sarah Brown,sarah.brown.568@example-corp.com,TEAM_050,DEP_OPE,Operations,Program Coordinator,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,MOBILE_WORKER,True
+EMP000569,Isha Müller,isha.muller.569@example-corp.com,TEAM_050,DEP_OPE,Operations,Program Coordinator,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000570,Meera Reddy,meera.reddy.570@example-corp.com,TEAM_050,DEP_OPE,Operations,Operations Associate,EMP000560,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000571,Nila Fernandes,nila.fernandes.571@example-corp.com,TEAM_051,DEP_SAL,Sales,Head of Sales,,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000572,Ananya Gupta,ananya.gupta.572@example-corp.com,TEAM_051,DEP_SAL,Sales,Sales Engineer,EMP000571,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000573,Rahul Müller,rahul.muller.573@example-corp.com,TEAM_051,DEP_SAL,Sales,Sales Engineer,EMP000571,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000574,Lena Gupta,lena.gupta.574@example-corp.com,TEAM_051,DEP_SAL,Sales,Sales Engineer,EMP000571,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000575,Daniel Reddy,daniel.reddy.575@example-corp.com,TEAM_051,DEP_SAL,Sales,Sales Associate,EMP000571,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,OFFICE,LATE_STARTER,True
+EMP000576,Chen Brown,chen.brown.576@example-corp.com,TEAM_051,DEP_SAL,Sales,Account Executive,EMP000571,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000577,Harish Kumar,harish.kumar.577@example-corp.com,TEAM_051,DEP_SAL,Sales,Sales Associate,EMP000571,BLD01_F03,BLD01_F03_ZC,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000578,Ashwin Brown,ashwin.brown.578@example-corp.com,TEAM_051,DEP_SAL,Sales,Sales Engineer,EMP000571,BLD01_F03,BLD01_F03_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000579,Omar Menon,omar.menon.579@example-corp.com,TEAM_051,DEP_SAL,Sales,Account Executive,EMP000571,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000580,Karthik Varma,karthik.varma.580@example-corp.com,TEAM_052,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000581,Sarah Pillai,sarah.pillai.581@example-corp.com,TEAM_052,DEP_SAL,Sales,Account Executive,EMP000580,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000582,Noah Kim,noah.kim.582@example-corp.com,TEAM_052,DEP_SAL,Sales,Sales Engineer,EMP000580,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000583,Kavya Bose,kavya.bose.583@example-corp.com,TEAM_052,DEP_SAL,Sales,Account Executive,EMP000580,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000584,Mateo Brown,mateo.brown.584@example-corp.com,TEAM_052,DEP_SAL,Sales,Sales Engineer,EMP000580,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000585,Siddharth Smith,siddharth.smith.585@example-corp.com,TEAM_052,DEP_SAL,Sales,Account Executive,EMP000580,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000586,Karthik Ali,karthik.ali.586@example-corp.com,TEAM_052,DEP_SAL,Sales,Sales Engineer,EMP000580,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000587,Emma Pillai,emma.pillai.587@example-corp.com,TEAM_052,DEP_SAL,Sales,Account Executive,EMP000580,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000588,Noah Iyer,noah.iyer.588@example-corp.com,TEAM_052,DEP_SAL,Sales,Sales Engineer,EMP000580,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000589,Isha Sharma,isha.sharma.589@example-corp.com,TEAM_052,DEP_SAL,Sales,Sales Associate,EMP000580,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000590,Harish Tanaka,harish.tanaka.590@example-corp.com,TEAM_053,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000591,Kavya Sharma,kavya.sharma.591@example-corp.com,TEAM_053,DEP_SAL,Sales,Sales Engineer,EMP000590,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000592,Deepa Rao,deepa.rao.592@example-corp.com,TEAM_053,DEP_SAL,Sales,Sales Associate,EMP000590,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000593,Lakshmi Pillai,lakshmi.pillai.593@example-corp.com,TEAM_053,DEP_SAL,Sales,Sales Associate,EMP000590,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,OFFICE,MEETING_HEAVY,True
+EMP000594,Nila Wang,nila.wang.594@example-corp.com,TEAM_053,DEP_SAL,Sales,Account Executive,EMP000590,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,REMOTE,LATE_STARTER,True
+EMP000595,Rohan Brown,rohan.brown.595@example-corp.com,TEAM_053,DEP_SAL,Sales,Sales Associate,EMP000590,BLD01_F03,BLD01_F03_ZC,INTERN,HYBRID,EARLY_BIRD,True
+EMP000596,Rohan Khan,rohan.khan.596@example-corp.com,TEAM_053,DEP_SAL,Sales,Account Executive,EMP000590,BLD01_F03,BLD01_F03_ZC,INTERN,REMOTE,REMOTE_HEAVY,True
+EMP000597,Keerthi Nair,keerthi.nair.597@example-corp.com,TEAM_053,DEP_SAL,Sales,Sales Associate,EMP000590,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000598,Pooja Krishnan,pooja.krishnan.598@example-corp.com,TEAM_053,DEP_SAL,Sales,Account Executive,EMP000590,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000599,Lakshmi Tanaka,lakshmi.tanaka.599@example-corp.com,TEAM_053,DEP_SAL,Sales,Sales Engineer,EMP000590,BLD01_F03,BLD01_F03_ZC,FULL_TIME,REMOTE,MEETING_HEAVY,True
+EMP000600,Diya Menon,diya.menon.600@example-corp.com,TEAM_053,DEP_SAL,Sales,Sales Engineer,EMP000590,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000601,Vikram Brown,vikram.brown.601@example-corp.com,TEAM_053,DEP_SAL,Sales,Sales Engineer,EMP000590,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000602,Janani Smith,janani.smith.602@example-corp.com,TEAM_053,DEP_SAL,Sales,Account Executive,EMP000590,BLD01_F03,BLD01_F03_ZC,FULL_TIME,REMOTE,LATE_STARTER,True
+EMP000603,Chen Srinivasan,chen.srinivasan.603@example-corp.com,TEAM_053,DEP_SAL,Sales,Account Executive,EMP000590,BLD01_F03,BLD01_F03_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000604,Keerthi Varma,keerthi.varma.604@example-corp.com,TEAM_053,DEP_SAL,Sales,Sales Associate,EMP000590,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000605,Siddharth Srinivasan,siddharth.srinivasan.605@example-corp.com,TEAM_054,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,OFFICE,MOBILE_WORKER,True
+EMP000606,Fatima Srinivasan,fatima.srinivasan.606@example-corp.com,TEAM_054,DEP_SAL,Sales,Account Executive,EMP000605,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000607,Rahul Pillai,rahul.pillai.607@example-corp.com,TEAM_054,DEP_SAL,Sales,Account Executive,EMP000605,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000608,Divya Rossi,divya.rossi.608@example-corp.com,TEAM_054,DEP_SAL,Sales,Sales Associate,EMP000605,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000609,Naveen Iyer,naveen.iyer.609@example-corp.com,TEAM_054,DEP_SAL,Sales,Sales Associate,EMP000605,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,OFFICE,MEETING_HEAVY,True
+EMP000610,Diya Gupta,diya.gupta.610@example-corp.com,TEAM_054,DEP_SAL,Sales,Sales Associate,EMP000605,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000611,Pooja Brown,pooja.brown.611@example-corp.com,TEAM_054,DEP_SAL,Sales,Sales Associate,EMP000605,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000612,Varun Bose,varun.bose.612@example-corp.com,TEAM_054,DEP_SAL,Sales,Account Executive,EMP000605,BLD01_F03,BLD01_F03_ZB,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000613,Aarav Mehta,aarav.mehta.613@example-corp.com,TEAM_054,DEP_SAL,Sales,Sales Associate,EMP000605,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,HYBRID,EARLY_BIRD,True
+EMP000614,Suresh Subramanian,suresh.subramanian.614@example-corp.com,TEAM_054,DEP_SAL,Sales,Account Executive,EMP000605,BLD01_F03,BLD01_F03_ZB,INTERN,HYBRID,MOBILE_WORKER,True
+EMP000615,Mateo Brown,mateo.brown.615@example-corp.com,TEAM_055,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000616,Sarah Ali,sarah.ali.616@example-corp.com,TEAM_055,DEP_SAL,Sales,Sales Associate,EMP000615,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000617,Lakshmi Khan,lakshmi.khan.617@example-corp.com,TEAM_055,DEP_SAL,Sales,Sales Associate,EMP000615,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000618,Meera Fernandes,meera.fernandes.618@example-corp.com,TEAM_055,DEP_SAL,Sales,Sales Associate,EMP000615,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000619,Manoj Müller,manoj.muller.619@example-corp.com,TEAM_055,DEP_SAL,Sales,Sales Engineer,EMP000615,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,OFFICE,STANDARD,True
+EMP000620,Aditya Nair,aditya.nair.620@example-corp.com,TEAM_055,DEP_SAL,Sales,Sales Engineer,EMP000615,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000621,Rahul Brown,rahul.brown.621@example-corp.com,TEAM_055,DEP_SAL,Sales,Sales Engineer,EMP000615,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000622,Aditya Krishnan,aditya.krishnan.622@example-corp.com,TEAM_055,DEP_SAL,Sales,Sales Engineer,EMP000615,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000623,Swathi Bose,swathi.bose.623@example-corp.com,TEAM_055,DEP_SAL,Sales,Account Executive,EMP000615,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000624,Kavya Kim,kavya.kim.624@example-corp.com,TEAM_056,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZA,CONTRACTOR,HYBRID,STANDARD,True
+EMP000625,Rahul Sharma,rahul.sharma.625@example-corp.com,TEAM_056,DEP_SAL,Sales,Sales Associate,EMP000624,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000626,Harish Pillai,harish.pillai.626@example-corp.com,TEAM_056,DEP_SAL,Sales,Account Executive,EMP000624,BLD01_F03,BLD01_F03_ZA,INTERN,REMOTE,STANDARD,True
+EMP000627,Isha Kumar,isha.kumar.627@example-corp.com,TEAM_056,DEP_SAL,Sales,Sales Associate,EMP000624,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000628,Deepa Wang,deepa.wang.628@example-corp.com,TEAM_056,DEP_SAL,Sales,Sales Engineer,EMP000624,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000629,Suresh Rao,suresh.rao.629@example-corp.com,TEAM_056,DEP_SAL,Sales,Sales Associate,EMP000624,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000630,Varun Subramanian,varun.subramanian.630@example-corp.com,TEAM_056,DEP_SAL,Sales,Sales Associate,EMP000624,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000631,Nila Bose,nila.bose.631@example-corp.com,TEAM_056,DEP_SAL,Sales,Account Executive,EMP000624,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000632,Ravi Wang,ravi.wang.632@example-corp.com,TEAM_057,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,REMOTE,STANDARD,True
+EMP000633,Rohan Das,rohan.das.633@example-corp.com,TEAM_057,DEP_SAL,Sales,Account Executive,EMP000632,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000634,Omar Chandran,omar.chandran.634@example-corp.com,TEAM_057,DEP_SAL,Sales,Account Executive,EMP000632,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000635,Varun Menon,varun.menon.635@example-corp.com,TEAM_057,DEP_SAL,Sales,Sales Associate,EMP000632,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000636,Siddharth Das,siddharth.das.636@example-corp.com,TEAM_057,DEP_SAL,Sales,Sales Associate,EMP000632,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000637,Pooja Smith,pooja.smith.637@example-corp.com,TEAM_057,DEP_SAL,Sales,Sales Associate,EMP000632,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000638,Ravi Fernandes,ravi.fernandes.638@example-corp.com,TEAM_057,DEP_SAL,Sales,Account Executive,EMP000632,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000639,Priya Brown,priya.brown.639@example-corp.com,TEAM_057,DEP_SAL,Sales,Sales Associate,EMP000632,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000640,Naveen Rao,naveen.rao.640@example-corp.com,TEAM_057,DEP_SAL,Sales,Account Executive,EMP000632,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000641,Aditya Ali,aditya.ali.641@example-corp.com,TEAM_058,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000642,Nila Pillai,nila.pillai.642@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Engineer,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000643,Ravi Mehta,ravi.mehta.643@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Engineer,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000644,Suresh Krishnan,suresh.krishnan.644@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Associate,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000645,Ashwin Smith,ashwin.smith.645@example-corp.com,TEAM_058,DEP_SAL,Sales,Account Executive,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000646,Manoj Kim,manoj.kim.646@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Engineer,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000647,Kavya Srinivasan,kavya.srinivasan.647@example-corp.com,TEAM_058,DEP_SAL,Sales,Account Executive,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000648,Arjun Krishnan,arjun.krishnan.648@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Associate,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,REMOTE,EARLY_BIRD,True
+EMP000649,Arjun Menon,arjun.menon.649@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Associate,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000650,Arjun Bose,arjun.bose.650@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Engineer,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000651,Aditya Garcia,aditya.garcia.651@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Associate,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000652,Harish Mehta,harish.mehta.652@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Engineer,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000653,Nila Nair,nila.nair.653@example-corp.com,TEAM_058,DEP_SAL,Sales,Sales Engineer,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000654,Sneha Bose,sneha.bose.654@example-corp.com,TEAM_058,DEP_SAL,Sales,Account Executive,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000655,Suresh Kim,suresh.kim.655@example-corp.com,TEAM_058,DEP_SAL,Sales,Account Executive,EMP000641,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000656,Harish Gupta,harish.gupta.656@example-corp.com,TEAM_059,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000657,Nila Fernandes,nila.fernandes.657@example-corp.com,TEAM_059,DEP_SAL,Sales,Sales Engineer,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000658,Sneha Tanaka,sneha.tanaka.658@example-corp.com,TEAM_059,DEP_SAL,Sales,Sales Associate,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000659,Ananya Wang,ananya.wang.659@example-corp.com,TEAM_059,DEP_SAL,Sales,Account Executive,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000660,Fatima Das,fatima.das.660@example-corp.com,TEAM_059,DEP_SAL,Sales,Sales Associate,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000661,Deepa Iyer,deepa.iyer.661@example-corp.com,TEAM_059,DEP_SAL,Sales,Account Executive,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000662,Fatima Subramanian,fatima.subramanian.662@example-corp.com,TEAM_059,DEP_SAL,Sales,Account Executive,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000663,Mateo Gupta,mateo.gupta.663@example-corp.com,TEAM_059,DEP_SAL,Sales,Account Executive,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000664,Divya Mehta,divya.mehta.664@example-corp.com,TEAM_059,DEP_SAL,Sales,Account Executive,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000665,Ashwin Garcia,ashwin.garcia.665@example-corp.com,TEAM_059,DEP_SAL,Sales,Account Executive,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000666,Kavya Krishnan,kavya.krishnan.666@example-corp.com,TEAM_059,DEP_SAL,Sales,Account Executive,EMP000656,BLD01_F03,BLD01_F03_ZA,CONTRACTOR,REMOTE,STANDARD,True
+EMP000667,Manoj Iyer,manoj.iyer.667@example-corp.com,TEAM_059,DEP_SAL,Sales,Sales Engineer,EMP000656,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000668,Divya Khan,divya.khan.668@example-corp.com,TEAM_059,DEP_SAL,Sales,Sales Associate,EMP000656,BLD01_F03,BLD01_F03_ZA,CONTRACTOR,REMOTE,STANDARD,True
+EMP000669,Priya Kumar,priya.kumar.669@example-corp.com,TEAM_060,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZC,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000670,Lena Joshi,lena.joshi.670@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Associate,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000671,Vikram Ali,vikram.ali.671@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Engineer,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000672,Manoj Krishnan,manoj.krishnan.672@example-corp.com,TEAM_060,DEP_SAL,Sales,Account Executive,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000673,Priya Pillai,priya.pillai.673@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Associate,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000674,Diya Tanaka,diya.tanaka.674@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Engineer,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000675,Deepa Khan,deepa.khan.675@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Associate,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000676,Harish Menon,harish.menon.676@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Associate,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000677,Daniel Smith,daniel.smith.677@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Associate,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000678,Meera Rao,meera.rao.678@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Engineer,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000679,Siddharth Kumar,siddharth.kumar.679@example-corp.com,TEAM_060,DEP_SAL,Sales,Account Executive,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000680,Karthik Joshi,karthik.joshi.680@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Associate,EMP000669,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000681,Emma Gupta,emma.gupta.681@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Associate,EMP000669,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,HYBRID,STANDARD,True
+EMP000682,Karthik Srinivasan,karthik.srinivasan.682@example-corp.com,TEAM_060,DEP_SAL,Sales,Sales Engineer,EMP000669,BLD01_F03,BLD01_F03_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000683,Ananya Srinivasan,ananya.srinivasan.683@example-corp.com,TEAM_061,DEP_SAL,Sales,Team Lead,EMP000571,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000684,Manoj Silva,manoj.silva.684@example-corp.com,TEAM_061,DEP_SAL,Sales,Sales Associate,EMP000683,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000685,Deepa Kumar,deepa.kumar.685@example-corp.com,TEAM_061,DEP_SAL,Sales,Sales Associate,EMP000683,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000686,Divya Das,divya.das.686@example-corp.com,TEAM_061,DEP_SAL,Sales,Sales Associate,EMP000683,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000687,Arjun Gupta,arjun.gupta.687@example-corp.com,TEAM_061,DEP_SAL,Sales,Sales Engineer,EMP000683,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000688,Mateo Tanaka,mateo.tanaka.688@example-corp.com,TEAM_061,DEP_SAL,Sales,Sales Associate,EMP000683,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000689,Mateo Khan,mateo.khan.689@example-corp.com,TEAM_061,DEP_SAL,Sales,Account Executive,EMP000683,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000690,Vikram Joshi,vikram.joshi.690@example-corp.com,TEAM_061,DEP_SAL,Sales,Sales Engineer,EMP000683,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000691,Sarah Khan,sarah.khan.691@example-corp.com,TEAM_062,DEP_MAR,Marketing,Head of Marketing,,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000692,Nila Pillai,nila.pillai.692@example-corp.com,TEAM_062,DEP_MAR,Marketing,Content Strategist,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000693,Naveen Chandran,naveen.chandran.693@example-corp.com,TEAM_062,DEP_MAR,Marketing,Content Strategist,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000694,Sarah Joshi,sarah.joshi.694@example-corp.com,TEAM_062,DEP_MAR,Marketing,Content Strategist,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000695,Pooja Ali,pooja.ali.695@example-corp.com,TEAM_062,DEP_MAR,Marketing,Marketing Specialist,EMP000691,BLD01_F03,BLD01_F03_ZA,CONTRACTOR,REMOTE,STANDARD,True
+EMP000696,Daniel Müller,daniel.muller.696@example-corp.com,TEAM_062,DEP_MAR,Marketing,Content Strategist,EMP000691,BLD01_F03,BLD01_F03_ZA,CONTRACTOR,HYBRID,STANDARD,True
+EMP000697,Lena Krishnan,lena.krishnan.697@example-corp.com,TEAM_062,DEP_MAR,Marketing,Growth Analyst,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000698,Mateo Sharma,mateo.sharma.698@example-corp.com,TEAM_062,DEP_MAR,Marketing,Marketing Specialist,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000699,Lakshmi Srinivasan,lakshmi.srinivasan.699@example-corp.com,TEAM_062,DEP_MAR,Marketing,Marketing Specialist,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000700,Siddharth Reddy,siddharth.reddy.700@example-corp.com,TEAM_062,DEP_MAR,Marketing,Marketing Specialist,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000701,Keerthi Tanaka,keerthi.tanaka.701@example-corp.com,TEAM_062,DEP_MAR,Marketing,Content Strategist,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000702,Divya Rossi,divya.rossi.702@example-corp.com,TEAM_062,DEP_MAR,Marketing,Growth Analyst,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000703,Yuki Bose,yuki.bose.703@example-corp.com,TEAM_063,DEP_MAR,Marketing,Team Lead,EMP000691,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000704,Diya Wang,diya.wang.704@example-corp.com,TEAM_063,DEP_MAR,Marketing,Content Strategist,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000705,Aarav Silva,aarav.silva.705@example-corp.com,TEAM_063,DEP_MAR,Marketing,Growth Analyst,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000706,Harish Tanaka,harish.tanaka.706@example-corp.com,TEAM_063,DEP_MAR,Marketing,Content Strategist,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000707,Pooja Iyer,pooja.iyer.707@example-corp.com,TEAM_063,DEP_MAR,Marketing,Content Strategist,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,REMOTE,LATE_STARTER,True
+EMP000708,Kavya Bose,kavya.bose.708@example-corp.com,TEAM_063,DEP_MAR,Marketing,Content Strategist,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000709,Suresh Kim,suresh.kim.709@example-corp.com,TEAM_063,DEP_MAR,Marketing,Marketing Specialist,EMP000703,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000710,Diya Silva,diya.silva.710@example-corp.com,TEAM_063,DEP_MAR,Marketing,Content Strategist,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000711,Ravi Kim,ravi.kim.711@example-corp.com,TEAM_063,DEP_MAR,Marketing,Growth Analyst,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000712,Noah Rao,noah.rao.712@example-corp.com,TEAM_063,DEP_MAR,Marketing,Marketing Specialist,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000713,Lakshmi Iyer,lakshmi.iyer.713@example-corp.com,TEAM_063,DEP_MAR,Marketing,Content Strategist,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000714,Harish Silva,harish.silva.714@example-corp.com,TEAM_063,DEP_MAR,Marketing,Content Strategist,EMP000703,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000715,Omar Nair,omar.nair.715@example-corp.com,TEAM_064,DEP_MAR,Marketing,Team Lead,EMP000691,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000716,Omar Pillai,omar.pillai.716@example-corp.com,TEAM_064,DEP_MAR,Marketing,Content Strategist,EMP000715,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000717,Siddharth Tanaka,siddharth.tanaka.717@example-corp.com,TEAM_064,DEP_MAR,Marketing,Content Strategist,EMP000715,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000718,Divya Bose,divya.bose.718@example-corp.com,TEAM_064,DEP_MAR,Marketing,Growth Analyst,EMP000715,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000719,Rahul Kim,rahul.kim.719@example-corp.com,TEAM_064,DEP_MAR,Marketing,Content Strategist,EMP000715,BLD01_F03,BLD01_F03_ZD,INTERN,HYBRID,STANDARD,True
+EMP000720,Siddharth Varma,siddharth.varma.720@example-corp.com,TEAM_064,DEP_MAR,Marketing,Growth Analyst,EMP000715,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000721,Manoj Bose,manoj.bose.721@example-corp.com,TEAM_064,DEP_MAR,Marketing,Marketing Specialist,EMP000715,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000722,Isha Wang,isha.wang.722@example-corp.com,TEAM_064,DEP_MAR,Marketing,Growth Analyst,EMP000715,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000723,Diya Tanaka,diya.tanaka.723@example-corp.com,TEAM_064,DEP_MAR,Marketing,Marketing Specialist,EMP000715,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000724,Pooja Brown,pooja.brown.724@example-corp.com,TEAM_064,DEP_MAR,Marketing,Growth Analyst,EMP000715,BLD01_F03,BLD01_F03_ZD,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000725,Arjun Smith,arjun.smith.725@example-corp.com,TEAM_064,DEP_MAR,Marketing,Growth Analyst,EMP000715,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000726,Deepa Nair,deepa.nair.726@example-corp.com,TEAM_065,DEP_MAR,Marketing,Team Lead,EMP000691,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,HYBRID,MOBILE_WORKER,True
+EMP000727,Noah Kim,noah.kim.727@example-corp.com,TEAM_065,DEP_MAR,Marketing,Marketing Specialist,EMP000726,BLD01_F03,BLD01_F03_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000728,Naveen Garcia,naveen.garcia.728@example-corp.com,TEAM_065,DEP_MAR,Marketing,Content Strategist,EMP000726,BLD01_F03,BLD01_F03_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000729,Sarah Iyer,sarah.iyer.729@example-corp.com,TEAM_065,DEP_MAR,Marketing,Growth Analyst,EMP000726,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000730,Sneha Fernandes,sneha.fernandes.730@example-corp.com,TEAM_065,DEP_MAR,Marketing,Content Strategist,EMP000726,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000731,Lena Müller,lena.muller.731@example-corp.com,TEAM_065,DEP_MAR,Marketing,Marketing Specialist,EMP000726,BLD01_F03,BLD01_F03_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000732,Rahul Mehta,rahul.mehta.732@example-corp.com,TEAM_065,DEP_MAR,Marketing,Growth Analyst,EMP000726,BLD01_F03,BLD01_F03_ZC,INTERN,HYBRID,STANDARD,True
+EMP000733,Karthik Garcia,karthik.garcia.733@example-corp.com,TEAM_065,DEP_MAR,Marketing,Marketing Specialist,EMP000726,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000734,Omar Bose,omar.bose.734@example-corp.com,TEAM_065,DEP_MAR,Marketing,Content Strategist,EMP000726,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000735,Karthik Silva,karthik.silva.735@example-corp.com,TEAM_065,DEP_MAR,Marketing,Marketing Specialist,EMP000726,BLD01_F03,BLD01_F03_ZC,CONTRACTOR,OFFICE,REMOTE_HEAVY,True
+EMP000736,Emma Kumar,emma.kumar.736@example-corp.com,TEAM_065,DEP_MAR,Marketing,Growth Analyst,EMP000726,BLD01_F03,BLD01_F03_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000737,Vikram Reddy,vikram.reddy.737@example-corp.com,TEAM_065,DEP_MAR,Marketing,Marketing Specialist,EMP000726,BLD01_F03,BLD01_F03_ZC,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000738,Aditya Gupta,aditya.gupta.738@example-corp.com,TEAM_066,DEP_MAR,Marketing,Team Lead,EMP000691,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000739,Emma Smith,emma.smith.739@example-corp.com,TEAM_066,DEP_MAR,Marketing,Marketing Specialist,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000740,Varun Rao,varun.rao.740@example-corp.com,TEAM_066,DEP_MAR,Marketing,Growth Analyst,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000741,Kavya Bose,kavya.bose.741@example-corp.com,TEAM_066,DEP_MAR,Marketing,Marketing Specialist,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000742,Deepa Wang,deepa.wang.742@example-corp.com,TEAM_066,DEP_MAR,Marketing,Content Strategist,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000743,Lena Joshi,lena.joshi.743@example-corp.com,TEAM_066,DEP_MAR,Marketing,Growth Analyst,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000744,Divya Wang,divya.wang.744@example-corp.com,TEAM_066,DEP_MAR,Marketing,Marketing Specialist,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000745,Keerthi Khan,keerthi.khan.745@example-corp.com,TEAM_066,DEP_MAR,Marketing,Growth Analyst,EMP000738,BLD01_F03,BLD01_F03_ZA,INTERN,HYBRID,STANDARD,True
+EMP000746,Rahul Gupta,rahul.gupta.746@example-corp.com,TEAM_066,DEP_MAR,Marketing,Growth Analyst,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000747,Emma Reddy,emma.reddy.747@example-corp.com,TEAM_066,DEP_MAR,Marketing,Marketing Specialist,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000748,Vikram Sharma,vikram.sharma.748@example-corp.com,TEAM_066,DEP_MAR,Marketing,Marketing Specialist,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000749,Ravi Silva,ravi.silva.749@example-corp.com,TEAM_066,DEP_MAR,Marketing,Marketing Specialist,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000750,Mateo Nair,mateo.nair.750@example-corp.com,TEAM_066,DEP_MAR,Marketing,Content Strategist,EMP000738,BLD01_F03,BLD01_F03_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000751,Rahul Ali,rahul.ali.751@example-corp.com,TEAM_067,DEP_MAR,Marketing,Team Lead,EMP000691,BLD01_F03,BLD01_F03_ZB,INTERN,OFFICE,REMOTE_HEAVY,True
+EMP000752,Deepa Müller,deepa.muller.752@example-corp.com,TEAM_067,DEP_MAR,Marketing,Marketing Specialist,EMP000751,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000753,Daniel Das,daniel.das.753@example-corp.com,TEAM_067,DEP_MAR,Marketing,Content Strategist,EMP000751,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000754,Pooja Das,pooja.das.754@example-corp.com,TEAM_067,DEP_MAR,Marketing,Content Strategist,EMP000751,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000755,Diya Chandran,diya.chandran.755@example-corp.com,TEAM_067,DEP_MAR,Marketing,Growth Analyst,EMP000751,BLD01_F03,BLD01_F03_ZB,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000756,Harish Mehta,harish.mehta.756@example-corp.com,TEAM_067,DEP_MAR,Marketing,Content Strategist,EMP000751,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000757,Isha Varma,isha.varma.757@example-corp.com,TEAM_067,DEP_MAR,Marketing,Marketing Specialist,EMP000751,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000758,Rohan Sharma,rohan.sharma.758@example-corp.com,TEAM_067,DEP_MAR,Marketing,Content Strategist,EMP000751,BLD01_F03,BLD01_F03_ZB,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000759,Naveen Nair,naveen.nair.759@example-corp.com,TEAM_067,DEP_MAR,Marketing,Content Strategist,EMP000751,BLD01_F03,BLD01_F03_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000760,Ravi Rao,ravi.rao.760@example-corp.com,TEAM_068,DEP_MAR,Marketing,Team Lead,EMP000691,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000761,Chen Rossi,chen.rossi.761@example-corp.com,TEAM_068,DEP_MAR,Marketing,Content Strategist,EMP000760,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000762,Harish Müller,harish.muller.762@example-corp.com,TEAM_068,DEP_MAR,Marketing,Content Strategist,EMP000760,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,REMOTE,STANDARD,True
+EMP000763,Lakshmi Subramanian,lakshmi.subramanian.763@example-corp.com,TEAM_068,DEP_MAR,Marketing,Growth Analyst,EMP000760,BLD01_F03,BLD01_F03_ZD,INTERN,OFFICE,MEETING_HEAVY,True
+EMP000764,Emma Srinivasan,emma.srinivasan.764@example-corp.com,TEAM_068,DEP_MAR,Marketing,Marketing Specialist,EMP000760,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000765,Arjun Srinivasan,arjun.srinivasan.765@example-corp.com,TEAM_068,DEP_MAR,Marketing,Growth Analyst,EMP000760,BLD01_F03,BLD01_F03_ZD,INTERN,REMOTE,STANDARD,True
+EMP000766,Aditya Mehta,aditya.mehta.766@example-corp.com,TEAM_068,DEP_MAR,Marketing,Content Strategist,EMP000760,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000767,Karthik Ali,karthik.ali.767@example-corp.com,TEAM_068,DEP_MAR,Marketing,Growth Analyst,EMP000760,BLD01_F03,BLD01_F03_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000768,Rohan Joshi,rohan.joshi.768@example-corp.com,TEAM_068,DEP_MAR,Marketing,Marketing Specialist,EMP000760,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000769,Sneha Chandran,sneha.chandran.769@example-corp.com,TEAM_068,DEP_MAR,Marketing,Marketing Specialist,EMP000760,BLD01_F03,BLD01_F03_ZD,CONTRACTOR,OFFICE,MEETING_HEAVY,True
+EMP000770,Sarah Khan,sarah.khan.770@example-corp.com,TEAM_068,DEP_MAR,Marketing,Content Strategist,EMP000760,BLD01_F03,BLD01_F03_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000771,Naveen Ali,naveen.ali.771@example-corp.com,TEAM_069,DEP_FIN,Finance,Head of Finance,,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,OFFICE,MEETING_HEAVY,True
+EMP000772,Kavya Das,kavya.das.772@example-corp.com,TEAM_069,DEP_FIN,Finance,Financial Analyst,EMP000771,BLD01_F04,BLD01_F04_ZA,INTERN,HYBRID,MOBILE_WORKER,True
+EMP000773,Rahul Subramanian,rahul.subramanian.773@example-corp.com,TEAM_069,DEP_FIN,Finance,Financial Analyst,EMP000771,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000774,Manoj Müller,manoj.muller.774@example-corp.com,TEAM_069,DEP_FIN,Finance,Controller,EMP000771,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000775,Chen Srinivasan,chen.srinivasan.775@example-corp.com,TEAM_069,DEP_FIN,Finance,Controller,EMP000771,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000776,Lena Khan,lena.khan.776@example-corp.com,TEAM_069,DEP_FIN,Finance,Accountant,EMP000771,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000777,Karthik Wang,karthik.wang.777@example-corp.com,TEAM_069,DEP_FIN,Finance,Accountant,EMP000771,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000778,Harish Subramanian,harish.subramanian.778@example-corp.com,TEAM_069,DEP_FIN,Finance,Financial Analyst,EMP000771,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,OFFICE,STANDARD,True
+EMP000779,Priya Khan,priya.khan.779@example-corp.com,TEAM_070,DEP_FIN,Finance,Team Lead,EMP000771,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000780,Varun Gupta,varun.gupta.780@example-corp.com,TEAM_070,DEP_FIN,Finance,Controller,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000781,Ananya Smith,ananya.smith.781@example-corp.com,TEAM_070,DEP_FIN,Finance,Accountant,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000782,Diya Krishnan,diya.krishnan.782@example-corp.com,TEAM_070,DEP_FIN,Finance,Financial Analyst,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000783,Nila Kim,nila.kim.783@example-corp.com,TEAM_070,DEP_FIN,Finance,Controller,EMP000779,BLD01_F04,BLD01_F04_ZB,CONTRACTOR,OFFICE,MEETING_HEAVY,True
+EMP000784,Deepa Müller,deepa.muller.784@example-corp.com,TEAM_070,DEP_FIN,Finance,Financial Analyst,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000785,Meera Menon,meera.menon.785@example-corp.com,TEAM_070,DEP_FIN,Finance,Accountant,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000786,Isha Nair,isha.nair.786@example-corp.com,TEAM_070,DEP_FIN,Finance,Controller,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000787,Aditya Tanaka,aditya.tanaka.787@example-corp.com,TEAM_070,DEP_FIN,Finance,Accountant,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000788,Divya Iyer,divya.iyer.788@example-corp.com,TEAM_070,DEP_FIN,Finance,Controller,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000789,Ananya Das,ananya.das.789@example-corp.com,TEAM_070,DEP_FIN,Finance,Financial Analyst,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,REMOTE,MEETING_HEAVY,True
+EMP000790,Isha Rao,isha.rao.790@example-corp.com,TEAM_070,DEP_FIN,Finance,Controller,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000791,Ashwin Garcia,ashwin.garcia.791@example-corp.com,TEAM_070,DEP_FIN,Finance,Financial Analyst,EMP000779,BLD01_F04,BLD01_F04_ZB,CONTRACTOR,OFFICE,EARLY_BIRD,True
+EMP000792,Daniel Pillai,daniel.pillai.792@example-corp.com,TEAM_070,DEP_FIN,Finance,Controller,EMP000779,BLD01_F04,BLD01_F04_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000793,Sarah Subramanian,sarah.subramanian.793@example-corp.com,TEAM_070,DEP_FIN,Finance,Accountant,EMP000779,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000794,Chen Smith,chen.smith.794@example-corp.com,TEAM_071,DEP_FIN,Finance,Team Lead,EMP000771,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000795,Chen Sharma,chen.sharma.795@example-corp.com,TEAM_071,DEP_FIN,Finance,Controller,EMP000794,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000796,Naveen Rossi,naveen.rossi.796@example-corp.com,TEAM_071,DEP_FIN,Finance,Controller,EMP000794,BLD01_F04,BLD01_F04_ZC,INTERN,HYBRID,MOBILE_WORKER,True
+EMP000797,Daniel Varma,daniel.varma.797@example-corp.com,TEAM_071,DEP_FIN,Finance,Controller,EMP000794,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000798,Karthik Wang,karthik.wang.798@example-corp.com,TEAM_071,DEP_FIN,Finance,Accountant,EMP000794,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000799,Noah Brown,noah.brown.799@example-corp.com,TEAM_071,DEP_FIN,Finance,Accountant,EMP000794,BLD01_F04,BLD01_F04_ZC,CONTRACTOR,OFFICE,STANDARD,True
+EMP000800,Varun Menon,varun.menon.800@example-corp.com,TEAM_071,DEP_FIN,Finance,Accountant,EMP000794,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000801,Ananya Rossi,ananya.rossi.801@example-corp.com,TEAM_071,DEP_FIN,Finance,Accountant,EMP000794,BLD01_F04,BLD01_F04_ZC,CONTRACTOR,REMOTE,STANDARD,True
+EMP000802,Omar Menon,omar.menon.802@example-corp.com,TEAM_071,DEP_FIN,Finance,Accountant,EMP000794,BLD01_F04,BLD01_F04_ZC,CONTRACTOR,OFFICE,STANDARD,True
+EMP000803,Swathi Khan,swathi.khan.803@example-corp.com,TEAM_071,DEP_FIN,Finance,Controller,EMP000794,BLD01_F04,BLD01_F04_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000804,Priya Kim,priya.kim.804@example-corp.com,TEAM_071,DEP_FIN,Finance,Controller,EMP000794,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000805,Deepa Fernandes,deepa.fernandes.805@example-corp.com,TEAM_071,DEP_FIN,Finance,Financial Analyst,EMP000794,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000806,Diya Brown,diya.brown.806@example-corp.com,TEAM_071,DEP_FIN,Finance,Controller,EMP000794,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000807,Omar Subramanian,omar.subramanian.807@example-corp.com,TEAM_071,DEP_FIN,Finance,Financial Analyst,EMP000794,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000808,Meera Joshi,meera.joshi.808@example-corp.com,TEAM_071,DEP_FIN,Finance,Financial Analyst,EMP000794,BLD01_F04,BLD01_F04_ZC,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000809,Noah Reddy,noah.reddy.809@example-corp.com,TEAM_072,DEP_FIN,Finance,Team Lead,EMP000771,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000810,Omar Reddy,omar.reddy.810@example-corp.com,TEAM_072,DEP_FIN,Finance,Accountant,EMP000809,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000811,Aditya Mehta,aditya.mehta.811@example-corp.com,TEAM_072,DEP_FIN,Finance,Financial Analyst,EMP000809,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000812,Mateo Pillai,mateo.pillai.812@example-corp.com,TEAM_072,DEP_FIN,Finance,Accountant,EMP000809,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000813,Sarah Ali,sarah.ali.813@example-corp.com,TEAM_072,DEP_FIN,Finance,Controller,EMP000809,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000814,Suresh Silva,suresh.silva.814@example-corp.com,TEAM_072,DEP_FIN,Finance,Financial Analyst,EMP000809,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,HYBRID,MOBILE_WORKER,True
+EMP000815,Deepa Nair,deepa.nair.815@example-corp.com,TEAM_072,DEP_FIN,Finance,Accountant,EMP000809,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000816,Omar Pillai,omar.pillai.816@example-corp.com,TEAM_072,DEP_FIN,Finance,Controller,EMP000809,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000817,Vikram Ali,vikram.ali.817@example-corp.com,TEAM_072,DEP_FIN,Finance,Accountant,EMP000809,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000818,Manoj Müller,manoj.muller.818@example-corp.com,TEAM_072,DEP_FIN,Finance,Controller,EMP000809,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000819,Vikram Bose,vikram.bose.819@example-corp.com,TEAM_072,DEP_FIN,Finance,Financial Analyst,EMP000809,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000820,Sneha Ali,sneha.ali.820@example-corp.com,TEAM_073,DEP_FIN,Finance,Team Lead,EMP000771,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000821,Aarav Joshi,aarav.joshi.821@example-corp.com,TEAM_073,DEP_FIN,Finance,Controller,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000822,Mateo Khan,mateo.khan.822@example-corp.com,TEAM_073,DEP_FIN,Finance,Accountant,EMP000820,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000823,Sneha Pillai,sneha.pillai.823@example-corp.com,TEAM_073,DEP_FIN,Finance,Financial Analyst,EMP000820,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000824,Naveen Brown,naveen.brown.824@example-corp.com,TEAM_073,DEP_FIN,Finance,Controller,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000825,Nila Rossi,nila.rossi.825@example-corp.com,TEAM_073,DEP_FIN,Finance,Accountant,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000826,Siddharth Gupta,siddharth.gupta.826@example-corp.com,TEAM_073,DEP_FIN,Finance,Accountant,EMP000820,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000827,Aditya Rossi,aditya.rossi.827@example-corp.com,TEAM_073,DEP_FIN,Finance,Financial Analyst,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000828,Mateo Mehta,mateo.mehta.828@example-corp.com,TEAM_073,DEP_FIN,Finance,Controller,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000829,Rahul Silva,rahul.silva.829@example-corp.com,TEAM_073,DEP_FIN,Finance,Controller,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000830,Siddharth Rossi,siddharth.rossi.830@example-corp.com,TEAM_073,DEP_FIN,Finance,Financial Analyst,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000831,Diya Rao,diya.rao.831@example-corp.com,TEAM_073,DEP_FIN,Finance,Accountant,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000832,Manoj Krishnan,manoj.krishnan.832@example-corp.com,TEAM_073,DEP_FIN,Finance,Accountant,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000833,Rahul Smith,rahul.smith.833@example-corp.com,TEAM_073,DEP_FIN,Finance,Controller,EMP000820,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000834,Siddharth Reddy,siddharth.reddy.834@example-corp.com,TEAM_074,DEP_FIN,Finance,Team Lead,EMP000771,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000835,Nila Garcia,nila.garcia.835@example-corp.com,TEAM_074,DEP_FIN,Finance,Accountant,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000836,Emma Brown,emma.brown.836@example-corp.com,TEAM_074,DEP_FIN,Finance,Controller,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000837,Deepa Reddy,deepa.reddy.837@example-corp.com,TEAM_074,DEP_FIN,Finance,Controller,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000838,Noah Wang,noah.wang.838@example-corp.com,TEAM_074,DEP_FIN,Finance,Controller,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000839,Rohan Fernandes,rohan.fernandes.839@example-corp.com,TEAM_074,DEP_FIN,Finance,Accountant,EMP000834,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,HYBRID,MOBILE_WORKER,True
+EMP000840,Manoj Brown,manoj.brown.840@example-corp.com,TEAM_074,DEP_FIN,Finance,Accountant,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000841,Diya Mehta,diya.mehta.841@example-corp.com,TEAM_074,DEP_FIN,Finance,Financial Analyst,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000842,Rahul Garcia,rahul.garcia.842@example-corp.com,TEAM_074,DEP_FIN,Finance,Financial Analyst,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000843,Omar Kumar,omar.kumar.843@example-corp.com,TEAM_074,DEP_FIN,Finance,Financial Analyst,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000844,Nila Garcia,nila.garcia.844@example-corp.com,TEAM_074,DEP_FIN,Finance,Financial Analyst,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000845,Rahul Menon,rahul.menon.845@example-corp.com,TEAM_074,DEP_FIN,Finance,Accountant,EMP000834,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000846,Chen Iyer,chen.iyer.846@example-corp.com,TEAM_075,DEP_FIN,Finance,Team Lead,EMP000771,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000847,Vikram Rossi,vikram.rossi.847@example-corp.com,TEAM_075,DEP_FIN,Finance,Accountant,EMP000846,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000848,Meera Rao,meera.rao.848@example-corp.com,TEAM_075,DEP_FIN,Finance,Financial Analyst,EMP000846,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000849,Priya Tanaka,priya.tanaka.849@example-corp.com,TEAM_075,DEP_FIN,Finance,Financial Analyst,EMP000846,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000850,Keerthi Reddy,keerthi.reddy.850@example-corp.com,TEAM_075,DEP_FIN,Finance,Controller,EMP000846,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000851,Divya Garcia,divya.garcia.851@example-corp.com,TEAM_076,DEP_HR,HR,Head of HR,,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000852,Janani Rossi,janani.rossi.852@example-corp.com,TEAM_076,DEP_HR,HR,Recruiter,EMP000851,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000853,Janani Müller,janani.muller.853@example-corp.com,TEAM_076,DEP_HR,HR,People Partner,EMP000851,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000854,Vikram Krishnan,vikram.krishnan.854@example-corp.com,TEAM_076,DEP_HR,HR,HR Generalist,EMP000851,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000855,Isha Reddy,isha.reddy.855@example-corp.com,TEAM_076,DEP_HR,HR,People Partner,EMP000851,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000856,Lena Brown,lena.brown.856@example-corp.com,TEAM_076,DEP_HR,HR,Recruiter,EMP000851,BLD01_F04,BLD01_F04_ZC,CONTRACTOR,OFFICE,EARLY_BIRD,True
+EMP000857,Keerthi Subramanian,keerthi.subramanian.857@example-corp.com,TEAM_076,DEP_HR,HR,Recruiter,EMP000851,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000858,Deepa Krishnan,deepa.krishnan.858@example-corp.com,TEAM_076,DEP_HR,HR,People Partner,EMP000851,BLD01_F04,BLD01_F04_ZC,FULL_TIME,REMOTE,STANDARD,True
+EMP000859,Janani Iyer,janani.iyer.859@example-corp.com,TEAM_076,DEP_HR,HR,Recruiter,EMP000851,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000860,Arjun Rossi,arjun.rossi.860@example-corp.com,TEAM_077,DEP_HR,HR,Team Lead,EMP000851,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000861,Ashwin Ali,ashwin.ali.861@example-corp.com,TEAM_077,DEP_HR,HR,Recruiter,EMP000860,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000862,Karthik Brown,karthik.brown.862@example-corp.com,TEAM_077,DEP_HR,HR,HR Generalist,EMP000860,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000863,Keerthi Varma,keerthi.varma.863@example-corp.com,TEAM_077,DEP_HR,HR,People Partner,EMP000860,BLD01_F04,BLD01_F04_ZB,INTERN,HYBRID,EARLY_BIRD,True
+EMP000864,Lena Rao,lena.rao.864@example-corp.com,TEAM_077,DEP_HR,HR,HR Generalist,EMP000860,BLD01_F04,BLD01_F04_ZB,CONTRACTOR,HYBRID,STANDARD,True
+EMP000865,Priya Subramanian,priya.subramanian.865@example-corp.com,TEAM_077,DEP_HR,HR,Recruiter,EMP000860,BLD01_F04,BLD01_F04_ZB,INTERN,HYBRID,STANDARD,True
+EMP000866,Isha Joshi,isha.joshi.866@example-corp.com,TEAM_077,DEP_HR,HR,People Partner,EMP000860,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000867,Ashwin Iyer,ashwin.iyer.867@example-corp.com,TEAM_077,DEP_HR,HR,Recruiter,EMP000860,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000868,Mateo Müller,mateo.muller.868@example-corp.com,TEAM_077,DEP_HR,HR,People Partner,EMP000860,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000869,Ravi Rao,ravi.rao.869@example-corp.com,TEAM_077,DEP_HR,HR,Recruiter,EMP000860,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000870,Sarah Gupta,sarah.gupta.870@example-corp.com,TEAM_077,DEP_HR,HR,People Partner,EMP000860,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000871,Sneha Gupta,sneha.gupta.871@example-corp.com,TEAM_078,DEP_HR,HR,Team Lead,EMP000851,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000872,Sarah Nair,sarah.nair.872@example-corp.com,TEAM_078,DEP_HR,HR,HR Generalist,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000873,Emma Sharma,emma.sharma.873@example-corp.com,TEAM_078,DEP_HR,HR,HR Generalist,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000874,Chen Kim,chen.kim.874@example-corp.com,TEAM_078,DEP_HR,HR,HR Generalist,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000875,Lakshmi Fernandes,lakshmi.fernandes.875@example-corp.com,TEAM_078,DEP_HR,HR,HR Generalist,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000876,Siddharth Ali,siddharth.ali.876@example-corp.com,TEAM_078,DEP_HR,HR,HR Generalist,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000877,Ravi Pillai,ravi.pillai.877@example-corp.com,TEAM_078,DEP_HR,HR,People Partner,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000878,Daniel Sharma,daniel.sharma.878@example-corp.com,TEAM_078,DEP_HR,HR,People Partner,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,REMOTE,MEETING_HEAVY,True
+EMP000879,Sarah Wang,sarah.wang.879@example-corp.com,TEAM_078,DEP_HR,HR,Recruiter,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000880,Harish Rossi,harish.rossi.880@example-corp.com,TEAM_078,DEP_HR,HR,People Partner,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000881,Lakshmi Fernandes,lakshmi.fernandes.881@example-corp.com,TEAM_078,DEP_HR,HR,Recruiter,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000882,Karthik Sharma,karthik.sharma.882@example-corp.com,TEAM_078,DEP_HR,HR,HR Generalist,EMP000871,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000883,Omar Müller,omar.muller.883@example-corp.com,TEAM_079,DEP_HR,HR,Team Lead,EMP000851,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,OFFICE,STANDARD,True
+EMP000884,Swathi Gupta,swathi.gupta.884@example-corp.com,TEAM_079,DEP_HR,HR,Recruiter,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000885,Suresh Krishnan,suresh.krishnan.885@example-corp.com,TEAM_079,DEP_HR,HR,Recruiter,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,STANDARD,True
+EMP000886,Noah Mehta,noah.mehta.886@example-corp.com,TEAM_079,DEP_HR,HR,People Partner,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000887,Siddharth Subramanian,siddharth.subramanian.887@example-corp.com,TEAM_079,DEP_HR,HR,HR Generalist,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000888,Karthik Silva,karthik.silva.888@example-corp.com,TEAM_079,DEP_HR,HR,Recruiter,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000889,Omar Rossi,omar.rossi.889@example-corp.com,TEAM_079,DEP_HR,HR,Recruiter,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000890,Sarah Silva,sarah.silva.890@example-corp.com,TEAM_079,DEP_HR,HR,People Partner,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000891,Daniel Garcia,daniel.garcia.891@example-corp.com,TEAM_079,DEP_HR,HR,Recruiter,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000892,Sarah Silva,sarah.silva.892@example-corp.com,TEAM_079,DEP_HR,HR,Recruiter,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000893,Omar Gupta,omar.gupta.893@example-corp.com,TEAM_079,DEP_HR,HR,Recruiter,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000894,Isha Krishnan,isha.krishnan.894@example-corp.com,TEAM_079,DEP_HR,HR,People Partner,EMP000883,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,HYBRID,STANDARD,True
+EMP000895,Siddharth Pillai,siddharth.pillai.895@example-corp.com,TEAM_079,DEP_HR,HR,HR Generalist,EMP000883,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000896,Manoj Srinivasan,manoj.srinivasan.896@example-corp.com,TEAM_079,DEP_HR,HR,People Partner,EMP000883,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,OFFICE,EARLY_BIRD,True
+EMP000897,Sarah Ali,sarah.ali.897@example-corp.com,TEAM_080,DEP_HR,HR,Team Lead,EMP000851,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000898,Divya Rao,divya.rao.898@example-corp.com,TEAM_080,DEP_HR,HR,HR Generalist,EMP000897,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,MOBILE_WORKER,True
+EMP000899,Yuki Rao,yuki.rao.899@example-corp.com,TEAM_080,DEP_HR,HR,People Partner,EMP000897,BLD01_F04,BLD01_F04_ZC,CONTRACTOR,HYBRID,MEETING_HEAVY,True
+EMP000900,Isha Kumar,isha.kumar.900@example-corp.com,TEAM_080,DEP_HR,HR,Recruiter,EMP000897,BLD01_F04,BLD01_F04_ZC,FULL_TIME,REMOTE,STANDARD,True
+EMP000901,Divya Krishnan,divya.krishnan.901@example-corp.com,TEAM_081,DEP_MAN,Management,Head of Management,,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000902,Keerthi Subramanian,keerthi.subramanian.902@example-corp.com,TEAM_081,DEP_MAN,Management,Product Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000903,Aditya Iyer,aditya.iyer.903@example-corp.com,TEAM_081,DEP_MAN,Management,Director,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000904,Deepa Varma,deepa.varma.904@example-corp.com,TEAM_081,DEP_MAN,Management,Product Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000905,Daniel Rao,daniel.rao.905@example-corp.com,TEAM_081,DEP_MAN,Management,Product Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,REMOTE,STANDARD,True
+EMP000906,Naveen Nair,naveen.nair.906@example-corp.com,TEAM_081,DEP_MAN,Management,Program Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000907,Aarav Rao,aarav.rao.907@example-corp.com,TEAM_081,DEP_MAN,Management,Program Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000908,Yuki Gupta,yuki.gupta.908@example-corp.com,TEAM_081,DEP_MAN,Management,Product Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,EARLY_BIRD,True
+EMP000909,Sarah Tanaka,sarah.tanaka.909@example-corp.com,TEAM_081,DEP_MAN,Management,Product Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000910,Divya Silva,divya.silva.910@example-corp.com,TEAM_081,DEP_MAN,Management,Director,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000911,Ananya Nair,ananya.nair.911@example-corp.com,TEAM_081,DEP_MAN,Management,Program Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000912,Deepa Rao,deepa.rao.912@example-corp.com,TEAM_081,DEP_MAN,Management,Director,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000913,Divya Khan,divya.khan.913@example-corp.com,TEAM_081,DEP_MAN,Management,Program Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000914,Nila Sharma,nila.sharma.914@example-corp.com,TEAM_081,DEP_MAN,Management,Program Manager,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000915,Rahul Müller,rahul.muller.915@example-corp.com,TEAM_082,DEP_MAN,Management,Team Lead,EMP000901,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000916,Chen Mehta,chen.mehta.916@example-corp.com,TEAM_082,DEP_MAN,Management,Director,EMP000915,BLD01_F04,BLD01_F04_ZB,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000917,Aarav Sharma,aarav.sharma.917@example-corp.com,TEAM_082,DEP_MAN,Management,Program Manager,EMP000915,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000918,Yuki Rao,yuki.rao.918@example-corp.com,TEAM_082,DEP_MAN,Management,Product Manager,EMP000915,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000919,Aditya Smith,aditya.smith.919@example-corp.com,TEAM_082,DEP_MAN,Management,Product Manager,EMP000915,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000920,Priya Tanaka,priya.tanaka.920@example-corp.com,TEAM_082,DEP_MAN,Management,Product Manager,EMP000915,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000921,Kavya Das,kavya.das.921@example-corp.com,TEAM_082,DEP_MAN,Management,Director,EMP000915,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000922,Ashwin Pillai,ashwin.pillai.922@example-corp.com,TEAM_082,DEP_MAN,Management,Program Manager,EMP000915,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000923,Rahul Menon,rahul.menon.923@example-corp.com,TEAM_082,DEP_MAN,Management,Director,EMP000915,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000924,Rahul Smith,rahul.smith.924@example-corp.com,TEAM_082,DEP_MAN,Management,Director,EMP000915,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000925,Meera Iyer,meera.iyer.925@example-corp.com,TEAM_083,DEP_MAN,Management,Team Lead,EMP000901,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,LATE_STARTER,True
+EMP000926,Sneha Reddy,sneha.reddy.926@example-corp.com,TEAM_083,DEP_MAN,Management,Product Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000927,Manoj Varma,manoj.varma.927@example-corp.com,TEAM_083,DEP_MAN,Management,Program Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000928,Chen Rao,chen.rao.928@example-corp.com,TEAM_083,DEP_MAN,Management,Program Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000929,Noah Srinivasan,noah.srinivasan.929@example-corp.com,TEAM_083,DEP_MAN,Management,Program Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000930,Yuki Rao,yuki.rao.930@example-corp.com,TEAM_083,DEP_MAN,Management,Program Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,OFFICE,REMOTE_HEAVY,True
+EMP000931,Emma Rao,emma.rao.931@example-corp.com,TEAM_083,DEP_MAN,Management,Director,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,MOBILE_WORKER,True
+EMP000932,Ananya Das,ananya.das.932@example-corp.com,TEAM_083,DEP_MAN,Management,Director,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000933,Fatima Joshi,fatima.joshi.933@example-corp.com,TEAM_083,DEP_MAN,Management,Product Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000934,Lakshmi Silva,lakshmi.silva.934@example-corp.com,TEAM_083,DEP_MAN,Management,Product Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000935,Kavya Wang,kavya.wang.935@example-corp.com,TEAM_083,DEP_MAN,Management,Product Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,STANDARD,True
+EMP000936,Aarav Chandran,aarav.chandran.936@example-corp.com,TEAM_083,DEP_MAN,Management,Product Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,HYBRID,REMOTE_HEAVY,True
+EMP000937,Lakshmi Tanaka,lakshmi.tanaka.937@example-corp.com,TEAM_083,DEP_MAN,Management,Product Manager,EMP000925,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000938,Sneha Varma,sneha.varma.938@example-corp.com,TEAM_084,DEP_MAN,Management,Team Lead,EMP000901,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000939,Noah Menon,noah.menon.939@example-corp.com,TEAM_084,DEP_MAN,Management,Program Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000940,Ravi Rossi,ravi.rossi.940@example-corp.com,TEAM_084,DEP_MAN,Management,Director,EMP000938,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000941,Manoj Fernandes,manoj.fernandes.941@example-corp.com,TEAM_084,DEP_MAN,Management,Product Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000942,Pooja Smith,pooja.smith.942@example-corp.com,TEAM_084,DEP_MAN,Management,Product Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000943,Nila Garcia,nila.garcia.943@example-corp.com,TEAM_084,DEP_MAN,Management,Product Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000944,Lakshmi Kumar,lakshmi.kumar.944@example-corp.com,TEAM_084,DEP_MAN,Management,Product Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000945,Ashwin Rossi,ashwin.rossi.945@example-corp.com,TEAM_084,DEP_MAN,Management,Program Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000946,Yuki Reddy,yuki.reddy.946@example-corp.com,TEAM_084,DEP_MAN,Management,Product Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000947,Aditya Nair,aditya.nair.947@example-corp.com,TEAM_084,DEP_MAN,Management,Program Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,OFFICE,STANDARD,True
+EMP000948,Emma Tanaka,emma.tanaka.948@example-corp.com,TEAM_084,DEP_MAN,Management,Product Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,HYBRID,REMOTE_HEAVY,True
+EMP000949,Deepa Srinivasan,deepa.srinivasan.949@example-corp.com,TEAM_084,DEP_MAN,Management,Program Manager,EMP000938,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,LATE_STARTER,True
+EMP000950,Noah Krishnan,noah.krishnan.950@example-corp.com,TEAM_085,DEP_MAN,Management,Team Lead,EMP000901,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000951,Emma Menon,emma.menon.951@example-corp.com,TEAM_085,DEP_MAN,Management,Product Manager,EMP000950,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000952,Fatima Iyer,fatima.iyer.952@example-corp.com,TEAM_085,DEP_MAN,Management,Director,EMP000950,BLD01_F04,BLD01_F04_ZB,CONTRACTOR,OFFICE,STANDARD,True
+EMP000953,Arjun Reddy,arjun.reddy.953@example-corp.com,TEAM_085,DEP_MAN,Management,Director,EMP000950,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000954,Chen Nair,chen.nair.954@example-corp.com,TEAM_085,DEP_MAN,Management,Program Manager,EMP000950,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000955,Ravi Reddy,ravi.reddy.955@example-corp.com,TEAM_085,DEP_MAN,Management,Director,EMP000950,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000956,Swathi Müller,swathi.muller.956@example-corp.com,TEAM_085,DEP_MAN,Management,Director,EMP000950,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000957,Divya Müller,divya.muller.957@example-corp.com,TEAM_085,DEP_MAN,Management,Director,EMP000950,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,STANDARD,True
+EMP000958,Isha Menon,isha.menon.958@example-corp.com,TEAM_085,DEP_MAN,Management,Product Manager,EMP000950,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000959,Aarav Smith,aarav.smith.959@example-corp.com,TEAM_085,DEP_MAN,Management,Program Manager,EMP000950,BLD01_F04,BLD01_F04_ZB,FULL_TIME,OFFICE,STANDARD,True
+EMP000960,Varun Brown,varun.brown.960@example-corp.com,TEAM_085,DEP_MAN,Management,Director,EMP000950,BLD01_F04,BLD01_F04_ZB,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000961,Emma Bose,emma.bose.961@example-corp.com,TEAM_086,DEP_MAN,Management,Team Lead,EMP000901,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000962,Aarav Chandran,aarav.chandran.962@example-corp.com,TEAM_086,DEP_MAN,Management,Product Manager,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,EARLY_BIRD,True
+EMP000963,Mateo Smith,mateo.smith.963@example-corp.com,TEAM_086,DEP_MAN,Management,Director,EMP000961,BLD01_F04,BLD01_F04_ZC,CONTRACTOR,OFFICE,MOBILE_WORKER,True
+EMP000964,Sneha Ali,sneha.ali.964@example-corp.com,TEAM_086,DEP_MAN,Management,Product Manager,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000965,Keerthi Garcia,keerthi.garcia.965@example-corp.com,TEAM_086,DEP_MAN,Management,Director,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000966,Keerthi Kumar,keerthi.kumar.966@example-corp.com,TEAM_086,DEP_MAN,Management,Director,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000967,Arjun Gupta,arjun.gupta.967@example-corp.com,TEAM_086,DEP_MAN,Management,Director,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000968,Ravi Iyer,ravi.iyer.968@example-corp.com,TEAM_086,DEP_MAN,Management,Program Manager,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000969,Aarav Pillai,aarav.pillai.969@example-corp.com,TEAM_086,DEP_MAN,Management,Director,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,LATE_STARTER,True
+EMP000970,Sneha Gupta,sneha.gupta.970@example-corp.com,TEAM_086,DEP_MAN,Management,Director,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,HYBRID,STANDARD,True
+EMP000971,Aditya Krishnan,aditya.krishnan.971@example-corp.com,TEAM_086,DEP_MAN,Management,Product Manager,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,REMOTE,STANDARD,True
+EMP000972,Manoj Smith,manoj.smith.972@example-corp.com,TEAM_086,DEP_MAN,Management,Director,EMP000961,BLD01_F04,BLD01_F04_ZC,FULL_TIME,OFFICE,STANDARD,True
+EMP000973,Rohan Kim,rohan.kim.973@example-corp.com,TEAM_087,DEP_MAN,Management,Team Lead,EMP000901,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000974,Yuki Rao,yuki.rao.974@example-corp.com,TEAM_087,DEP_MAN,Management,Product Manager,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,OFFICE,MEETING_HEAVY,True
+EMP000975,Omar Joshi,omar.joshi.975@example-corp.com,TEAM_087,DEP_MAN,Management,Product Manager,EMP000973,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000976,Meera Nair,meera.nair.976@example-corp.com,TEAM_087,DEP_MAN,Management,Program Manager,EMP000973,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000977,Varun Chandran,varun.chandran.977@example-corp.com,TEAM_087,DEP_MAN,Management,Product Manager,EMP000973,BLD01_F04,BLD01_F04_ZA,CONTRACTOR,HYBRID,STANDARD,True
+EMP000978,Daniel Rossi,daniel.rossi.978@example-corp.com,TEAM_087,DEP_MAN,Management,Director,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000979,Lakshmi Varma,lakshmi.varma.979@example-corp.com,TEAM_087,DEP_MAN,Management,Program Manager,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,REMOTE_HEAVY,True
+EMP000980,Divya Menon,divya.menon.980@example-corp.com,TEAM_087,DEP_MAN,Management,Director,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,REMOTE,MOBILE_WORKER,True
+EMP000981,Arjun Varma,arjun.varma.981@example-corp.com,TEAM_087,DEP_MAN,Management,Program Manager,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,REMOTE,STANDARD,True
+EMP000982,Lakshmi Tanaka,lakshmi.tanaka.982@example-corp.com,TEAM_087,DEP_MAN,Management,Director,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000983,Swathi Das,swathi.das.983@example-corp.com,TEAM_087,DEP_MAN,Management,Director,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,STANDARD,True
+EMP000984,Naveen Varma,naveen.varma.984@example-corp.com,TEAM_087,DEP_MAN,Management,Program Manager,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000985,Janani Nair,janani.nair.985@example-corp.com,TEAM_087,DEP_MAN,Management,Product Manager,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000986,Aditya Krishnan,aditya.krishnan.986@example-corp.com,TEAM_087,DEP_MAN,Management,Director,EMP000973,BLD01_F04,BLD01_F04_ZA,FULL_TIME,HYBRID,MEETING_HEAVY,True
+EMP000987,Rahul Sharma,rahul.sharma.987@example-corp.com,TEAM_088,DEP_MAN,Management,Team Lead,EMP000901,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000988,Isha Kim,isha.kim.988@example-corp.com,TEAM_088,DEP_MAN,Management,Program Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000989,Rohan Rossi,rohan.rossi.989@example-corp.com,TEAM_088,DEP_MAN,Management,Product Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP000990,Sarah Pillai,sarah.pillai.990@example-corp.com,TEAM_088,DEP_MAN,Management,Product Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000991,Isha Silva,isha.silva.991@example-corp.com,TEAM_088,DEP_MAN,Management,Product Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True
+EMP000992,Omar Tanaka,omar.tanaka.992@example-corp.com,TEAM_088,DEP_MAN,Management,Product Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,REMOTE_HEAVY,True
+EMP000993,Swathi Ali,swathi.ali.993@example-corp.com,TEAM_088,DEP_MAN,Management,Product Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000994,Vikram Iyer,vikram.iyer.994@example-corp.com,TEAM_088,DEP_MAN,Management,Product Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,REMOTE,REMOTE_HEAVY,True
+EMP000995,Priya Garcia,priya.garcia.995@example-corp.com,TEAM_088,DEP_MAN,Management,Product Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,LATE_STARTER,True
+EMP000996,Lena Wang,lena.wang.996@example-corp.com,TEAM_088,DEP_MAN,Management,Director,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000997,Swathi Menon,swathi.menon.997@example-corp.com,TEAM_088,DEP_MAN,Management,Product Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,HYBRID,STANDARD,True
+EMP000998,Varun Rossi,varun.rossi.998@example-corp.com,TEAM_088,DEP_MAN,Management,Program Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,CONTRACTOR,HYBRID,LATE_STARTER,True
+EMP000999,Aditya Chandran,aditya.chandran.999@example-corp.com,TEAM_088,DEP_MAN,Management,Product Manager,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,OFFICE,STANDARD,True
+EMP001000,Naveen Subramanian,naveen.subramanian.1000@example-corp.com,TEAM_088,DEP_MAN,Management,Director,EMP000987,BLD01_F04,BLD01_F04_ZD,FULL_TIME,REMOTE,REMOTE_HEAVY,True

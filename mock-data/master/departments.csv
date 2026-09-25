@@ -1,0 +1,8 @@
+department_id,name
+DEP_ENG,Engineering
+DEP_OPE,Operations
+DEP_SAL,Sales
+DEP_MAR,Marketing
+DEP_FIN,Finance
+DEP_HR,HR
+DEP_MAN,Management

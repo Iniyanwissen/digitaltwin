@@ -1,8 +1,10 @@
 # Architecture
 
 > Smart Workplace / Office Digital Twin Simulator
-> Status: DRAFT v0.1. Source of requirements: `docs/SPEC.md` (section 51 overrides earlier sections).
-> Related docs: `event-model.md`, `data-model.md`, `simulation-engine.md`, `implementation-plan.md`
+> Status: DRAFT v0.2. Source of requirements: `docs/SPEC.md` (section 51 overrides earlier sections).
+> Related docs: `event-model.md`, `data-model.md`, `simulation-engine.md`, `live-streaming.md`, `visualization-spec.md`, `simulation-scenarios.md`, `implementation-plan.md`, `cloud-migration.md`
+
+> **Current scope: everything runs locally.** Redis Streams, local raw archive, DuckDB and the mock SaaS stand in for Azure Event Hubs, ADLS, Snowflake and real enterprise systems. All cloud work is deferred and designed in `cloud-migration.md`; the adapter interfaces in §6 are what make the later move a configuration change.
 
 ---
 
@@ -390,7 +392,11 @@ smart-workplace-twin/
 │       ├── features/              # one folder per navigation section
 │       ├── components/            # shared UI components
 │       └── floorplan/             # SVG renderer
-├── infra/                         # Azure IaC (later phases)
+├── reference/                     # working reference simulator + viewer (port from here, do not import in prod)
+├── mock-data/                     # generated sample master data, SaaS records, one day of raw events
+├── prompts/                       # Claude Code prompts, one per step
+├── .claude/commands/              # Claude Code slash commands (/phase, /verify, /audit)
+├── infra/                         # Azure IaC (deferred, see cloud-migration.md)
 ├── data/                          # local volumes (gitignored)
 ├── docs/
 └── tests/

@@ -1,0 +1,50 @@
+[
+  {
+    "event_id": "f8b9e0ca-8bd2-50be-a44e-0fe2d09abe00",
+    "event_type": "WORKSPACE_LOGIN",
+    "event_version": 1,
+    "event_time": "2026-09-23T06:35:50.563+05:30",
+    "ingest_time": "2026-09-23T06:35:52.299+05:30",
+    "source": "WORKSTATION",
+    "source_device_id": "DESK_BLD01_F04_0662",
+    "identity_class": "IDENTIFIED",
+    "entity_type": "EMPLOYEE",
+    "entity_id": "EMP000791",
+    "building_id": "BLD01",
+    "floor_id": "BLD01_F04",
+    "zone_id": "BLD01_F04_ZB",
+    "correlation_id": "VISIT-EMP000791-20260923-1",
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 791,
+    "payload": {
+      "workspace_id": "DESK_BLD01_F04_0662",
+      "login_method": "BADGE_TAP",
+      "device_type": "DOCKING_STATION",
+      "assignment_type": "ASSIGNED"
+    }
+  },
+  {
+    "event_id": "e2220ee0-e82e-5192-9ccf-c09ab8f8c1c5",
+    "event_type": "WORKSPACE_LOGIN",
+    "event_version": 1,
+    "event_time": "2026-09-23T06:39:01.566+05:30",
+    "ingest_time": "2026-09-23T06:39:02.928+05:30",
+    "source": "WORKSTATION",
+    "source_device_id": "DESK_BLD01_F01_0070",
+    "identity_class": "IDENTIFIED",
+    "entity_type": "EMPLOYEE",
+    "entity_id": "EMP000085",
+    "building_id": "BLD01",
+    "floor_id": "BLD01_F01",
+    "zone_id": "BLD01_F01_ZB",
+    "correlation_id": "VISIT-EMP000085-20260923-1",
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 793,
+    "payload": {
+      "workspace_id": "DESK_BLD01_F01_0070",
+      "login_method": "BADGE_TAP",
+      "device_type": "DOCKING_STATION",
+      "assignment_type": "HOT_DESK"
+    }
+  }
+]

@@ -1,7 +1,9 @@
 # Simulation Engine
 
-> Status: DRAFT v0.1. Related: `architecture.md`, `event-model.md`
+> Status: DRAFT v0.2. Related: `architecture.md`, `event-model.md`, `live-streaming.md`, `simulation-scenarios.md`
 > The simulation engine is the core of the system. Everything else consumes what it produces.
+>
+> **Reference implementation:** `reference/refsim/` implements this design end to end (planner, state machines, desk assignment, meetings, area readers, sensors, environment, BMS, delivery, sinks) and passes the invariant/privacy/reproducibility tests in `reference/tests/`. Port it into `services/simulation-engine` rather than re-inventing it. Differences from this document are listed in §17.
 
 ---
 
@@ -112,6 +114,10 @@ rng.stream("attendance", date)                   # per day
 rng.stream("person", employee_id, date)          # per person per day
 rng.stream("sensor_noise", sensor_id, date)
 rng.stream("anomaly", date)
+rng.stream("observers", date)                    # identity + occupancy observers, delivery delays
+rng.stream("environment", date)                  # env physics, BMS, heartbeats (separate so the
+                                                 # live 1-min / batch 15-min interval difference
+                                                 # never shifts other draws)
 ```
 
 - Streams are `numpy.random.Generator(PCG64(SeedSequence([root_seed, stable_hash(name), stable_hash(key)...])))`. `stable_hash` is a fixed hash (e.g. xxhash64), never Python's `hash()`.
@@ -348,6 +354,16 @@ Observers subscribe to ground-truth transitions via an in-process bus. They outp
 - `missed_badge_out_probability` (default 4%): the `ACCESS_OUT` is not emitted.
 - Visitors use `VISITOR_BADGE` credentials.
 - Generates the visit `correlation_id` used by the workstation observer for the same person-visit.
+
+### 9.1b Internal access readers and room panels
+- Readers are placed by the layout: a lobby reader per floor above ground, a secure-zone reader per restricted zone, door readers on configured room types.
+- On every ground-truth move, the observer checks which readers the path crosses:
+  - destination floor ≠ current floor → destination floor lobby reader
+  - destination is a room with a door reader → that reader
+  - destination zone is restricted and differs from the current zone → secure-zone reader
+- Each pass emits `AREA_ACCESS` with a few seconds' offset (multiple readers on one path are spaced ~20 s apart). Non-secure readers respect `internal_badge_compliance`.
+- Restricted zones are excluded from desk search for teams not in `zone_access_rule`.
+- **Room panel:** when a meeting starts and the organizer is present, `ROOM_CHECK_IN` is emitted 30–180 s later with probability `room_check_in_probability`.
 
 ### 9.2 WorkstationObserver
 - First arrival at a claimed desk → `WORKSPACE_LOGIN` after a login delay of N(60 s, 30 s).
@@ -607,3 +623,22 @@ anomalies:                        # all 0 until the data-quality phase
   missing_event_probability: 0.0
   sensor_failure_probability: 0.0
 ```
+
+---
+
+## 17. Reference Implementation Notes (`reference/refsim`)
+
+| Area | Reference behaviour | Production target |
+|---|---|---|
+| Time | float seconds since run start date midnight; ISO with building offset | same, wrapped in a `Clock` protocol |
+| Live clock | `server.py` Runner: scaled clock, night skip, pause/speed/reset | engine service + Redis control channel |
+| Sinks | Archive (JSONL + manifests), Stdout, Callback, RedisStream (optional) | EventPublisher adapters |
+| Processor | `state.py` LiveState (dedupe, event-time guards, KPIs, change log) | event-processor service + Redis |
+| Visitors / special events | not implemented | Phase 10 (scenarios) |
+| Walk-in meetings, late joiners | not implemented | optional realism, Phase 9 |
+| Desk choice | favourite desk (60%) else random in zone | add teammate-proximity weighting |
+| Stillness flicker / false positives on desk sensors | not implemented | Phase 9 (data quality) |
+| Sensor failures, out-of-order | not implemented (duplicate, late, missing are) | Phase 9 |
+| Arrival curve | profile mixture; 10:00–12:00 slightly under the SPEC §6 shape | tune `profiles` / `profile_mix`, keep the calibration test |
+
+Performance measured in the sandbox: medium scale (1,000 employees, 800 desks) ≈ 2 s per simulated day in batch mode (single process), ≈ 115 k observed events + 64 k truth events per 7 days with heartbeats off.

@@ -1,0 +1,82 @@
+[
+  {
+    "event_id": "939fb749-d8aa-5cc0-9398-774e637dbeab",
+    "event_type": "AUTOMATION_ACTION",
+    "event_version": 1,
+    "event_time": "2026-09-23T00:15:00.000+05:30",
+    "ingest_time": "2026-09-23T00:15:00.100+05:30",
+    "source": "BMS",
+    "source_device_id": "BMS_BLD01",
+    "identity_class": "SYSTEM",
+    "entity_type": "ZONE",
+    "entity_id": "BLD01_F03_ZD",
+    "building_id": "BLD01",
+    "floor_id": "BLD01_F03",
+    "zone_id": "BLD01_F03_ZD",
+    "correlation_id": null,
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 68,
+    "payload": {
+      "rule_id": "HVAC_ECO_WHEN_EMPTY",
+      "trigger": {
+        "condition": "observed occupancy == 0 for 15 min",
+        "observed_values": {
+          "observed_occupancy": 0,
+          "occupancy_pct": 0.0,
+          "temperature": 23.0,
+          "co2": 431
+        }
+      },
+      "action": "SET_HVAC_MODE",
+      "action_params": {
+        "mode": "ECO"
+      },
+      "previous_state": {
+        "mode": "NORMAL",
+        "setpoint_adj": 0.0,
+        "boost": false
+      },
+      "hvac_zone_id": "BLD01_F03_ZD"
+    }
+  },
+  {
+    "event_id": "3c640d67-fd78-58a6-85b0-68779e414d67",
+    "event_type": "AUTOMATION_ACTION",
+    "event_version": 1,
+    "event_time": "2026-09-23T00:15:00.000+05:30",
+    "ingest_time": "2026-09-23T00:15:00.402+05:30",
+    "source": "BMS",
+    "source_device_id": "BMS_BLD01",
+    "identity_class": "SYSTEM",
+    "entity_type": "ZONE",
+    "entity_id": "BLD01_F02_ZMTG",
+    "building_id": "BLD01",
+    "floor_id": "BLD01_F02",
+    "zone_id": "BLD01_F02_ZMTG",
+    "correlation_id": null,
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 56,
+    "payload": {
+      "rule_id": "HVAC_ECO_WHEN_EMPTY",
+      "trigger": {
+        "condition": "observed occupancy == 0 for 15 min",
+        "observed_values": {
+          "observed_occupancy": 0,
+          "occupancy_pct": 0.0,
+          "temperature": 22.9,
+          "co2": 427
+        }
+      },
+      "action": "SET_HVAC_MODE",
+      "action_params": {
+        "mode": "ECO"
+      },
+      "previous_state": {
+        "mode": "NORMAL",
+        "setpoint_adj": 0.0,
+        "boost": false
+      },
+      "hvac_zone_id": "BLD01_F02_ZMTG"
+    }
+  }
+]

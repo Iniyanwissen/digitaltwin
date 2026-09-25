@@ -1,0 +1,65 @@
+[
+  {
+    "event_type": "TRUTH_STATE_TRANSITION",
+    "event_time": "2026-09-23T06:28:59.256+05:30",
+    "sim_t": 23339.256947591624,
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "entity_id": "EMP000791",
+    "payload": {
+      "person_id": "EMP000791",
+      "person_type": "EMPLOYEE",
+      "team_id": "TEAM_070",
+      "department": "Finance",
+      "from_state": "OUTSIDE_OFFICE",
+      "to_state": "ENTERING",
+      "location_type": "UNSENSED",
+      "location_id": "BLD01_F01_ZLOB",
+      "floor_id": "BLD01_F01",
+      "held_workspace_id": null,
+      "reason": "ARRIVAL",
+      "meeting_id": null
+    }
+  },
+  {
+    "event_type": "TRUTH_STATE_TRANSITION",
+    "event_time": "2026-09-23T06:33:44.870+05:30",
+    "sim_t": 23624.870739298196,
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "entity_id": "EMP000085",
+    "payload": {
+      "person_id": "EMP000085",
+      "person_type": "EMPLOYEE",
+      "team_id": "TEAM_008",
+      "department": "Engineering",
+      "from_state": "OUTSIDE_OFFICE",
+      "to_state": "ENTERING",
+      "location_type": "UNSENSED",
+      "location_id": "BLD01_F01_ZLOB",
+      "floor_id": "BLD01_F01",
+      "held_workspace_id": null,
+      "reason": "ARRIVAL",
+      "meeting_id": null
+    }
+  },
+  {
+    "event_type": "TRUTH_STATE_TRANSITION",
+    "event_time": "2026-09-23T06:34:54.359+05:30",
+    "sim_t": 23694.359638945978,
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "entity_id": "EMP000791",
+    "payload": {
+      "person_id": "EMP000791",
+      "person_type": "EMPLOYEE",
+      "team_id": "TEAM_070",
+      "department": "Finance",
+      "from_state": "ENTERING",
+      "to_state": "AT_DESK",
+      "location_type": "DESK",
+      "location_id": "DESK_BLD01_F04_0662",
+      "floor_id": "BLD01_F04",
+      "held_workspace_id": "DESK_BLD01_F04_0662",
+      "reason": "SEATED",
+      "meeting_id": null
+    }
+  }
+]

@@ -1,0 +1,6 @@
+pyyaml>=6.0
+tzdata>=2024.1        # required on Windows for zoneinfo
+# optional
+redis>=5.0           # only for RedisStreamSink
+# dev
+pytest>=8.0

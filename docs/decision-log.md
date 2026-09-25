@@ -34,3 +34,38 @@ Newest first. Each entry: date, decision, reason, docs affected.
 8. **Deterministic IDs for config/version rows:** UUIDv5 from content hashes (no uuid4 outside tests).
 
 **Docs affected:** `infrastructure.md` (commands), `CLAUDE.md` (commands).
+
+---
+
+## 2026-09-26: Kit v0.2 baseline decisions (imported)
+
+Imported from the Local Kit v0.2 (`reference/`, `prompts/`, `mock-data/`, v0.2 docs). These are the kit's design decisions; where they mention Docker, PostgreSQL or Redis, `infrastructure.md` still applies (embedded equivalents behind the same adapters).
+
+| ID | Decision | Why |
+|---|---|---|
+| D-01 | Ground truth and observed data are separate streams; observers derive events from truth | Realistic sensor/badge gaps; enables accuracy analytics |
+| D-02 | Anonymous sensors never carry identity; identity only from access control, workstation, room panel | Privacy by design |
+| D-03 | Everything local first; cloud deferred | Faster iteration, zero cloud cost |
+| D-04 | Cloud path = Event Hubs → ADLS JSONL → Event Grid → Snowpipe AUTO_INGEST → Dynamic Tables | Simple, cheap, 1–2 min latency |
+| D-05 | Internal readers: floor lobbies, secure zones, room doors (entry-only) + room panels | Movement through areas visible in identity data |
+| D-06 | BMS runs inside the engine and reads observed values only | Realistic automation on imperfect data |
+| D-07 | Mock SaaS has its own DB and REST API with `updated_since` | Realistic incremental extraction |
+| D-08 | `event_id = UUIDv5(run_id, sequence)`; dedupe on `(run_id, event_id)` | Deterministic, idempotent reprocessing |
+| D-09 | Named RNG streams per purpose | Reproducibility; live and batch produce the same world |
+| D-10 | `reference/refsim` is the porting source | De-risks the core algorithm; tests define behaviour |
+| D-11 | Live UI via versioned change log + throttled deltas (500 ms) + resync | Bounded bandwidth at 60x |
+| D-12 | Twin rendering on canvas layers; no 3D engine | Performance at 800+ desks and 700 moving dots |
+| D-13 | Replay via `sim.floor_snapshot` per floor per sim-minute | Cheap scrubber |
+| D-14 | Scenarios are config overlays against a cached baseline with the same seed | Differences come from the change |
+| D-15 | Phase 0 cleanup before further phases; docs win over previously generated code | Existing code must follow the model |
+
+## 2026-09-26: Hybrid direction after importing the kit
+
+**Decisions**
+1. **Infrastructure stays light** (native Windows, no Docker, SQLite + in-memory bus/state). Kit references to Docker Compose, PostgreSQL, Redis and `make` map to `infrastructure.md` equivalents (`uv run poe ...`).
+2. **Hybrid master data:** keep our layout (4 floors, 808 workspaces, 40 zones), departments, teams, columns and Directory views; add the kit's features (floor-lobby, secure-zone and room-door readers, restricted zones with access rules, room panels, device types). Byte-for-byte parity with `mock-data/master` is dropped; `mock-data/` stays as a reference fixture.
+3. **Navigation:** keep the current sidebar (including Directory with its current columns) and add a **Live Simulation** screen modelled on `reference/refsim/viewer` (isometric building, 2D floor twin, truth-dot toggle, overlays, KPIs, hybrid chart, live feed).
+4. **Early port:** the reference engine and processor are ported into twin-server early (typed, tested) so the Live Simulation screen works before the later phases; later phases harden it.
+5. **Theme:** dark design tokens (`visualization-spec.md` §2) on the Live Simulation screen only; other pages stay light.
+6. **Reference config:** the kit's `config/simulation.yaml` lives at `reference/config/simulation.yaml`; `refsim` was changed to read it there. The app keeps its split config (`simulation.yaml`, `organization.yaml`, `layout_presets.yaml`, `layouts/`).
+7. `mock-data/raw/` (26 MB) is gitignored; regenerate with `cd reference && python -m refsim history`.

@@ -1,7 +1,7 @@
 # Implementation Plan
 
-> Status: DRAFT v0.1. Related: all docs in `docs/`
-> Phases follow SPEC §43 as adjusted by §51.12. Phase 8 is split into 8A/8B, data quality becomes Phase 9, and later phases shift by one.
+> Status: DRAFT v0.2. Related: all docs in `docs/`
+> v0.2 changes: **everything local first** (cloud phases deferred to `cloud-migration.md`), a Phase 0 cleanup of previously generated code, porting from the working reference simulator (`reference/refsim`), and the new visualisation and scenario work.
 
 ---
 
@@ -16,6 +16,8 @@ For every phase:
 5. **Summarize:** what was built, how to run it, known gaps.
 6. Commit, tag (`phase-N`), then `/clear` before the next phase.
 
+Prompts for each step are in `prompts/`; the `/phase N` slash command (`.claude/commands/phase.md`) runs the same workflow.
+
 ### Global Definition of Done (applies to every phase)
 
 - `docker compose up` starts all services for that phase with no errors and no cloud credentials.
@@ -27,6 +29,7 @@ For every phase:
 - No business logic in React components or FastAPI route handlers.
 - New config keys are documented in `config/*.yaml` with comments.
 - The app is runnable and demonstrable at the end of the phase.
+- Reference tests (`reference/tests`) that apply to the ported code are ported into the service test suites and pass.
 
 ### Tooling decisions
 - Python 3.12, `uv` for dependency management, one `pyproject.toml` per service plus `packages/domain`.
@@ -39,342 +42,164 @@ For every phase:
 
 | Phase | Name | Outcome |
 |---|---|---|
-| 1 | Foundation | Skeleton services running in Docker, UI shell with navigation |
-| 2 | Master data | Office hierarchy and synthetic employees generated from config |
-| 3 | Simulation core | Clock, scheduler, planner, person state machines, ground truth, control panel |
-| 4 | Identity events + processing | Access and workstation events flow through Redis to current state and raw archive |
-| 5 | Occupancy sensors + SaaS | Desk/room sensors, heartbeats, mock SaaS with bookings |
-| 6 | Live dashboard | Overview KPIs, live workplace, building view, live event viewer |
-| 7 | Floor Digital Twin | SVG floor plans with live desk/room states |
-| 8A | Historical generation + warehouse core | Batch mode, loaders, dbt RAW → CORE on DuckDB |
-| 8B | Analytics marts + UI | Marts, real-estate analytics, heat maps, pipeline and sources pages |
-| 9 | Data quality | Anomalies enabled, DQ marts, sensor accuracy |
-| 10 | Snowflake | Snowflake adapters, dbt-snowflake target |
-| 11 | Azure | Event Hubs and ADLS adapters, IaC |
-| 12 | Scenarios + capacity planning | Special events, visitors, scenario simulator |
-| 13 | Environment + HVAC automation | Environment physics, env sensors, BMS rules, environmental monitoring |
+| 0 | Cleanup and alignment | Previously generated schema/views audited, removed or remapped; repo matches `architecture.md` |
+| 1 | Foundation | Skeleton services in Docker, UI shell with navigation and design tokens |
+| 2 | Master data | Layout + synthetic organisation generated from config (ported from reference) |
+| 3 | Simulation core | Clock, scheduler, planner, person state machines, desk assignment, meetings, control panel |
+| 4 | Identity events + processing | Access (entrance, floors, secure zones, room doors), room check-in, workstation → Redis → current state + raw archive |
+| 5 | Sensors, environment, SaaS | Desk/room sensors, environment physics, BMS automation, mock SaaS bookings/leave |
+| 6 | Live dashboard | Overview KPIs, live workplace, building view, live events, environmental monitoring |
+| 7 | Digital twin visuals | 2D floor twin, isometric building, Simulation View dots, time scrubber |
+| 8A | History + warehouse core | Batch generation, loaders, dbt RAW → CORE on DuckDB |
+| 8B | Analytics UI | Marts, hybrid charts, heat maps, network graphs, movement flow, pipeline + sources pages |
+| 9 | Data quality + realism | Anomalies, sensor faults, walk-ins, DQ and sensor-accuracy marts |
+| 10 | Scenario simulations | Capacity/special events, what-if team moves, hot-desk policy, evacuation drill, energy savings |
+| Deferred | Cloud | Azure Event Hubs, ADLS, Snowpipe, Snowflake Dynamic Tables (`cloud-migration.md`) |
 
-The MVP is Phases 1–7: a fully local, live, event-driven workplace simulation with a digital twin.
+**MVP = Phases 0–7**: a fully local, live, event-driven workplace simulation with a digital twin.
 
 ---
 
 ## 3. Phases
 
+### Phase 0: Cleanup and Alignment
+Follow `cleanup-guide.md` with prompts `00-cleanup-audit.md` → `01-cleanup-execute.md`.
+
+**Acceptance criteria**
+- `docs/cleanup-report.md` lists every pre-existing file/table/view with a KEEP / ADAPT / REPLACE / DELETE decision, approved by you before deletion.
+- No leftover schema, migration, seed script, mock JSON or UI page that contradicts `data-model.md`, `event-model.md` or `visualization-spec.md`.
+- No random/mock data generation remains in the frontend or API.
+- Kept UI components are restyled to the tokens in `visualization-spec.md` §2.
+- `docker compose up` still starts (even if pages are placeholders).
+
 ### Phase 1: Foundation
-
 **Scope**
-- Repository structure per `architecture.md` §10.
-- `packages/domain` skeleton:
-  - config schema (Pydantic) and loader
-  - enums
-  - adapter Protocols (empty implementations allowed)
-  - event envelope model
-- PostgreSQL with two databases (`workplace`, `workplace_saas`) and Alembic set up for `workplace` (empty baseline migration).
-- `api` service: FastAPI app factory, settings from env, structured logging, `/health` (checks postgres and redis), `/api/v1/meta` (version, config summary).
-- `simulation-engine` and `event-processor` services: runnable skeletons with `/health` (engine) and a heartbeat log line (processor).
-- `frontend`:
-  - Vite + React + TS + Tailwind
-  - app shell with sidebar navigation for all SPEC §39 sections (placeholder pages)
-  - typed API client
-  - health indicator in the header
-- `docker-compose.yml`: postgres, redis, api, simulation-engine, event-processor, frontend. Plus `.env.example` and `Makefile`.
-- CI config (GitHub Actions or equivalent): lint + test.
+- Repo structure per `architecture.md` §10 (including `reference/`, `mock-data/`, `prompts/`, `.claude/commands/`).
+- `packages/domain`: config schema for `config/simulation.yaml` (Pydantic, fail fast), enums, adapter Protocols, event envelope + identity table.
+- PostgreSQL (`workplace`, `workplace_saas`), Alembic baseline.
+- `api` (FastAPI factory, settings, structured logging, `/health`, `/api/v1/meta`); `simulation-engine` and `event-processor` skeletons.
+- Frontend: Vite + React + TS + Tailwind, app shell with the SPEC §39 navigation, design tokens, typed API client, health indicator.
+- Docker Compose (postgres, redis, api, simulation-engine, event-processor, frontend), `.env.example`, `Makefile`, CI.
 
 **Acceptance criteria**
-- `docker compose up` → UI at `localhost:5173` shows navigation and a green health indicator.
-- `GET /health` reports postgres and redis status.
-- `make test` and `make lint` pass in all packages.
-- Invalid `simulation.yaml` causes the API and engine to fail fast with a readable validation error.
+- `docker compose up` → UI shell at `localhost:5173` with green health indicator.
+- `make test` / `make lint` pass. Invalid `simulation.yaml` fails fast with a readable error.
 
-**Out of scope:** any data generation.
-
----
-
-### Phase 2: Office Master Data and Synthetic Employees
-
+### Phase 2: Master Data
 **Scope**
-- `config/layouts/building_a.yaml` (1 building, 4 floors, medium scale), plus `LayoutGenerator` for small/medium/large presets.
-- Alembic migrations for `master`, `config`, `sim`, `ops` schemas (`data-model.md` §2).
-- Generators:
-  - `LayoutLoader`, `SensorGenerator`, `OrgGenerator`, `EmployeeGenerator`, `WorkPatternGenerator`, `AssignmentGenerator`
-  - `RngFactory` (named seeded streams)
-- CLI / Make target `seed`: generate master data for the active config and seed.
-- API read endpoints:
-  - buildings, floors (with layout geometry), zones, workspaces, rooms, sensors
-  - teams, departments, employees (paginated, filterable)
-- UI pages: Employees, Teams, Rooms, Workspaces (tables with filters). The Building View shows static capacity per floor.
+- Port `reference/refsim/layout.py` and `master.py` into `simulation-engine/engine/generators` (typed, Pydantic models, `RngFactory`).
+- Alembic migrations for `master`, `config`, `sim`, `ops` (`data-model.md` §2, v0.2 fields: reader types, restricted zones, room readers/panels, device types, `floor_snapshot`).
+- `make seed` loads generated master data into PostgreSQL. `mock-data/master/*.csv` must be reproducible byte-for-byte from the same config + seed.
+- API read endpoints + UI pages: Employees, Teams, Rooms, Workspaces, Building View (static capacity).
 
 **Acceptance criteria**
-- Generating twice with the same seed and config produces identical master data (content hash test).
-- Counts match config (employees, desks, rooms, sensors) for all three presets.
-- Work mode and profile mixes are within ±2% of config for medium scale.
-- Every team has a home floor and zone allocations summing to 1.0.
-- Every desk with `has_sensor` has exactly one desk sensor; every room/common area has one count sensor; every zone has one environment sensor.
+- Port of `test_master_data_is_deterministic` passes; counts match all three presets.
+- Every restricted zone has a secure reader and at least one `zone_access_rule`.
+- Generated CSVs equal `mock-data/master` for the default config.
 
----
-
-### Phase 3: Simulation Clock and Employee State Machine
-
+### Phase 3: Simulation Core
 **Scope**
-- `ScaledRealtimeClock`, `VirtualClock`, scheduler with lazy cancellation and priorities.
-- Day planner:
-  - calendar and leave (leave stored in memory until Phase 5)
-  - team-correlated attendance with calibration
-  - arrival/departure per profile
-  - MeetingScheduler (room booking in memory until Phase 5)
-- Person state machines, activity model, lunch and meeting constraints.
-- Desk assignment engine (assigned and hot-desk, overflow).
-- Truth events (`TRUTH_STATE_TRANSITION`, `TRUTH_DESK_SEARCH_FAILED`) to an in-memory sink, plus a debug JSONL dump.
-- Control channel via Redis pub/sub: START, PAUSE, RESUME, STOP, RESET, SET_SPEED. Status snapshots.
-- `simulation_run` tracking in PostgreSQL.
-- UI Simulation Control panel: status, sim date/time, speed selector, buttons, engine-side counters (labeled "simulation truth").
+- Port clock, scheduler, planner (calendar, leave, team-correlated attendance with weekday calibration), person state machine, activity model, desk assignment, meeting scheduler from `reference/refsim/engine.py`.
+- Truth events to an in-memory/debug sink. Redis control channel (START/PAUSE/RESUME/STOP/RESET/SET_SPEED). `simulation_run` tracking.
+- UI Simulation Control panel.
 
 **Acceptance criteria**
-- Invariant tests pass for a full simulated day at small scale (`simulation-engine.md` §14).
-- Calibration tests pass at medium scale (attendance ±3 pp, arrival curve shape, meetings per person ±10%, team correlation higher than random pairs).
-- Two batch runs of the same day with the same seed produce identical truth content hashes.
-- From the UI:
-  - start at 60x and watch the "people inside" counter rise through the morning and fall in the evening
-  - pause/resume/speed change work without time jumps
-  - reset clears state
-- One medium-scale day in batch mode completes in < 30 s.
+- Ported tests pass: truth sequences, non-negative counts, reproducibility, calibration.
+- 60x run from the UI: truth "inside" rises and falls over the day; pause/speed/reset work without time jumps.
+- One medium day in batch mode < 30 s.
 
-**Out of scope:** observable (non-truth) events.
-
----
-
-### Phase 4: Access-Card and Workspace-Login Events
-
+### Phase 4: Identity Events and Processing
 **Scope**
-- Event envelope finalized, with the payload registry and identity lookup table (`event-model.md`).
-- AccessControlObserver and WorkstationObserver, including realism rules (tailgate, missed badge-out, logout reasons, no-login).
-- Delivery layer: AnomalyInjector (implemented, all probabilities 0), LiveSink, InMemorySink.
-- `RedisStreamPublisher` / `RedisStreamConsumer`.
-- Event processor:
-  - validation and deadletter
-  - dedupe
-  - person and desk-login state
-  - building inside set and counters
-  - raw archive (`LocalFileRawArchive` with manifests)
-  - source metrics
-  - live pub/sub feed
-- API endpoints: current people inside (identity-aware), desk logins, source metrics.
+- Access observer (entrance, floor lobby, secure zone, room door readers; tailgating, missed badge-out, internal badge compliance), room-panel check-in, workstation observer (logout reasons, no-login).
+- Delivery layer (anomalies implemented, all 0), `RedisStreamPublisher`/`Consumer`.
+- Event processor: validation/deadletter, dedupe, event-time guards, person/floor/desk-login state, raw archive with manifests, source metrics, live pub/sub. Logic mirrors `reference/refsim/state.py`.
+- API: people inside, current floor per person (identity-aware, from readers), desk logins, source metrics.
 
 **Acceptance criteria**
-- Contract tests: every emitted event validates against its payload schema.
-- Privacy test: identity fields exist only on IDENTIFIED events.
-- For a simulated day at 60x: Redis `inside_count` tracks the engine's true count within the gap explained by tailgating/missed badge-outs. The report shows both numbers.
-- Raw archive files follow the partition layout, and manifests match row counts.
-- Killing and restarting the event processor mid-run resumes from the consumer group with no lost or double-applied state.
+- Contract + privacy tests (port `test_anonymous_events_never_carry_identity`, `test_logins_only_after_arrival`).
+- Raw archive layout and manifests match `mock-data/raw` structure.
+- Processor restart resumes from the consumer group with no lost/double-applied state.
 
----
-
-### Phase 5: Desk/Room Occupancy Sensors and Mock SaaS
-
+### Phase 5: Sensors, Environment, BMS and Mock SaaS
 **Scope**
-- DeskSensorObserver (debounce, hold time, flicker, false positives) and RoomSensorObserver (count lag, noise), for rooms and common areas.
-- Heartbeats, gateway `SENSOR_STATUS_CHANGED` (failure mechanism present, probability 0).
-- Processor state for desks (sensor), rooms, floors (`est_headcount`), sensors.
-- `mock-saas` service:
-  - own DB migrations
-  - read APIs with `updated_since` + pagination
-  - write APIs
-  - optional simulated rate-limit headers and transient errors
-- The engine writes bookings and leave records to mock-saas via `SaasClient`.
-- Docker Compose adds `mock-saas`.
+- Desk sensor (detection delay, vacancy hold), room/common-area count sensor (lag, noise), heartbeats.
+- Environment physics and BMS rules (observed data only) — already in the reference, port them.
+- `mock-saas` service + DB; engine writes bookings and leave via `SaasClient`.
+- Processor state for desks, rooms, floors, env, HVAC.
 
 **Acceptance criteria**
-- The SPEC §48 end-to-end flow is reproduced by a scripted scenario test. Observed event sequence and state match `event-model.md` §11 (timings within configured lag distributions).
-- Current state shows desks that are "logged in + vacant" during meetings. The count is non-zero during meeting peaks.
-- No anonymous event or state key links a room count change to an employee (privacy test extended to state).
-- `GET /v1/room-bookings?updated_since=...` returns the day's bookings with stable pagination.
+- SPEC §48 flow reproduced by a scripted test (`event-model.md` §11).
+- "Logged in + vacant" desks non-zero during meeting peaks; port `test_sensor_lags_truth_and_login_persists_during_meetings`.
+- Port `test_live_and_batch_produce_the_same_world`.
+- `GET /v1/room-bookings?updated_since=…` paginates stably.
 
----
-
-### Phase 6: Live Dashboard and Event Stream
-
-**Scope**
-- API WebSocket `/ws/live`: throttled event batches and state deltas, subscription filters.
-- Processor: today's rolling series per building and floor (sim-minute resolution).
-- UI:
-  - **Overview**: SPEC §24 KPIs that are available so far (employees inside, occupied/available desks, desk/room/building utilization %, peak today), plus occupancy-over-time, floor utilization, team distribution (today)
-  - **Live Workplace**: floor cards with live counts
-  - **Building View**: floor utilization bars, click-through placeholder to the twin
-  - **Live Events**: streaming table with filters (event type, employee, floor, workspace, sensor), pause/auto-scroll, rate indicator
-  - **Simulation Control**: integrated live counters
+### Phase 6: Live Dashboard, Events and Environmental Monitoring
+**Scope** (`visualization-spec.md` §4: Overview, Live Workplace, Building View, Live Events, Environmental Monitoring, Simulation Control)
+- WebSocket `/ws/live` implementing the frame contract in `live-streaming.md` §4 (throttled deltas, resync).
+- Processor rolling series (per sim-minute).
+- Hybrid charts H1 (people vs desks vs capacity) and H3 (temperature vs occupancy with HVAC bands).
 
 **Acceptance criteria**
-- At 60x with medium scale, the UI stays responsive (no dropped frames beyond minor, WebSocket backlog bounded). The event rate indicator shows the actual flow.
-- KPI values in the UI equal the API/Redis values (automated API-level test, plus a manual check).
-- Filters work on live and buffered events.
-- All utilization calculations come from the API. The frontend only formats.
+- Medium scale at 60x: UI responsive, bounded WebSocket backlog, KPI parity with API/Redis (automated).
+- Live Events filters work; identity class colour-coding present.
+- Frontend performs no utilisation maths (only formatting).
 
----
-
-### Phase 7: Floor Digital Twin
-
-**Scope**
-- SVG floor renderer driven by the layout from the API: zones, desks, rooms, cabins, common areas, entrances.
-- Desk visual states:
-  - `VACANT`, `OCCUPIED` (sensor)
-  - `RESERVED` (logged in + vacant, shown as a distinct "held" style)
-  - `UNAVAILABLE`
-- Rooms show count / capacity.
-- Click panel for a desk: workspace ID, zone, sensor status, logged-in employee (**only from login state**), last occupancy event, utilization today (from rolling state).
-- Click panel for a room: count, capacity, current booking (from SaaS via API), today's usage.
-- "Current occupancy" heat map mode (historical modes come in 8B).
-- Building View → floor click-through.
+### Phase 7: Digital Twin Visuals
+**Scope** (`visualization-spec.md` §5)
+- 2D floor twin (static layer cached, dynamic layer per frame), overlays (occupancy, temperature, HVAC, bookings), desk/room detail panels.
+- Isometric building view with per-floor utilisation.
+- Simulation View: truth dots on a Canvas/PixiJS layer with tweening, clearly labelled, toggleable.
+- Time scrubber backed by `sim.floor_snapshot` (writer in the processor, one row per floor per sim-minute).
 
 **Acceptance criteria**
-- Renders a 250-desk floor with live updates at 60x without visible lag.
-- A test asserts that the desk detail endpoint returns an employee only when a login session exists, and never derives one from sensor state.
-- Layout changes in YAML (after re-seeding) are reflected in the twin with no frontend code changes.
+- 250-desk floor with dots at 60x renders ≥ 50 fps on a laptop (dirty-flag rendering).
+- Desk detail never shows an employee unless a workstation login exists (test).
+- Scrubbing any minute of today restores desk/room/zone state within 200 ms.
+- Operational View never renders truth data (test on the API: truth endpoints are separate and flagged).
 
 **Milestone: MVP complete.**
 
----
-
 ### Phase 8A: Historical Generation and Warehouse Core
-
 **Scope**
-- Engine BATCH mode:
-  - `GENERATE_HISTORY` command
-  - parallel day workers
-  - BatchSink writing the raw archive layout
-  - coarser environment interval, heartbeats off
-- `pipeline-runner` service:
-  - archive loader (manifest watermark)
-  - PostgreSQL master snapshot loader
-  - SaaS incremental loader
-  - DuckDB build + atomic swap
-  - `ops.pipeline_run` and layer counts
-- dbt project (dbt-duckdb):
-  - RAW sources
-  - STAGING models
-  - CORE dims (SCD2 snapshots) and facts, including interval facts and `FACT_SPACE_UTILIZATION_15MIN`
-  - dbt tests
-- Cross-dialect macros prepared for Snowflake (JSON access, date functions).
+- Engine BATCH mode, `GENERATE_HISTORY`, parallel day workers, BatchSink.
+- `pipeline-runner`: archive loader, PostgreSQL master snapshots, SaaS incremental loader, DuckDB build-and-swap, `ops` tables.
+- dbt (dbt-duckdb): RAW sources, STAGING, CORE (incl. `FACT_AREA_ACCESS`, `FACT_ROOM_CHECK_IN`, interval facts, `FACT_SPACE_UTILIZATION_15MIN`), dbt tests.
+- `mock-data/raw` must load as-is (it is the first fixture).
 
 **Acceptance criteria**
-- `make generate-history DAYS=30` completes, and the pipeline builds CORE successfully.
-- 365 medium-scale days complete in < 30 min (generation) plus a reasonable pipeline time (target < 15 min on DuckDB).
-- dbt tests pass (uniqueness, not-null, relationships, accepted values).
-- Reconciliation tests:
-  - RAW distinct events = STAGING rows (no anomalies)
-  - interval facts close all sessions at day end
-  - `FACT_SPACE_UTILIZATION_15MIN` totals equal `FACT_OCCUPANCY` durations
-- Re-running the pipeline without new files adds zero rows (idempotency).
+- `make generate-history DAYS=30` + pipeline succeed; 365 medium days < 30 min generation.
+- Reconciliation and idempotency tests as in v0.1.
 
----
-
-### Phase 8B: Analytics Marts and UI
-
+### Phase 8B: Analytics UI
 **Scope**
-- All marts from `data-model.md` §5.4, except the DQ and sensor-accuracy marts (Phase 9). Metric macros match the domain metric definitions.
-- `config/recommendations.yaml` and `MART_RECOMMENDATIONS`.
-- `DuckDbWarehouseRepository` and API analytics endpoints.
-- UI:
-  - **Historical Analytics**: attendance trends, peak trend, hourly patterns
-  - **Real Estate Analytics**: SPEC §28 metrics and rule-based observations with supporting values
-  - **Teams**: team distribution by floor (bars + heat map)
-  - **Rooms**: utilization, right-sizing, booking effectiveness
-  - **Heat maps**: Today / 7-day / 30-day modes on the twin
-  - **Data Pipeline**: lineage view with live record counts per layer
-  - **Data Sources**: status, events received, last event, records processed, failures, latency
+- All marts (`data-model.md` §5.4 v0.2) including network and flow marts.
+- Pages: Historical Analytics, Real Estate Analytics (rule-based observations), Teams (distribution + collaboration network + co-location vs collaboration), Rooms (booked-vs-used Gantt), heat maps (Today / 7D / 30D), Data Pipeline, Data Sources.
+- Hybrid charts H2, H4–H7 from `visualization-spec.md` §6.
 
 **Acceptance criteria**
-- Metric parity test: domain metric functions and dbt marts give identical results on a fixture dataset.
-- With 90 days of history, Real Estate Analytics shows at least one triggered and one non-triggered rule, each with its metric values.
-- Heat maps in 7D/30D modes match the corresponding `MART_HEATMAP` values.
-- The Data Pipeline page shows counts moving after a live micro-batch.
+- Metric parity test (domain metrics vs dbt) passes.
+- Network graph renders ≤ 150 team nodes smoothly; edges filterable by threshold.
+- Ghost bookings visible in the room timeline and counted in `MART_BOOKING_EFFECTIVENESS`.
 
----
-
-### Phase 9: Data Quality Scenarios
-
+### Phase 9: Data Quality and Realism
 **Scope**
-- Enable anomaly configuration: duplicates, late, out-of-order, missing, sensor failures, partial env nulls.
-- Staging DQ handling and `STAGING.DQ_EVENT_QUALITY`.
-- Processor behavior under anomalies (event-time guards) verified.
-- `MART_DATA_QUALITY` and `MART_SENSOR_ACCURACY` (vs `FACT_GROUND_TRUTH_ACTIVITY`).
-- UI: data quality panel on the Data Sources page, and a Simulation Debug view (truth vs observed for a selected desk or room, clearly labeled).
+- Enable anomalies (duplicates, late, out-of-order, missing, sensor failures, env nulls, `ACCESS_DENIED`), desk-sensor flicker/false positives, walk-in meetings, late joiners.
+- `STAGING.DQ_EVENT_QUALITY`, `MART_DATA_QUALITY`, `MART_SENSOR_ACCURACY`; DQ panel; Simulation Debug (truth vs observed).
+
+**Acceptance criteria**: as v0.1 Phase 9.
+
+### Phase 10: Scenario Simulations
+**Scope** (`simulation-scenarios.md`)
+- S1 Special event capacity (admin UI → SaaS → planner; visitors, reserved rooms, unavailable desks) + Scenario Simulator Mode 1 (deterministic) and Mode 2 (batch sim).
+- S2 What-if team move. S3 Hot-desk policy test. S4 Evacuation drill. S5 Energy savings (BMS on/off A/B).
+- Capacity Planning page with saved and compared scenarios.
 
 **Acceptance criteria**
-- With anomalies enabled, the reported rates in `MART_DATA_QUALITY` are within tolerance of the configured probabilities.
-- Duplicates never inflate facts (reconciliation test with anomalies on).
-- Late events never regress current state (processor property test).
-- The sensor accuracy mart reports precision/recall and detection lag consistent with observer config.
+- SPEC §3 example (800 capacity, 620 + 150) explained per floor.
+- Every scenario is a tagged `simulation_run` (mode `SCENARIO`) with inputs stored, reproducible by seed, and comparable against a baseline run.
 
----
-
-### Phase 10: Snowflake Integration
-
-**Scope**
-- `SnowflakeLoader`: stage from local files first (PUT + COPY INTO); ADLS external stage after Phase 11.
-- dbt-snowflake target using the same models.
-- `SnowflakeWarehouseRepository`.
-- Setup SQL: database, schemas, roles, warehouse (script, no hardcoded credentials, key-pair auth via env).
-
-**Acceptance criteria**
-- Switching `WAREHOUSE=snowflake` requires no code changes outside adapters and dbt profiles.
-- On a fixed 7-day dataset, every mart has identical row counts and matching aggregates (within rounding) on DuckDB and Snowflake.
-
----
-
-### Phase 11: Azure Event Hubs and ADLS
-
-**Scope**
-- `AzureEventHubPublisher`, `AzureEventHubConsumer` (Blob checkpointing).
-- `AdlsRawArchive`.
-- Snowflake external stage on ADLS.
-- IaC (Bicep or Terraform) for:
-  - Event Hubs namespace + hubs
-  - storage account with `raw` container
-  - managed identity / connection settings
-- Docs for setup and teardown.
-
-**Acceptance criteria**
-- Switching `EVENT_BUS=eventhubs` and `RAW_ARCHIVE=adls` runs a live simulation end to end with the same UI behavior. Engine and processor business logic are unchanged.
-- The same seed produces the same raw content in ADLS as locally (content-hash comparison on one day).
-
----
-
-### Phase 12: Scenario Simulator and Capacity Planning
-
-**Scope**
-- Admin UI for special events and visitor registrations (API → mock SaaS).
-- Engine planner integration: visitor persons, attendance uplift, reserved rooms, unavailable desks.
-- **Scenario Simulator (Mode 1)**: deterministic calculation. Inputs are SPEC §3 fields; the calculation uses historical marts (floor peaks, team attendance by weekday). Outputs:
-  - building and floor projected occupancy
-  - desk shortage/surplus
-  - room sufficiency
-  - spare capacity by floor
-  - temporary space suggestions (rule-based)
-- **Capacity Planning** page: scenario comparison and saved scenarios.
-- Optional **Mode 2**: run an actual batch simulation for the scenario date and compare with Mode 1.
-
-**Acceptance criteria**
-- The SPEC §3 example (800 capacity, 620 employees + 150 guests) produces a correct, explained result with the floor breakdown.
-- A created special event appears in the next simulated day: visitors badge in, reserved rooms are blocked, and occupancy rises accordingly.
-
----
-
-### Phase 13: Environmental Sensors and HVAC Automation
-
-**Scope**
-- Environment physics model and EnvironmentSensorObserver.
-- BMS with `ObservedStateView`, rules from `config/automation_rules.yaml`, hysteresis and cooldowns.
-- `AUTOMATION_ACTION` events, HVAC state in Redis, `FACT_ENVIRONMENT`, `FACT_AUTOMATION_EVENT`, `MART_ENVIRONMENT_HOURLY`.
-- UI:
-  - **Environmental Monitoring**: zone metrics, temperature by zone, occupancy vs temperature
-  - automation log
-  - HVAC mode overlay on the twin
-
-**Acceptance criteria**
-- Temperature series are smooth: tick-to-tick change is ≤ configured max; no jumps.
-- An empty zone switches to ECO after 15 simulated minutes and back when occupied, with no flapping (cooldown respected).
-- A test proves the BMS cannot access ground truth (type-level: `ObservedStateView` only).
-- CO2 rises with occupancy and falls under increased ventilation.
+### Deferred: Cloud
+See `cloud-migration.md`: C1 Event Hubs + ADLS adapters, C2 Snowpipe auto-ingest + dbt-snowflake, C3 Dynamic Tables for near-real-time marts. Entry criterion: MVP complete and local pipeline stable.
 
 ---
 
@@ -382,22 +207,20 @@ The MVP is Phases 1–7: a fully local, live, event-driven workplace simulation 
 
 | Risk | Mitigation |
 |---|---|
-| Python DES too slow at large scale | per-day parallelism in batch; vectorized environment ticks; profile early in Phase 3; large scale is a stretch goal |
-| UI overwhelmed at 60x | server-side throttling and aggregation; WebSocket sends deltas, not full state; event viewer caps its buffer |
-| DuckDB locking between API and pipeline | build-and-swap file strategy (`architecture.md` §8.3) |
-| Scope creep in later phases | MVP boundary at Phase 7; non-goals in SPEC §51.13 |
-| Unrealistic-looking data | calibration tests in Phase 3; visual review checkpoints at the end of Phases 6 and 8B |
-| Identity leakage through correlation | envelope validator, privacy tests on events and state, no correlation IDs on anonymous events |
+| Old generated code keeps leaking back in | Phase 0 report + `CLAUDE.md` rule: only files described in docs/ may exist |
+| Python DES too slow at large scale | per-day parallelism; reference measured ~2 s/day at medium |
+| UI overwhelmed at 60x | server-side throttling, deltas only, canvas layers, dirty-flag rendering |
+| DuckDB locking | build-and-swap |
+| Truth leaking into operational views | separate endpoints/channels for truth, UI labelling, API tests |
+| Scope creep | MVP boundary at Phase 7; cloud deferred |
 
 ---
 
-## 5. Open Questions (to confirm before or during Phase 1)
+## 5. Open Questions (answer before Phase 1)
 
-1. Default timezone `Asia/Kolkata`? (affects calendar and core hours)
-2. v1 layout: one building with 4 floors at medium scale. Is a second building needed early?
-3. Hand-written `building_a.yaml` layout or generated from presets only?
-4. Frontend component library: plain Tailwind, or Tailwind + shadcn/ui?
-5. Should historical generation be allowed while a live run is active? (current design: one active run at a time)
-6. Do you have Snowflake and Azure accounts available (trial/free tier) for Phases 10–11, or should those stay adapter-only for now?
-7. Weekend attendance: keep the small default (1–3%), or zero?
-8. CI platform: GitHub Actions?
+1. Default timezone `Asia/Kolkata`? (config default)
+2. v1: one building, 4 floors, medium preset — OK?
+3. Frontend component library: Tailwind only, or Tailwind + shadcn/ui? (spec assumes shadcn/ui primitives, restyled)
+4. Keep weekend attendance at 2% of office-mode employees?
+5. CI: GitHub Actions?
+6. Which existing UI screens do you want to keep visually (Phase 0 decides structurally)?

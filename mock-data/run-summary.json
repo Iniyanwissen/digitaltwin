@@ -1,0 +1,23 @@
+{
+ "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+ "mode": "BATCH",
+ "seed": 12345,
+ "preset": "medium",
+ "start_date": "2026-09-23",
+ "days": 1,
+ "wall_seconds": 2.3,
+ "events_by_type": {
+  "ACCESS_IN": 698,
+  "ACCESS_OUT": 665,
+  "AREA_ACCESS": 3230,
+  "AUTOMATION_ACTION": 231,
+  "ENVIRONMENT_READING": 2800,
+  "OCCUPANCY_CHANGED": 10858,
+  "ROOM_CHECK_IN": 164,
+  "ROOM_OCCUPANCY_CHANGED": 3654,
+  "SIMULATION_LIFECYCLE": 3,
+  "TRUTH": 14375,
+  "WORKSPACE_LOGIN": 831,
+  "WORKSPACE_LOGOUT": 831
+ }
+}

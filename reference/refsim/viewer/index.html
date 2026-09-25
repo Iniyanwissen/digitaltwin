@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workplace Digital Twin — Reference Viewer</title>
+<style>
+  :root { --bg:#0e1117; --panel:#161b24; --line:#262e3b; --text:#e6e9ef; --muted:#8a94a6; --accent:#4f8cff;
+          --occ:#22c55e; --held:#f59e0b; --vac:#334155; --off:#0b0e13; --id:#4f8cff; --anon:#a78bfa; --sys:#94a3b8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:13px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  header { display:flex; align-items:center; gap:12px; padding:10px 16px; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  header h1 { font-size:15px; margin:0 12px 0 0; font-weight:600; }
+  .clock { font-variant-numeric:tabular-nums; font-size:18px; font-weight:600; min-width:150px; }
+  .pill { padding:2px 8px; border-radius:99px; background:var(--line); color:var(--muted); font-size:11px; }
+  .pill.RUNNING { background:#14532d; color:#bbf7d0; } .pill.PAUSED { background:#713f12; color:#fde68a; }
+  button, select { background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:5px 10px; cursor:pointer; font:inherit; }
+  button:hover { border-color:var(--accent); } button.on { background:var(--accent); border-color:var(--accent); }
+  .grow { flex:1; }
+  main { display:grid; grid-template-columns:260px 1fr 360px; gap:12px; padding:12px; height:calc(100vh - 54px); }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px; overflow:hidden; display:flex; flex-direction:column; }
+  .panel h2 { font-size:12px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin:0 0 8px; font-weight:600; }
+  #iso { width:100%; height:260px; cursor:pointer; }
+  .floorrow { display:grid; grid-template-columns:60px 1fr 44px; gap:6px; align-items:center; padding:4px 2px; cursor:pointer; border-radius:4px; }
+  .floorrow:hover, .floorrow.sel { background:#1f2733; }
+  .bar { height:8px; background:var(--line); border-radius:4px; overflow:hidden; } .bar > i { display:block; height:100%; background:var(--occ); }
+  #floorWrap { position:relative; flex:1; min-height:0; }
+  #floor { width:100%; height:100%; display:block; }
+  #tip { position:absolute; display:none; background:#0b1220ee; border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:12px; pointer-events:none; min-width:200px; }
+  .legend { display:flex; gap:12px; flex-wrap:wrap; color:var(--muted); font-size:11px; margin-top:6px; }
+  .legend i { display:inline-block; width:10px; height:10px; border-radius:2px; margin-right:4px; vertical-align:-1px; }
+  .kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+  .kpi { background:#0f141c; border:1px solid var(--line); border-radius:8px; padding:6px 8px; }
+  .kpi b { display:block; font-size:18px; font-variant-numeric:tabular-nums; } .kpi span { color:var(--muted); font-size:10px; text-transform:uppercase; }
+  .kpi.truth { border-style:dashed; }
+  #chart { width:100%; height:150px; }
+  #feed { flex:1; overflow:auto; font:11px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace; min-height:0; }
+  #feed div { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border-bottom:1px solid #1b222d; }
+  .IDENTIFIED { color:var(--id); } .ANONYMOUS { color:var(--anon); } .SYSTEM { color:var(--sys); }
+  .note { color:var(--muted); font-size:11px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Workplace Digital Twin</h1>
+  <span class="clock" id="clock">--</span><span class="pill" id="status">STOPPED</span>
+  <button id="bStart">▶ Start</button><button id="bPause">⏸ Pause</button><button id="bReset">↺ Reset</button>
+  <select id="speed"><option>1</option><option>5</option><option>10</option><option>30</option><option selected>60</option><option>120</option><option>300</option></select><span class="note">× speed</span>
+  <span class="grow"></span>
+  <span class="note">View</span><button id="vOps" class="on">Operational</button><button id="vSim">Simulation (truth)</button>
+  <span class="note">Overlay</span><select id="overlay"><option value="occ">Occupancy</option><option value="temp">Temperature</option><option value="hvac">HVAC mode</option></select>
+</header>
+<main>
+  <section class="panel">
+    <h2>Building</h2>
+    <canvas id="iso"></canvas>
+    <div id="floors"></div>
+    <p class="note">Isometric stack coloured by desk utilisation (sensor). Click a floor.</p>
+  </section>
+  <section class="panel">
+    <h2 id="floorTitle">Floor</h2>
+    <div id="floorWrap"><canvas id="floor"></canvas><div id="tip"></div></div>
+    <div class="legend" id="legend"></div>
+  </section>
+  <section class="panel">
+    <h2>Live KPIs</h2>
+    <div class="kpis" id="kpis"></div>
+    <h2 style="margin-top:10px">Today — people vs desks (hybrid)</h2>
+    <canvas id="chart"></canvas>
+    <h2 style="margin-top:8px">Live events <span class="note">(<span class="IDENTIFIED">identified</span> · <span class="ANONYMOUS">anonymous</span> · <span class="SYSTEM">system</span>)</span></h2>
+    <div id="feed"></div>
+  </section>
+</main>
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+const S = { layout:null, floor:null, view:"ops", overlay:"occ", desks:{}, rooms:{}, zones:{}, pos:{}, dots:{},
+            series:[], kpis:null, version:0, staticCache:{}, dirty:true };
+const PALETTE = ["#60a5fa","#f472b6","#34d399","#fbbf24","#a78bfa","#f87171","#2dd4bf","#fb923c"];
+let deptColor = {};
+
+async function api(path, body) {
+  const r = await fetch(path, body ? {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)} : {});
+  return r.json();
+}
+
+// ------------------------------------------------------------------ bootstrap
+async function init() {
+  S.layout = await api("/api/layout");
+  S.layout.departments.forEach((d,i) => deptColor[d] = PALETTE[i % PALETTE.length]);
+  S.floor = S.layout.floors[0].floor_id;
+  S.deskById = Object.fromEntries(S.layout.workspaces.map(w => [w.workspace_id, w]));
+  S.roomById = Object.fromEntries(S.layout.rooms.map(r => [r.room_id, r]));
+  const snap = await api("/api/snapshot");
+  Object.assign(S.desks, snap.desks); Object.assign(S.rooms, snap.rooms); Object.assign(S.zones, snap.zones);
+  for (const [id, p] of Object.entries(snap.positions)) setPos(id, p, true);
+  S.series = snap.series; S.version = snap.version; applyKpis(snap.kpis, snap.truth); setStatus(snap);
+  buildLegend(); selectFloor(S.floor); connect(); requestAnimationFrame(frame);
+}
+
+function connect() {
+  const es = new EventSource(`/api/stream?since=${S.version}`);
+  es.onmessage = m => {
+    const f = JSON.parse(m.data);
+    if (f.resync) { es.close(); location.reload(); return; }
+    for (const [k,v] of Object.entries(f.desks)) S.desks[k] = v;
+    for (const [k,v] of Object.entries(f.rooms)) S.rooms[k] = v;
+    for (const [k,v] of Object.entries(f.zones)) S.zones[k] = v;
+    for (const [k,v] of Object.entries(f.positions)) setPos(k, v, false);
+    if (f.point) { const last = S.series[S.series.length-1];
+      if (last && f.point.m < last.m) S.series = [];
+      if (!last || last.m !== f.point.m) S.series.push(f.point); }
+    pushFeed(f.feed); applyKpis(f.kpis, f.truth); setStatus(f); S.dirty = true;
+  };
+  es.onerror = () => { es.close(); setTimeout(connect, 1500); };
+}
+
+// ------------------------------------------------------------------ controls
+$("bStart").onclick = () => api("/api/control", {cmd: S.status === "PAUSED" ? "resume" : "start"}).then(setStatus);
+$("bPause").onclick = () => api("/api/control", {cmd:"pause"}).then(setStatus);
+$("bReset").onclick = () => api("/api/control", {cmd:"reset"}).then(() => location.reload());
+$("speed").onchange = e => api("/api/control", {cmd:"speed", speed:+e.target.value});
+$("vOps").onclick = () => setView("ops"); $("vSim").onclick = () => setView("sim");
+$("overlay").onchange = e => { S.overlay = e.target.value; buildLegend(); S.dirty = true; };
+function setView(v) { S.view = v; $("vOps").classList.toggle("on", v==="ops"); $("vSim").classList.toggle("on", v==="sim"); buildLegend(); S.dirty = true; }
+function setStatus(f) { if (!f) return; S.status = f.status;
+  $("status").textContent = f.status; $("status").className = "pill " + f.status;
+  if (f.sim_time) $("clock").textContent = f.sim_time.slice(0,10) + " " + f.sim_time.slice(11,19);
+  if (f.speed) $("speed").value = f.speed; }
+
+// ------------------------------------------------------------------ positions (truth, simulation view)
+function setPos(id, p, instant) {
+  if (!p) { delete S.pos[id]; return; }
+  const cur = S.pos[id], now = performance.now();
+  if (!cur || instant || cur.floor !== p[2]) { S.pos[id] = {x:p[0], y:p[1], fx:p[0], fy:p[1], tx:p[0], ty:p[1], t0:now, floor:p[2], dept:p[3], st:p[4]}; return; }
+  cur.fx = cur.x; cur.fy = cur.y; cur.tx = p[0]; cur.ty = p[1]; cur.t0 = now; cur.st = p[4];
+}
+
+// ------------------------------------------------------------------ floor rendering (static layer cached, dynamic per frame)
+const fc = $("floor"), fctx = fc.getContext("2d");
+function geom() {
+  const W = S.layout.floors[0].plan_width, H = S.layout.floors[0].plan_height;
+  const r = fc.getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+  if (fc.width !== Math.round(r.width*dpr) || fc.height !== Math.round(r.height*dpr)) {
+    fc.width = Math.round(r.width*dpr); fc.height = Math.round(r.height*dpr); S.staticCache = {}; }
+  const sc = Math.min(fc.width / W, fc.height / H) * 0.98;
+  return { sc, ox:(fc.width - W*sc)/2, oy:(fc.height - H*sc)/2, dpr };
+}
+function staticLayer(g) {
+  const key = S.floor + "|" + fc.width + "x" + fc.height;
+  if (S.staticCache[key]) return S.staticCache[key];
+  const c = document.createElement("canvas"); c.width = fc.width; c.height = fc.height;
+  const x = c.getContext("2d"), X = v => g.ox + v*g.sc, Y = v => g.oy + v*g.sc;
+  for (const z of S.layout.zones.filter(z => z.floor_id === S.floor)) {
+    x.fillStyle = z.zone_type === "OPEN_WORKSPACE" ? "#131a24" : z.zone_type.match(/ENTRANCE|CIRCULATION/) ? "#10151d" : "#121822";
+    x.fillRect(X(z.x), Y(z.y), z.width*g.sc, z.height*g.sc);
+    x.strokeStyle = z.is_restricted ? "#ef4444" : "#2a3444"; x.setLineDash(z.is_restricted ? [6,4] : []);
+    x.lineWidth = g.dpr; x.strokeRect(X(z.x), Y(z.y), z.width*g.sc, z.height*g.sc); x.setLineDash([]);
+    x.fillStyle = "#6b7689"; x.font = `${11*g.dpr}px system-ui`; x.fillText(z.name + (z.is_restricted ? " 🔒" : ""), X(z.x)+4*g.dpr, Y(z.y)+13*g.dpr);
+  }
+  for (const a of S.layout.access_points.filter(a => a.floor_id === S.floor)) {
+    x.fillStyle = a.reader_type === "SECURE_ZONE" ? "#ef4444" : a.reader_type === "ROOM_DOOR" ? "#38bdf8" : "#e2e8f0";
+    const px = X(a.x), py = Y(a.y), s = 5*g.dpr;
+    x.beginPath(); x.moveTo(px, py-s); x.lineTo(px+s, py+s); x.lineTo(px-s, py+s); x.fill();
+  }
+  S.staticCache = {[key]: c}; return c;
+}
+function tempColor(t) { if (t == null) return "#1e293b"; const k = Math.max(0, Math.min(1, (t-21)/6));
+  return `rgba(${Math.round(60+195*k)},${Math.round(130-60*k)},${Math.round(255-200*k)},0.35)`; }
+const HVAC = { ECO:"rgba(34,197,94,.25)", NORMAL:"rgba(148,163,184,.12)", HIGH:"rgba(249,115,22,.3)" };
+
+function drawFloor(now) {
+  const g = geom(), x = fctx, X = v => g.ox + v*g.sc, Y = v => g.oy + v*g.sc;
+  x.clearRect(0,0,fc.width,fc.height); x.drawImage(staticLayer(g), 0, 0);
+  if (S.overlay !== "occ") for (const z of S.layout.zones.filter(z => z.floor_id === S.floor)) {
+    const zs = S.zones[z.zone_id]; x.fillStyle = S.overlay === "temp" ? tempColor(zs && zs[0]) : HVAC[(zs && zs[2]) || "NORMAL"];
+    x.fillRect(X(z.x), Y(z.y), z.width*g.sc, z.height*g.sc);
+    if (zs) { x.fillStyle = "#cbd5e1"; x.font = `${10*g.dpr}px system-ui`;
+      x.fillText(S.overlay === "temp" ? `${zs[0]}°C · ${zs[1]} ppm` : zs[2], X(z.x)+4*g.dpr, Y(z.y+z.height)-5*g.dpr); }
+  }
+  for (const r of S.layout.rooms.filter(r => r.floor_id === S.floor)) {
+    const n = S.rooms[r.room_id] || 0, u = Math.min(1, n / r.capacity);
+    x.fillStyle = n ? `rgba(79,140,255,${0.15 + 0.55*u})` : "#1a2230"; x.fillRect(X(r.x), Y(r.y), r.width*g.sc, r.height*g.sc);
+    x.strokeStyle = n > r.capacity ? "#ef4444" : "#334155"; x.lineWidth = g.dpr; x.strokeRect(X(r.x), Y(r.y), r.width*g.sc, r.height*g.sc);
+    x.fillStyle = "#e2e8f0"; x.font = `${10*g.dpr}px system-ui`;
+    x.fillText(`${r.area_subtype || r.room_type.replace("_MEETING","").replace("_CONFERENCE","").slice(0,6)} ${n}/${r.capacity}`, X(r.x)+3*g.dpr, Y(r.y)+12*g.dpr);
+  }
+  for (const w of S.layout.workspaces) { if (w.floor_id !== S.floor) continue;
+    const d = S.desks[w.workspace_id] || [0,0], s = w.size*g.sc;
+    x.fillStyle = w.status !== "ACTIVE" ? "#0b0e13" : d[0] ? "#22c55e" : d[1] ? "#f59e0b" : "#334155";
+    x.fillRect(X(w.x)-s/2, Y(w.y)-s/2, s, s); }
+  if (S.view === "sim") {
+    const rad = Math.max(2*g.dpr, 0.45*g.sc); let moving = false;
+    for (const p of Object.values(S.pos)) { if (p.floor !== S.floor) continue;
+      const k = Math.min(1, (now - p.t0) / 900), e = k<.5 ? 2*k*k : 1-Math.pow(-2*k+2,2)/2;
+      p.x = p.fx + (p.tx-p.fx)*e; p.y = p.fy + (p.ty-p.fy)*e; if (k < 1) moving = true;
+      x.fillStyle = deptColor[p.dept] || "#fff"; x.beginPath(); x.arc(X(p.x), Y(p.y), rad, 0, 7); x.fill(); }
+    if (moving) S.dirty = true;
+  }
+}
+
+// hover / click tooltip — identity ONLY from workstation login (server enforces it too)
+fc.addEventListener("click", async ev => {
+  const g = geom(), r = fc.getBoundingClientRect();
+  const lx = ((ev.clientX - r.left)*g.dpr - g.ox)/g.sc, ly = ((ev.clientY - r.top)*g.dpr - g.oy)/g.sc;
+  let best = null, bd = 2.5;
+  for (const w of S.layout.workspaces) if (w.floor_id === S.floor) { const d = Math.hypot(w.x-lx, w.y-ly); if (d < bd) { bd = d; best = w; } }
+  const tip = $("tip");
+  if (!best) { const room = S.layout.rooms.find(o => o.floor_id === S.floor && lx>=o.x && lx<=o.x+o.width && ly>=o.y && ly<=o.y+o.height);
+    if (!room) { tip.style.display = "none"; return; }
+    tip.innerHTML = `<b>${room.name}</b><br>${room.room_id}<br>Type: ${room.area_subtype || room.room_type}<br>Count (sensor): ${S.rooms[room.room_id]||0} / ${room.capacity}<br>Door reader: ${room.has_badge_reader ? "yes (identified)" : "no"}`;
+  } else { const d = await api("/api/desk/" + best.workspace_id);
+    tip.innerHTML = `<b>${d.workspace_id}</b><br>Zone: ${d.zone_id}<br>Sensor: ${d.sensor_status}<br>Last sensor change: ${(d.last_sensor_change||"–").slice(11,19)}<br>Logged in (workstation): ${d.logged_in_employee || "–"}`; }
+  tip.style.display = "block"; tip.style.left = (ev.clientX - r.left + 12) + "px"; tip.style.top = (ev.clientY - r.top + 12) + "px";
+});
+
+function buildLegend() {
+  const items = S.overlay === "temp" ? [["#3b82f6","≤21°C"],["#a855f7","24°C"],["#ef4444","≥27°C"]]
+    : S.overlay === "hvac" ? [["#22c55e","ECO"],["#94a3b8","NORMAL"],["#f97316","HIGH"]]
+    : [["#22c55e","Occupied (sensor)"],["#f59e0b","Logged in, vacant"],["#334155","Vacant"],["#4f8cff","Room occupied (count)"]];
+  let html = items.map(([c,l]) => `<span><i style="background:${c}"></i>${l}</span>`).join("");
+  if (S.view === "sim") html += " · Dots = ground truth by department: " + Object.entries(deptColor).map(([d,c]) => `<span><i style="background:${c};border-radius:50%"></i>${d}</span>`).join("");
+  $("legend").innerHTML = html;
+}
+
+// ------------------------------------------------------------------ building (isometric) + floor list
+const ic = $("iso"), ictx = ic.getContext("2d");
+function drawIso() {
+  const dpr = window.devicePixelRatio || 1, r = ic.getBoundingClientRect();
+  ic.width = r.width*dpr; ic.height = r.height*dpr; const x = ictx; x.clearRect(0,0,ic.width,ic.height);
+  const floors = (S.kpis && S.kpis.floors) || S.layout.floors.map(f => ({floor_id:f.floor_id, name:f.name, desk_util_pct:0}));
+  const n = floors.length, w = ic.width*0.62, dx = ic.width*0.22, dy = Math.min(26*dpr, ic.height/(n+3)), gap = Math.min(40*dpr, (ic.height - dy*2)/n);
+  S.isoBands = [];
+  floors.forEach((f, i) => { const y = ic.height - dy - 8*dpr - i*gap, x0 = ic.width*0.06, u = f.desk_util_pct/100;
+    x.beginPath(); x.moveTo(x0, y); x.lineTo(x0+w, y); x.lineTo(x0+w+dx, y-dy); x.lineTo(x0+dx, y-dy); x.closePath();
+    x.fillStyle = `hsla(${140 - 140*Math.min(1,u)}, 70%, ${22 + 30*u}%, .95)`; x.fill();
+    x.strokeStyle = f.floor_id === S.floor ? "#fff" : "#475569"; x.lineWidth = (f.floor_id === S.floor ? 2 : 1)*dpr; x.stroke();
+    x.fillStyle = "#e2e8f0"; x.font = `${11*dpr}px system-ui`; x.fillText(`${f.name}  ${f.desk_util_pct}%`, x0+dx*0.5+6*dpr, y - dy/2 + 4*dpr);
+    S.isoBands.push({id:f.floor_id, y0:y-dy, y1:y}); });
+}
+ic.addEventListener("click", ev => { const r = ic.getBoundingClientRect(), y = (ev.clientY - r.top)*(window.devicePixelRatio||1);
+  const b = (S.isoBands||[]).find(b => y >= b.y0-6 && y <= b.y1+6); if (b) selectFloor(b.id); });
+function selectFloor(id) { S.floor = id; S.dirty = true; renderFloors(); drawIso();
+  const f = S.layout.floors.find(f => f.floor_id === id); $("floorTitle").textContent = `${f.name} — ${f.desk_policy.replace("_"," ")} · ${f.desk_count} desks`; }
+function renderFloors() { if (!S.kpis) return;
+  $("floors").innerHTML = S.kpis.floors.map(f => `<div class="floorrow ${f.floor_id===S.floor?"sel":""}" data-f="${f.floor_id}">
+    <span>${f.name}</span><div class="bar"><i style="width:${f.desk_util_pct}%"></i></div><span>${f.desk_util_pct}%</span></div>`).join("");
+  document.querySelectorAll(".floorrow").forEach(el => el.onclick = () => selectFloor(el.dataset.f)); }
+
+// ------------------------------------------------------------------ KPIs, hybrid chart, feed
+let lastKpiDraw = 0;
+function applyKpis(k, truth) { S.kpis = k; S.truth = truth; const now = performance.now(); if (now - lastKpiDraw < 450) return; lastKpiDraw = now;
+  const cards = [["Employees inside", k.employees_inside],["Occupied desks", k.occupied_desks],["Held desks", k.held_desks],
+    ["Available desks", k.available_desks],["Desk util", k.desk_util_pct+"%"],["Room util", k.room_util_pct+"%"],
+    ["Room occupants", k.room_occupants],["Building util", k.building_util_pct+"%"],["Peak today", `${k.peak_today} @${k.peak_time||"–"}`],
+    ["ECO zones", k.hvac_eco_zones],["Truth inside*", truth ? truth.inside : "–", true],["Truth in meetings*", truth ? truth.in_meeting : "–", true]];
+  $("kpis").innerHTML = cards.map(([l,v,t]) => `<div class="kpi ${t?"truth":""}"><b>${v}</b><span>${l}</span></div>`).join("");
+  renderFloors(); drawIso(); drawChart(); }
+
+const cc = $("chart"), cctx = cc.getContext("2d");
+function drawChart() {
+  const dpr = window.devicePixelRatio || 1, r = cc.getBoundingClientRect(); cc.width = r.width*dpr; cc.height = r.height*dpr;
+  const x = cctx, W = cc.width, H = cc.height, pad = 26*dpr; x.clearRect(0,0,W,H);
+  const cap = S.kpis ? S.kpis.total_desks : 1, maxY = Math.max(cap, ...S.series.map(p => p.inside)) * 1.05;
+  const tx = m => { const [h,mm] = m.split(":").map(Number); return pad + ((h*60+mm) - 360) / (16*60) * (W - pad*1.4); };
+  const ty = v => H - pad*0.8 - v / maxY * (H - pad*1.3);
+  x.strokeStyle = "#263041"; x.fillStyle = "#6b7689"; x.font = `${9*dpr}px system-ui`;
+  for (const h of [6,9,12,15,18,21]) { const X = tx(`${h}:00`); x.beginPath(); x.moveTo(X, pad*0.4); x.lineTo(X, H-pad*0.8); x.stroke(); x.fillText(`${h}:00`, X-10*dpr, H-6*dpr); }
+  x.setLineDash([4*dpr,4*dpr]); x.strokeStyle = "#ef4444"; x.beginPath(); x.moveTo(pad, ty(cap)); x.lineTo(W-pad*0.4, ty(cap)); x.stroke(); x.setLineDash([]);
+  x.fillStyle = "#ef4444"; x.fillText(`desk capacity ${cap}`, W - 95*dpr, ty(cap)-4*dpr);
+  const pts = S.series.filter(p => p.m >= "06:00");
+  if (pts.length > 1) {
+    x.beginPath(); x.moveTo(tx(pts[0].m), ty(0)); pts.forEach(p => x.lineTo(tx(p.m), ty(p.inside))); x.lineTo(tx(pts[pts.length-1].m), ty(0));
+    x.fillStyle = "rgba(79,140,255,.25)"; x.fill();
+    const line = (key, col, dash) => { x.beginPath(); x.setLineDash(dash||[]); pts.forEach((p,i) => i ? x.lineTo(tx(p.m), ty(p[key])) : x.moveTo(tx(p.m), ty(p[key]))); x.strokeStyle = col; x.lineWidth = 1.5*dpr; x.stroke(); x.setLineDash([]); };
+    line("inside", "#4f8cff"); line("desks", "#22c55e"); line("held", "#f59e0b", [3*dpr,3*dpr]); line("rooms", "#a78bfa");
+  }
+  x.font = `${9*dpr}px system-ui`; [["#4f8cff","inside (badge)"],["#22c55e","desks (sensor)"],["#f59e0b","held"],["#a78bfa","in rooms"]]
+    .forEach(([c,l],i) => { x.fillStyle = c; x.fillText(l, pad + i*70*dpr, 10*dpr); });
+}
+
+function pushFeed(lines) { if (!lines || !lines.length) return; const feed = $("feed"), frag = document.createDocumentFragment();
+  for (const l of lines.slice(-25).reverse()) { const d = document.createElement("div"); d.className = l.identity;
+    d.textContent = `${l.t}  ${l.type.padEnd(22)} ${l.entity}  ${l.detail}`; frag.appendChild(d); }
+  feed.prepend(frag); while (feed.childElementCount > 80) feed.lastChild.remove(); }
+
+// ------------------------------------------------------------------ render loop (only redraws when something changed)
+function frame(now) { if (S.dirty) { S.dirty = false; drawFloor(now); } requestAnimationFrame(frame); }
+window.addEventListener("resize", () => { S.staticCache = {}; S.dirty = true; drawIso(); drawChart(); });
+init();
+</script>
+</body>
+</html>

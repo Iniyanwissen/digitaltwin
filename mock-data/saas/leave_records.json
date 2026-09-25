@@ -1,0 +1,407 @@
+[
+ {
+  "leave_id": "LV-20260923-EMP000002",
+  "employee_id": "EMP000002",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000153",
+  "employee_id": "EMP000153",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000203",
+  "employee_id": "EMP000203",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000209",
+  "employee_id": "EMP000209",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000210",
+  "employee_id": "EMP000210",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000231",
+  "employee_id": "EMP000231",
+  "leave_date": "2026-09-23",
+  "leave_type": "OTHER",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000235",
+  "employee_id": "EMP000235",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000245",
+  "employee_id": "EMP000245",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000261",
+  "employee_id": "EMP000261",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000313",
+  "employee_id": "EMP000313",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000319",
+  "employee_id": "EMP000319",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000351",
+  "employee_id": "EMP000351",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000360",
+  "employee_id": "EMP000360",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000378",
+  "employee_id": "EMP000378",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000385",
+  "employee_id": "EMP000385",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000395",
+  "employee_id": "EMP000395",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000396",
+  "employee_id": "EMP000396",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000405",
+  "employee_id": "EMP000405",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000431",
+  "employee_id": "EMP000431",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000441",
+  "employee_id": "EMP000441",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000468",
+  "employee_id": "EMP000468",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000490",
+  "employee_id": "EMP000490",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000515",
+  "employee_id": "EMP000515",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000526",
+  "employee_id": "EMP000526",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000531",
+  "employee_id": "EMP000531",
+  "leave_date": "2026-09-23",
+  "leave_type": "OTHER",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000532",
+  "employee_id": "EMP000532",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000535",
+  "employee_id": "EMP000535",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000571",
+  "employee_id": "EMP000571",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000622",
+  "employee_id": "EMP000622",
+  "leave_date": "2026-09-23",
+  "leave_type": "OTHER",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000629",
+  "employee_id": "EMP000629",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000637",
+  "employee_id": "EMP000637",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000704",
+  "employee_id": "EMP000704",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000719",
+  "employee_id": "EMP000719",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000726",
+  "employee_id": "EMP000726",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000751",
+  "employee_id": "EMP000751",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000794",
+  "employee_id": "EMP000794",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000804",
+  "employee_id": "EMP000804",
+  "leave_date": "2026-09-23",
+  "leave_type": "OTHER",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000826",
+  "employee_id": "EMP000826",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000896",
+  "employee_id": "EMP000896",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000900",
+  "employee_id": "EMP000900",
+  "leave_date": "2026-09-23",
+  "leave_type": "OTHER",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000904",
+  "employee_id": "EMP000904",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000945",
+  "employee_id": "EMP000945",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000959",
+  "employee_id": "EMP000959",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000964",
+  "employee_id": "EMP000964",
+  "leave_date": "2026-09-23",
+  "leave_type": "SICK",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ },
+ {
+  "leave_id": "LV-20260923-EMP000978",
+  "employee_id": "EMP000978",
+  "leave_date": "2026-09-23",
+  "leave_type": "ANNUAL",
+  "record_status": "ACTIVE",
+  "updated_at": "2026-09-23T00:00:00.000+05:30",
+  "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc"
+ }
+]

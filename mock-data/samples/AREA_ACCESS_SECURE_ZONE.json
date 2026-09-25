@@ -1,0 +1,54 @@
+[
+  {
+    "event_id": "7b225893-6512-5da8-b367-af63571f95e1",
+    "event_type": "AREA_ACCESS",
+    "event_version": 1,
+    "event_time": "2026-09-23T06:35:18.707+05:30",
+    "ingest_time": "2026-09-23T06:35:19.401+05:30",
+    "source": "ACCESS_CONTROL",
+    "source_device_id": "AP_BLD01_F04_ZB_SECURE",
+    "identity_class": "IDENTIFIED",
+    "entity_type": "EMPLOYEE",
+    "entity_id": "EMP000791",
+    "building_id": "BLD01",
+    "floor_id": "BLD01_F04",
+    "zone_id": "BLD01_F04_ZB",
+    "correlation_id": "VISIT-EMP000791-20260923-1",
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 790,
+    "payload": {
+      "access_point_id": "AP_BLD01_F04_ZB_SECURE",
+      "reader_type": "SECURE_ZONE",
+      "area_type": "ZONE",
+      "area_id": "BLD01_F04_ZB",
+      "direction": "IN",
+      "result": "GRANTED"
+    }
+  },
+  {
+    "event_id": "cddee346-f840-5cf4-b01d-1190f25b50cc",
+    "event_type": "AREA_ACCESS",
+    "event_version": 1,
+    "event_time": "2026-09-23T07:03:54.840+05:30",
+    "ingest_time": "2026-09-23T07:03:55.828+05:30",
+    "source": "ACCESS_CONTROL",
+    "source_device_id": "AP_BLD01_F04_ZC_SECURE",
+    "identity_class": "IDENTIFIED",
+    "entity_type": "EMPLOYEE",
+    "entity_id": "EMP000854",
+    "building_id": "BLD01",
+    "floor_id": "BLD01_F04",
+    "zone_id": "BLD01_F04_ZC",
+    "correlation_id": "VISIT-EMP000854-20260923-1",
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 875,
+    "payload": {
+      "access_point_id": "AP_BLD01_F04_ZC_SECURE",
+      "reader_type": "SECURE_ZONE",
+      "area_type": "ZONE",
+      "area_id": "BLD01_F04_ZC",
+      "direction": "IN",
+      "result": "GRANTED"
+    }
+  }
+]

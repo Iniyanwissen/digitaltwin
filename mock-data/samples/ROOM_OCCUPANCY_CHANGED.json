@@ -1,0 +1,60 @@
+[
+  {
+    "event_id": "6d9437bc-2083-530b-b70d-617da9c1f726",
+    "event_type": "ROOM_OCCUPANCY_CHANGED",
+    "event_version": 1,
+    "event_time": "2026-09-23T07:08:52.553+05:30",
+    "ingest_time": "2026-09-23T07:08:53.712+05:30",
+    "source": "ROOM_SENSOR",
+    "source_device_id": "SEN_RM_000010",
+    "identity_class": "ANONYMOUS",
+    "entity_type": "ROOM",
+    "entity_id": "AREA_BLD01_F01_CAF",
+    "building_id": "BLD01",
+    "floor_id": "BLD01_F01",
+    "zone_id": "BLD01_F01_ZCOM",
+    "correlation_id": null,
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 894,
+    "payload": {
+      "sensor_id": "SEN_RM_000010",
+      "room_id": "AREA_BLD01_F01_CAF",
+      "room_type": "COMMON_AREA",
+      "area_subtype": "CAFETERIA",
+      "capacity": 300,
+      "occupied": true,
+      "occupancy_count": 1,
+      "previous_count": 0,
+      "count_confidence": 0.9
+    }
+  },
+  {
+    "event_id": "9aa4549a-42ab-56fc-800d-494babe89196",
+    "event_type": "ROOM_OCCUPANCY_CHANGED",
+    "event_version": 1,
+    "event_time": "2026-09-23T07:14:08.936+05:30",
+    "ingest_time": "2026-09-23T07:14:09.397+05:30",
+    "source": "ROOM_SENSOR",
+    "source_device_id": "SEN_RM_000037",
+    "identity_class": "ANONYMOUS",
+    "entity_type": "ROOM",
+    "entity_id": "AREA_BLD01_F03_LOU",
+    "building_id": "BLD01",
+    "floor_id": "BLD01_F03",
+    "zone_id": "BLD01_F03_ZCOM",
+    "correlation_id": null,
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 909,
+    "payload": {
+      "sensor_id": "SEN_RM_000037",
+      "room_id": "AREA_BLD01_F03_LOU",
+      "room_type": "COMMON_AREA",
+      "area_subtype": "LOUNGE",
+      "capacity": 12,
+      "occupied": true,
+      "occupancy_count": 1,
+      "previous_count": 0,
+      "count_confidence": 0.9
+    }
+  }
+]

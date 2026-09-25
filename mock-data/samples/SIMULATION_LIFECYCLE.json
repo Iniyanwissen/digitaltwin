@@ -1,0 +1,49 @@
+[
+  {
+    "event_id": "53d5522e-536e-50ed-b131-d628a8fee92f",
+    "event_type": "SIMULATION_LIFECYCLE",
+    "event_version": 1,
+    "event_time": "2026-09-23T00:00:00.000+05:30",
+    "ingest_time": "2026-09-23T00:00:00.109+05:30",
+    "source": "SIMULATION",
+    "source_device_id": "ENGINE",
+    "identity_class": "SYSTEM",
+    "entity_type": "SYSTEM",
+    "entity_id": "BLD01",
+    "building_id": "BLD01",
+    "floor_id": null,
+    "zone_id": null,
+    "correlation_id": null,
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 1,
+    "payload": {
+      "lifecycle": "RUN_STARTED",
+      "mode": "BATCH",
+      "seed": 12345
+    }
+  },
+  {
+    "event_id": "1adb8e22-aa6c-5136-baf7-63c864e0efbe",
+    "event_type": "SIMULATION_LIFECYCLE",
+    "event_version": 1,
+    "event_time": "2026-09-23T00:00:00.000+05:30",
+    "ingest_time": "2026-09-23T00:00:00.109+05:30",
+    "source": "SIMULATION",
+    "source_device_id": "ENGINE",
+    "identity_class": "SYSTEM",
+    "entity_type": "SYSTEM",
+    "entity_id": "BLD01",
+    "building_id": "BLD01",
+    "floor_id": null,
+    "zone_id": null,
+    "correlation_id": null,
+    "simulation_run_id": "1260addb-6b82-45a3-bd4f-b9ee4f07a0fc",
+    "sequence_number": 2,
+    "payload": {
+      "lifecycle": "DAY_STARTED",
+      "mode": "BATCH",
+      "seed": 12345,
+      "sim_date": "2026-09-23"
+    }
+  }
+]

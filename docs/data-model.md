@@ -1,6 +1,7 @@
 # Data Model
 
-> Status: DRAFT v0.1. Related: `architecture.md`, `event-model.md`
+> Status: DRAFT v0.2 (area access, room panels, snapshots for replay, network/flow marts). Related: `architecture.md`, `event-model.md`, `visualization-spec.md`
+> Sample data following this model: `mock-data/` (see `mock-data.md`).
 
 Covers:
 1. Identifier conventions
@@ -21,12 +22,13 @@ IDs are human-readable, deterministic, and generated from the layout configurati
 | Organization | `ORG<nn>` | `ORG01` |
 | Building | `BLD<nn>` | `BLD01` |
 | Floor | `<building>_F<nn>` | `BLD01_F02` |
-| Zone | `<floor>_Z<code>` | `BLD01_F02_ZA` |
-| Desk / workspace | `DESK_<building>_F<nn>_<nnn>` | `DESK_BLD01_F02_045` |
+| Zone | `<floor>_Z<code>` (A, B… workspace; LOB lobby; MTG meeting; COM common) | `BLD01_F02_ZA`, `BLD01_F02_ZMTG` |
+| Desk / workspace | `DESK_<building>_F<nn>_<nnnn>` (sequence is building-wide) | `DESK_BLD01_F02_0245` |
 | Cabin | `CABIN_<building>_F<nn>_<nn>` | `CABIN_BLD01_F04_03` |
-| Room | `ROOM_<building>_F<nn>_<nn>` | `ROOM_BLD01_F02_04` |
-| Common area | `AREA_<building>_F<nn>_<code>` | `AREA_BLD01_F01_CAF` |
-| Access point | `AP_<building>_<name><nn>` | `AP_BLD01_ENT01` |
+| Room | `ROOM_<building>_F<nn>_<nnn>` | `ROOM_BLD01_F02_014` |
+| Common area | `AREA_<building>_F<nn>_<CAF/LOU/COL>` | `AREA_BLD01_F01_CAF` |
+| Access point | `AP_<building>_ENT<nn>`, `AP_<floor>_LOBBY`, `AP_<zone>_SECURE`, `AP_<room>_DOOR` | `AP_BLD01_F03_LOBBY` |
+| Room panel | `PANEL_<room_id>` | `PANEL_ROOM_BLD01_F02_014` |
 | Sensor | `SEN_<DSK/RM/ENV>_<nnnnnn>` | `SEN_DSK_000021` |
 | Department | `DEP_<code>` | `DEP_ENG` |
 | Team | `TEAM_<nnn>` | `TEAM_014` |
@@ -85,6 +87,12 @@ zone
   max_occupancy       int
   area_sqm            numeric
   is_hvac_zone        bool            -- v1: every zone is its own HVAC zone
+  is_restricted       bool            -- secure zone with badge reader
+
+zone_access_rule                      -- who may enter restricted zones
+  zone_id             text FK → zone
+  team_id             text FK → team
+  PK (zone_id, team_id)
 
 workspace
   workspace_id        text PK
@@ -94,6 +102,7 @@ workspace
   x, y                numeric
   status              text            -- ACTIVE | UNAVAILABLE
   has_sensor          bool
+  device_type         text            -- DOCKING_STATION | DESK_PC | THIN_CLIENT
 
 room                                  -- meeting rooms AND common areas
   room_id             text PK
@@ -106,13 +115,16 @@ room                                  -- meeting rooms AND common areas
   capacity            int
   x, y, width, height numeric
   is_bookable         bool
+  has_badge_reader    bool            -- identified door reader (AREA_ACCESS)
+  has_panel           bool            -- booking check-in panel (ROOM_CHECK_IN)
   status              text            -- ACTIVE | UNAVAILABLE
 
 access_point
   access_point_id     text PK
   building_id         text FK
   floor_id            text FK
-  name                text
+  reader_type         text            -- BUILDING_ENTRANCE | FLOOR_LOBBY | SECURE_ZONE | ROOM_DOOR
+  target_id           text            -- building / floor / zone / room it guards
   direction           text            -- IN | OUT | IN_OUT
   x, y                numeric
 
@@ -234,6 +246,16 @@ run_speed_change
   old_speed           int
   new_speed           int
 
+floor_snapshot                        -- powers the time scrubber / replay (visualization-spec.md)
+  simulation_run_id   uuid FK
+  floor_id            text
+  sim_minute          timestamptz     -- one row per floor per simulated minute (configurable)
+  desks               jsonb           -- compact: {"DESK_…": [sensor, logged_in], …} (only non-default)
+  rooms               jsonb           -- {"ROOM_…": count}
+  zones               jsonb           -- {"ZONE_…": [temp, co2, hvac_mode]}
+  kpis                jsonb
+  PK (simulation_run_id, floor_id, sim_minute)
+
 run_metrics_snapshot                  -- written periodically for comparison between runs
   simulation_run_id   uuid FK
   sim_time            timestamptz
@@ -350,7 +372,7 @@ Maintained by the event processor. Key prefix includes the run: `st:{run}:...`, 
 
 | Key | Type | Fields | Source |
 |---|---|---|---|
-| `st:{run}:person:{employee_or_visitor_id}` | hash | inside, access_in_time, access_point_id, visit_id, workspace_id, login_time, last_event_time | ACCESS_*, WORKSPACE_* |
+| `st:{run}:person:{employee_or_visitor_id}` | hash | inside, access_in_time, access_point_id, visit_id, current_floor (last lobby reader), last_area, workspace_id, login_time, last_event_time | ACCESS_*, AREA_ACCESS, WORKSPACE_* |
 | `st:{run}:inside:{building_id}` | set | employee and visitor IDs currently inside | ACCESS_* |
 | `st:{run}:desk:{workspace_id}` | hash | sensor_status, sensor_changed_at, sensor_online, logged_in_employee_id, login_time, last_event_time | OCCUPANCY_CHANGED, WORKSPACE_*, SENSOR_STATUS_CHANGED |
 | `st:{run}:room:{room_id}` | hash | occupied, occupancy_count, changed_at, sensor_online | ROOM_OCCUPANCY_CHANGED |
@@ -390,7 +412,7 @@ _file_name, _file_row, _loaded_at
 
 | Table | Content |
 |---|---|
-| `RAW_ACCESS_EVENTS` | ACCESS_IN / ACCESS_OUT |
+| `RAW_ACCESS_EVENTS` | ACCESS_IN / ACCESS_OUT / AREA_ACCESS / ACCESS_DENIED / ROOM_CHECK_IN |
 | `RAW_WORKSPACE_EVENTS` | WORKSPACE_LOGIN / LOGOUT |
 | `RAW_OCCUPANCY_EVENTS` | OCCUPANCY_CHANGED, ROOM_OCCUPANCY_CHANGED, desk/room SENSOR_HEARTBEAT |
 | `RAW_ENVIRONMENT_EVENTS` | ENVIRONMENT_READING |
@@ -446,6 +468,8 @@ SCD2 is implemented with dbt snapshots on `STG_MASTER_*`.
 | Fact | Grain | Key measures / columns |
 |---|---|---|
 | `FACT_ACCESS_EVENT` | one access event | employee_sk / visitor_sk, building_sk, access_point_id, direction, event_time, date_key, time_key, is_late |
+| `FACT_AREA_ACCESS` | one internal reader pass | person_sk, access_point_id, reader_type, area_type, area_id, event_time, result, inferred_exit_time (next pass / exit) |
+| `FACT_ROOM_CHECK_IN` | one panel check-in | booking_id, room_sk, organizer_employee_sk, event_time |
 | `FACT_BUILDING_VISIT` | one person-visit (paired IN → OUT) | person_sk, arrival_time, departure_time, duration_minutes, exit_inferred (missing ACCESS_OUT), entry_inferred (missing ACCESS_IN, first login seen) |
 | `FACT_WORKSPACE_SESSION` | one login → logout session | employee_sk, workspace_sk, floor_sk, login_time, logout_time, duration_minutes, logout_reason, assignment_type |
 | `FACT_OCCUPANCY` | one occupied interval per desk sensor | workspace_sk, sensor_sk, occupied_start, occupied_end, duration_seconds (built from change events; open intervals closed at day end) |
@@ -481,6 +505,9 @@ All marts exclude employee-level PII. The lowest person-related grain is team.
 | `MART_HEATMAP` | zone / desk × period type (TODAY, 7D, 30D) | utilization %, band (VERY_LOW … VERY_HIGH) |
 | `MART_ENVIRONMENT_HOURLY` | zone × hour | avg/min/max per metric, avg occupancy (occupancy vs temperature) |
 | `MART_BOOKING_EFFECTIVENESS` | room / floor × date | booked hours, used booked hours, ghost booking rate, no-show rate |
+| `MART_TEAM_COLLAB_NETWORK` | team pair × period | shared meetings, shared meeting hours, cross-floor meetings (edges for the collaboration network graph; from bookings) |
+| `MART_TEAM_COLOCATION` | team pair × period | seating proximity score (same zone/floor share of sessions) vs collaboration strength → relocation candidates |
+| `MART_MOVEMENT_FLOW` | from area type/floor × to area type/floor × hour | pass counts from `FACT_AREA_ACCESS` + visits (Sankey/chord input; team-level only) |
 | `MART_DATA_QUALITY` | run × date × event type | duplicates, late %, missing heartbeat %, sensor downtime % |
 | `MART_SENSOR_ACCURACY` | run × date × space type (**simulation evaluation**) | sensor occupancy vs ground truth: precision, recall, avg detection lag, count error |
 

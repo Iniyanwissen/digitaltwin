@@ -1,0 +1,174 @@
+# Smart Workplace Digital Twin: simulation configuration
+# Single source of truth for all simulation parameters. Nothing here should be hardcoded in code.
+# Used by the reference simulator (reference/refsim) and later by services/simulation-engine.
+
+seed: 12345
+timezone: Asia/Kolkata
+scale_preset: medium            # small | medium | large
+
+# ---------------------------------------------------------------- layout presets
+presets:
+  small:
+    floors: 2
+    employees: 100
+    desks_per_floor: 50
+    workspace_zones_per_floor: 2
+    rooms_per_floor: { SMALL_MEETING: 3, MEDIUM_MEETING: 2 }
+    auditorium_on_ground_floor: false
+    assigned_desk_floors: []
+  medium:
+    floors: 4
+    employees: 1000
+    desks_per_floor: 200
+    workspace_zones_per_floor: 4
+    rooms_per_floor: { SMALL_MEETING: 5, MEDIUM_MEETING: 4, LARGE_CONFERENCE: 2 }
+    auditorium_on_ground_floor: true
+    assigned_desk_floors: [4]
+  large:
+    floors: 10
+    employees: 10000
+    desks_per_floor: 700
+    workspace_zones_per_floor: 6
+    rooms_per_floor: { SMALL_MEETING: 22, MEDIUM_MEETING: 18, LARGE_CONFERENCE: 9 }
+    auditorium_on_ground_floor: true
+    assigned_desk_floors: [9, 10]
+
+layout:
+  building_id: BLD01
+  building_name: Building A
+  floor_width: 120               # layout units used by the floor renderer
+  floor_height: 72
+  desk_sensor_coverage: 1.0      # share of desks with an occupancy sensor
+  room_capacity: { SMALL_MEETING: 4, MEDIUM_MEETING: 8, LARGE_CONFERENCE: 20, AUDITORIUM: 100 }
+  door_reader_room_types: [LARGE_CONFERENCE, AUDITORIUM]   # identified room-door badge readers
+  panel_room_types: [SMALL_MEETING, MEDIUM_MEETING, LARGE_CONFERENCE, AUDITORIUM]
+  common_areas:
+    ground_floor: { CAFETERIA: 0.30, LOUNGE: 16 }          # cafeteria capacity = share of employees
+    other_floors: { COLLABORATION: 20, LOUNGE: 12 }
+  restricted_departments: [Finance]                        # their primary zone gets a secure-zone reader
+
+# ---------------------------------------------------------------- organization
+organization:
+  departments:
+    Engineering: 0.40
+    Operations: 0.17
+    Sales: 0.12
+    Marketing: 0.08
+    Finance: 0.08
+    HR: 0.05
+    Management: 0.10
+  team_size: { min: 8, max: 16 }
+  team_office_days:              # ISO weekdays; departments not listed get a seeded random 3-day pattern
+    Engineering: [2, 3, 4]
+    Finance: [1, 2, 4]
+    Sales: [1, 3, 5]
+  employment_type_mix: { FULL_TIME: 0.85, CONTRACTOR: 0.12, INTERN: 0.03 }
+  work_mode_mix: { OFFICE: 0.25, HYBRID: 0.60, REMOTE: 0.15 }
+  profile_mix:
+    EARLY_BIRD: 0.12
+    STANDARD: 0.45
+    LATE_STARTER: 0.12
+    MEETING_HEAVY: 0.13
+    REMOTE_HEAVY: 0.08
+    MOBILE_WORKER: 0.10
+
+# ---------------------------------------------------------------- behaviour
+profiles:                        # times in hours, sd in minutes
+  EARLY_BIRD:    { arrival: 7.5,  arrival_sd: 20, workday: 8.3, workday_sd: 40, meeting_factor: 1.0, desk_switch_p: 0.02 }
+  STANDARD:      { arrival: 9.0,  arrival_sd: 30, workday: 8.8, workday_sd: 45, meeting_factor: 1.0, desk_switch_p: 0.02 }
+  LATE_STARTER:  { arrival: 10.5, arrival_sd: 30, workday: 8.8, workday_sd: 45, meeting_factor: 0.9, desk_switch_p: 0.02 }
+  MEETING_HEAVY: { arrival: 9.0,  arrival_sd: 25, workday: 9.0, workday_sd: 45, meeting_factor: 2.0, desk_switch_p: 0.02 }
+  REMOTE_HEAVY:  { arrival: 9.5,  arrival_sd: 40, workday: 7.0, workday_sd: 60, meeting_factor: 0.8, desk_switch_p: 0.02 }
+  MOBILE_WORKER: { arrival: 9.25, arrival_sd: 35, workday: 8.5, workday_sd: 50, meeting_factor: 1.1, desk_switch_p: 0.25 }
+
+simulation:
+  speed: 60                      # 1 | 5 | 10 | 30 | 60 (sim seconds per wall second)
+  skip_night: true
+  earliest_arrival: 6.0
+  latest_arrival: 12.0
+  latest_departure: 21.5
+  core_hours: { start: 8.0, end: 18.0 }
+
+calendar:
+  weekend_days: [6, 7]
+  holidays: ["2026-10-02", "2026-10-20", "2026-12-25"]
+  weekend_attendance: 0.02       # share of OFFICE-mode employees coming in on weekends
+  leave_rate: 0.04
+
+attendance:
+  average_daily_percentage: 65
+  team_correlation_sigma: 0.15
+  team_office_day_boost: 1.25
+  base: { OFFICE: 0.92, HYBRID_OFFICE: 0.85, HYBRID_REMOTE: 0.08, HYBRID_FLEX: 0.35, REMOTE: 0.03 }
+  weekday_factor: { 1: 0.90, 2: 1.05, 3: 1.10, 4: 1.05, 5: 0.75 }
+
+activities:                      # dwell medians / p90 in minutes
+  desk_block: { median: 45, p90: 110 }
+  lunch: { median: 35, p90: 55 }
+  coffee: { median: 10, p90: 20 }
+  break: { median: 8, p90: 18 }
+  collaboration: { median: 25, p90: 60 }
+  other: { median: 5, p90: 12 }
+  weights: { CAFETERIA: 1.0, BREAK: 1.2, COLLABORATION_AREA: 0.8, OTHER_AREA: 1.5 }
+  lunch_window: [12.0, 14.0]
+  lunch_boost: 4.0
+  pack_up_return_p: 0.8
+
+meetings:
+  average_per_employee: 2.3
+  team_share: 0.70
+  department_share: 0.20
+  size_weights: { 2: 0.25, 3: 0.20, 4: 0.20, 5: 0.10, 6: 0.08, 8: 0.08, 10: 0.05, 14: 0.03, 20: 0.01 }
+  duration_weights: { 30: 0.45, 60: 0.45, 90: 0.10 }
+  no_show_probability: 0.08
+  ghost_booking_probability: 0.07
+  early_end_probability: 0.20
+  room_check_in_probability: 0.70
+
+# ---------------------------------------------------------------- observers (source realism)
+access:
+  tailgate_probability: 0.015
+  missed_badge_out_probability: 0.04
+  internal_badge_compliance: 0.95      # share of internal reader passes actually badged
+
+workstation:
+  explicit_logout_probability: 0.70
+  no_login_probability: 0.03
+  idle_timeout_minutes: 120
+  end_of_day_sweep: 23.0
+
+sensors:
+  desk_detection_delay_s: { mean: 30, sd: 15 }
+  desk_vacancy_timeout_s: 180
+  room_report_lag_s: { mean: 20, sd: 10 }
+  room_count_noise_probability: 0.05
+  environment_poll_interval_s: 60      # live
+  heartbeat_interval_s: 300            # 0 disables heartbeats
+
+environment:
+  setpoint_c: { ECO: 26.0, NORMAL: 23.5, HIGH: 22.5 }
+  mean_reversion_per_min: { ECO: 0.03, NORMAL: 0.08, HIGH: 0.12 }
+  ventilation_per_min: { ECO: 0.02, NORMAL: 0.05, HIGH: 0.08, BOOST: 0.12 }
+  occupancy_heat_c: 1.5
+  outdoor_amplitude_c: 0.8
+
+bms:
+  eco_after_empty_minutes: 15
+  high_above_pct: 70
+  high_exit_below_pct: 55
+  hot_threshold_c: 25.0
+  co2_threshold_ppm: 1000
+  cooldown_minutes: 10
+
+batch:
+  environment_poll_interval_s: 900
+  emit_heartbeats: false
+
+delivery:
+  transport_delay_s: { mean: 1.0, sd: 0.5 }
+  late_threshold_seconds: 300
+
+anomalies:                       # all 0 until the data-quality phase
+  duplicate_event_probability: 0.0
+  late_event_probability: 0.0
+  missing_event_probability: 0.0

@@ -29,3 +29,6 @@ data/
 .idea/
 .DS_Store
 Thumbs.db
+
+# Reference raw events (26 MB); regenerate with: cd reference && python -m refsim history
+mock-data/raw/
