@@ -1,4 +1,5 @@
 import type {
+  AccessPoint,
   Building,
   Department,
   Employee,
@@ -50,6 +51,8 @@ export const api = {
   buildings: () => request<Building[]>("/api/v1/buildings"),
   floors: () => request<FloorSummary[]>("/api/v1/floors"),
   zones: (floorId?: string) => request<Zone[]>("/api/v1/zones", { floor_id: floorId }),
+  accessPoints: (floorId?: string) =>
+    request<AccessPoint[]>("/api/v1/access-points", { floor_id: floorId }),
   rooms: (floorId?: string) => request<Room[]>("/api/v1/rooms", { floor_id: floorId }),
   departments: () => request<Department[]>("/api/v1/departments"),
   teams: () => request<Team[]>("/api/v1/teams"),

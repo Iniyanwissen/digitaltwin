@@ -181,6 +181,19 @@ class AccessDirection(StrEnum):
     IN_OUT = "IN_OUT"
 
 
+class ReaderType(StrEnum):
+    BUILDING_ENTRANCE = "BUILDING_ENTRANCE"
+    FLOOR_LOBBY = "FLOOR_LOBBY"
+    SECURE_ZONE = "SECURE_ZONE"
+    ROOM_DOOR = "ROOM_DOOR"
+
+
+class DeviceType(StrEnum):
+    DOCKING_STATION = "DOCKING_STATION"
+    DESK_PC = "DESK_PC"
+    THIN_CLIENT = "THIN_CLIENT"
+
+
 class SpaceStatus(StrEnum):
     ACTIVE = "ACTIVE"
     UNAVAILABLE = "UNAVAILABLE"

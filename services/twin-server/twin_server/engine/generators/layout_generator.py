@@ -24,7 +24,14 @@ from workplace_domain.config.layout import (
     RoomSpec,
     ZoneSpec,
 )
-from workplace_domain.enums import AccessDirection, AreaSubtype, DeskPolicy, RoomType, ZoneType
+from workplace_domain.enums import (
+    AccessDirection,
+    AreaSubtype,
+    DeskPolicy,
+    ReaderType,
+    RoomType,
+    ZoneType,
+)
 
 _ROOM_MARGIN = 0.5
 _AREA_MARGIN = 1.0
@@ -76,6 +83,8 @@ def _meeting_zone(
                 name="Auditorium",
                 room_type=RoomType.AUDITORIUM,
                 capacity=presets.room_capacity[RoomType.AUDITORIUM],
+                has_badge_reader=RoomType.AUDITORIUM in presets.door_reader_room_types,
+                has_panel=RoomType.AUDITORIUM in presets.panel_room_types,
                 rect=_inset(rect, _AREA_MARGIN),
             )
         )
@@ -94,6 +103,8 @@ def _meeting_zone(
                     name=f"Room {floor_number}.{first_room_no + i:02d}",
                     room_type=room_type,
                     capacity=presets.room_capacity[room_type],
+                    has_badge_reader=room_type in presets.door_reader_room_types,
+                    has_panel=room_type in presets.panel_room_types,
                     rect=_inset(cell, _ROOM_MARGIN),
                 )
             )
@@ -228,7 +239,16 @@ def _floor(floor_number: int, p: LayoutPreset, presets: LayoutPresetsFile) -> Fl
             for k in range(1, p.entrances + 1)
         ]
         if floor_number == 1
-        else []
+        else [
+            AccessPointSpec(
+                code="LOBBY",
+                name=f"Floor {floor_number} lobby",
+                direction=AccessDirection.IN,
+                x=round(lobby.x + lobby.width / 2, 2),
+                y=round(lobby.y + lobby.height / 2, 2),
+                reader_type=ReaderType.FLOOR_LOBBY,
+            )
+        ]
     )
     workspaces = sum(b.count for z in zones for b in (*z.desk_blocks, *z.cabin_blocks))
     return FloorSpec(

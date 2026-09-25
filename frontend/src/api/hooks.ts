@@ -37,6 +37,15 @@ export function useZones(floorId: string | undefined) {
   });
 }
 
+export function useAccessPoints(floorId: string | undefined) {
+  return useQuery({
+    queryKey: ["access-points", floorId],
+    queryFn: () => api.accessPoints(floorId),
+    enabled: Boolean(floorId),
+    staleTime: MASTER_STALE_MS,
+  });
+}
+
 export function useRooms(floorId: string | undefined) {
   return useQuery({
     queryKey: ["rooms", floorId],

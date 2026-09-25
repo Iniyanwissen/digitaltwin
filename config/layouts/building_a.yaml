@@ -43,26 +43,33 @@ building:
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 90.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 1.02
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 100.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 1.03
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 110.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 1.04
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 90.5, y: 14.0, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 1.05
         room_type: LARGE_CONFERENCE
         capacity: 14
         rect: {x: 100.5, y: 14.0, width: 9.0, height: 12.5}
+        has_badge_reader: true
+        has_panel: true
       - name: Room 1.06
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 110.5, y: 14.0, width: 9.0, height: 12.5}
+        has_panel: true
     - code: D
       name: Workspace D
       zone_type: TEAM_NEIGHBORHOOD
@@ -87,6 +94,8 @@ building:
         room_type: AUDITORIUM
         capacity: 80
         rect: {x: 61.0, y: 34.0, width: 28.0, height: 25.0}
+        has_badge_reader: true
+        has_panel: true
     - code: X
       name: Cafeteria
       zone_type: CAFETERIA
@@ -149,26 +158,33 @@ building:
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 90.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 2.02
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 100.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 2.03
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 110.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 2.04
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 90.5, y: 14.0, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 2.05
         room_type: LARGE_CONFERENCE
         capacity: 14
         rect: {x: 100.5, y: 14.0, width: 9.0, height: 12.5}
+        has_badge_reader: true
+        has_panel: true
       - name: Room 2.06
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 110.5, y: 14.0, width: 9.0, height: 12.5}
+        has_panel: true
     - code: D
       name: Workspace D
       zone_type: TEAM_NEIGHBORHOOD
@@ -193,26 +209,33 @@ building:
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 60.5, y: 33.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 2.08
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 70.5, y: 33.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 2.09
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 80.5, y: 33.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 2.10
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 60.5, y: 47.0, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 2.11
         room_type: LARGE_CONFERENCE
         capacity: 14
         rect: {x: 70.5, y: 47.0, width: 9.0, height: 12.5}
+        has_badge_reader: true
+        has_panel: true
       - name: Room 2.12
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 80.5, y: 47.0, width: 9.0, height: 12.5}
+        has_panel: true
     - code: X
       name: Collaboration area
       zone_type: COLLABORATION
@@ -234,6 +257,8 @@ building:
       zone_type: CIRCULATION
       rect: {x: 90.0, y: 27.0, width: 30.0, height: 6.0}
       max_occupancy: 0
+    access_points:
+    - {code: LOBBY, name: Floor 2 lobby, direction: IN, x: 105.0, y: 30.0, reader_type: FLOOR_LOBBY}
   - floor_number: 3
     name: Floor 3
     desk_policy: HOT_DESK
@@ -272,26 +297,33 @@ building:
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 90.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 3.02
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 100.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 3.03
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 110.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 3.04
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 90.5, y: 14.0, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 3.05
         room_type: LARGE_CONFERENCE
         capacity: 14
         rect: {x: 100.5, y: 14.0, width: 9.0, height: 12.5}
+        has_badge_reader: true
+        has_panel: true
       - name: Room 3.06
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 110.5, y: 14.0, width: 9.0, height: 12.5}
+        has_panel: true
     - code: D
       name: Workspace D
       zone_type: TEAM_NEIGHBORHOOD
@@ -316,26 +348,33 @@ building:
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 60.5, y: 33.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 3.08
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 70.5, y: 33.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 3.09
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 80.5, y: 33.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 3.10
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 60.5, y: 47.0, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 3.11
         room_type: LARGE_CONFERENCE
         capacity: 14
         rect: {x: 70.5, y: 47.0, width: 9.0, height: 12.5}
+        has_badge_reader: true
+        has_panel: true
       - name: Room 3.12
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 80.5, y: 47.0, width: 9.0, height: 12.5}
+        has_panel: true
     - code: X
       name: Lounge
       zone_type: LOUNGE
@@ -357,6 +396,8 @@ building:
       zone_type: CIRCULATION
       rect: {x: 90.0, y: 27.0, width: 30.0, height: 6.0}
       max_occupancy: 0
+    access_points:
+    - {code: LOBBY, name: Floor 3 lobby, direction: IN, x: 105.0, y: 30.0, reader_type: FLOOR_LOBBY}
   - floor_number: 4
     name: Floor 4
     desk_policy: ASSIGNED
@@ -395,26 +436,33 @@ building:
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 90.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 4.02
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 100.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 4.03
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 110.5, y: 0.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 4.04
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 90.5, y: 14.0, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 4.05
         room_type: LARGE_CONFERENCE
         capacity: 14
         rect: {x: 100.5, y: 14.0, width: 9.0, height: 12.5}
+        has_badge_reader: true
+        has_panel: true
       - name: Room 4.06
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 110.5, y: 14.0, width: 9.0, height: 12.5}
+        has_panel: true
     - code: D
       name: Workspace D
       zone_type: TEAM_NEIGHBORHOOD
@@ -439,26 +487,33 @@ building:
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 60.5, y: 33.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 4.08
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 70.5, y: 33.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 4.09
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 80.5, y: 33.5, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 4.10
         room_type: MEDIUM_MEETING
         capacity: 8
         rect: {x: 60.5, y: 47.0, width: 9.0, height: 12.5}
+        has_panel: true
       - name: Room 4.11
         room_type: LARGE_CONFERENCE
         capacity: 14
         rect: {x: 70.5, y: 47.0, width: 9.0, height: 12.5}
+        has_badge_reader: true
+        has_panel: true
       - name: Room 4.12
         room_type: SMALL_MEETING
         capacity: 4
         rect: {x: 80.5, y: 47.0, width: 9.0, height: 12.5}
+        has_panel: true
     - code: X
       name: Cabins
       zone_type: CABIN_BLOCK
@@ -476,3 +531,5 @@ building:
       zone_type: CIRCULATION
       rect: {x: 90.0, y: 27.0, width: 30.0, height: 6.0}
       max_occupancy: 0
+    access_points:
+    - {code: LOBBY, name: Floor 4 lobby, direction: IN, x: 105.0, y: 30.0, reader_type: FLOOR_LOBBY}

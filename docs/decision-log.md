@@ -69,3 +69,13 @@ Imported from the Local Kit v0.2 (`reference/`, `prompts/`, `mock-data/`, v0.2 d
 5. **Theme:** dark design tokens (`visualization-spec.md` §2) on the Live Simulation screen only; other pages stay light.
 6. **Reference config:** the kit's `config/simulation.yaml` lives at `reference/config/simulation.yaml`; `refsim` was changed to read it there. The app keeps its split config (`simulation.yaml`, `organization.yaml`, `layout_presets.yaml`, `layouts/`).
 7. `mock-data/raw/` (26 MB) is gitignored; regenerate with `cd reference && python -m refsim history`.
+
+## 2026-09-26: Part A, hybrid master data
+
+**Decisions**
+1. **Readers (from the kit):** building entrances (layout file), one `FLOOR_LOBBY` reader per floor above 1 (layout file, `AP_<floor>_LOBBY`), `ROOM_DOOR` readers derived from rooms with `has_badge_reader` (`AP_<room>_DOOR`), `SECURE_ZONE` readers derived from restricted zones (`AP_<zone>_SECURE`). Door/panel room types come from `layout_presets.yaml` (`door_reader_room_types`, `panel_room_types`).
+2. **Restricted zones:** departments listed in `organization.yaml: restricted_departments` (default `[FIN]`). Their teams are placed first and packed together on one floor; the zones they use become restricted and are closed to other teams, giving a compact secure area. Every team seated in a restricted zone gets a `zone_access_rule`. (The kit secures each restricted team's primary zone; packing avoids secure zones full of other departments.)
+3. **Device types:** exact mix from `simulation.yaml: office.device_type_mix`, shuffled with the `device_type` RNG stream.
+4. **New tables/columns (migration `0003`):** `master_zone.is_restricted`, `master_zone_access_rule`, `master_workspace.device_type`, `master_room.has_badge_reader/has_panel`, `master_access_point.reader_type/target_id`, `sim_floor_snapshot`.
+5. **Startup:** migrations are applied automatically (`auto_migrate`, also after auto-reload). Master data is regenerated when the generated content hash differs from the stored one, so generator code changes are picked up without a config change.
+6. **Directory UI:** columns kept; added Restricted badge (zones), Door reader and Check-in panel (rooms), a Badge readers table (Spaces) and Secure access (Teams).

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useDepartments, useFloors, useTeams } from "@/api/hooks";
 import type { Team } from "@/api/types";
-import { Card, type Column, DataTable, Loading, SearchInput, Select, StatCard } from "@/components/ui";
+import { Badge, Card, type Column, DataTable, Loading, SearchInput, Select, StatCard } from "@/components/ui";
 import { percent, weekdays } from "@/lib/format";
 
 const COLUMNS: Column<Team>[] = [
@@ -22,6 +22,15 @@ const COLUMNS: Column<Team>[] = [
   {
     header: "Seating zones",
     cell: (t) => t.zone_allocations.map((a) => `${a.zone_name} ${percent(a.share)}`).join(" · "),
+  },
+  {
+    header: "Secure access",
+    cell: (t) =>
+      t.secure_zones.length ? (
+        <Badge tone="red">{t.secure_zones.map((z) => z.zone_name).join(", ")}</Badge>
+      ) : (
+        "—"
+      ),
   },
 ];
 

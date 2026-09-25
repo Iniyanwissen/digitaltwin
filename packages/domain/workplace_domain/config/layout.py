@@ -11,7 +11,14 @@ from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
-from workplace_domain.enums import AccessDirection, AreaSubtype, DeskPolicy, RoomType, ZoneType
+from workplace_domain.enums import (
+    AccessDirection,
+    AreaSubtype,
+    DeskPolicy,
+    ReaderType,
+    RoomType,
+    ZoneType,
+)
 
 NonNeg = Annotated[float, Field(ge=0)]
 Positive = Annotated[float, Field(gt=0)]
@@ -63,6 +70,8 @@ class RoomSpec(_Strict):
     room_type: RoomType
     capacity: PositiveInt
     rect: Rect
+    has_badge_reader: bool = False  # identified door reader (AREA_ACCESS)
+    has_panel: bool = False  # booking check-in panel (ROOM_CHECK_IN)
 
     @model_validator(mode="after")
     def _not_common_area(self) -> RoomSpec:
@@ -100,11 +109,20 @@ class ZoneSpec(_Strict):
 
 
 class AccessPointSpec(_Strict):
-    code: Annotated[str, Field(pattern=r"^[A-Z]+\d{2}$")]
+    """Building entrances and floor-lobby readers. Door and secure readers are derived."""
+
+    code: Annotated[str, Field(pattern=r"^[A-Z0-9]{2,8}$")]
     name: str
     direction: AccessDirection
     x: NonNeg
     y: NonNeg
+    reader_type: ReaderType = ReaderType.BUILDING_ENTRANCE
+
+    @model_validator(mode="after")
+    def _layout_reader_types(self) -> AccessPointSpec:
+        if self.reader_type not in (ReaderType.BUILDING_ENTRANCE, ReaderType.FLOOR_LOBBY):
+            raise ValueError("layout files define only BUILDING_ENTRANCE and FLOOR_LOBBY readers")
+        return self
 
 
 class FloorSpec(_Strict):
@@ -139,8 +157,14 @@ class BuildingSpec(_Strict):
         numbers = [f.floor_number for f in self.floors]
         if len(set(numbers)) != len(numbers):
             raise ValueError("floor numbers must be unique")
-        if not any(f.access_points for f in self.floors):
-            raise ValueError("building needs at least one access point")
+        entrances = [
+            ap
+            for f in self.floors
+            for ap in f.access_points
+            if ap.reader_type is ReaderType.BUILDING_ENTRANCE
+        ]
+        if not entrances:
+            raise ValueError("building needs at least one BUILDING_ENTRANCE access point")
         return self
 
 
@@ -173,6 +197,8 @@ class LayoutPreset(_Strict):
 class LayoutPresetsFile(_Strict):
     room_capacity: dict[RoomType, PositiveInt]
     amenity_capacity: dict[AreaSubtype, PositiveInt]
+    door_reader_room_types: list[RoomType]
+    panel_room_types: list[RoomType]
     presets: dict[str, LayoutPreset]
 
     @model_validator(mode="after")

@@ -1,12 +1,19 @@
-"""Expand layout files into master-data entities (floors, zones, workspaces, rooms, sensors)."""
+"""Expand layout files into master-data entities (floors, zones, workspaces, rooms, readers,
+sensors)."""
 
 from __future__ import annotations
 
+import dataclasses
+
+from twin_server.engine.generators.apportion import apportion
 from workplace_domain import ids
 from workplace_domain.config import WorkplaceConfig
 from workplace_domain.config.layout import BuildingSpec
 from workplace_domain.enums import (
+    AccessDirection,
+    DeviceType,
     MetricType,
+    ReaderType,
     RoomType,
     SensorTarget,
     SensorType,
@@ -73,6 +80,7 @@ def _load_building(spec: BuildingSpec, config: WorkplaceConfig, layout: Layout) 
                     max_occupancy=zs.max_occupancy,
                     area_sqm=round(zs.rect.area, 2),
                     is_hvac_zone=True,
+                    is_restricted=False,
                 )
             )
             for block in zs.desk_blocks:
@@ -88,6 +96,7 @@ def _load_building(spec: BuildingSpec, config: WorkplaceConfig, layout: Layout) 
                             y,
                             SpaceStatus.ACTIVE,
                             has_sensor=False,
+                            device_type=DeviceType.DOCKING_STATION,  # set by _finalize_workspaces
                         )
                     )
             for block in zs.cabin_blocks:
@@ -103,13 +112,15 @@ def _load_building(spec: BuildingSpec, config: WorkplaceConfig, layout: Layout) 
                             y,
                             SpaceStatus.ACTIVE,
                             has_sensor=False,
+                            device_type=DeviceType.DOCKING_STATION,  # set by _finalize_workspaces
                         )
                     )
             for rs in zs.rooms:
                 room_no += 1
+                room_id = ids.room_id(b, fn, room_no)
                 layout.rooms.append(
                     Room(
-                        room_id=ids.room_id(b, fn, room_no),
+                        room_id=room_id,
                         floor_id=floor_id,
                         zone_id=zone_id,
                         name=rs.name,
@@ -122,8 +133,24 @@ def _load_building(spec: BuildingSpec, config: WorkplaceConfig, layout: Layout) 
                         height=rs.rect.height,
                         is_bookable=True,
                         status=SpaceStatus.ACTIVE,
+                        has_badge_reader=rs.has_badge_reader,
+                        has_panel=rs.has_panel,
                     )
                 )
+                if rs.has_badge_reader:
+                    layout.access_points.append(
+                        AccessPoint(
+                            access_point_id=ids.door_reader_id(room_id),
+                            building_id=b,
+                            floor_id=floor_id,
+                            name=f"{rs.name} door",
+                            direction=AccessDirection.IN,
+                            x=round(rs.rect.x + 0.5, 2),
+                            y=round(rs.rect.y + rs.rect.height / 2, 2),
+                            reader_type=ReaderType.ROOM_DOOR,
+                            target_id=room_id,
+                        )
+                    )
             for area in zs.common_areas:
                 layout.rooms.append(
                     Room(
@@ -140,36 +167,43 @@ def _load_building(spec: BuildingSpec, config: WorkplaceConfig, layout: Layout) 
                         height=area.rect.height,
                         is_bookable=False,
                         status=SpaceStatus.ACTIVE,
+                        has_badge_reader=False,
+                        has_panel=False,
                     )
                 )
         for ap in fs.access_points:
+            lobby = ap.reader_type is ReaderType.FLOOR_LOBBY
             layout.access_points.append(
                 AccessPoint(
-                    access_point_id=ids.access_point_id(b, ap.code),
+                    access_point_id=ids.lobby_reader_id(floor_id)
+                    if lobby
+                    else ids.access_point_id(b, ap.code),
                     building_id=b,
                     floor_id=floor_id,
                     name=ap.name,
                     direction=ap.direction,
                     x=ap.x,
                     y=ap.y,
+                    reader_type=ap.reader_type,
+                    target_id=floor_id if lobby else b,
                 )
             )
 
 
-def _apply_sensor_coverage(layout: Layout, coverage: float, rng: RngFactory) -> None:
+def _finalize_workspaces(layout: Layout, config: WorkplaceConfig, rng: RngFactory) -> None:
+    """Choose which workspaces have sensors and assign device types (exact mixes, seeded)."""
     n = len(layout.workspaces)
-    k = round(coverage * n)
-    chosen = set(int(i) for i in rng.stream("sensor_coverage").choice(n, size=k, replace=False))
+    coverage = config.simulation.sensors.desk_sensor_coverage
+    sensed = {
+        int(i)
+        for i in rng.stream("sensor_coverage").choice(n, size=round(coverage * n), replace=False)
+    }
+    counts = apportion(n, dict(config.simulation.office.device_type_mix))
+    devices = [d for d, c in counts.items() for _ in range(c)]
+    order = rng.stream("device_type").permutation(n)
     layout.workspaces[:] = [
-        Workspace(
-            w.workspace_id,
-            w.floor_id,
-            w.zone_id,
-            w.workspace_type,
-            w.x,
-            w.y,
-            w.status,
-            has_sensor=i in chosen,
+        dataclasses.replace(
+            w, has_sensor=i in sensed, device_type=DeviceType(devices[int(order[i])])
         )
         for i, w in enumerate(layout.workspaces)
     ]
@@ -230,6 +264,6 @@ def load_layout(config: WorkplaceConfig, rng: RngFactory) -> Layout:
     layout = Layout(organization=Organization(org_id=org.org_id, name=org.name))
     for layout_file in config.layouts:
         _load_building(layout_file.building, config, layout)
-    _apply_sensor_coverage(layout, config.simulation.sensors.desk_sensor_coverage, rng)
+    _finalize_workspaces(layout, config, rng)
     _generate_sensors(layout, config)
     return layout

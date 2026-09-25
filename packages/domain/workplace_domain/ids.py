@@ -35,6 +35,18 @@ def access_point_id(building_id: str, code: str) -> str:
     return f"AP_{building_id}_{code}"
 
 
+def lobby_reader_id(floor_id_: str) -> str:
+    return f"AP_{floor_id_}_LOBBY"
+
+
+def secure_reader_id(zone_id_: str) -> str:
+    return f"AP_{zone_id_}_SECURE"
+
+
+def door_reader_id(room_id_: str) -> str:
+    return f"AP_{room_id_}_DOOR"
+
+
 def sensor_id(kind: SensorKind, n: int) -> str:
     return f"SEN_{kind}_{n:06d}"
 

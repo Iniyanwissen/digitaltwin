@@ -26,10 +26,14 @@ def test_health_reports_all_components(client) -> None:
         "simulation_engine",
         "event_processor",
     }
-    assert body["components"]["database"]["info"]["schema_revision"] == "0002_master_config_sim_ops"
+    assert (
+        body["components"]["database"]["info"]["schema_revision"]
+        == "0003_readers_restricted_snapshots"
+    )
 
 
 def test_health_is_down_without_migrations(settings) -> None:
+    settings = settings.model_copy(update={"auto_migrate": False})
     with TestClient(create_app(settings)) as client:
         response = client.get("/health")
     assert response.status_code == 503

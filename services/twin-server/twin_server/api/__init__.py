@@ -13,6 +13,7 @@ from twin_server import __version__
 from twin_server.api.routes import api_v1_router, system_router
 from twin_server.api.routes_master import master_router
 from twin_server.context import AppContext
+from twin_server.db import run_migrations
 from twin_server.log_setup import configure_logging
 from twin_server.settings import Settings
 from workplace_domain.config import load_workplace_config
@@ -29,6 +30,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         ctx = AppContext.build(settings, config)
         app.state.ctx = ctx
         log = structlog.get_logger("api")
+        if settings.auto_migrate:
+            await run_in_threadpool(run_migrations, settings.resolved_database_url)
         if settings.auto_seed:
             try:
                 await run_in_threadpool(ctx.master.ensure)

@@ -9,6 +9,7 @@ from fastapi.concurrency import run_in_threadpool
 
 from twin_server.api.routes import Ctx
 from twin_server.api.schemas import (
+    AccessPointOut,
     BuildingOut,
     DepartmentOut,
     EmployeeFacetsOut,
@@ -46,6 +47,13 @@ async def floor_layout(ctx: Ctx, floor_id: str) -> dict[str, object]:
     if layout is None:
         raise HTTPException(404, f"floor {floor_id} not found")
     return layout
+
+
+@master_router.get("/access-points", response_model=list[AccessPointOut])
+async def access_points(
+    ctx: Ctx, floor_id: str | None = None, reader_type: str | None = None
+) -> list[dict[str, object]]:
+    return await run_in_threadpool(ctx.master.reader.access_points, floor_id, reader_type)
 
 
 @master_router.get("/zones", response_model=list[ZoneOut])

@@ -23,6 +23,7 @@ from sqlalchemy import (
     String,
     Table,
     Text,
+    false,
     func,
 )
 
@@ -94,6 +95,7 @@ zone = Table(
     Column("max_occupancy", Integer, nullable=False),
     Column("area_sqm", Float, nullable=False),
     Column("is_hvac_zone", Boolean, nullable=False),
+    Column("is_restricted", Boolean, nullable=False, server_default=false()),
     *_timestamps(),
 )
 
@@ -108,6 +110,7 @@ workspace = Table(
     Column("y", Float, nullable=False),
     Column("status", String, nullable=False),
     Column("has_sensor", Boolean, nullable=False),
+    Column("device_type", String, nullable=False, server_default="DOCKING_STATION"),
     *_timestamps(),
 )
 
@@ -127,6 +130,8 @@ room = Table(
     Column("height", Float, nullable=False),
     Column("is_bookable", Boolean, nullable=False),
     Column("status", String, nullable=False),
+    Column("has_badge_reader", Boolean, nullable=False, server_default=false()),
+    Column("has_panel", Boolean, nullable=False, server_default=false()),
     *_timestamps(),
 )
 
@@ -140,6 +145,8 @@ access_point = Table(
     Column("direction", String, nullable=False),
     Column("x", Float, nullable=False),
     Column("y", Float, nullable=False),
+    Column("reader_type", String, nullable=False, server_default="BUILDING_ENTRANCE"),
+    Column("target_id", String, nullable=False, server_default=""),
     *_timestamps(),
 )
 
@@ -185,6 +192,14 @@ team_zone_allocation = Table(
     Column("team_id", String, ForeignKey("master_team.team_id"), primary_key=True),
     Column("zone_id", String, ForeignKey("master_zone.zone_id"), primary_key=True),
     Column("share", Float, nullable=False),
+    *_timestamps(),
+)
+
+zone_access_rule = Table(
+    "master_zone_access_rule",
+    metadata,
+    Column("zone_id", String, ForeignKey("master_zone.zone_id"), primary_key=True),
+    Column("team_id", String, ForeignKey("master_team.team_id"), primary_key=True),
     *_timestamps(),
 )
 
@@ -247,6 +262,7 @@ MASTER_TABLES: dict[str, Table] = {
     "department": department,
     "team": team,
     "team_zone_allocation": team_zone_allocation,
+    "zone_access_rule": zone_access_rule,
     "employee": employee,
     "employee_work_pattern": employee_work_pattern,
     "workspace_assignment": workspace_assignment,
@@ -342,6 +358,23 @@ run_metrics_snapshot = Table(
     Column("occupied_desks", Integer, nullable=False),
     Column("occupied_rooms", Integer, nullable=False),
     Column("events_generated", BigInteger, nullable=False),
+)
+
+floor_snapshot = Table(
+    "sim_floor_snapshot",
+    metadata,
+    Column(
+        "simulation_run_id",
+        String(36),
+        ForeignKey("sim_simulation_run.simulation_run_id"),
+        primary_key=True,
+    ),
+    Column("floor_id", String, primary_key=True),
+    Column("sim_minute", DateTime(timezone=True), primary_key=True),
+    Column("desks", JSON, nullable=False),  # {"DESK_...": [sensor, logged_in]}, non-default only
+    Column("rooms", JSON, nullable=False),  # {"ROOM_...": count}
+    Column("zones", JSON, nullable=False),  # {"ZONE_...": [temp, co2, hvac_mode]}
+    Column("kpis", JSON, nullable=False),
 )
 
 # ------------------------------------------------------------------------------ ops

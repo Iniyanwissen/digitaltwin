@@ -3,12 +3,16 @@
 # Every floor is a grid of modules: a top row and a bottom row of `modules_per_row` modules,
 # separated by a corridor. Top row: desk zones + 1 meeting zone. Bottom row: desk zones +
 # 1 meeting zone + 1 amenity (cafeteria on floor 1, cabins on assigned floors, else
-# collaboration/lounge alternating). Units are metres.
+# collaboration/lounge alternating). Floors above 1 get a floor-lobby reader. Units are metres.
 
 # Seats per meeting room type.
 room_capacity: { SMALL_MEETING: 4, MEDIUM_MEETING: 8, LARGE_CONFERENCE: 14, AUDITORIUM: 80 }
 # Capacity of each amenity common area.
 amenity_capacity: { CAFETERIA: 150, COLLABORATION: 40, LOUNGE: 30 }
+# Room types with an identified door badge reader (AREA_ACCESS events).
+door_reader_room_types: [LARGE_CONFERENCE, AUDITORIUM]
+# Room types with a booking check-in panel (ROOM_CHECK_IN events).
+panel_room_types: [SMALL_MEETING, MEDIUM_MEETING, LARGE_CONFERENCE, AUDITORIUM]
 
 presets:
   small:

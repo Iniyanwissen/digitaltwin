@@ -36,11 +36,20 @@ class MasterDataService:
         return version is not None and version["config_id"] == config_id_for(self._config)
 
     def ensure(self, force: bool = False) -> SeedResult:
-        """Generate master data if missing, if the config changed, or when forced."""
-        if not force and self.is_current():
-            version = self.store.current_version()
-            return SeedResult(False, version["version_id"] if version else None, {})
+        """Regenerate master data if missing, if config or generator output changed, or if forced.
+
+        Generation is cheap and deterministic, so comparing content hashes also catches
+        generator code changes that leave the config untouched.
+        """
         master = generate_master_data(self._config)
+        version = self.store.current_version()
+        if (
+            not force
+            and version is not None
+            and version["config_id"] == config_id_for(self._config)
+            and version["content_hash"] == master.content_hash()
+        ):
+            return SeedResult(False, version["version_id"], {})
         version_id = self.store.replace(master, self._config)
         counts = master.counts()
         log.info("master_data_generated", version_id=version_id, **counts)

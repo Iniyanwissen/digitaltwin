@@ -18,6 +18,7 @@ def generate_master_data(config: WorkplaceConfig) -> MasterData:
         departments=org.departments,
         teams=org.teams,
         team_zone_allocations=org.team_zone_allocations,
+        zone_access_rules=org.zone_access_rules,
         employees=org.employees,
         work_patterns=org.work_patterns,
         assignments=org.assignments,

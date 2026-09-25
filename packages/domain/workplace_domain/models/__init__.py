@@ -14,9 +14,11 @@ from workplace_domain.enums import (
     AreaSubtype,
     BehaviorProfile,
     DeskPolicy,
+    DeviceType,
     EmploymentType,
     MetricType,
     PlannedMode,
+    ReaderType,
     RoomType,
     SensorTarget,
     SensorType,
@@ -69,6 +71,7 @@ class Zone:
     max_occupancy: int
     area_sqm: float
     is_hvac_zone: bool
+    is_restricted: bool
 
 
 @dataclass(frozen=True, slots=True)
@@ -81,6 +84,7 @@ class Workspace:
     y: float
     status: SpaceStatus
     has_sensor: bool
+    device_type: DeviceType
 
 
 @dataclass(frozen=True, slots=True)
@@ -98,6 +102,8 @@ class Room:
     height: float
     is_bookable: bool
     status: SpaceStatus
+    has_badge_reader: bool
+    has_panel: bool
 
 
 @dataclass(frozen=True, slots=True)
@@ -109,6 +115,8 @@ class AccessPoint:
     direction: AccessDirection
     x: float
     y: float
+    reader_type: ReaderType
+    target_id: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -146,6 +154,14 @@ class TeamZoneAllocation:
     team_id: str
     zone_id: str
     share: float
+
+
+@dataclass(frozen=True, slots=True)
+class ZoneAccessRule:
+    """Teams allowed through a restricted zone's secure reader."""
+
+    zone_id: str
+    team_id: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -201,6 +217,7 @@ class MasterData:
     departments: list[Department]
     teams: list[Team]
     team_zone_allocations: list[TeamZoneAllocation]
+    zone_access_rules: list[ZoneAccessRule]
     employees: list[Employee]
     work_patterns: list[EmployeeWorkPattern]
     assignments: list[WorkspaceAssignment]
@@ -220,6 +237,7 @@ class MasterData:
             "department": self.departments,
             "team": self.teams,
             "team_zone_allocation": self.team_zone_allocations,
+            "zone_access_rule": self.zone_access_rules,
             "employee": self.employees,
             "employee_work_pattern": self.work_patterns,
             "workspace_assignment": self.assignments,

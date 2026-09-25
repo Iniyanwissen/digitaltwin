@@ -13,7 +13,7 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from workplace_domain.enums import BehaviorProfile, ScalePreset, WorkMode
+from workplace_domain.enums import BehaviorProfile, DeviceType, ScalePreset, WorkMode
 
 Probability = Annotated[float, Field(ge=0.0, le=1.0)]
 PositiveInt = Annotated[int, Field(gt=0)]
@@ -37,6 +37,13 @@ def _check_mix(shares: Iterable[float], label: str) -> None:
 
 class OfficeConfig(_Strict):
     layout_files: list[str] = Field(min_length=1)
+    device_type_mix: dict[DeviceType, float]
+
+    @field_validator("device_type_mix")
+    @classmethod
+    def _device_mix_sums_to_one(cls, v: dict[DeviceType, float]) -> dict[DeviceType, float]:
+        _check_mix(v.values(), "office.device_type_mix")
+        return v
 
 
 class EmployeesConfig(_Strict):

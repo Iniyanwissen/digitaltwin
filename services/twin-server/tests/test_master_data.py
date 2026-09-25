@@ -17,7 +17,15 @@ from workplace_domain.config import (
     load_layout_presets,
     load_workplace_config,
 )
-from workplace_domain.enums import DeskPolicy, SensorType, WorkMode, WorkspaceType
+from workplace_domain.enums import (
+    DeskPolicy,
+    DeviceType,
+    ReaderType,
+    RoomType,
+    SensorType,
+    WorkMode,
+    WorkspaceType,
+)
 from workplace_domain.models import MasterData
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -89,7 +97,11 @@ def test_counts_match_config(config: WorkplaceConfig, preset_name: str) -> None:
     assert sum(w.workspace_type is WorkspaceType.CABIN for w in lay.workspaces) == cabins
     assert len(lay.zones) == preset.floors * (2 * preset.modules_per_row + 2)
     assert len(data.employees) == PRESET_EMPLOYEES[preset_name]
-    assert len(lay.access_points) == preset.entrances
+    readers = Counter(ap.reader_type for ap in lay.access_points)
+    assert readers[ReaderType.BUILDING_ENTRANCE] == preset.entrances
+    assert readers[ReaderType.FLOOR_LOBBY] == preset.floors - 1
+    assert readers[ReaderType.ROOM_DOOR] == sum(r.has_badge_reader for r in lay.rooms)
+    assert readers[ReaderType.SECURE_ZONE] == sum(z.is_restricted for z in lay.zones) > 0
     expected_sensors = sum(w.has_sensor for w in lay.workspaces) + len(lay.rooms) + len(lay.zones)
     assert len(lay.sensors) == expected_sensors
 
@@ -220,3 +232,68 @@ def test_store_seeds_once_and_detects_config_change(tmp_path, config: WorkplaceC
         assert changed.is_current() and not service.is_current()
     finally:
         engine.dispose()
+
+
+# ------------------------------------------------------------------ readers and security
+
+
+def test_restricted_zones_have_secure_reader_and_rules(
+    config: WorkplaceConfig, master: MasterData
+) -> None:
+    lay = master.layout
+    restricted = {z.zone_id for z in lay.zones if z.is_restricted}
+    assert restricted
+    secure = {
+        ap.target_id: ap for ap in lay.access_points if ap.reader_type is ReaderType.SECURE_ZONE
+    }
+    assert set(secure) == restricted
+    ruled = defaultdict(set)
+    for rule in master.zone_access_rules:
+        ruled[rule.zone_id].add(rule.team_id)
+    assert set(ruled) == restricted
+    # Every team of a restricted department has its main zone restricted and a rule for it.
+    codes = {f"DEP_{c}" for c in config.organization.restricted_departments}
+    for team in (t for t in master.teams if t.department_id in codes):
+        allocs = [a for a in master.team_zone_allocations if a.team_id == team.team_id]
+        main = max(allocs, key=lambda a: (a.share, a.zone_id)).zone_id
+        assert main in restricted and team.team_id in ruled[main]
+    # The secure area is compact and holds only restricted-department teams.
+    team_dept = {tm.team_id: tm.department_id for tm in master.teams}
+    for a in master.team_zone_allocations:
+        if a.zone_id in restricted:
+            assert team_dept[a.team_id] in codes
+    assert len(restricted) <= 3
+    # Everyone seated in a restricted zone may enter it.
+    for a in master.team_zone_allocations:
+        if a.zone_id in restricted:
+            assert a.team_id in ruled[a.zone_id]
+
+
+def test_room_readers_and_panels_follow_config(master: MasterData) -> None:
+    presets = load_layout_presets(CONFIG_DIR)
+    doors = {
+        ap.target_id for ap in master.layout.access_points if ap.reader_type is ReaderType.ROOM_DOOR
+    }
+    for room in master.layout.rooms:
+        if room.room_type is RoomType.COMMON_AREA:
+            assert not room.has_badge_reader and not room.has_panel
+            continue
+        assert room.has_badge_reader == (room.room_type in presets.door_reader_room_types)
+        assert room.has_panel == (room.room_type in presets.panel_room_types)
+        assert (room.room_id in doors) == room.has_badge_reader
+
+
+def test_lobby_readers_and_unique_access_point_ids(master: MasterData) -> None:
+    aps = master.layout.access_points
+    assert len({ap.access_point_id for ap in aps}) == len(aps)
+    lobbies = {ap.target_id for ap in aps if ap.reader_type is ReaderType.FLOOR_LOBBY}
+    assert lobbies == {f.floor_id for f in master.layout.floors if f.floor_number > 1}
+    for ap in aps:
+        assert re.fullmatch(r"AP_[A-Z0-9_]+", ap.access_point_id)
+
+
+def test_device_type_mix_is_exact(config: WorkplaceConfig, master: MasterData) -> None:
+    workspaces = master.layout.workspaces
+    counts = Counter(w.device_type for w in workspaces)
+    for device, share in config.simulation.office.device_type_mix.items():
+        assert abs(counts[DeviceType(device)] - share * len(workspaces)) < 1

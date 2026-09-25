@@ -61,6 +61,8 @@ class AccessPointOut(BaseModel):
     direction: str
     x: float
     y: float
+    reader_type: str
+    target_id: str
 
 
 class FloorSummaryOut(BaseModel):
@@ -83,6 +85,7 @@ class FloorSummaryOut(BaseModel):
     sensors: int
     home_employees: int
     home_teams: int
+    readers: int
     workspaces: int
     employees_per_workspace: float
 
@@ -109,6 +112,7 @@ class ZoneOut(BaseModel):
     height: float
     max_occupancy: int
     area_sqm: float
+    is_restricted: bool
     workspaces: int = 0
 
 
@@ -121,6 +125,7 @@ class WorkspaceOut(BaseModel):
     y: float
     status: str
     has_sensor: bool
+    device_type: str
 
 
 class RoomOut(BaseModel):
@@ -138,6 +143,8 @@ class RoomOut(BaseModel):
     height: float
     is_bookable: bool
     status: str
+    has_badge_reader: bool
+    has_panel: bool
 
 
 class FloorLayoutOut(BaseModel):
@@ -183,6 +190,11 @@ class ZoneAllocationOut(BaseModel):
     share: float
 
 
+class SecureZoneOut(BaseModel):
+    zone_id: str
+    zone_name: str
+
+
 class TeamOut(BaseModel):
     team_id: str
     name: str
@@ -194,6 +206,7 @@ class TeamOut(BaseModel):
     size_target: int
     members: int
     zone_allocations: list[ZoneAllocationOut]
+    secure_zones: list[SecureZoneOut]
 
 
 class EmployeeOut(BaseModel):

@@ -28,6 +28,9 @@ class Settings(BaseSettings):
     # Wall-clock interval for service heartbeat log lines (operational only).
     heartbeat_interval_s: float = 30.0
 
+    # Apply database migrations at startup (also after auto-reload).
+    auto_migrate: bool = True
+
     # Generate master data at startup when missing or when config/ changed.
     auto_seed: bool = True
 

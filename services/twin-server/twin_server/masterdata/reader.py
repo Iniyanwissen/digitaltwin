@@ -70,6 +70,7 @@ class MasterDataReader:
         zones = count(z.c.floor_id)
         sensors = count(s.c.floor_id)
         people = count(e.c.home_floor_id)
+        readers = count(t.access_point.c.floor_id)
         teams = count(tm.c.home_floor_id)
         for fl in floors:
             fid = fl["floor_id"]
@@ -84,6 +85,7 @@ class MasterDataReader:
                 "sensors": sensors.get(fid, 0),
                 "home_employees": people.get(fid, 0),
                 "home_teams": teams.get(fid, 0),
+                "readers": readers.get(fid, 0),
             }
             fl["workspaces"] = fl["desks"] + fl["cabins"]
             fl["employees_per_workspace"] = (
@@ -121,6 +123,17 @@ class MasterDataReader:
             select(t.access_point).where(t.access_point.c.floor_id == floor_id)
         )
         return layout
+
+    def access_points(
+        self, floor_id: str | None = None, reader_type: str | None = None
+    ) -> list[Row]:
+        ap = t.access_point
+        query = select(ap).order_by(ap.c.floor_id, ap.c.reader_type, ap.c.access_point_id)
+        if floor_id:
+            query = query.where(ap.c.floor_id == floor_id)
+        if reader_type:
+            query = query.where(ap.c.reader_type == reader_type)
+        return self._all(query)
 
     def zones(self, floor_id: str | None = None) -> list[Row]:
         z, w = t.zone, t.workspace
@@ -219,8 +232,17 @@ class MasterDataReader:
             .order_by(a.c.team_id, a.c.share.desc())
         ):
             allocations[alloc.pop("team_id")].append(alloc)
+        rule, rz = t.zone_access_rule, t.zone
+        secure: dict[str, list[Row]] = defaultdict(list)
+        for access in self._all(
+            select(rule.c.team_id, rule.c.zone_id, rz.c.name.label("zone_name"))
+            .join(rz, rz.c.zone_id == rule.c.zone_id)
+            .order_by(rule.c.team_id, rule.c.zone_id)
+        ):
+            secure[access.pop("team_id")].append(access)
         for row in rows:
             row["zone_allocations"] = allocations[row["team_id"]]
+            row["secure_zones"] = secure[row["team_id"]]
         return rows
 
     def employees(

@@ -52,6 +52,8 @@ export interface AccessPoint {
   direction: string;
   x: number;
   y: number;
+  reader_type: string;
+  target_id: string;
 }
 
 export interface FloorSummary {
@@ -75,6 +77,7 @@ export interface FloorSummary {
   sensors: number;
   home_employees: number;
   home_teams: number;
+  readers: number;
   employees_per_workspace: number;
 }
 
@@ -100,6 +103,7 @@ export interface Zone {
   height: number;
   max_occupancy: number;
   area_sqm: number;
+  is_restricted: boolean;
   workspaces: number;
 }
 
@@ -118,6 +122,8 @@ export interface Room {
   height: number;
   is_bookable: boolean;
   status: string;
+  has_badge_reader: boolean;
+  has_panel: boolean;
 }
 
 // ---------------------------------------------------------------- people
@@ -140,6 +146,7 @@ export interface Team {
   size_target: number;
   members: number;
   zone_allocations: { zone_id: string; zone_name: string; share: number }[];
+  secure_zones: { zone_id: string; zone_name: string }[];
 }
 
 export interface Employee {

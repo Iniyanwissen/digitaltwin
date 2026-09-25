@@ -28,6 +28,10 @@ departments:
   - { code: OPS, name: Operations, share: 0.10, lead_role: Operations Manager,
       roles: [Operations Analyst, Facilities Coordinator, IT Support Engineer] }
 
+# Departments whose teams sit in restricted zones: each such team's main zone gets a
+# secure-zone badge reader, and every team seated in that zone gets an access rule.
+restricted_departments: [FIN]
+
 # Team sizes within a department (people per team).
 team_size: { min: 6, mean: 10, max: 16 }
 

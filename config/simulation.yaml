@@ -12,6 +12,8 @@ scale_preset: medium
 office:
   # Layout files (relative to config/) defining buildings, floors, zones, desks and rooms.
   layout_files: [layouts/building_a.yaml]
+  # Share of workspaces per workstation device type (WORKSPACE_LOGIN.device_type). Sums to 1.0.
+  device_type_mix: { DOCKING_STATION: 0.70, DESK_PC: 0.20, THIN_CLIENT: 0.10 }
 
 employees:
   # Total synthetic employees generated as master data.

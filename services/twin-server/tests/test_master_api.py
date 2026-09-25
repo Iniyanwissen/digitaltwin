@@ -5,7 +5,9 @@ def test_buildings_with_floor_capacity(client) -> None:
     assert [f["floor_number"] for f in floors] == [1, 2, 3, 4]
     assert sum(f["desks"] for f in floors) == 800
     assert sum(f["home_employees"] for f in floors) == 1000
-    assert len(buildings[0]["access_points"]) == 2
+    readers = {ap["reader_type"] for ap in buildings[0]["access_points"]}
+    assert readers == {"BUILDING_ENTRANCE", "FLOOR_LOBBY", "ROOM_DOOR", "SECURE_ZONE"}
+    assert all(f["readers"] > 0 for f in floors)
 
 
 def test_floor_layout(client) -> None:
@@ -50,3 +52,22 @@ def test_health_includes_master_data(client) -> None:
     body = client.get("/health").json()
     assert body["components"]["master_data"]["status"] == "ok"
     assert body["status"] == "ok"
+
+
+def test_access_points_and_secure_zones(client) -> None:
+    lobby = client.get("/api/v1/access-points", params={"reader_type": "FLOOR_LOBBY"}).json()
+    assert [ap["access_point_id"] for ap in lobby] == [
+        "AP_BLD01_F02_LOBBY",
+        "AP_BLD01_F03_LOBBY",
+        "AP_BLD01_F04_LOBBY",
+    ]
+    secure = client.get("/api/v1/access-points", params={"reader_type": "SECURE_ZONE"}).json()
+    assert secure
+    zone_ids = {ap["target_id"] for ap in secure}
+    zones = client.get("/api/v1/zones").json()
+    assert {z["zone_id"] for z in zones if z["is_restricted"]} == zone_ids
+    teams = client.get("/api/v1/teams").json()
+    assert {s["zone_id"] for t in teams for s in t["secure_zones"]} == zone_ids
+
+    rooms = client.get("/api/v1/rooms", params={"room_type": "LARGE_CONFERENCE"}).json()
+    assert rooms and all(r["has_badge_reader"] and r["has_panel"] for r in rooms)

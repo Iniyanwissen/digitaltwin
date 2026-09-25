@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import dataclasses
 import unicodedata
 from collections import defaultdict
 from dataclasses import dataclass
@@ -12,15 +13,18 @@ from workplace_domain import ids
 from workplace_domain.config import WorkplaceConfig
 from workplace_domain.config.organization import WORKDAYS
 from workplace_domain.enums import (
+    AccessDirection,
     BehaviorProfile,
     DeskPolicy,
     EmploymentType,
     PlannedMode,
+    ReaderType,
     WorkMode,
     WorkspaceType,
     ZoneType,
 )
 from workplace_domain.models import (
+    AccessPoint,
     Department,
     Employee,
     EmployeeWorkPattern,
@@ -29,6 +33,7 @@ from workplace_domain.models import (
     Team,
     TeamZoneAllocation,
     WorkspaceAssignment,
+    ZoneAccessRule,
 )
 from workplace_domain.rng import RngFactory
 
@@ -40,6 +45,7 @@ class OrgData:
     departments: list[Department]
     teams: list[Team]
     team_zone_allocations: list[TeamZoneAllocation]
+    zone_access_rules: list[ZoneAccessRule]
     employees: list[Employee]
     work_patterns: list[EmployeeWorkPattern]
     assignments: list[WorkspaceAssignment]
@@ -67,9 +73,13 @@ def _ascii(text: str) -> str:
 
 
 def _allocate_teams(
-    teams: list[Team], floors: list[Floor], layout: Layout
+    teams: list[Team], floors: list[Floor], layout: Layout, secure_teams: set[str]
 ) -> tuple[list[Team], list[TeamZoneAllocation]]:
-    """Place teams on floors and desk zones proportionally to desk capacity (deterministic)."""
+    """Place teams on floors and desk zones proportionally to desk capacity (deterministic).
+
+    Teams in `secure_teams` (restricted departments) are placed first and packed together on one
+    floor; the zones they use are then closed to every other team, forming a compact secure area.
+    """
     desk_zones = {z.zone_id: z for z in layout.zones if z.zone_type in DESK_ZONE_TYPES}
     zone_cap: dict[str, int] = defaultdict(int)
     for w in layout.workspaces:
@@ -86,13 +96,29 @@ def _allocate_teams(
 
     placed: dict[str, Team] = {}
     allocations: list[TeamZoneAllocation] = []
-    for team in sorted(teams, key=lambda t: (-t.size_target, t.team_id)):
-        floor_id = max(floor_left, key=lambda f: (floor_left[f], f))
+    secure_zones: list[str] = []
+    secure_floor: str | None = None
+    order = sorted(teams, key=lambda t: (t.team_id not in secure_teams, -t.size_target, t.team_id))
+    for team in order:
+        is_secure = team.team_id in secure_teams
+        if is_secure and secure_floor is not None and floor_left[secure_floor] >= team.size_target:
+            floor_id = secure_floor
+        else:
+            floor_id = max(floor_left, key=lambda f: (floor_left[f], f))
         floor_left[floor_id] -= team.size_target
-        zones = sorted(
-            (z for z in zone_left if desk_zones[z].floor_id == floor_id),
-            key=lambda z: (-zone_left[z], z),
-        )
+        on_floor = [z for z in zone_left if desk_zones[z].floor_id == floor_id]
+        if is_secure:
+            secure_floor = floor_id
+            # Fill zones already secured before opening a new one.
+            zones = sorted(
+                on_floor,
+                key=lambda z: (z not in secure_zones or zone_left[z] <= 0, -zone_left[z], z),
+            )
+        else:
+            zones = sorted(
+                [z for z in on_floor if z not in secure_zones] or on_floor,
+                key=lambda z: (-zone_left[z], z),
+            )
         first = zones[0]
         size = team.size_target
         if zone_left[first] >= size or len(zones) == 1 or zone_left[first] <= 0:
@@ -103,12 +129,58 @@ def _allocate_teams(
         for zone_id, share in shares.items():
             zone_left[zone_id] -= share * size
             allocations.append(TeamZoneAllocation(team.team_id, zone_id, share))
+            if is_secure and zone_id not in secure_zones:
+                secure_zones.append(zone_id)
         placed[team.team_id] = Team(
             team.team_id, team.department_id, team.name, floor_id, team.office_days, size
         )
     ordered = [placed[t.team_id] for t in teams]
     allocations.sort(key=lambda a: (a.team_id, a.zone_id))
     return ordered, allocations
+
+
+def _restrict_zones(
+    teams: list[Team],
+    allocations: list[TeamZoneAllocation],
+    team_dept: dict[str, str],
+    restricted_departments: list[str],
+    layout: Layout,
+) -> list[ZoneAccessRule]:
+    """Secure every zone where restricted-department teams sit (kit: reference/refsim/master.py).
+
+    Those teams are packed together by `_allocate_teams`, so the secure area is compact.
+    Every team seated in a restricted zone gets an access rule, so nobody is locked out.
+    """
+    restricted: list[str] = []
+    for a in sorted(allocations, key=lambda a: (a.zone_id, a.team_id)):
+        if team_dept[a.team_id] in restricted_departments and a.zone_id not in restricted:
+            restricted.append(a.zone_id)
+    zones = {z.zone_id: z for z in layout.zones}
+    for zone_id in restricted:
+        zone = zones[zone_id]
+        layout.access_points.append(
+            AccessPoint(
+                access_point_id=ids.secure_reader_id(zone_id),
+                building_id=next(
+                    f.building_id for f in layout.floors if f.floor_id == zone.floor_id
+                ),
+                floor_id=zone.floor_id,
+                name=f"{zone.name} secure door",
+                direction=AccessDirection.IN,
+                x=round(zone.x + 0.5, 2),
+                y=round(zone.y + zone.height / 2, 2),
+                reader_type=ReaderType.SECURE_ZONE,
+                target_id=zone_id,
+            )
+        )
+    layout.zones[:] = [
+        dataclasses.replace(z, is_restricted=True) if z.zone_id in restricted else z
+        for z in layout.zones
+    ]
+    return sorted(
+        {ZoneAccessRule(a.zone_id, a.team_id) for a in allocations if a.zone_id in restricted},
+        key=lambda r: (r.zone_id, r.team_id),
+    )
 
 
 def _assign_desks(
@@ -181,7 +253,11 @@ def generate_organization(config: WorkplaceConfig, layout: Layout, rng: RngFacto
             days = sorted(int(d) + 1 for d in trng.choice(5, size=k, replace=False, p=weekday_p))
             teams.append(Team(tid, ids.department_id(dept.code), name, "", tuple(days), sizes[i]))
             team_dept[tid] = dept.code
-    teams, allocations = _allocate_teams(teams, floors, layout)
+    secure_teams = {t for t, code in team_dept.items() if code in org.restricted_departments}
+    teams, allocations = _allocate_teams(teams, floors, layout, secure_teams)
+    access_rules = _restrict_zones(
+        teams, allocations, team_dept, org.restricted_departments, layout
+    )
     team_zones: dict[str, list[TeamZoneAllocation]] = defaultdict(list)
     for a in allocations:
         team_zones[a.team_id].append(a)
@@ -258,4 +334,4 @@ def generate_organization(config: WorkplaceConfig, layout: Layout, rng: RngFacto
             patterns.append(EmployeeWorkPattern(emp.employee_id, day, mode))
 
     assignments = _assign_desks(employees, floors, layout, leads)
-    return OrgData(departments, teams, allocations, employees, patterns, assignments)
+    return OrgData(departments, teams, allocations, access_rules, employees, patterns, assignments)

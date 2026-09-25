@@ -74,6 +74,7 @@ class OrganizationConfig(_Strict):
     name: str
     email_domain: str
     departments: list[DepartmentSpec] = Field(min_length=1)
+    restricted_departments: list[str] = Field(default_factory=list)
     team_size: TeamSizeSpec
     team_names: list[str] = Field(min_length=1)
     office_days: OfficeDaysSpec
@@ -93,6 +94,13 @@ class OrganizationConfig(_Strict):
         if abs(total - 1.0) > _TOLERANCE:
             raise ValueError(f"department shares must sum to 1.0 (got {total:.4f})")
         return v
+
+    @model_validator(mode="after")
+    def _restricted_departments_exist(self) -> OrganizationConfig:
+        unknown = set(self.restricted_departments) - {d.code for d in self.departments}
+        if unknown:
+            raise ValueError(f"restricted_departments has unknown codes {sorted(unknown)}")
+        return self
 
     @field_validator("employment_type_mix")
     @classmethod
