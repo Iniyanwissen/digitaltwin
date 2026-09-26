@@ -230,3 +230,22 @@ def test_collaboration_pairs_meet_more_than_random_pairs(base, medium_run) -> No
     ]
     other_avg = sum(shared[k] for k in others) / len(others)
     assert partner_avg > 5 * other_avg, (partner_avg, other_avg)
+
+
+def test_bms_never_switches_unsensed_zones_to_eco(medium_run) -> None:
+    """Missing occupancy sensors = unknown occupancy, never ECO (simulation-engine.md §10)."""
+    master, _, events, _ = medium_run
+    sensed = {s.target_id for s in master.layout.sensors if s.sensor_type != "ENVIRONMENT"}
+    zone_of = {w.workspace_id: w.zone_id for w in master.layout.workspaces}
+    zone_of |= {r.room_id: r.zone_id for r in master.layout.rooms}
+    sensed_zones = {zone_of[t] for t in sensed}
+    unsensed = {z.zone_id for z in master.layout.zones} - sensed_zones
+    assert unsensed, "corridors and lobbies have no occupancy sensors"
+    eco = [
+        e
+        for e in events
+        if e.event_type is EventType.AUTOMATION_ACTION
+        and e.payload["rule_id"] == "HVAC_ECO_WHEN_EMPTY"
+    ]
+    assert eco, "sensed empty zones still go to ECO"
+    assert not [e for e in eco if e.entity_id in unsensed]

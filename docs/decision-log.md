@@ -94,3 +94,15 @@ Imported from the Local Kit v0.2 (`reference/`, `prompts/`, `mock-data/`, v0.2 d
 9. **Assigned desks never overflow into restricted zones** a team may not enter (bug found by the new engine test).
 
 **Performance:** one medium weekday in batch mode ≈ 1.2 s (target < 30 s).
+
+## 2026-09-26: Part C, Live Simulation screen
+
+**Decisions**
+1. **New sidebar item "Live Simulation"** (`/live`), a React rebuild of `reference/refsim/viewer`: control bar (clock, status, start/pause/resume/reset, speed, Operational vs Simulation view, overlay), isometric building + floor rows, 2D floor twin, KPIs, people-vs-desks chart (Recharts `ComposedChart`, H1) and live event feed. Dark tokens (`--color-twin-*`, visualization-spec §2) on this screen only; canvas colours mirror them in `features/live/theme.ts`.
+2. **Live data flow:** WebSocket `/ws/live` -> `LiveStore` (mutable, outside React). Canvases redraw only when the store is dirty or dots are tweening (900 ms ease); panels re-render at most every 450 ms. The truth channel (`truth=true`) is opened only in Simulation View; truth KPIs are dashed with an asterisk and hidden in Operational View.
+3. **Details:** desk and room panels come from `/api/v1/live/desks|rooms/{id}` (desk identity only from workstation login, room booking labelled as booking-system data).
+4. **URL parameters** `?view=simulation&overlay=temperature|hvac` set the initial view (shareable links, screenshots).
+5. **Live page is lazy-loaded** so the chart library does not weigh on other pages.
+6. **BMS fix:** zones without any occupancy sensor (corridors, lobbies) have unknown occupancy and never get occupancy-driven HVAC rules (simulation-engine.md §10). Found from the temperature overlay (corridors drifted to 27 °C in ECO).
+
+**Measured:** medium scale at 10x, frames 2-4 KB every 500 ms (budget 50 KB).

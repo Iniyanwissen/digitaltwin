@@ -1325,7 +1325,12 @@ class Engine:
                 rng=self.env_rng,
             )
 
-        if obs == 0:
+        # Zones without any occupancy sensor (corridors, lobbies) have UNKNOWN occupancy:
+        # occupancy rules never fire there (docs/simulation-engine.md §10, safe default).
+        sensed = bool(self.desks_by_zone[zid] or self.rooms_by_zone[zid])
+        if not sensed:
+            pass
+        elif obs == 0:
             e.empty_since = e.empty_since if e.empty_since is not None else self.t
             empty_for = self.t - e.empty_since
             if e.mode != "ECO" and empty_for >= bc.eco_after_empty_minutes * 60:

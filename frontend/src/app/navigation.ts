@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   type LucideIcon,
   Play,
+  Radio,
   Users,
   CalendarRange,
 } from "lucide-react";
@@ -42,6 +43,25 @@ export const NAVIGATION: NavSection[] = [
           "Occupancy over time (today)",
           "Live floor cards with current counts",
           "Team distribution today",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "live",
+    label: "Live Simulation",
+    icon: Radio,
+    description: "Watch the simulated office live: building, floor twin, people and events.",
+    tabs: [
+      {
+        slug: "",
+        label: "Live Simulation",
+        phase: "C",
+        features: [
+          "Start, pause, speed and reset",
+          "Isometric building and 2D floor twin with overlays",
+          "Simulation (truth) view with moving people",
+          "Live KPIs, people-vs-desks chart and event feed",
         ],
       },
     ],
@@ -221,4 +241,9 @@ export function sectionPath(section: NavSection): string {
 
 export function tabPath(section: NavSection, tab: NavTab): string {
   return tab.slug ? `/${section.slug}/${tab.slug}` : sectionPath(section);
+}
+
+/** A section with one untitled tab renders its page directly, without a tab bar. */
+export function isSinglePage(section: NavSection): boolean {
+  return section.tabs.length === 1 && section.tabs[0]?.slug === "";
 }

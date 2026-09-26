@@ -6,6 +6,22 @@
   --color-brand-500: #2f6fed;
   --color-brand-600: #2358c9;
   --color-brand-700: #1c469f;
+
+  /* Live Simulation (dark) tokens - docs/visualization-spec.md §2. Canvas colours: features/live/theme.ts */
+  --color-twin-bg: #0e1117;
+  --color-twin-panel: #161b24;
+  --color-twin-inset: #0f141c;
+  --color-twin-line: #262e3b;
+  --color-twin-text: #e6e9ef;
+  --color-twin-muted: #8a94a6;
+  --color-twin-accent: #4f8cff;
+  --color-twin-occupied: #22c55e;
+  --color-twin-held: #f59e0b;
+  --color-twin-vacant: #334155;
+  --color-twin-identified: #4f8cff;
+  --color-twin-anonymous: #a78bfa;
+  --color-twin-system: #94a3b8;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
 }
 
 html,
