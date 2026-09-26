@@ -7,7 +7,8 @@ from pathlib import Path
 import pytest
 
 from twin_server.engine.generators import generate_master_data
-from twin_server.engine.simulation import Engine, TruthTransition
+from twin_server.engine.simulation import TruthTransition
+from twin_server.v2.engine import EngineV2
 from twin_server.v2.world import build_v2_world
 from workplace_domain.config import load_workplace_config
 from workplace_domain.config.v2 import load_v2_config
@@ -74,7 +75,9 @@ def test_environment_areas_cover_zones_and_rooms(setup) -> None:
     *_, world = setup
     lay = world.master.layout
     areas = {a["area_id"] for a in world.env_areas}
-    assert areas == {z.zone_id for z in lay.zones} | {r.room_id for r in lay.rooms}
+    covered = {r.zone_id for r in lay.rooms if r.room_type is RoomType.COMMON_AREA}
+    zones = {z.zone_id for z in lay.zones} - covered
+    assert areas == zones | {r.room_id for r in lay.rooms}
     env = {s.target_id for s in lay.sensors if s.sensor_type is SensorType.ENVIRONMENT}
     assert env == areas
 
@@ -92,9 +95,9 @@ def test_v1_master_data_is_unaffected(setup) -> None:
 
 
 def test_engine_runs_a_day_on_the_v2_building(setup) -> None:
-    base, *_, world = setup
+    base, v2, _, world = setup
     truth: list = []
-    eng = Engine(base.simulation, world.master, date(2026, 9, 28), lambda e: None, truth.append)
+    eng = EngineV2(base.simulation, v2, world, date(2026, 9, 28), lambda e: None, truth.append)
     eng.start(days=1)
     eng.step_until(86400 + 3600)
     arrivals = {

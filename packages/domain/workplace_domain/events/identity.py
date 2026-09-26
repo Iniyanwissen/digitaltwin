@@ -64,13 +64,19 @@ EVENT_TYPE_SPECS: dict[EventType, EventTypeSpec] = {
         IdentityClass.ANONYMOUS, _SENSORS, {EntityType.SENSOR}, Stream.OCCUPANCY
     ),
     EventType.ENVIRONMENT_READING: _spec(
-        IdentityClass.ANONYMOUS, {Source.ENV_SENSOR}, {EntityType.ZONE}, Stream.ENVIRONMENT
+        IdentityClass.ANONYMOUS,
+        {Source.ENV_SENSOR},
+        {EntityType.ZONE, EntityType.ROOM},  # v2: rooms are environment areas too
+        Stream.ENVIRONMENT,
     ),
     EventType.SENSOR_STATUS_CHANGED: _spec(
         IdentityClass.SYSTEM, {Source.SENSOR_GATEWAY}, {EntityType.SENSOR}, Stream.SYSTEM
     ),
     EventType.AUTOMATION_ACTION: _spec(
-        IdentityClass.SYSTEM, {Source.BMS}, {EntityType.ZONE}, Stream.SYSTEM
+        IdentityClass.SYSTEM, {Source.BMS}, {EntityType.ZONE, EntityType.ROOM}, Stream.SYSTEM
+    ),
+    EventType.ENERGY_INTERVAL: _spec(
+        IdentityClass.SYSTEM, {Source.BMS}, {EntityType.ZONE, EntityType.ROOM}, Stream.ENVIRONMENT
     ),
     EventType.TRUTH_STATE_TRANSITION: _spec(
         IdentityClass.INTERNAL, {Source.SIMULATION}, _PERSON, Stream.TRUTH

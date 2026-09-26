@@ -161,7 +161,8 @@ class V2Environment(_Strict):
     max_load: PositiveFloat
     solar_gain_c: dict[Facade, float]
     daylight: Daylight
-    co2_gen_ppm_per_min: NonNeg
+    co2_lpm_per_person: PositiveFloat
+    ceiling_height_m: PositiveFloat
     ventilation_per_min: dict[str, PositiveFloat]
     outdoor_co2_ppm: PositiveFloat
     lux_full: PositiveFloat

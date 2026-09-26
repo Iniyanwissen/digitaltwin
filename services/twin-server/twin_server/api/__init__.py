@@ -13,7 +13,7 @@ from twin_server import __version__
 from twin_server.api.routes import api_v1_router, system_router
 from twin_server.api.routes_live import live_router, live_ws_router
 from twin_server.api.routes_master import master_router
-from twin_server.api.routes_v2 import v2_router
+from twin_server.api.routes_v2 import v2_router, v2_ws_router
 from twin_server.context import AppContext
 from twin_server.db import run_migrations
 from twin_server.log_setup import configure_logging
@@ -61,4 +61,5 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(live_router)
     app.include_router(live_ws_router)
     app.include_router(v2_router)
+    app.include_router(v2_ws_router)
     return app

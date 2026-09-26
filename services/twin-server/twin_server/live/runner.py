@@ -68,7 +68,17 @@ class LiveRunner(BackgroundService):
         self._outbox.clear()
         self.state.reset(self.run_id)
         self.truth.reset()
-        self.engine = Engine(
+        self.engine = self._make_engine(start)
+        self.engine.start(days=None)
+        self.status = "STOPPED"
+        self.sim_t = 0.0
+        self.anchor_wall = time.monotonic()
+        self.anchor_sim = 0.0
+        self.state.sample(self.engine.st.dt(0))
+        self.truth.summary = self.engine.truth_summary()
+
+    def _make_engine(self, start: date) -> Engine:
+        return Engine(
             self.cfg,
             self.master,
             start,
@@ -77,13 +87,6 @@ class LiveRunner(BackgroundService):
             mode=RunMode.LIVE,
             run_id=self.run_id,
         )
-        self.engine.start(days=None)
-        self.status = "STOPPED"
-        self.sim_t = 0.0
-        self.anchor_wall = time.monotonic()
-        self.anchor_sim = 0.0
-        self.state.sample(self.engine.st.dt(0))
-        self.truth.summary = self.engine.truth_summary()
 
     def command(self, cmd: SimCommand, speed: int | None = None) -> dict[str, Any]:
         now = time.monotonic()

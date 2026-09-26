@@ -64,7 +64,8 @@ class V2World:
 
     master: MasterData
     render: dict[str, Any]
-    #: Environment areas = every zone + every room/common area (environment-and-esg.md §1).
+    #: Environment areas = every zone + every room/common area (environment-and-esg.md §1);
+    #: a zone filled by a common area is represented by that common-area room only.
     env_areas: list[dict[str, Any]] = field(default_factory=list)
 
 
@@ -342,7 +343,10 @@ def build_v2_world(base: WorkplaceConfig, v2: SimulationV2Config, plan: FloorPla
     )
 
     # Environment areas: every zone and every room/common area.
+    covered = {r.zone_id for r in layout.rooms if r.room_type is RoomType.COMMON_AREA}
     for z in layout.zones:
+        if z.zone_id in covered:
+            continue  # the common-area room filling this zone is the environment area
         meta = zone_meta.get(z.zone_id, {})
         env_areas.append(
             {
@@ -480,7 +484,10 @@ def _v2_sensors(layout: Layout, cfg: WorkplaceConfig) -> None:
             s.room_poll_interval,
         )
     n = 0
+    covered = {r.zone_id for r in layout.rooms if r.room_type is RoomType.COMMON_AREA}
     for z in layout.zones:
+        if z.zone_id in covered:
+            continue
         n += 1
         add(
             "ENV",
