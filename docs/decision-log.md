@@ -110,3 +110,11 @@ Imported from the Local Kit v0.2 (`reference/`, `prompts/`, `mock-data/`, v0.2 d
 ## 2026-09-26: Every day is a working day (prototype)
 
 `calendar.all_days_working: true` (default) runs weekends and holidays as normal working days; weekends borrow the attendance pattern of `calendar.working_pattern_weekday` (Wednesday). Live runs start today. Set it to `false` to restore weekends, holidays and weekend attendance (for example once real data is connected).
+
+## 2026-09-26: People activity panel and short codes
+
+1. **Short codes:** employees are shown as `E283` (derived from `EMP000283`, display only; the id stays the key). Directory search accepts codes too.
+2. **People activity panel** (Live Simulation, left column): readable activity stream and current status per person, with a search to follow someone.
+   - Operational View: built only from IDENTIFIED events (entrance/lobby/room/secure readers, workstation login/logout, room check-in). Anonymous sensor events never produce people activity.
+   - Simulation View: built from ground-truth transitions (sat down, meeting, cafeteria, break, leaving), labelled "simulation truth" and sent only on the truth channel.
+   The contrast between the two shows what building systems can and cannot know about people.

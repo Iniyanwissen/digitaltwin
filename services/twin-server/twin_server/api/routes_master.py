@@ -7,6 +7,7 @@ from typing import Annotated, Any
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.concurrency import run_in_threadpool
 
+from twin_server.activity import short_code
 from twin_server.api.routes import Ctx
 from twin_server.api.schemas import (
     AccessPointOut,
@@ -123,6 +124,8 @@ async def employees(
 ) -> dict[str, object]:
     filters = EmployeeFilters(search, department_id, team_id, floor_id, work_mode, behavior_profile)
     items, total = await run_in_threadpool(ctx.master.reader.employees, filters, page, page_size)
+    for item in items:
+        item["code"] = short_code(item["employee_id"])
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
 

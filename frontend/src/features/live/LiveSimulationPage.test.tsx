@@ -50,6 +50,8 @@ const SNAPSHOT: SnapshotMessage = {
   },
   events_total: 0,
   automation: [],
+  people: {},
+  activity: [],
   series: [],
 };
 

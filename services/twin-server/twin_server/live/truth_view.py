@@ -9,7 +9,9 @@ import hashlib
 from collections import deque
 from typing import Any
 
+from twin_server.activity import ActivityDescriber
 from twin_server.engine.simulation import TruthEvent, TruthTransition
+from workplace_domain.config.schema import ProcessingConfig
 from workplace_domain.enums import LocationType
 from workplace_domain.models import MasterData
 
@@ -25,18 +27,23 @@ def stable_jitter(key: str, span: float) -> tuple[float, float]:
 class TruthView:
     JITTER_SPAN = 0.8
 
-    def __init__(self, master: MasterData, change_log_max: int) -> None:
+    def __init__(self, master: MasterData, cfg: ProcessingConfig) -> None:
         lay = master.layout
         self.desks = {w.workspace_id: (w.x, w.y) for w in lay.workspaces}
         self.boxes = {r.room_id: (r.x, r.y, r.width, r.height) for r in lay.rooms}
         self.boxes |= {z.zone_id: (z.x, z.y, z.width, z.height) for z in lay.zones}
-        self.change_log_max = change_log_max
+        self.cfg = cfg
+        self.describer = ActivityDescriber(master)
         self.version = 0
         self.reset()
 
     def reset(self) -> None:
         self.positions: dict[str, Position] = {}
-        self.log: deque[tuple[int, str, Position | None]] = deque(maxlen=self.change_log_max)
+        self.status: dict[str, dict[str, Any]] = {}
+        self.log: deque[tuple[int, str, Position | None, dict[str, Any] | None]] = deque(
+            maxlen=self.cfg.change_log_max
+        )
+        self.activity: deque[tuple[int, dict[str, Any]]] = deque(maxlen=self.cfg.feed_buffer)
         self.summary: dict[str, int] = {}
         self.version += 1
 
@@ -45,9 +52,18 @@ class TruthView:
             return
         pid, loc_type, loc_id = event.person_id, event.location_type, event.location_id
         self.version += 1
+        item, status_text = self.describer.truth(event)
+        status = (
+            {**{k: item[k] for k in ("code", "name", "dept", "t")}, "text": status_text}
+            if item
+            else None
+        )
+        if item:
+            self.activity.append((self.version, item))
         if loc_type is None or loc_id is None:
             self.positions.pop(pid, None)
-            self.log.append((self.version, pid, None))
+            self.status.pop(pid, None)
+            self.log.append((self.version, pid, None, None))
             return
         if loc_type is LocationType.WORKSPACE:
             x, y = self.desks[loc_id]
@@ -57,17 +73,34 @@ class TruthView:
             x, y = bx + bw * (0.5 + jx), by + bh * (0.5 + jy)
         pos: Position = [round(x, 2), round(y, 2), event.floor_id, event.department, event.to_state]
         self.positions[pid] = pos
-        self.log.append((self.version, pid, pos))
+        if status:
+            self.status[pid] = status
+        self.log.append((self.version, pid, pos, status))
 
     def snapshot(self) -> dict[str, Any]:
-        return {"version": self.version, "positions": dict(self.positions), "summary": self.summary}
+        return {
+            "version": self.version,
+            "positions": dict(self.positions),
+            "people": dict(self.status),
+            "activity": [a for _, a in self.activity],
+            "summary": self.summary,
+        }
 
     def delta(self, since: int) -> dict[str, Any] | None:
         oldest = self.log[0][0] if self.log else self.version + 1
         if since < oldest - 1 and since != self.version:
             return None
         changes: dict[str, Position | None] = {}
-        for ver, pid, pos in self.log:
+        people: dict[str, dict[str, Any] | None] = {}
+        for ver, pid, pos, status in self.log:
             if ver > since:
                 changes[pid] = pos
-        return {"version": self.version, "positions": changes, "summary": self.summary}
+                people[pid] = status
+        activity = [a for v, a in self.activity if v > since][-self.cfg.feed_per_frame :]
+        return {
+            "version": self.version,
+            "positions": changes,
+            "people": people,
+            "activity": activity,
+            "summary": self.summary,
+        }

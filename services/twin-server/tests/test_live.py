@@ -127,7 +127,7 @@ def test_truth_view_is_separate(world) -> None:
     from workplace_domain.enums import LocationType, PersonState
 
     cfg, master = world
-    truth = TruthView(master, 1000)
+    truth = TruthView(master, cfg.simulation.processing)
     desk = master.layout.workspaces[0]
     truth.apply(
         TruthTransition(
@@ -180,3 +180,49 @@ def test_live_websocket_sends_snapshot_then_frames(client) -> None:
         assert first["type"] == "snapshot" and "desks" in first and "truth" not in first
         second = ws.receive_json()
         assert second["type"] in ("frame", "snapshot")
+
+
+def test_people_activity_comes_only_from_identified_events(state, world) -> None:
+    desk = world[1].layout.workspaces[5].workspace_id
+    v0 = state.version
+    access = envelope(
+        EventType.ACCESS_IN,
+        EntityType.EMPLOYEE,
+        "EMP000283",
+        {"access_point_id": "AP_BLD01_ENT01", "direction": "IN"},
+        T0,
+        Source.ACCESS_CONTROL,
+        IdentityClass.IDENTIFIED,
+    )
+    state.apply(access)
+    state.apply(login("EMP000283", desk, T0 + timedelta(minutes=2)))
+    state.apply(sensor(desk, 1, T0 + timedelta(minutes=3)))  # anonymous: no people activity
+    texts = [a["text"] for _, a in state.activity]
+    assert texts == [
+        "entered the building",
+        f"logged in at Desk F{int(desk.split('_')[2][1:])}-{desk.split('_')[3]}",
+    ]
+    assert all(a["code"] == "E283" for _, a in state.activity)
+    status = state.person_status["EMP000283"]
+    assert status["inside"] and "logged in at Desk" in status["text"]
+    delta = state.delta(v0)
+    assert delta is not None and "EMP000283" in delta["people"] and delta["activity"]
+
+
+def test_truth_activity_is_readable(world) -> None:
+    from twin_server.engine.simulation import TruthTransition
+    from workplace_domain.enums import LocationType, PersonState
+
+    cfg, master = world
+    truth = TruthView(master, cfg.simulation.processing)
+    cafe = next(r for r in master.layout.rooms if r.area_subtype == "CAFETERIA")
+    truth.apply(
+        TruthTransition(
+            T0, 0.0, "EMP000007", "TEAM_001", "Engineering", PersonState.AT_DESK,
+            PersonState.CAFETERIA, LocationType.COMMON_AREA, cafe.room_id, cafe.floor_id,
+            None, "LUNCH", None,
+        )
+    )  # fmt: skip
+    snap = truth.snapshot()
+    assert snap["activity"][-1]["text"] == "went to the cafeteria (lunch)"
+    assert snap["people"]["EMP000007"]["text"] == "Cafeteria (lunch)"

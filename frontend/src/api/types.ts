@@ -151,6 +151,7 @@ export interface Team {
 
 export interface Employee {
   employee_id: string;
+  code: string;
   employee_name: string;
   email: string;
   job_role: string;

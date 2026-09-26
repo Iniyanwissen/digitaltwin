@@ -24,6 +24,8 @@ function snapshot(extra: Partial<SnapshotMessage> = {}): SnapshotMessage {
     kpis: KPIS,
     events_total: 10,
     automation: [],
+    people: {},
+    activity: [],
     series: [{ m: "09:00", inside: 3, desks: 1, held: 0, rooms: 2 }],
     ...extra,
   };
@@ -42,6 +44,8 @@ function frame(extra: Partial<FrameMessage> = {}): FrameMessage {
     automation: [],
     feed: [],
     point: null,
+    people: {},
+    activity: [],
     ...extra,
   };
 }
@@ -69,14 +73,20 @@ describe("LiveStore", () => {
   it("keeps the newest feed lines first and tweens truth dots", () => {
     let now = 0;
     const store = new LiveStore(() => now);
-    store.apply(snapshot({ truth: { version: 1, positions: { E1: [1, 1, "F1", "Eng", "AT_DESK"] }, summary: {} } }));
+    store.apply(snapshot({ truth: { version: 1, positions: { E1: [1, 1, "F1", "Eng", "AT_DESK"] }, people: {}, activity: [], summary: {} } }));
     store.apply(
       frame({
         feed: [
           { t: "09:00:01", type: "ACCESS_IN", entity: "E2", floor: "F1", detail: "", identity: "IDENTIFIED" },
           { t: "09:00:02", type: "ACCESS_IN", entity: "E3", floor: "F1", detail: "", identity: "IDENTIFIED" },
         ],
-        truth: { version: 2, positions: { E1: [5, 5, "F1", "Eng", "MEETING"], E9: null }, summary: { inside: 1 } },
+        truth: {
+          version: 2,
+          positions: { E1: [5, 5, "F1", "Eng", "MEETING"], E9: null },
+          people: {},
+          activity: [],
+          summary: { inside: 1 },
+        },
       }),
     );
     expect(store.feed.map((f) => f.entity)).toEqual(["E3", "E2"]);
@@ -84,6 +94,25 @@ describe("LiveStore", () => {
     expect([dot.fromX, dot.toX, dot.state]).toEqual([1, 5, "MEETING"]);
     now = 1000;
     expect(store.truthSummary?.inside).toBe(1);
+  });
+
+  it("merges people activity and status, newest first", () => {
+    const store = new LiveStore(() => 0);
+    store.apply(snapshot());
+    const who = { code: "E283", name: "Priya Nair", dept: "Engineering" };
+    store.apply(
+      frame({
+        people: { EMP000283: { ...who, t: "09:00:05", text: "In building · Floor 1", inside: true } },
+        activity: [
+          { t: "09:00:05", person: "EMP000283", ...who, text: "entered the building", kind: "in" },
+          { t: "09:01:10", person: "EMP000283", ...who, text: "logged in at Desk F1-012", kind: "desk" },
+        ],
+      }),
+    );
+    expect(store.activity.map((a) => a.text)).toEqual(["logged in at Desk F1-012", "entered the building"]);
+    expect(store.people.EMP000283?.text).toBe("In building · Floor 1");
+    store.apply(frame({ people: { EMP000283: null } }));
+    expect(store.people.EMP000283).toBeUndefined();
   });
 
   it("throttles panel notifications", () => {

@@ -47,8 +47,8 @@ export function BuildingPanel({
     const n = list.length;
     const w = canvas.width * 0.62;
     const dx = canvas.width * 0.22;
-    const dy = Math.min(26 * dpr, canvas.height / (n + 3));
-    const gap = Math.min(40 * dpr, (canvas.height - dy * 2) / Math.max(1, n));
+    const dy = Math.min(20 * dpr, canvas.height / (n + 3));
+    const gap = Math.min(28 * dpr, (canvas.height - dy * 2) / Math.max(1, n));
     bands.current = [];
     list.forEach((f, i) => {
       const y = canvas.height - dy - 8 * dpr - i * gap;
@@ -80,9 +80,11 @@ export function BuildingPanel({
   };
 
   return (
-    <section className="flex min-h-0 flex-col rounded-xl border border-twin-line bg-twin-panel p-3">
-      <h2 className="mb-2 text-xs font-semibold tracking-wider text-twin-muted uppercase">Building</h2>
-      <canvas ref={canvasRef} onClick={onClick} className="h-60 w-full cursor-pointer" aria-label="Isometric building" />
+    <section className="flex shrink-0 flex-col rounded-xl border border-twin-line bg-twin-panel p-3">
+      <h2 className="mb-1 text-xs font-semibold tracking-wider text-twin-muted uppercase" title="Floors coloured by desk utilisation (sensor). Click a floor.">
+        Building
+      </h2>
+      <canvas ref={canvasRef} onClick={onClick} className="h-36 w-full cursor-pointer" aria-label="Isometric building" />
       <div className="mt-2 space-y-1">
         {floors.map((f) => (
           <button
@@ -102,7 +104,6 @@ export function BuildingPanel({
           </button>
         ))}
       </div>
-      <p className="mt-auto pt-3 text-xs text-twin-muted">Floors coloured by desk utilisation (sensor). Click a floor.</p>
     </section>
   );
 }

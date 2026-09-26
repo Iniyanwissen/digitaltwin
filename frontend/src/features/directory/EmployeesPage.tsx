@@ -16,7 +16,7 @@ const COLUMNS: Column<Employee>[] = [
       <div>
         <div className="font-medium text-slate-900">{e.employee_name}</div>
         <div className="text-xs text-slate-500">
-          {e.employee_id} · {e.email}
+          <b className="text-slate-700">{e.code}</b> · {e.employee_id} · {e.email}
         </div>
       </div>
     ),
@@ -65,7 +65,7 @@ export function EmployeesPage() {
             setSearch(v);
             setPage(1);
           }}
-          placeholder="Name, ID, email or role"
+          placeholder="Name, E-code, ID, email or role"
         />
         <Select
           label="Department"

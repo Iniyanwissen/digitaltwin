@@ -8,6 +8,7 @@ import type { Employee, Page } from "@/api/types";
 
 const EMPLOYEE: Employee = {
   employee_id: "EMP000001",
+  code: "E1",
   employee_name: "Priya Nair",
   email: "priya.nair@northwind.example",
   job_role: "Engineering Manager",

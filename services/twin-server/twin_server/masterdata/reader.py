@@ -275,9 +275,14 @@ class MasterDataReader:
             .outerjoin(wa, and_(wa.c.employee_id == e.c.employee_id, wa.c.valid_to.is_(None)))
         )
         if filters.search:
-            like = f"%{filters.search.strip()}%"
+            term = filters.search.strip()
+            like = f"%{term}%"
+            # Short codes (E283) resolve to the employee id (EMP000283).
+            code = term.upper()
+            by_code = f"EMP{int(code[1:]):06d}" if code[:1] == "E" and code[1:].isdigit() else None
             query = query.where(
                 or_(
+                    e.c.employee_id == by_code,
                     e.c.employee_name.ilike(like),
                     e.c.employee_id.ilike(like),
                     e.c.email.ilike(like),

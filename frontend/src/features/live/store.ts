@@ -1,15 +1,35 @@
 import type {
+  ActivityItem,
   AutomationLine,
   DeskValue,
   FeedLine,
   Kpis,
   LiveMessage,
+  PersonStatus,
   SeriesPoint,
   StatusInfo,
   TruthPosition,
   TruthSummary,
   ZoneValue,
 } from "./types";
+
+function mergeStatus(
+  current: Record<string, PersonStatus>,
+  changes: Record<string, PersonStatus | null> | undefined,
+): Record<string, PersonStatus> {
+  if (!changes || Object.keys(changes).length === 0) return current;
+  const next = { ...current };
+  for (const [id, status] of Object.entries(changes)) {
+    if (status) next[id] = status;
+    else delete next[id];
+  }
+  return next;
+}
+
+/** Newest first, capped. */
+function prepend(current: ActivityItem[], items: ActivityItem[]): ActivityItem[] {
+  return [...[...items].reverse(), ...current].slice(0, ACTIVITY_CAP);
+}
 
 /** A truth dot with its tween state (Simulation View only). */
 export interface Dot {
@@ -26,6 +46,7 @@ export interface Dot {
 }
 
 const FEED_CAP = 120;
+const ACTIVITY_CAP = 300;
 const PANEL_REFRESH_MS = 450;
 
 /**
@@ -47,6 +68,11 @@ export class LiveStore {
   /** Desk id -> time its state last changed (drives the pulse ring). */
   deskPulses = new Map<string, number>();
   truthSummary: TruthSummary | null = null;
+  /** People activity + current status: observed (identified events) and truth (Simulation View). */
+  people: Record<string, PersonStatus> = {};
+  activity: ActivityItem[] = [];
+  truthPeople: Record<string, PersonStatus> = {};
+  truthActivity: ActivityItem[] = [];
   /** Canvas needs a redraw. */
   dirty = true;
 
@@ -77,6 +103,10 @@ export class LiveStore {
       this.feed = [];
       this.dots.clear();
       this.deskPulses.clear();
+      this.people = { ...(msg.people ?? {}) };
+      this.activity = [...(msg.activity ?? [])].reverse().slice(0, ACTIVITY_CAP);
+      this.truthPeople = { ...(msg.truth?.people ?? {}) };
+      this.truthActivity = [...(msg.truth?.activity ?? [])].reverse().slice(0, ACTIVITY_CAP);
       if (msg.truth) {
         for (const [id, p] of Object.entries(msg.truth.positions)) this.setDot(id, p, true);
         this.truthSummary = msg.truth.summary;
@@ -91,9 +121,13 @@ export class LiveStore {
       Object.assign(this.zones, msg.zones);
       if (msg.point) this.addPoint(msg.point);
       if (msg.feed.length) this.feed = [...[...msg.feed].reverse(), ...this.feed].slice(0, FEED_CAP);
+      this.people = mergeStatus(this.people, msg.people);
+      if (msg.activity?.length) this.activity = prepend(this.activity, msg.activity);
       if (msg.truth) {
         for (const [id, p] of Object.entries(msg.truth.positions)) this.setDot(id, p, false);
         this.truthSummary = msg.truth.summary;
+        this.truthPeople = mergeStatus(this.truthPeople, msg.truth.people);
+        if (msg.truth.activity?.length) this.truthActivity = prepend(this.truthActivity, msg.truth.activity);
       }
     }
     this.dirty = true;

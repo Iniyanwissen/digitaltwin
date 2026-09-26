@@ -71,3 +71,9 @@ def test_access_points_and_secure_zones(client) -> None:
 
     rooms = client.get("/api/v1/rooms", params={"room_type": "LARGE_CONFERENCE"}).json()
     assert rooms and all(r["has_badge_reader"] and r["has_panel"] for r in rooms)
+
+
+def test_employee_short_codes(client) -> None:
+    page = client.get("/api/v1/employees", params={"search": "E283"}).json()
+    assert [e["employee_id"] for e in page["items"]] == ["EMP000283"]
+    assert page["items"][0]["code"] == "E283"

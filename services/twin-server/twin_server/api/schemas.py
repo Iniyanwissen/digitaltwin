@@ -211,6 +211,7 @@ class TeamOut(BaseModel):
 
 class EmployeeOut(BaseModel):
     employee_id: str
+    code: str
     employee_name: str
     email: str
     job_role: str

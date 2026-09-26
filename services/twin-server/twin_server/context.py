@@ -52,7 +52,7 @@ class AppContext:
         """Wire the live simulation once master data is available."""
         sim = self.config.simulation
         state = LiveState(master, sim.processing)
-        truth = TruthView(master, sim.processing.change_log_max)
+        truth = TruthView(master, sim.processing)
         self.runner = LiveRunner(sim, master, self.bus, state, truth)
         self.processor.live_state = state
         self.live = LiveService(master, self.runner, state, truth)

@@ -15,6 +15,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 
+from twin_server.activity import ActivityDescriber
 from workplace_domain.config.schema import ProcessingConfig
 from workplace_domain.enums import EventType, RoomType, WorkspaceType
 from workplace_domain.events import EventEnvelope
@@ -37,6 +38,7 @@ class Visit:
 class LiveState:
     def __init__(self, master: MasterData, cfg: ProcessingConfig) -> None:
         self.cfg = cfg
+        self.describer = ActivityDescriber(master)
         lay = master.layout
         self.desks = {w.workspace_id: w for w in lay.workspaces}
         self.rooms = {r.room_id: r for r in lay.rooms}
@@ -77,6 +79,10 @@ class LiveState:
         self.feed: deque[tuple[int, dict[str, Any]]] = deque(maxlen=self.cfg.feed_buffer)
         self.series: list[dict[str, Any]] = []
         self._last_minute: str | None = None
+        # People activity (identified events only) and current status per person.
+        self.activity: deque[tuple[int, dict[str, Any]]] = deque(maxlen=self.cfg.feed_buffer)
+        self.person_status: dict[str, dict[str, Any]] = {}
+        self.login_of: dict[str, str] = {}
         self.sim_time: datetime | None = None
         self.version += 1  # clients holding an older version resync
 
@@ -153,6 +159,32 @@ class LiveState:
             )
         if et not in _SKIP_FEED:
             self.feed.append((self.version, self._feed_line(env)))
+        if env.identity_class == "IDENTIFIED":
+            self._person_activity(env)
+
+    def _person_activity(self, env: EventEnvelope) -> None:
+        ent, p = env.entity_id, env.payload
+        if env.event_type is EventType.WORKSPACE_LOGIN:
+            self.login_of[ent] = p["workspace_id"]
+        elif (
+            env.event_type is EventType.WORKSPACE_LOGOUT
+            and self.login_of.get(ent) == p["workspace_id"]
+        ):
+            del self.login_of[ent]
+        item = self.describer.observed(env)
+        if item is None:
+            return
+        visit = self.inside.get(ent)
+        status = {
+            **{k: item[k] for k in ("code", "name", "dept", "t")},
+            "text": self.describer.observed_status(
+                visit is not None, visit.floor_id if visit else None, self.login_of.get(ent)
+            ),
+            "inside": visit is not None,
+        }
+        self.person_status[ent] = status
+        self._change("s", ent, status)
+        self.activity.append((self.version, item))
 
     def zone_value(self, zone_id: str) -> list[Any]:
         e = self.env.get(zone_id, {})
@@ -248,6 +280,9 @@ class LiveState:
         if self._last_minute and minute[:10] != self._last_minute[:10]:
             self.series.clear()
             self.inside.clear()  # inferred exits for missed badge-outs (state only, no events)
+            for pid in list(self.person_status):
+                self._change("s", pid, None)
+            self.person_status.clear()
             self.peak_value, self.peak_time = 0, None
         self._last_minute = minute
         k = self.kpis()
@@ -272,6 +307,8 @@ class LiveState:
             "series": list(self.series),
             "events_total": sum(self.event_counts.values()),
             "automation": list(self.automation_log)[-5:],
+            "people": dict(self.person_status),
+            "activity": [a for _, a in self.activity][-self.cfg.feed_buffer :],
         }
 
     def delta(self, since: int) -> dict[str, Any] | None:
@@ -282,17 +319,21 @@ class LiveState:
         desks: dict[str, ChangeValue] = {}
         rooms: dict[str, ChangeValue] = {}
         zones: dict[str, ChangeValue] = {}
-        target = {"d": desks, "r": rooms, "z": zones}
+        people: dict[str, ChangeValue] = {}
+        target = {"d": desks, "r": rooms, "z": zones, "s": people}
         for ver, kind, key, val in self.log:
             if ver > since:
                 target[kind][key] = val
         feed = [f for v, f in self.feed if v > since][-self.cfg.feed_per_frame :]
+        activity = [a for v, a in self.activity if v > since][-self.cfg.feed_per_frame :]
         return {
             "version": self.version,
             "desks": desks,
             "rooms": rooms,
             "zones": zones,
             "feed": feed,
+            "people": people,
+            "activity": activity,
             "kpis": self.kpis(),
             "point": self.series[-1] if self.series else None,
             "events_total": sum(self.event_counts.values()),

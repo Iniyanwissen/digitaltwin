@@ -101,6 +101,26 @@ export interface FeedLine {
   identity: "IDENTIFIED" | "ANONYMOUS" | "SYSTEM" | string;
 }
 
+/** One readable people-activity line (observed: identified events only; truth: simulation). */
+export interface ActivityItem {
+  t: string;
+  person: string;
+  code: string;
+  name: string;
+  dept: string;
+  text: string;
+  kind: string;
+}
+
+export interface PersonStatus {
+  code: string;
+  name: string;
+  dept: string;
+  t: string;
+  text: string;
+  inside?: boolean;
+}
+
 export interface AutomationLine {
   t: string;
   zone: string;
@@ -141,14 +161,30 @@ interface StreamBase extends StatusInfo {
 export interface SnapshotMessage extends StreamBase {
   type: "snapshot";
   series: SeriesPoint[];
-  truth?: { version: number; positions: Record<string, TruthPosition>; summary: TruthSummary };
+  people: Record<string, PersonStatus>;
+  activity: ActivityItem[];
+  truth?: {
+    version: number;
+    positions: Record<string, TruthPosition>;
+    people: Record<string, PersonStatus>;
+    activity: ActivityItem[];
+    summary: TruthSummary;
+  };
 }
 
 export interface FrameMessage extends StreamBase {
   type: "frame";
   feed: FeedLine[];
   point: SeriesPoint | null;
-  truth?: { version: number; positions: Record<string, TruthPosition | null>; summary: TruthSummary };
+  people: Record<string, PersonStatus | null>;
+  activity: ActivityItem[];
+  truth?: {
+    version: number;
+    positions: Record<string, TruthPosition | null>;
+    people: Record<string, PersonStatus | null>;
+    activity: ActivityItem[];
+    summary: TruthSummary;
+  };
 }
 
 export type LiveMessage = SnapshotMessage | FrameMessage;

@@ -6,6 +6,7 @@ import { liveApi } from "./api";
 import { BuildingPanel } from "./BuildingPanel";
 import { ControlBar } from "./ControlBar";
 import { FloorPanel } from "./FloorPanel";
+import { PeoplePanel } from "./PeoplePanel";
 import type { Overlay, View } from "./floorRenderer";
 import { SidePanel } from "./SidePanel";
 import { DEPARTMENT_PALETTE } from "./theme";
@@ -49,8 +50,11 @@ export function LiveSimulationPage() {
       />
       {layout.isError && <div className="p-6 text-sm text-red-300">Live simulation is not available: {String(layout.error)}</div>}
       {layout.data && floorId ? (
-        <div className="grid min-h-0 flex-1 grid-cols-[240px_minmax(0,1fr)_340px] gap-3 p-3">
-          <BuildingPanel store={store} layout={layout.data} floorId={floorId} onSelect={setFloorChoice} />
+        <div className="grid min-h-0 flex-1 grid-cols-[290px_minmax(0,1fr)_340px] gap-3 p-3">
+          <div className="flex min-h-0 flex-col gap-3">
+            <BuildingPanel store={store} layout={layout.data} floorId={floorId} onSelect={setFloorChoice} />
+            <PeoplePanel store={store} view={view} deptColor={deptColor} />
+          </div>
           <FloorPanel
             store={store}
             layout={layout.data}
