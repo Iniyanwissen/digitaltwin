@@ -53,7 +53,7 @@ simulation:
   # Live runner tick (wall milliseconds between engine advances).
   tick_ms: 50
   # First simulated day of a live run (null = today in the building timezone, moved forward
-  # to the next working day if today is a weekend or holiday).
+  # to the next working day if today is an off day; see calendar.all_days_working).
   live_start_date: null
   # Core hours used by utilization metrics.
   core_hours: { start: "08:00", end: "18:00" }
@@ -66,6 +66,11 @@ simulation:
   day_end_hour: 23.5
 
 calendar:
+  # Prototype switch: run EVERY day (weekends and holidays too) as a normal working day.
+  # Set to false to use weekend_days, holidays and weekend_attendance below (e.g. with real data).
+  all_days_working: true
+  # When all_days_working, weekends borrow this weekday's attendance pattern (3 = Wednesday).
+  working_pattern_weekday: 3
   # ISO weekdays that are weekends (6 = Saturday, 7 = Sunday).
   weekend_days: [6, 7]
   holidays: ["2026-10-02", "2026-10-20", "2026-12-25"]

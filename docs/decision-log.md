@@ -106,3 +106,7 @@ Imported from the Local Kit v0.2 (`reference/`, `prompts/`, `mock-data/`, v0.2 d
 6. **BMS fix:** zones without any occupancy sensor (corridors, lobbies) have unknown occupancy and never get occupancy-driven HVAC rules (simulation-engine.md §10). Found from the temperature overlay (corridors drifted to 27 °C in ECO).
 
 **Measured:** medium scale at 10x, frames 2-4 KB every 500 ms (budget 50 KB).
+
+## 2026-09-26: Every day is a working day (prototype)
+
+`calendar.all_days_working: true` (default) runs weekends and holidays as normal working days; weekends borrow the attendance pattern of `calendar.working_pattern_weekday` (Wednesday). Live runs start today. Set it to `false` to restore weekends, holidays and weekend attendance (for example once real data is connected).

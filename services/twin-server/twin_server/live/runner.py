@@ -56,7 +56,7 @@ class LiveRunner(BackgroundService):
         )
         cal = self.cfg.calendar
         if self.cfg.simulation.live_start_date is None:
-            while day.isoweekday() in cal.weekend_days or day in cal.holidays:
+            while cal.is_off_day(day):
                 day += timedelta(days=1)
         return day
 

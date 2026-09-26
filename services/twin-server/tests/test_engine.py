@@ -249,3 +249,32 @@ def test_bms_never_switches_unsensed_zones_to_eco(medium_run) -> None:
     ]
     assert eco, "sensed empty zones still go to ECO"
     assert not [e for e in eco if e.entity_id in unsensed]
+
+
+SATURDAY = date(2026, 10, 3)
+
+
+def _arrivals_on(cfg: WorkplaceConfig, day: date) -> int:
+    master = generate_master_data(cfg)
+    truth: list = []
+    eng = Engine(cfg.simulation, master, day, lambda e: None, truth.append)
+    eng.start(days=1)
+    eng.step_until(86400 + 3600)
+    return len({t.person_id for t in transitions(truth) if t.to_state is PersonState.ENTERING})
+
+
+def test_all_days_working_runs_weekends_like_a_working_day(base) -> None:
+    cfg = small_config(base)
+    cal = cfg.simulation.calendar
+    assert cal.all_days_working, "prototype default: every day is a working day"
+    weekend = _arrivals_on(cfg, SATURDAY)
+    off = dataclasses.replace(
+        cfg,
+        simulation=cfg.simulation.model_copy(
+            update={"calendar": cal.model_copy(update={"all_days_working": False})}
+        ),
+    )
+    real_weekend = _arrivals_on(off, SATURDAY)
+    people = cfg.simulation.employees.count
+    assert weekend > 0.4 * people, weekend
+    assert real_weekend < 0.1 * people, real_weekend

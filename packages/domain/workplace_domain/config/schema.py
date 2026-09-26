@@ -176,10 +176,24 @@ class SimulationSection(_Strict):
 
 
 class CalendarConfig(_Strict):
+    all_days_working: bool
+    working_pattern_weekday: Annotated[int, Field(ge=1, le=5)]
     weekend_days: list[Annotated[int, Field(ge=1, le=7)]]
     holidays: list[date]
     weekend_attendance: Probability
     leave_type_weights: dict[str, PositiveFloat]
+
+    def is_off_day(self, day: date) -> bool:
+        if self.all_days_working:
+            return False
+        return day.isoweekday() in self.weekend_days or day in self.holidays
+
+    def pattern_weekday(self, day: date) -> int:
+        """Weekday whose attendance pattern applies (weekends borrow one if all days work)."""
+        wd = day.isoweekday()
+        if self.all_days_working and wd in self.weekend_days:
+            return self.working_pattern_weekday
+        return wd
 
 
 class AttendanceConfig(_Strict):

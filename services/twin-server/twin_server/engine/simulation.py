@@ -486,8 +486,8 @@ class Engine:
         self.obs_rng = self.rngf.py_stream("observers", day)
         self.env_rng = self.rngf.py_stream("environment", day)
         self._lifecycle("DAY_STARTED", sim_date=day.isoformat())
-        wd = day.isoweekday()
-        off_day = wd in cal.weekend_days or day in cal.holidays
+        wd = cal.pattern_weekday(day)
+        off_day = cal.is_off_day(day)
         people = list(self.persons.values())
         if off_day:
             attendees = [
