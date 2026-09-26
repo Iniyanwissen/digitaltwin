@@ -1,5 +1,5 @@
-// Canvas colours for the Live Simulation screen. Mirrors the --color-twin-* tokens in index.css
-// (docs/visualization-spec.md §2); canvases cannot use Tailwind classes, so they read these.
+﻿// Canvas colours for the Live Simulation screen. Mirrors the --color-twin-* tokens in index.css
+// (docs/visualization-spec.md Â§2); canvases cannot use Tailwind classes, so they read these.
 
 export const TWIN = {
   bg: "#0e1117",
@@ -44,9 +44,9 @@ export const HVAC_LEGEND: [string, string][] = [
 ];
 
 export const TEMP_LEGEND: [string, string][] = [
-  ["#3b82f6", "≤21 °C"],
-  ["#a855f7", "24 °C"],
-  ["#ef4444", "≥27 °C"],
+  ["#3b82f6", "â‰¤21 Â°C"],
+  ["#a855f7", "24 Â°C"],
+  ["#ef4444", "â‰¥27 Â°C"],
 ];
 
 export const OCCUPANCY_LEGEND: [string, string][] = [
@@ -56,7 +56,7 @@ export const OCCUPANCY_LEGEND: [string, string][] = [
   [TWIN.accent, "Room occupied (count)"],
 ];
 
-/** Temperature ramp 21 °C blue -> 24 °C purple -> 27 °C red (overlay fill). */
+/** Temperature ramp 21 Â°C blue -> 24 Â°C purple -> 27 Â°C red (overlay fill). */
 export function temperatureFill(t: number | null | undefined): string {
   if (t == null) return "#1e293b";
   const k = Math.max(0, Math.min(1, (t - 21) / 6));
@@ -77,7 +77,13 @@ export function roomFill(count: number, capacity: number): string {
 }
 
 /** Desk square size and click radius in layout units (metres). */
-export const DESK_SIZE = 1.6;
+export const DESK_SIZE = 2.0;
+/** Occupied-desk glow: halo size (x desk size) and colour. */
+export const DESK_GLOW_SCALE = 1.6;
+export const DESK_GLOW = "rgba(34,197,94,0.35)";
+/** Pulse ring when a desk changes state (ms) and its max radius (x desk size). */
+export const DESK_PULSE_MS = 1600;
+export const DESK_PULSE_SCALE = 2.6;
 export const DESK_HIT_RADIUS = 2.0;
-/** Dot tween duration (ms), docs/live-streaming.md §5. */
+/** Dot tween duration (ms), docs/live-streaming.md Â§5. */
 export const DOT_TWEEN_MS = 900;

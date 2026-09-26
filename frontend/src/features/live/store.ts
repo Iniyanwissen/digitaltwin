@@ -44,6 +44,8 @@ export class LiveStore {
   automation: AutomationLine[] = [];
   eventsTotal = 0;
   dots = new Map<string, Dot>();
+  /** Desk id -> time its state last changed (drives the pulse ring). */
+  deskPulses = new Map<string, number>();
   truthSummary: TruthSummary | null = null;
   /** Canvas needs a redraw. */
   dirty = true;
@@ -74,6 +76,7 @@ export class LiveStore {
       this.series = [...msg.series];
       this.feed = [];
       this.dots.clear();
+      this.deskPulses.clear();
       if (msg.truth) {
         for (const [id, p] of Object.entries(msg.truth.positions)) this.setDot(id, p, true);
         this.truthSummary = msg.truth.summary;
@@ -81,6 +84,8 @@ export class LiveStore {
         this.truthSummary = null;
       }
     } else {
+      const t = this.now();
+      for (const id of Object.keys(msg.desks)) this.deskPulses.set(id, t);
       Object.assign(this.desks, msg.desks);
       Object.assign(this.rooms, msg.rooms);
       Object.assign(this.zones, msg.zones);

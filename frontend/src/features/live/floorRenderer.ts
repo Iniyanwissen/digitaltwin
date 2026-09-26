@@ -4,7 +4,11 @@
 
 import type { Dot, LiveStore } from "./store";
 import {
+  DESK_GLOW,
+  DESK_GLOW_SCALE,
   DESK_HIT_RADIUS,
+  DESK_PULSE_MS,
+  DESK_PULSE_SCALE,
   DESK_SIZE,
   DOT_TWEEN_MS,
   HVAC_FILL,
@@ -119,7 +123,7 @@ function ease(k: number): number {
   return k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
 }
 
-/** Draws one frame. Returns true while dots are still tweening (caller keeps redrawing). */
+/** Draws one frame. Returns true while dots tween or desk pulses fade (caller keeps redrawing). */
 export function drawFloor(
   canvas: HTMLCanvasElement,
   scene: FloorScene,
@@ -172,13 +176,37 @@ export function drawFloor(
   }
 
   const s = DESK_SIZE * g.scale;
+  const glow = s * DESK_GLOW_SCALE;
+  // Glow halo under occupied desks ("desk lights on").
+  ctx.fillStyle = DESK_GLOW;
+  for (const w of scene.workspaces) {
+    if (store.desks[w.workspace_id]?.[0]) ctx.fillRect(X(w.x) - glow / 2, Y(w.y) - glow / 2, glow, glow);
+  }
+  let pulsing = false;
   for (const w of scene.workspaces) {
     const d = store.desks[w.workspace_id] ?? [0, 0];
-    ctx.fillStyle = d[0] ? TWIN.occupied : d[1] ? TWIN.held : TWIN.vacant;
+    const colour = d[0] ? TWIN.occupied : d[1] ? TWIN.held : TWIN.vacant;
+    ctx.fillStyle = colour;
     ctx.fillRect(X(w.x) - s / 2, Y(w.y) - s / 2, s, s);
+    // Expanding, fading ring right after the desk changed state.
+    const changed = store.deskPulses.get(w.workspace_id);
+    if (changed !== undefined) {
+      const k = (now - changed) / DESK_PULSE_MS;
+      if (k >= 1 || k < 0) {
+        store.deskPulses.delete(w.workspace_id);
+      } else if (d[0] || d[1]) {
+        pulsing = true;
+        const r = (s / 2) * (1 + (DESK_PULSE_SCALE - 1) * k);
+        ctx.strokeStyle = colour;
+        ctx.globalAlpha = 1 - k;
+        ctx.lineWidth = 1.5 * g.dpr;
+        ctx.strokeRect(X(w.x) - r, Y(w.y) - r, r * 2, r * 2);
+        ctx.globalAlpha = 1;
+      }
+    }
   }
 
-  let moving = false;
+  let moving = pulsing;
   if (view === "simulation") {
     const radius = Math.max(2 * g.dpr, 0.45 * g.scale);
     for (const p of store.dots.values()) {
