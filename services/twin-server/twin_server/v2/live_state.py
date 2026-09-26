@@ -158,14 +158,20 @@ class LiveStateV2(LiveState):
             "comfort_pct": round(100 * ok / occ, 1) if occ else 100.0,
         }
 
-    def warm_spots(self) -> dict[str, int]:
-        """Areas observed occupied and at or above the warm threshold, per floor."""
+    def warm_areas(self) -> list[str]:
+        """Areas observed occupied and at or above the warm threshold (warm-spot markers)."""
         threshold = self.v2.bms.warm_threshold_c
+        return sorted(
+            area
+            for area, value in self.areas.items()
+            if value[0] is not None and value[0] >= threshold and self._occupied(area)
+        )
+
+    def warm_spots(self) -> dict[str, int]:
+        """Warm areas per floor (KPI strip)."""
         counts: dict[str, int] = defaultdict(int)
-        for area, value in self.areas.items():
-            meta = self.area_meta.get(area, {})
-            if value[0] is not None and value[0] >= threshold and self._occupied(area):
-                counts[meta.get("floor_id", "")] += 1
+        for area in self.warm_areas():
+            counts[self.area_meta.get(area, {}).get("floor_id", "")] += 1
         return dict(counts)
 
     def _occupied(self, area: str) -> bool:
@@ -233,6 +239,7 @@ class LiveStateV2(LiveState):
             floor_kpis=self.floor_kpis(),
             chips=self.active_chips(self.sim_time),
             actions=[a for _, a in self.actions][-self.cfg.feed_per_frame :],
+            warm_areas=self.warm_areas(),
         )
         return snap
 
@@ -251,6 +258,7 @@ class LiveStateV2(LiveState):
             floor_kpis=self.floor_kpis(),
             chips=self.active_chips(self.sim_time),
             actions=[a for v, a in self.actions if v > since][-self.cfg.feed_per_frame :],
+            warm_areas=self.warm_areas(),
         )
         return base
 

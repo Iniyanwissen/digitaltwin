@@ -57,6 +57,35 @@ class LiveServiceV2(LiveService):
     def layout(self) -> dict[str, Any]:
         return self.world.render
 
+    BOOKED_WINDOW_MIN = 30
+
+    def booked(self) -> dict[str, str]:
+        """Rooms empty now with a booking starting within 30 min -> start time (room chip)."""
+        engine = self.runner.engine
+        if not isinstance(engine, EngineV2):
+            return {}
+        now = engine.st.dt(self.runner.sim_t)
+        out: dict[str, str] = {}
+        for room_id in engine.bookings_by_room:
+            if self.state.room_count.get(room_id, 0) > 0:
+                continue
+            nxt = engine._next_booking(room_id, now, self.BOOKED_WINDOW_MIN)
+            if nxt is not None:
+                out[room_id] = nxt.start_time.strftime("%H:%M")
+        return out
+
+    def snapshot(self, include_truth: bool) -> dict[str, Any]:
+        snap = super().snapshot(include_truth)
+        snap["booked"] = self.booked()
+        return snap
+
+    def frame(
+        self, obs_since: int, truth_since: int, include_truth: bool
+    ) -> tuple[dict[str, Any], int, int]:
+        frame, obs_v, truth_v = super().frame(obs_since, truth_since, include_truth)
+        frame["booked"] = self.booked()
+        return frame, obs_v, truth_v
+
     def area_detail(self, area_id: str) -> dict[str, Any] | None:
         detail = self.state_v2.area_detail(area_id)
         if detail is None:

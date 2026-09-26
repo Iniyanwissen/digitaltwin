@@ -204,6 +204,14 @@ class EngineV2(Engine):
             return  # booking was auto-released: the meeting does not happen in this room
         super().meeting_start(mid, end_t)
 
+    def truth_summary(self) -> dict[str, int]:
+        summary = super().truth_summary()
+        for p in self.persons.values():
+            if p.inside and p.cur_floor:
+                key = f"inside_{p.cur_floor}"
+                summary[key] = summary.get(key, 0) + 1
+        return summary
+
     # ------------------------------------------------------------------ environment tick
     def start(self, days: int | None = None) -> None:
         super().start(days)

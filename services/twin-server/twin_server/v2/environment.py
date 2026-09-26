@@ -13,9 +13,9 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass, field
-from random import Random
 
 from workplace_domain.config.v2 import V2Energy, V2Environment
+from workplace_domain.rng import PyRandom
 
 
 @dataclass
@@ -72,7 +72,7 @@ def step_physics(
     hour: float,
     dt_min: float,
     cfg: V2Environment,
-    rng: Random,
+    rng: PyRandom,
 ) -> None:
     """Advance temperature and CO2 of one area by dt_min minutes (first-order responses)."""
     load = min(cfg.max_load, people / max(1, capacity))

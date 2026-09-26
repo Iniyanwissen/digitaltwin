@@ -10,9 +10,14 @@ const LiveSimulationPage = lazy(() =>
   import("@/features/live/LiveSimulationPage").then((m) => ({ default: m.LiveSimulationPage })),
 );
 
+const LiveSimulationV2Page = lazy(() =>
+  import("@/features/live-v2/LiveSimulationV2Page").then((m) => ({ default: m.LiveSimulationV2Page })),
+);
+
 /** Implemented pages keyed by "<section>/<tab>". Everything else shows its placeholder. */
 export const PAGES: Record<string, ComponentType> = {
   "live/": LiveSimulationPage,
+  "live-v2/": LiveSimulationV2Page,
   "twin/building": BuildingPage,
   "directory/employees": EmployeesPage,
   "directory/teams": TeamsPage,

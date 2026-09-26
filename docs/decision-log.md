@@ -139,3 +139,12 @@ v0.3 is implemented as a **separate v2 world** next to v1; v1 pages, API, data a
 5. **Energy:** shadow baseline per `environment-and-esg.md` §3; with `bms.enabled: false` actual equals baseline. Typical weekday: ~10.7% saved, ~96% comfort.
 6. **Live:** separate v2 bus, processor (`LiveStateV2`: areas + 15-min trend + 1-h history, ESG rollups, automation log with reasons, room chips, per-floor KPI strip), runner and service; `/api/v2/simulation/*`, `/api/v2/live/{snapshot,desks,areas}`, `WS /ws/live-v2`. v1 runs independently.
 7. **Small shared change:** `LiveRunner._make_engine()` hook (v1 behaviour unchanged). Identity table allows `ROOM` entities for environment readings and automation actions.
+
+## 2026-09-27: Live Simulation v2, part v2-C: the v2 page
+
+1. **Navigation:** new sidebar section "Live Simulation v2" (`/live-v2`); v1 Live Simulation and all other pages untouched. Sidebar cap raised from 8 to 9 sections.
+2. **Theme:** the v0.3 light theme (IBM Plex Sans, paper/ink tokens) is scoped to `.twin2` in `features/live-v2/twin-v2.css`, so the rest of the app keeps its look. A Dark toggle on the page only (remembered per browser in `localStorage`, key `live-v2-theme`).
+3. **Rendering:** SVG in metres from `/api/v2/layout` (zones, cores, glazing, rooms, desks, readers); layers Occupancy / Temperature / Lighting / HVAC; truth dots only in the Simulation view.
+4. **No UI logic:** warm-and-rising markers (`warm_areas`), booked-room chips (`booked`, next start time), the KPI strip and ESG come from the v2 processor. Per-floor true headcount (`inside_<floor_id>` in the truth summary) shows as a striped cell in the Simulation view only.
+5. **Reuse:** `useLiveConnection` takes an optional socket path and store factory; `LiveStoreV2` extends the v1 store (areas, ESG, KPIs, chips, bookings, actions newest first, capped at 60).
+6. **Fix:** `v2/environment.py` types its generator as `PyRandom` (from `workplace_domain.rng`) so `check-rng` passes.

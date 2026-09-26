@@ -8,9 +8,17 @@ export type Connection = "connecting" | "open" | "closed";
 
 const RECONNECT_MS = 1500;
 
-/** Opens the live WebSocket (truth channel only in Simulation View) and feeds a LiveStore. */
-export function useLiveConnection(truth: boolean): { store: LiveStore; connection: Connection } {
-  const store = useMemo(() => new LiveStore(), []);
+/**
+ * Opens the live WebSocket (truth channel only in Simulation View) and feeds a LiveStore.
+ * Live Simulation v2 passes its own socket path and store class.
+ */
+export function useLiveConnection<S extends LiveStore = LiveStore>(
+  truth: boolean,
+  options: { path?: string; createStore?: () => S } = {},
+): { store: S; connection: Connection } {
+  const { path = "/ws/live", createStore } = options;
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- the store lives for the page's lifetime
+  const store = useMemo(() => (createStore ? createStore() : new LiveStore()) as S, []);
   const [connection, setConnection] = useState<Connection>("connecting");
 
   useEffect(() => {
@@ -20,7 +28,7 @@ export function useLiveConnection(truth: boolean): { store: LiveStore; connectio
 
     const open = () => {
       setConnection("connecting");
-      socket = new WebSocket(liveSocketUrl(truth));
+      socket = new WebSocket(liveSocketUrl(truth, path));
       socket.onopen = () => setConnection("open");
       socket.onmessage = (event: MessageEvent<string>) => store.apply(JSON.parse(event.data) as LiveMessage);
       socket.onclose = () => {
@@ -34,7 +42,7 @@ export function useLiveConnection(truth: boolean): { store: LiveStore; connectio
       if (retry) clearTimeout(retry);
       socket?.close();
     };
-  }, [store, truth]);
+  }, [store, truth, path]);
 
   return { store, connection };
 }

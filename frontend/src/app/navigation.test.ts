@@ -15,6 +15,6 @@ describe("navigation", () => {
   });
 
   it("keeps the sidebar small", () => {
-    expect(NAVIGATION.length).toBeLessThanOrEqual(8);
+    expect(NAVIGATION.length).toBeLessThanOrEqual(9);
   });
 });

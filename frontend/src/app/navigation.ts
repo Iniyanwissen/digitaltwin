@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   type LucideIcon,
   Play,
+  Leaf,
   Radio,
   Users,
   CalendarRange,
@@ -62,6 +63,24 @@ export const NAVIGATION: NavSection[] = [
           "Isometric building and 2D floor twin with overlays",
           "Simulation (truth) view with moving people",
           "Live KPIs, people-vs-desks chart and event feed",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "live-v2",
+    label: "Live Simulation v2",
+    icon: Leaf,
+    description: "Real floor plan, crowd-driven temperature and CO₂, ESG automation (v0.3).",
+    tabs: [
+      {
+        slug: "",
+        label: "Live Simulation v2",
+        phase: "v2-C",
+        features: [
+          "Real floor plan in metres, floors 1-4",
+          "Occupancy, temperature, lighting and HVAC layers",
+          "Automation log and sustainability today",
         ],
       },
     ],

@@ -14,7 +14,7 @@ export const liveApi = {
   room: (id: string) => json<RoomDetail>(`/api/v1/live/rooms/${encodeURIComponent(id)}`),
 };
 
-export function liveSocketUrl(truth: boolean): string {
+export function liveSocketUrl(truth: boolean, path = "/ws/live"): string {
   const proto = window.location.protocol === "https:" ? "wss" : "ws";
-  return `${proto}://${window.location.host}/ws/live?truth=${truth ? "true" : "false"}`;
+  return `${proto}://${window.location.host}${path}?truth=${truth ? "true" : "false"}`;
 }
