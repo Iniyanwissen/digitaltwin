@@ -1,0 +1,100 @@
+# Live Simulation v2 (v0.3 pack): real floor plan, crowd-driven environment, ESG automation.
+# Only the v2 page (/live-v2, /api/v2) uses this file; everything else keeps config/simulation.yaml.
+# Shared behaviour (profiles, meetings, access, sensors, calendar, seed...) still comes from
+# config/simulation.yaml and config/organization.yaml. Source: v03-pack config/esg-additions.yaml
+# (kept as esg-additions.original.yaml). Validated by workplace_domain.config.v2.
+
+employees:
+  # Employees in the v2 building (4 floors x 136 desks = 544 desks, about 1.3 people per desk).
+  count: 700
+
+layout:
+  # Floor geometry in metres, shared by all floors (relative to the repository root).
+  floor_plan_file: design/floor-plan-v2.json
+  # Number of floors built from the plan (Floor 1..n).
+  floors: 4
+  # Index of the lift core used as each floor's walkable lobby zone (the plan has no corridor zone).
+  lobby_core: 0
+  # Per-floor overrides on the shared geometry.
+  floor_overrides:
+    1:
+      # Team hub becomes Reception with the building entrance reader; bigger cafe.
+      replace_zone: { HUB: { name: Reception, zone_type: ENTRANCE, entrance_reader: true } }
+      capacity_overrides: { CAF: 60 }
+    3:
+      # Finance sits in restricted zone D (secure reader). On other floors zone D is open workspace.
+      restricted_zones: [D]
+      restricted_departments: [Finance]
+    4:
+      desk_policy: ASSIGNED
+
+environment:
+  # Environment tick (seconds): live and history generation.
+  tick_live_s: 60
+  tick_batch_s: 300
+  # HVAC setpoints and first-order response rate per mode.
+  setpoint_c: { ECO: 25.5, NORMAL: 23.5, HIGH: 22.5, PRECOOL: 23.0 }
+  mean_reversion_per_min: { ECO: 0.03, NORMAL: 0.08, HIGH: 0.12, PRECOOL: 0.12 }
+  # Degrees above setpoint at 100% crowd load (people / capacity); load is capped at max_load.
+  occupancy_heat_c: 1.3
+  max_load: 1.5
+  # Solar gain (degrees) by facade at full daylight; areas without a facade get none.
+  solar_gain_c: { N: 0.2, S: 0.5, E: 0.4, W: 0.7 }
+  # Daylight curve: sine from start to end hour, peak 1.0 at peak hour.
+  daylight: { start_h: 7.0, end_h: 18.0, peak_h: 12.5 }
+  # CO2 generation (ppm/min at 100% load) and ventilation (fraction/min) per mode or BOOST.
+  co2_gen_ppm_per_min: 24
+  ventilation_per_min: { ECO: 0.02, NORMAL: 0.05, HIGH: 0.08, PRECOOL: 0.06, BOOST: 0.12 }
+  outdoor_co2_ppm: 420
+  # Full artificial light level (lux) and extra daylight lux on facade areas at peak.
+  lux_full: 450
+  daylight_lux: 300
+  # Window for the temperature trend arrow (delta over the last N minutes).
+  trend_window_min: 15
+  # Starting values and measurement noise.
+  initial: { temperature_c: 24.0, co2_ppm: 450.0 }
+  temperature_noise_c: 0.03
+  co2_noise_ppm: 3
+  # Capacity floor for areas without a capacity (desk zones use their desk count).
+  min_area_capacity: 4
+
+energy:
+  # HVAC and lighting power densities (W/m2) used for kWh per area per interval.
+  hvac_w_per_m2: { ECO: 12, NORMAL: 30, HIGH: 42, PRECOOL: 36 }
+  boost_w_per_m2: 6
+  lighting_w_per_m2: 8
+  # Shadow baseline (no automation): NORMAL HVAC + full lights in operating hours, else night level.
+  operating_hours: [7.0, 20.0]
+  night_baseline_w_per_m2: 6
+  # Emission factor (kg CO2e/kWh, verify against the latest published grid factor) and tariff.
+  grid_emission_factor_kg_per_kwh: 0.71
+  tariff_inr_per_kwh: 8.0
+  # Comfort: occupied minutes inside this band and below this CO2.
+  comfort_band_c: [22.5, 25.5]
+  comfort_co2_ppm: 1000
+  # ENERGY_INTERVAL period (sim minutes).
+  interval_minutes: 15
+
+bms:
+  # Master switch: false = no automation (shadow-baseline check, scenario S5).
+  enabled: true
+  cooldown_minutes: 10
+  eco_after_empty_minutes: 15
+  warm_threshold_c: 25.5
+  min_setpoint_c: 22.5
+  co2_boost_on_ppm: 1000
+  co2_boost_off_ppm: 750
+  lights:
+    dim_empty_after_minutes: 15
+    dim_level_pct: 30
+    room_off_after_minutes: 5
+    daylight_level_pct: 70
+    daylight_min_factor: 0.6
+    after_hours_off_h: 20.0
+  rooms:
+    release_after_minutes: 10
+    precool_lead_minutes: 20
+    precool_min_expected_pct: 50
+    oversized_max_pct: 35
+    oversized_after_minutes: 15
+    over_capacity_after_minutes: 5

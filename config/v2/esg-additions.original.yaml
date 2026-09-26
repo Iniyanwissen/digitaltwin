@@ -1,0 +1,54 @@
+# Merge into config/simulation.yaml (v0.3). Replaces the `environment` and `bms` sections.
+
+layout:
+  floor_plan_file: design/floor-plan-v2.json     # geometry in metres, shared by all floors
+  floor_overrides:
+    1: { replace_zone: { HUB: { name: Reception, zone_type: ENTRANCE, entrance_reader: true } }, capacity_overrides: { CAF: 60 } }
+    3: { restricted_zones: [D], restricted_departments: [Finance] }
+    4: { desk_policy: ASSIGNED }
+
+environment:
+  tick_live_s: 60
+  tick_batch_s: 300
+  setpoint_c: { ECO: 25.5, NORMAL: 23.5, HIGH: 22.5, PRECOOL: 23.0 }
+  mean_reversion_per_min: { ECO: 0.03, NORMAL: 0.08, HIGH: 0.12, PRECOOL: 0.12 }
+  occupancy_heat_c: 1.3                 # °C above setpoint at 100% crowd load
+  solar_gain_c: { N: 0.2, S: 0.5, E: 0.4, W: 0.7 }
+  daylight: { start_h: 7.0, end_h: 18.0, peak_h: 12.5 }
+  co2_gen_ppm_per_min: 24
+  ventilation_per_min: { ECO: 0.02, NORMAL: 0.05, HIGH: 0.08, PRECOOL: 0.06, BOOST: 0.12 }
+  lux_full: 450
+  trend_window_min: 15
+
+energy:
+  hvac_w_per_m2: { ECO: 12, NORMAL: 30, HIGH: 42, PRECOOL: 36 }
+  boost_w_per_m2: 6
+  lighting_w_per_m2: 8
+  operating_hours: [7.0, 20.0]
+  night_baseline_w_per_m2: 6
+  grid_emission_factor_kg_per_kwh: 0.71  # verify against the latest published grid factor
+  tariff_inr_per_kwh: 8.0
+  comfort_band_c: [22.5, 25.5]
+  comfort_co2_ppm: 1000
+
+bms:
+  cooldown_minutes: 10
+  eco_after_empty_minutes: 15
+  warm_threshold_c: 25.5
+  min_setpoint_c: 22.5
+  co2_boost_on_ppm: 1000
+  co2_boost_off_ppm: 750
+  lights:
+    dim_empty_after_minutes: 15
+    dim_level_pct: 30
+    room_off_after_minutes: 5
+    daylight_level_pct: 70
+    daylight_min_factor: 0.6
+    after_hours_off_h: 20.0
+  rooms:
+    release_after_minutes: 10
+    precool_lead_minutes: 20
+    precool_min_expected_pct: 50
+    oversized_max_pct: 35
+    oversized_after_minutes: 15
+    over_capacity_after_minutes: 5

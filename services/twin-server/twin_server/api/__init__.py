@@ -13,6 +13,7 @@ from twin_server import __version__
 from twin_server.api.routes import api_v1_router, system_router
 from twin_server.api.routes_live import live_router, live_ws_router
 from twin_server.api.routes_master import master_router
+from twin_server.api.routes_v2 import v2_router
 from twin_server.context import AppContext
 from twin_server.db import run_migrations
 from twin_server.log_setup import configure_logging
@@ -41,6 +42,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 log.exception("master_data_seed_failed")
         if ctx.master.current is not None:
             ctx.attach_live(ctx.master.current)
+        try:
+            ctx.attach_v2()
+        except Exception:
+            # v2 is optional and isolated: a v2 config problem never stops v1.
+            log.exception("live_v2_unavailable")
         ctx.start()
         log.info("twin_server_started", port=settings.port)
         try:
@@ -54,4 +60,5 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(master_router)
     app.include_router(live_router)
     app.include_router(live_ws_router)
+    app.include_router(v2_router)
     return app

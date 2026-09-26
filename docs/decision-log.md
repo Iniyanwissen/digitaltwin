@@ -118,3 +118,14 @@ Imported from the Local Kit v0.2 (`reference/`, `prompts/`, `mock-data/`, v0.2 d
    - Operational View: built only from IDENTIFIED events (entrance/lobby/room/secure readers, workstation login/logout, room check-in). Anonymous sensor events never produce people activity.
    - Simulation View: built from ground-truth transitions (sat down, meeting, cafeteria, break, leaving), labelled "simulation truth" and sent only on the truth channel.
    The contrast between the two shows what building systems can and cannot know about people.
+
+## 2026-09-27: Live Simulation v2 (v0.3 pack), part v2-A: world from the real floor plan
+
+v0.3 is implemented as a **separate v2 world** next to v1; v1 pages, API, data and config are unchanged (v1 master-data hash verified identical).
+
+1. **Files:** pack docs added as `docs/floor-twin-design-v2.md` and `docs/environment-and-esg.md` with a note that they apply to v2 only; design files in `design/`; prompts in `prompts/v03-*`. Existing docs were not rewritten (the pack's step 1 "docs merge" is replaced by this scoping).
+2. **Config:** `config/v2/simulation-v2.yaml` (validated by `workplace_domain.config.v2`) holds the pack's `environment`, `energy`, `bms`, the floor-plan file and floor overrides, plus v2 headcount (700). The original `esg-additions.yaml` is kept as `config/v2/esg-additions.original.yaml`. Shared behaviour still comes from `config/simulation.yaml`.
+3. **World:** `twin_server/v2/world.py` builds 4 floors from `design/floor-plan-v2.json` (ids rewritten per floor, JSON ids kept for Floor 2): 544 desks, 48 rooms, 11 common areas, 95 environment areas (every zone and room, each with an ENVIRONMENT sensor). Overrides: Floor 1 team hub -> Reception + building entrance reader, cafe 60; Floor 3 Finance in restricted zone D with the secure reader (zone D is "Open workspace D" elsewhere); Floor 4 ASSIGNED.
+4. **Adaptations:** cafe/lounge/team hub become COMMON_AREA rooms filling their zone; the plan has no corridor, so lift core `lobby_core` becomes a walkable "Lift lobby" zone per floor; render-only geometry (desk w/h/facing, cores, glazing) stays in the v2 render model instead of the shared master-data tables; `FOCUS_BOOTH` added to `RoomType`.
+5. **Organisation generator:** zones already restricted in a layout are a *fixed* secure area (secure teams go only there, others never). No effect on v1 (no pre-restricted zones).
+6. **API:** `/api/v2/layout` (render geometry) and `/api/v2/areas`. v2 builds at startup; a v2 config problem is logged and never stops v1.

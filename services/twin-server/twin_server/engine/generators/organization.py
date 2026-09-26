@@ -79,7 +79,10 @@ def _allocate_teams(
 
     Teams in `secure_teams` (restricted departments) are placed first and packed together on one
     floor; the zones they use are then closed to every other team, forming a compact secure area.
+    Zones already marked restricted in the layout (e.g. v2 floor overrides) are the fixed secure
+    area: secure teams go only there and other teams never do.
     """
+    fixed = [z.zone_id for z in layout.zones if z.is_restricted and z.zone_type in DESK_ZONE_TYPES]
     desk_zones = {z.zone_id: z for z in layout.zones if z.zone_type in DESK_ZONE_TYPES}
     zone_cap: dict[str, int] = defaultdict(int)
     for w in layout.workspaces:
@@ -96,12 +99,16 @@ def _allocate_teams(
 
     placed: dict[str, Team] = {}
     allocations: list[TeamZoneAllocation] = []
-    secure_zones: list[str] = []
-    secure_floor: str | None = None
+    secure_zones: list[str] = list(fixed)
+    secure_floor: str | None = desk_zones[fixed[0]].floor_id if fixed else None
     order = sorted(teams, key=lambda t: (t.team_id not in secure_teams, -t.size_target, t.team_id))
     for team in order:
         is_secure = team.team_id in secure_teams
-        if is_secure and secure_floor is not None and floor_left[secure_floor] >= team.size_target:
+        if (
+            is_secure
+            and secure_floor is not None
+            and (fixed or floor_left[secure_floor] >= team.size_target)
+        ):
             floor_id = secure_floor
         else:
             floor_id = max(floor_left, key=lambda f: (floor_left[f], f))
@@ -109,9 +116,9 @@ def _allocate_teams(
         on_floor = [z for z in zone_left if desk_zones[z].floor_id == floor_id]
         if is_secure:
             secure_floor = floor_id
-            # Fill zones already secured before opening a new one.
+            # Fill zones already secured before opening a new one (fixed areas: only those).
             zones = sorted(
-                on_floor,
+                [z for z in on_floor if z in fixed] if fixed else on_floor,
                 key=lambda z: (z not in secure_zones or zone_left[z] <= 0, -zone_left[z], z),
             )
         else:
@@ -151,12 +158,17 @@ def _restrict_zones(
     Those teams are packed together by `_allocate_teams`, so the secure area is compact.
     Every team seated in a restricted zone gets an access rule, so nobody is locked out.
     """
-    restricted: list[str] = []
+    restricted: list[str] = [z.zone_id for z in layout.zones if z.is_restricted]
     for a in sorted(allocations, key=lambda a: (a.zone_id, a.team_id)):
         if team_dept[a.team_id] in restricted_departments and a.zone_id not in restricted:
             restricted.append(a.zone_id)
     zones = {z.zone_id: z for z in layout.zones}
+    has_reader = {
+        ap.target_id for ap in layout.access_points if ap.reader_type is ReaderType.SECURE_ZONE
+    }
     for zone_id in restricted:
+        if zone_id in has_reader:
+            continue
         zone = zones[zone_id]
         layout.access_points.append(
             AccessPoint(

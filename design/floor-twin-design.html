@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Floor twin — light design v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper:#FCFDFE; --page:#F2F4F7; --panel:#FFFFFF; --rule:#E3E7ED; --ink:#1E2A36; --ink-2:#5A6674; --ink-3:#8E98A5;
+  --wall:#3A4655; --glass:#9CC3E0; --column:#B8C0CA; --core:#EEF0F3; --core-hatch:#D6DBE1;
+  --z-work:#FFFFFF; --z-meet:#F4F7FC; --z-common:#FBF7F0; --z-secure:#D23B2A;
+  --desk-vacant:#FFFFFF; --desk-vacant-line:#B4BDC8; --desk-occ:#1F9D55; --desk-occ-line:#15703C;
+  --desk-held:#F2A516; --desk-held-line:#A86B06; --desk-off:#E6E9ED; --desk-off-line:#9AA4B0;
+  --room-line:#8D9BAE; --room-text:#1D3A6B; --accent:#1D5FD1; --esg:#0E7C6B; --esg-bg:#E4F4EF;
+  --released:#6D3FD1; --released-bg:#EFE9FC; --danger:#C62828; --danger-bg:#FDECEC; --warn:#8A5A00; --warn-bg:#FEF4DE;
+  --warm:#D9621C; --cool:#2F6FDE; --focus:#1D5FD1; color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper:#141A21; --page:#0E1318; --panel:#161D25; --rule:#26303B; --ink:#E4E9EF; --ink-2:#A7B1BD; --ink-3:#768292;
+  --wall:#C3CDD8; --glass:#4E86B3; --column:#4B5765; --core:#1F2731; --core-hatch:#2C3642; --z-work:#171E26; --z-meet:#18212D; --z-common:#1E1C18;
+  --desk-vacant:#1B232C; --desk-vacant-line:#4B5765; --desk-off:#232B34; --desk-off-line:#4B5765; --room-line:#5B6B82; --room-text:#C9D8F2;
+  --esg-bg:#12302A; --released-bg:#261D3D; --danger-bg:#3A1717; --warn:#F2C46A; --warn-bg:#3A2C0F; --warm:#F08A45; --cool:#6FA0F0; color-scheme: dark; } }
+:root[data-theme="dark"] { --paper:#141A21; --page:#0E1318; --panel:#161D25; --rule:#26303B; --ink:#E4E9EF; --ink-2:#A7B1BD; --ink-3:#768292;
+  --wall:#C3CDD8; --glass:#4E86B3; --column:#4B5765; --core:#1F2731; --core-hatch:#2C3642; --z-work:#171E26; --z-meet:#18212D; --z-common:#1E1C18;
+  --desk-vacant:#1B232C; --desk-vacant-line:#4B5765; --desk-off:#232B34; --desk-off-line:#4B5765; --room-line:#5B6B82; --room-text:#C9D8F2;
+  --esg-bg:#12302A; --released-bg:#261D3D; --danger-bg:#3A1717; --warn:#F2C46A; --warn-bg:#3A2C0F; --warm:#F08A45; --cool:#6FA0F0; color-scheme: dark; }
+:root { box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); }
+html { scroll-padding-top:env(safe-area-inset-top,0px); }
+*, *::before, *::after { box-sizing:inherit; }
+body { margin:0; background:var(--page); color:var(--ink); font:14px/1.5 "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; font-variant-numeric:tabular-nums; }
+button { font:inherit; color:inherit; background:var(--panel); border:1px solid var(--rule); border-radius:6px; padding:6px 12px; cursor:pointer; }
+button:hover { border-color:var(--ink-3); }
+button:focus-visible, [tabindex]:focus-visible { outline:2px solid var(--focus); outline-offset:2px; }
+.seg { display:inline-flex; border:1px solid var(--rule); border-radius:7px; overflow:hidden; background:var(--panel); }
+.seg button { border:0; border-radius:0; padding:6px 12px; }
+.seg button + button { border-left:1px solid var(--rule); }
+.seg button[aria-pressed="true"] { background:var(--ink); color:var(--paper); }
+header { display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:12px 20px; background:var(--panel); border-bottom:1px solid var(--rule); }
+.brand b { font-weight:600; font-size:15px; display:block; } .brand span { color:var(--ink-2); font-size:12px; }
+.clock { font-size:20px; font-weight:500; margin-left:6px; }
+.live { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--esg); }
+.live i { width:7px; height:7px; border-radius:50%; background:var(--esg); }
+.grow { flex:1; }
+main { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:16px; padding:16px 20px 24px; max-width:1560px; margin:0 auto; }
+@media (max-width:1080px) { main { grid-template-columns:minmax(0,1fr); } }
+.sheet { background:var(--panel); border:1px solid var(--rule); border-radius:10px; }
+.plan-head { display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:14px 18px 10px; }
+.plan-head h1 { font-size:18px; font-weight:600; margin:0; }
+.plan-head .meta { color:var(--ink-2); font-size:13px; }
+.plan-head .seg { margin-left:auto; }
+.opstrip { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+.opstrip div { padding:10px 18px; border-right:1px solid var(--rule); }
+.opstrip div:last-child { border-right:0; }
+.opstrip b { display:block; font-size:22px; font-weight:500; } .opstrip span { font-size:12px; color:var(--ink-2); }
+.opstrip .truth { background:repeating-linear-gradient(135deg, transparent 0 6px, var(--page) 6px 7px); }
+.plan-wrap { padding:14px 14px 4px; overflow-x:auto; }
+svg.plan { display:block; width:100%; min-width:760px; height:auto; }
+.legend { display:flex; flex-wrap:wrap; gap:6px 18px; padding:6px 18px 16px; font-size:12px; color:var(--ink-2); }
+.legend span { display:inline-flex; align-items:center; gap:6px; }
+.sw { width:14px; height:10px; border-radius:2px; border:1px solid; display:inline-block; }
+aside { display:flex; flex-direction:column; gap:16px; }
+aside section { padding:14px 16px; }
+aside h2 { font-size:14px; font-weight:600; margin:0 0 10px; }
+.detail dl { display:grid; grid-template-columns:auto 1fr; gap:4px 12px; margin:0; font-size:13px; }
+.detail dt { color:var(--ink-2); } .detail dd { margin:0; }
+.hint { color:var(--ink-3); font-size:13px; margin:0; }
+.spark { margin:10px 0 2px; } .spark small { color:var(--ink-3); font-size:11px; }
+.up { color:var(--warm); } .down { color:var(--cool); }
+.esg-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:8px; overflow:hidden; }
+.esg-grid div { background:var(--panel); padding:10px 12px; }
+.esg-grid b { display:block; font-size:19px; font-weight:500; } .esg-grid span { font-size:12px; color:var(--ink-2); }
+.esg-grid .hero { grid-column:1 / -1; background:var(--esg-bg); } .esg-grid .hero b { color:var(--esg); font-size:26px; }
+.log { list-style:none; margin:0; padding:0; font-size:13px; }
+.log li { display:grid; grid-template-columns:40px 1fr; gap:8px; padding:8px 0; border-top:1px solid var(--rule); }
+.log li:first-child { border-top:0; padding-top:0; }
+.log time { color:var(--ink-3); } .log small { display:block; color:var(--ink-2); }
+.tag { display:inline-block; font-size:11px; font-weight:500; padding:1px 7px; border-radius:10px; margin-right:6px; }
+.t-hvac { background:var(--esg-bg); color:var(--esg); } .t-light { background:var(--warn-bg); color:var(--warn); } .t-room { background:var(--released-bg); color:var(--released); }
+.note { font-size:12px; color:var(--ink-3); padding:0 18px 14px; margin:0; }
+@media (prefers-reduced-motion: reduce) { .dot { transition:none !important; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><b>Workplace twin</b><span>Building A</span></div>
+  <div class="clock" id="clock">Wed 23 Sep · 10:42</div>
+  <span class="live"><i></i>60×</span>
+  <button id="play" aria-pressed="false">Play demo</button>
+  <span class="grow"></span>
+  <div class="seg" role="group" aria-label="View">
+    <button data-view="ops" aria-pressed="true">Operational</button><button data-view="sim" aria-pressed="false">Simulation</button>
+  </div>
+  <div class="seg" role="group" aria-label="Layer">
+    <button data-layer="occ" aria-pressed="true">Occupancy</button><button data-layer="temp" aria-pressed="false">Temperature</button><button data-layer="light" aria-pressed="false">Lighting</button><button data-layer="hvac" aria-pressed="false">HVAC</button>
+  </div>
+  <button id="theme" aria-label="Switch to dark theme">Dark</button>
+</header>
+<main>
+  <div class="sheet">
+    <div class="plan-head">
+      <h1>Floor 2</h1><span class="meta">Hot desk · 136 desks · 12 rooms</span>
+      <div class="seg" role="group" aria-label="Floor"><button aria-pressed="false">1</button><button aria-pressed="true">2</button><button aria-pressed="false">3</button><button aria-pressed="false">4</button></div>
+    </div>
+    <div class="opstrip" id="ops"></div>
+    <div class="plan-wrap"><svg class="plan" id="plan" viewBox="-0.8 -0.8 65.6 27.6" role="img" aria-label="Floor 2 plan with live occupancy and temperature"></svg></div>
+    <div class="legend" id="legend"></div>
+    <p class="note" id="note"></p>
+  </div>
+  <aside>
+    <section class="sheet detail" id="detail"><h2>Selection</h2><p class="hint">Select a desk, room or area on the plan.</p></section>
+    <section class="sheet">
+      <h2>Sustainability today</h2>
+      <div class="esg-grid">
+        <div class="hero"><b id="saved">18.6%</b><span>Energy saved vs. no automation</span></div>
+        <div><b>412 kWh</b><span>Energy used</span></div>
+        <div><b>67 kg</b><span>CO₂e avoided</span></div>
+        <div><b>₹752</b><span>Cost saved</span></div>
+        <div><b id="comfort">96.4%</b><span>Comfort compliance</span></div>
+      </div>
+    </section>
+    <section class="sheet"><h2>Automation</h2><ul class="log" id="log"></ul></section>
+  </aside>
+</main>
+<script>
+"use strict";
+const PLAN = {"version":"2.0","units":"metres","floor":{"floor_id":"BLD01_F02","name":"Floor 2","width":64,"height":26,"north":"up","glazing":["N","S","E","W"],"desk_policy":"HOT_DESK"},"zones":[{"zone_id":"BLD01_F02_ZA","code":"A","name":"Open workspace A","zone_type":"OPEN_WORKSPACE","x":0.6,"y":0.6,"w":26.4,"h":8.6,"facade":"N"},{"zone_id":"BLD01_F02_ZHUB","code":"HUB","name":"Team hub","zone_type":"COLLABORATION","x":27,"y":0.6,"w":10,"h":8.6,"facade":"N","capacity":10},{"zone_id":"BLD01_F02_ZB","code":"B","name":"Open workspace B","zone_type":"OPEN_WORKSPACE","x":37,"y":0.6,"w":26.4,"h":8.6,"facade":"N"},{"zone_id":"BLD01_F02_ZLOU","code":"LOU","name":"Lounge","zone_type":"LOUNGE","x":0.6,"y":9.8,"w":10.6,"h":6.6,"facade":"W","capacity":12},{"zone_id":"BLD01_F02_ZCAF","code":"CAF","name":"Caf\u00e9","zone_type":"CAFETERIA","x":43,"y":9.8,"w":10.2,"h":6.6,"facade":null,"capacity":30},{"zone_id":"BLD01_F02_ZC","code":"C","name":"Open workspace C","zone_type":"OPEN_WORKSPACE","x":0.6,"y":17,"w":16.8,"h":8.4,"facade":"S"},{"zone_id":"BLD01_F02_ZD","code":"D","name":"Finance","zone_type":"OPEN_WORKSPACE","x":44.6,"y":17,"w":18.8,"h":8.4,"facade":"S","is_restricted":true},{"zone_id":"BLD01_F02_ZMTG","code":"MTG","name":"Meeting rooms","zone_type":"MEETING","x":17.6,"y":9.8,"w":35.4,"h":12.4,"facade":null}],"cores":[{"x":11.6,"y":10.2,"w":7,"h":5.8,"label":"Lifts"},{"x":35.6,"y":10.2,"w":7,"h":5.8,"label":"Lifts"}],"rooms":[{"room_id":"ROOM_BLD01_F02_BRD","code":"BRD","name":"Boardroom","room_type":"LARGE_CONFERENCE","x":19,"y":9.8,"w":9.4,"h":6.6,"capacity":16,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":true,"has_panel":true,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_WSH","code":"WSH","name":"Workshop","room_type":"MEDIUM_MEETING","x":28.4,"y":9.8,"w":6.8,"h":6.6,"capacity":8,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":true,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_F1","code":"F1","name":"Focus 1","room_type":"FOCUS_BOOTH","x":53.6,"y":9.8,"w":4.9,"h":3.3,"capacity":1,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":false,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_F2","code":"F2","name":"Focus 2","room_type":"FOCUS_BOOTH","x":58.5,"y":9.8,"w":4.9,"h":3.3,"capacity":1,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":false,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_F3","code":"F3","name":"Focus 3","room_type":"FOCUS_BOOTH","x":53.6,"y":13.1,"w":4.9,"h":3.3,"capacity":1,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":false,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_F4","code":"F4","name":"Focus 4","room_type":"FOCUS_BOOTH","x":58.5,"y":13.1,"w":4.9,"h":3.3,"capacity":1,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":false,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_KAV","code":"KAV","name":"Kaveri","room_type":"SMALL_MEETING","x":17.6,"y":17,"w":4,"h":5.2,"capacity":4,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":true,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_VAI","code":"VAI","name":"Vaigai","room_type":"SMALL_MEETING","x":21.6,"y":17,"w":4,"h":5.2,"capacity":4,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":true,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_PAL","code":"PAL","name":"Palar","room_type":"MEDIUM_MEETING","x":25.6,"y":17,"w":5,"h":5.2,"capacity":6,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":true,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_BHA","code":"BHA","name":"Bhavani","room_type":"MEDIUM_MEETING","x":30.6,"y":17,"w":5,"h":5.2,"capacity":6,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":true,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_NOY","code":"NOY","name":"Noyyal","room_type":"SMALL_MEETING","x":35.6,"y":17,"w":4,"h":5.2,"capacity":4,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":true,"is_bookable":true},{"room_id":"ROOM_BLD01_F02_AMA","code":"AMA","name":"Amaravathi","room_type":"MEDIUM_MEETING","x":39.6,"y":17,"w":5,"h":5.2,"capacity":8,"zone_id":"BLD01_F02_ZMTG","has_badge_reader":false,"has_panel":true,"is_bookable":true}],"workspaces":[{"workspace_id":"DESK_BLD01_F02_A01","zone_code":"A","zone_id":"BLD01_F02_ZA","x":2.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A02","zone_code":"A","zone_id":"BLD01_F02_ZA","x":3.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A03","zone_code":"A","zone_id":"BLD01_F02_ZA","x":2.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A04","zone_code":"A","zone_id":"BLD01_F02_ZA","x":3.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B01","zone_code":"B","zone_id":"BLD01_F02_ZB","x":38.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B02","zone_code":"B","zone_id":"BLD01_F02_ZB","x":39.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B03","zone_code":"B","zone_id":"BLD01_F02_ZB","x":38.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B04","zone_code":"B","zone_id":"BLD01_F02_ZB","x":39.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A05","zone_code":"A","zone_id":"BLD01_F02_ZA","x":2.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A06","zone_code":"A","zone_id":"BLD01_F02_ZA","x":3.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A07","zone_code":"A","zone_id":"BLD01_F02_ZA","x":2.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A08","zone_code":"A","zone_id":"BLD01_F02_ZA","x":3.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B05","zone_code":"B","zone_id":"BLD01_F02_ZB","x":38.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B06","zone_code":"B","zone_id":"BLD01_F02_ZB","x":39.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B07","zone_code":"B","zone_id":"BLD01_F02_ZB","x":38.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B08","zone_code":"B","zone_id":"BLD01_F02_ZB","x":39.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A09","zone_code":"A","zone_id":"BLD01_F02_ZA","x":7.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A10","zone_code":"A","zone_id":"BLD01_F02_ZA","x":8.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A11","zone_code":"A","zone_id":"BLD01_F02_ZA","x":7.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A12","zone_code":"A","zone_id":"BLD01_F02_ZA","x":8.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B09","zone_code":"B","zone_id":"BLD01_F02_ZB","x":43.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B10","zone_code":"B","zone_id":"BLD01_F02_ZB","x":44.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B11","zone_code":"B","zone_id":"BLD01_F02_ZB","x":43.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B12","zone_code":"B","zone_id":"BLD01_F02_ZB","x":44.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A13","zone_code":"A","zone_id":"BLD01_F02_ZA","x":7.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A14","zone_code":"A","zone_id":"BLD01_F02_ZA","x":8.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A15","zone_code":"A","zone_id":"BLD01_F02_ZA","x":7.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A16","zone_code":"A","zone_id":"BLD01_F02_ZA","x":8.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B13","zone_code":"B","zone_id":"BLD01_F02_ZB","x":43.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B14","zone_code":"B","zone_id":"BLD01_F02_ZB","x":44.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B15","zone_code":"B","zone_id":"BLD01_F02_ZB","x":43.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B16","zone_code":"B","zone_id":"BLD01_F02_ZB","x":44.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A17","zone_code":"A","zone_id":"BLD01_F02_ZA","x":12.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A18","zone_code":"A","zone_id":"BLD01_F02_ZA","x":13.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A19","zone_code":"A","zone_id":"BLD01_F02_ZA","x":12.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A20","zone_code":"A","zone_id":"BLD01_F02_ZA","x":13.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B17","zone_code":"B","zone_id":"BLD01_F02_ZB","x":48.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B18","zone_code":"B","zone_id":"BLD01_F02_ZB","x":49.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B19","zone_code":"B","zone_id":"BLD01_F02_ZB","x":48.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B20","zone_code":"B","zone_id":"BLD01_F02_ZB","x":49.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A21","zone_code":"A","zone_id":"BLD01_F02_ZA","x":12.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A22","zone_code":"A","zone_id":"BLD01_F02_ZA","x":13.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A23","zone_code":"A","zone_id":"BLD01_F02_ZA","x":12.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A24","zone_code":"A","zone_id":"BLD01_F02_ZA","x":13.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B21","zone_code":"B","zone_id":"BLD01_F02_ZB","x":48.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B22","zone_code":"B","zone_id":"BLD01_F02_ZB","x":49.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B23","zone_code":"B","zone_id":"BLD01_F02_ZB","x":48.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B24","zone_code":"B","zone_id":"BLD01_F02_ZB","x":49.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A25","zone_code":"A","zone_id":"BLD01_F02_ZA","x":17.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A26","zone_code":"A","zone_id":"BLD01_F02_ZA","x":18.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A27","zone_code":"A","zone_id":"BLD01_F02_ZA","x":17.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A28","zone_code":"A","zone_id":"BLD01_F02_ZA","x":18.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B25","zone_code":"B","zone_id":"BLD01_F02_ZB","x":53.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B26","zone_code":"B","zone_id":"BLD01_F02_ZB","x":54.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B27","zone_code":"B","zone_id":"BLD01_F02_ZB","x":53.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B28","zone_code":"B","zone_id":"BLD01_F02_ZB","x":54.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A29","zone_code":"A","zone_id":"BLD01_F02_ZA","x":17.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A30","zone_code":"A","zone_id":"BLD01_F02_ZA","x":18.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A31","zone_code":"A","zone_id":"BLD01_F02_ZA","x":17.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A32","zone_code":"A","zone_id":"BLD01_F02_ZA","x":18.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B29","zone_code":"B","zone_id":"BLD01_F02_ZB","x":53.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B30","zone_code":"B","zone_id":"BLD01_F02_ZB","x":54.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B31","zone_code":"B","zone_id":"BLD01_F02_ZB","x":53.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B32","zone_code":"B","zone_id":"BLD01_F02_ZB","x":54.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A33","zone_code":"A","zone_id":"BLD01_F02_ZA","x":22.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A34","zone_code":"A","zone_id":"BLD01_F02_ZA","x":23.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A35","zone_code":"A","zone_id":"BLD01_F02_ZA","x":22.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A36","zone_code":"A","zone_id":"BLD01_F02_ZA","x":23.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B33","zone_code":"B","zone_id":"BLD01_F02_ZB","x":58.0,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B34","zone_code":"B","zone_id":"BLD01_F02_ZB","x":59.5,"y":2.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B35","zone_code":"B","zone_id":"BLD01_F02_ZB","x":58.0,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B36","zone_code":"B","zone_id":"BLD01_F02_ZB","x":59.5,"y":3.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A37","zone_code":"A","zone_id":"BLD01_F02_ZA","x":22.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A38","zone_code":"A","zone_id":"BLD01_F02_ZA","x":23.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_A39","zone_code":"A","zone_id":"BLD01_F02_ZA","x":22.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_A40","zone_code":"A","zone_id":"BLD01_F02_ZA","x":23.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B37","zone_code":"B","zone_id":"BLD01_F02_ZB","x":58.0,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B38","zone_code":"B","zone_id":"BLD01_F02_ZB","x":59.5,"y":6.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_B39","zone_code":"B","zone_id":"BLD01_F02_ZB","x":58.0,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_B40","zone_code":"B","zone_id":"BLD01_F02_ZB","x":59.5,"y":6.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C01","zone_code":"C","zone_id":"BLD01_F02_ZC","x":2.0,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C02","zone_code":"C","zone_id":"BLD01_F02_ZC","x":3.5,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C03","zone_code":"C","zone_id":"BLD01_F02_ZC","x":2.0,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C04","zone_code":"C","zone_id":"BLD01_F02_ZC","x":3.5,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C05","zone_code":"C","zone_id":"BLD01_F02_ZC","x":2.0,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C06","zone_code":"C","zone_id":"BLD01_F02_ZC","x":3.5,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C07","zone_code":"C","zone_id":"BLD01_F02_ZC","x":2.0,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C08","zone_code":"C","zone_id":"BLD01_F02_ZC","x":3.5,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C09","zone_code":"C","zone_id":"BLD01_F02_ZC","x":7.0,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C10","zone_code":"C","zone_id":"BLD01_F02_ZC","x":8.5,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C11","zone_code":"C","zone_id":"BLD01_F02_ZC","x":7.0,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C12","zone_code":"C","zone_id":"BLD01_F02_ZC","x":8.5,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C13","zone_code":"C","zone_id":"BLD01_F02_ZC","x":7.0,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C14","zone_code":"C","zone_id":"BLD01_F02_ZC","x":8.5,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C15","zone_code":"C","zone_id":"BLD01_F02_ZC","x":7.0,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C16","zone_code":"C","zone_id":"BLD01_F02_ZC","x":8.5,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C17","zone_code":"C","zone_id":"BLD01_F02_ZC","x":12.0,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C18","zone_code":"C","zone_id":"BLD01_F02_ZC","x":13.5,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C19","zone_code":"C","zone_id":"BLD01_F02_ZC","x":12.0,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C20","zone_code":"C","zone_id":"BLD01_F02_ZC","x":13.5,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C21","zone_code":"C","zone_id":"BLD01_F02_ZC","x":12.0,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C22","zone_code":"C","zone_id":"BLD01_F02_ZC","x":13.5,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_C23","zone_code":"C","zone_id":"BLD01_F02_ZC","x":12.0,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_C24","zone_code":"C","zone_id":"BLD01_F02_ZC","x":13.5,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D01","zone_code":"D","zone_id":"BLD01_F02_ZD","x":46.2,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D02","zone_code":"D","zone_id":"BLD01_F02_ZD","x":47.7,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D03","zone_code":"D","zone_id":"BLD01_F02_ZD","x":46.2,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D04","zone_code":"D","zone_id":"BLD01_F02_ZD","x":47.7,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D05","zone_code":"D","zone_id":"BLD01_F02_ZD","x":46.2,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D06","zone_code":"D","zone_id":"BLD01_F02_ZD","x":47.7,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D07","zone_code":"D","zone_id":"BLD01_F02_ZD","x":46.2,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D08","zone_code":"D","zone_id":"BLD01_F02_ZD","x":47.7,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D09","zone_code":"D","zone_id":"BLD01_F02_ZD","x":50.8,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D10","zone_code":"D","zone_id":"BLD01_F02_ZD","x":52.3,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D11","zone_code":"D","zone_id":"BLD01_F02_ZD","x":50.8,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D12","zone_code":"D","zone_id":"BLD01_F02_ZD","x":52.3,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D13","zone_code":"D","zone_id":"BLD01_F02_ZD","x":50.8,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D14","zone_code":"D","zone_id":"BLD01_F02_ZD","x":52.3,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D15","zone_code":"D","zone_id":"BLD01_F02_ZD","x":50.8,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D16","zone_code":"D","zone_id":"BLD01_F02_ZD","x":52.3,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D17","zone_code":"D","zone_id":"BLD01_F02_ZD","x":55.4,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D18","zone_code":"D","zone_id":"BLD01_F02_ZD","x":56.9,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D19","zone_code":"D","zone_id":"BLD01_F02_ZD","x":55.4,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D20","zone_code":"D","zone_id":"BLD01_F02_ZD","x":56.9,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D21","zone_code":"D","zone_id":"BLD01_F02_ZD","x":55.4,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D22","zone_code":"D","zone_id":"BLD01_F02_ZD","x":56.9,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D23","zone_code":"D","zone_id":"BLD01_F02_ZD","x":55.4,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D24","zone_code":"D","zone_id":"BLD01_F02_ZD","x":56.9,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D25","zone_code":"D","zone_id":"BLD01_F02_ZD","x":60.0,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D26","zone_code":"D","zone_id":"BLD01_F02_ZD","x":61.5,"y":19.0,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D27","zone_code":"D","zone_id":"BLD01_F02_ZD","x":60.0,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D28","zone_code":"D","zone_id":"BLD01_F02_ZD","x":61.5,"y":19.75,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D29","zone_code":"D","zone_id":"BLD01_F02_ZD","x":60.0,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D30","zone_code":"D","zone_id":"BLD01_F02_ZD","x":61.5,"y":22.6,"w":1.5,"h":0.75,"facing":"N"},{"workspace_id":"DESK_BLD01_F02_D31","zone_code":"D","zone_id":"BLD01_F02_ZD","x":60.0,"y":23.35,"w":1.5,"h":0.75,"facing":"S"},{"workspace_id":"DESK_BLD01_F02_D32","zone_code":"D","zone_id":"BLD01_F02_ZD","x":61.5,"y":23.35,"w":1.5,"h":0.75,"facing":"S"}],"access_points":[{"access_point_id":"AP_BLD01_F02_LOBBY_W","reader_type":"FLOOR_LOBBY","x":15.1,"y":9.9,"target_id":"BLD01_F02"},{"access_point_id":"AP_BLD01_F02_LOBBY_E","reader_type":"FLOOR_LOBBY","x":39.1,"y":9.9,"target_id":"BLD01_F02"},{"access_point_id":"AP_ROOM_BLD01_F02_BRD_DOOR","reader_type":"ROOM_DOOR","x":23.7,"y":9.8,"target_id":"ROOM_BLD01_F02_BRD"},{"access_point_id":"AP_BLD01_F02_ZD_SECURE","reader_type":"SECURE_ZONE","x":44.6,"y":21.2,"target_id":"BLD01_F02_ZD"}]};
+const NS = "http://www.w3.org/2000/svg", svg = document.getElementById("plan");
+const el = (t, a, p) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); (p || svg).appendChild(n); return n; };
+let seed = 11; const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+const f1 = v => v.toFixed(1);
+
+/* ---------- sample state (what the backend would stream) ---------- */
+const DEPTS = { Engineering:"#2F6FDE", Operations:"#C2417A", Sales:"#0F8F6E", Marketing:"#C07A0A", Finance:"#6D3FD1", HR:"#D0452F", Management:"#11879E" };
+const ZONE_DEPT = { A:["Engineering","Management"], B:["Engineering","Operations"], C:["Sales","Marketing","HR"], D:["Finance"] };
+const OCC = { A:.62, B:.55, C:.35, D:.5 };
+const DESKS = PLAN.workspaces.map(d => { const r = rnd(); const zc = d.zone_code;
+  return { ...d, state: r < .02 ? "off" : r < OCC[zc] ? "occ" : r < OCC[zc] + .07 ? "held" : "vacant", dept: ZONE_DEPT[zc][Math.floor(rnd() * ZONE_DEPT[zc].length)],
+    emp: "EMP000" + (300 + Math.floor(rnd() * 600)), since: `${9 + Math.floor(rnd() * 2)}:${String(Math.floor(rnd() * 60)).padStart(2, "0")}` }; });
+const ROOMSTATE = { BRD:[11,"in_use",true], WSH:[0,"released"], F1:[1,"in_use"], F2:[1,"in_use"], F3:[0,"free"], F4:[0,"free"], KAV:[3,"in_use",true], VAI:[0,"free"],
+  PAL:[5,"in_use",true], BHA:[2,"oversized",true], NOY:[5,"over",true], AMA:[0,"booked"] };
+/* environment per area: temp now, setpoint, mode, light %, co2; hist = last readings (5 min apart), oldest first */
+const ENV = { A:[23.4,23.5,"NORMAL",70,640,0.3], HUB:[25.2,25.5,"ECO",30,450,0.5], B:[23.7,23.5,"NORMAL",70,610,0.2], LOU:[24.0,23.5,"NORMAL",100,520,0], CAF:[24.4,23.5,"NORMAL",100,700,0.4],
+  C:[23.0,23.5,"NORMAL",100,560,-0.1], D:[25.2,23.5,"NORMAL",100,760,0.7], BRD:[24.6,22.5,"HIGH",100,1010,0.6], WSH:[25.3,25.5,"ECO",0,470,0.4],
+  F1:[23.9,23.5,"NORMAL",100,600,0.1], F2:[24.0,23.5,"NORMAL",100,610,0.1], F3:[25.0,25.5,"ECO",0,430,0.2], F4:[25.1,25.5,"ECO",0,430,0.2],
+  KAV:[23.8,23.5,"NORMAL",100,720,0.3], VAI:[25.2,25.5,"ECO",0,440,0.3], PAL:[24.4,23.5,"NORMAL",100,880,0.5], BHA:[23.7,23.5,"NORMAL",100,590,0.1],
+  NOY:[26.1,23.5,"BOOST",100,1180,1.2], AMA:[23.9,23.5,"PRECOOL",0,450,-0.6] };
+const AREAS = [];
+PLAN.zones.filter(z => z.zone_type !== "MEETING").forEach(z => {
+  const desks = DESKS.filter(d => d.zone_code === z.code);
+  AREAS.push({ ...z, id:z.code, kind:"zone", cap: desks.length || z.capacity, count: desks.length ? null : { HUB:0, LOU:3, CAF:14 }[z.code] }); });
+PLAN.rooms.forEach(r => { const s = ROOMSTATE[r.code]; AREAS.push({ ...r, id:r.code, kind:"room", cap:r.capacity, count:s[0], status:s[1], checkin:!!s[2] }); });
+AREAS.forEach(a => { const e = ENV[a.id]; a.temp = e[0]; a.setpoint = e[1]; a.mode = e[2]; a.light = e[3]; a.co2 = e[4];
+  a.hist = Array.from({ length:12 }, (_, i) => a.temp - e[5] * (11 - i) / 3 + (rnd() - .5) * .08); a.hist[11] = a.temp; });
+const people = a => a.count !== null ? a.count : DESKS.filter(d => d.zone_code === a.code && d.state === "occ").length;
+const trend = a => a.temp - a.hist[a.hist.length - 4];           /* change over the last 15 min */
+
+/* ---------- drawing ---------- */
+const S = { view:"ops", layer:"occ", sel:null }; const L = {};
+function shell() {
+  svg.innerHTML = "";
+  const d = el("defs", {});
+  const h = el("pattern", { id:"hatch", width:.7, height:.7, patternUnits:"userSpaceOnUse", patternTransform:"rotate(45)" }, d);
+  el("line", { x1:0, y1:0, x2:0, y2:.7, stroke:"var(--core-hatch)", "stroke-width":.18 }, h);
+  const o = el("pattern", { id:"off", width:.3, height:.3, patternUnits:"userSpaceOnUse", patternTransform:"rotate(45)" }, d);
+  el("rect", { width:.3, height:.3, fill:"var(--desk-off)" }, o); el("line", { x1:0, y1:0, x2:0, y2:.3, stroke:"var(--desk-off-line)", "stroke-width":.07 }, o);
+  el("rect", { x:0, y:0, width:64, height:26, fill:"var(--paper)" });
+  ["zones","overlay","rooms","desks","walls","labels","dots"].forEach(k => L[k] = el("g", {}));
+  AREAS.filter(a => a.kind === "zone").forEach(a => { const r = el("rect", { x:a.x, y:a.y, width:a.w, height:a.h, fill: ["COLLABORATION","LOUNGE","CAFETERIA"].includes(a.zone_type) ? "var(--z-common)" : "var(--z-work)", style:"cursor:pointer" }, L.zones);
+    r.addEventListener("click", () => select(a));
+    if (a.is_restricted) el("rect", { x:a.x+.15, y:a.y+.15, width:a.w-.3, height:a.h-.3, fill:"none", stroke:"var(--z-secure)", "stroke-width":.1, "stroke-dasharray":".6 .35" }, L.walls);
+    const t = el("text", { x:a.x+.5, y:a.y+1.05, "font-size":.66, "font-weight":500, fill:"var(--ink-2)" }, L.labels); t.textContent = a.name + (a.is_restricted ? " · secure" : "");
+    if (a.count !== null) { const c = el("text", { class:"cnt", x:a.x+.5, y:a.y+1.9, "font-size":.6, fill:"var(--ink-3)" }, L.labels); c.textContent = `${a.count} of ${a.cap}`; } });
+  PLAN.cores.forEach(c => { el("rect", { x:c.x, y:c.y, width:c.w, height:c.h, fill:"url(#hatch)", stroke:"var(--wall)", "stroke-width":.12 }, L.walls);
+    const t = el("text", { x:c.x + c.w/2, y:c.y + c.h/2 + .22, "text-anchor":"middle", "font-size":.62, fill:"var(--ink-3)" }, L.labels); t.textContent = c.label; });
+  el("rect", { x:0, y:0, width:64, height:26, fill:"none", stroke:"var(--wall)", "stroke-width":.28 }, L.walls);
+  el("rect", { x:.14, y:.14, width:63.72, height:25.72, fill:"none", stroke:"var(--glass)", "stroke-width":.14, "stroke-dasharray":"1.7 .3" }, L.walls);
+  for (let x = 0; x <= 64; x += 8) [0, 8.9, 17, 26].forEach(y => el("rect", { x:x-.22, y:y-.22, width:.44, height:.44, fill:"var(--column)" }, L.walls));
+  [[19,9.8,16.2,6.6],[17.6,17,27,5.2],[53.6,9.8,9.8,6.6]].forEach(([x,y,w,h]) => el("rect", { x, y, width:w, height:h, fill:"none", stroke:"var(--wall)", "stroke-width":.14 }, L.walls));
+  PLAN.access_points.forEach(r => { const col = r.reader_type === "SECURE_ZONE" ? "var(--danger)" : r.reader_type === "ROOM_DOOR" ? "var(--accent)" : "var(--ink-2)";
+    const g = el("g", { transform:`translate(${r.x} ${r.y})` }, L.walls); el("rect", { x:-.26, y:-.26, width:.52, height:.52, rx:.1, fill:col, transform:"rotate(45)" }, g);
+    el("title", {}, g).textContent = r.reader_type.replace("_"," ").toLowerCase() + " reader"; });
+  rooms(); desks(); overlay(); dots();
+}
+const LONG = { released:"Released", over:"Over capacity", oversized:"Oversized", booked:"Booked 11:00" }, SHORT = { released:"Released", over:"Over", oversized:"Too big", booked:"Booked" };
+const CHIP = { released:["var(--released)","var(--released-bg)"], over:["var(--danger)","var(--danger-bg)"], oversized:["var(--warn)","var(--warn-bg)"], booked:["var(--ink-2)","var(--z-meet)"] };
+function rooms() {
+  const G = L.rooms; G.innerHTML = "";
+  AREAS.filter(a => a.kind === "room").forEach(r => {
+    const g = el("g", { tabindex:0, role:"button", "aria-label":`${r.name}, ${r.count} of ${r.cap}`, style:"cursor:pointer" }, G);
+    g.addEventListener("click", () => select(r)); g.addEventListener("keydown", e => e.key === "Enter" && select(r));
+    const u = Math.min(1, r.count / r.cap), occLayer = S.layer === "occ";
+    el("rect", { x:r.x+.08, y:r.y+.08, width:r.w-.16, height:r.h-.16,
+      fill: !occLayer ? "transparent" : r.count ? `color-mix(in srgb, var(--accent) ${Math.round(10 + 30*u)}%, var(--paper))` : "var(--z-meet)",
+      stroke: occLayer && r.status === "over" ? "var(--danger)" : occLayer && r.status === "released" ? "var(--released)" : "var(--room-line)",
+      "stroke-width": occLayer && (r.status === "over" || r.status === "released") ? .15 : .08,
+      "stroke-dasharray": occLayer && (r.status === "released" || r.status === "booked") ? ".45 .3" : "none" }, g);
+    const small = r.cap === 1;
+    el("text", { x:r.x+.4, y:r.y+(small ? 1 : 1.15), "font-size": small ? .54 : .66, "font-weight":500, fill:"var(--room-text)" }, g).textContent = r.name;
+    el("text", { x:r.x+.4, y:r.y+(small ? 1.75 : 2), "font-size":.58, fill:"var(--ink-2)" }, g).textContent = `${r.count}/${r.cap}`;
+    if (occLayer && CHIP[r.status] && !small) { const lab = r.w < 5.5 ? SHORT[r.status] : LONG[r.status], [fg, bg] = CHIP[r.status], w = lab.length*.31 + .7;
+      el("rect", { x:r.x+.35, y:r.y+r.h-1.25, width:w, height:.8, rx:.4, fill:bg, stroke:fg, "stroke-width":.05 }, g);
+      el("text", { x:r.x+.35+w/2, y:r.y+r.h-.66, "text-anchor":"middle", "font-size":.5, "font-weight":500, fill:fg }, g).textContent = lab; }
+    if (S.sel === r) el("rect", { x:r.x+.2, y:r.y+.2, width:r.w-.4, height:r.h-.4, fill:"none", stroke:"var(--focus)", "stroke-width":.14 }, g);
+  });
+}
+function deskStyle(d) { return d.state === "occ" ? ["var(--desk-occ)","var(--desk-occ-line)"] : d.state === "held" ? ["var(--desk-held)","var(--desk-held-line)"]
+  : d.state === "off" ? ["url(#off)","var(--desk-off-line)"] : ["var(--desk-vacant)","var(--desk-vacant-line)"]; }
+function desks() {
+  const G = L.desks; G.innerHTML = ""; G.setAttribute("opacity", S.layer === "occ" ? 1 : .35);
+  DESKS.forEach(d => {
+    const g = el("g", { tabindex:0, role:"button", "aria-label":`Desk ${d.workspace_id}, ${d.state}`, style:"cursor:pointer" }, G);
+    g.addEventListener("click", () => select(d)); g.addEventListener("keydown", e => e.key === "Enter" && select(d));
+    const [f, s] = S.layer === "occ" ? deskStyle(d) : ["var(--desk-vacant)","var(--desk-vacant-line)"];
+    el("rect", { x:d.x+.07, y:d.y+.05, width:1.36, height:.65, rx:.1, fill:f, stroke:s, "stroke-width":.06 }, g);
+    if (d.state === "held" && S.layer === "occ") el("circle", { cx:d.x+.75, cy:d.y+.375, r:.13, fill:"var(--panel)" }, g);
+    if (S.sel === d) el("rect", { x:d.x-.1, y:d.y-.1, width:1.7, height:.95, rx:.18, fill:"none", stroke:"var(--focus)", "stroke-width":.12 }, g);
+  });
+}
+/* temperature colour: cool blue → comfort neutral → warm orange → hot red */
+function tempColor(t) { const st = [[21,"#3B7DD8"],[22.5,"#C9DBF3"],[24.5,"#EEF1F5"],[26,"#F0903A"],[27.5,"#D23B2A"]];
+  let a = st[0], b = st[4]; for (let i = 0; i < 4; i++) if (t >= st[i][0] && t <= st[i+1][0]) { a = st[i]; b = st[i+1]; }
+  const k = Math.max(0, Math.min(1, (t - a[0]) / (b[0] - a[0]))); return `color-mix(in srgb, ${b[1]} ${Math.round(k*100)}%, ${a[1]})`; }
+function arrow(dt) { return Math.abs(dt) < .2 ? ["→", "var(--ink-3)"] : dt > 0 ? [`▲${f1(dt)}`, "var(--warm)"] : [`▼${f1(-dt)}`, "var(--cool)"]; }
+const HV = { ECO:["Eco","#1F9D7A"], HIGH:["High","#E07A1F"], BOOST:["Vent boost","#E07A1F"], PRECOOL:["Pre-cool","#3B7DD8"] };
+function overlay() {
+  const G = L.overlay; G.innerHTML = ""; L.labels.querySelectorAll(".ov").forEach(n => n.remove());
+  AREAS.forEach(a => {
+    const isRoom = a.kind === "room", small = a.cap === 1, [arr, ac] = arrow(trend(a));
+    const put = (txt, col, top = false) => { const t = el("text", { class:"ov", x:a.x + a.w - .4, y: isRoom && !top ? a.y + a.h - .45 : a.y + 1.05, "text-anchor":"end",
+      "font-size": small ? .5 : .6, "font-weight":500, fill:col, "pointer-events":"none" }, L.labels); t.textContent = txt; };
+    if (S.layer === "occ") {                     /* only exceptions on the default layer: hot and warming */
+      if (a.temp >= 25.5 && people(a) > 0) put(isRoom && a.w < 5.5 ? `${f1(a.temp)}°▲` : `${f1(a.temp)}° ${arr}`, "var(--warm)", true); return; }
+    let fill = null;
+    if (S.layer === "temp") { fill = `color-mix(in srgb, ${tempColor(a.temp)} 70%, transparent)`; put(small ? `${f1(a.temp)}°` : `${f1(a.temp)}°  ${arr}`, small ? "var(--ink)" : ac === "var(--ink-3)" ? "var(--ink)" : ac); }
+    if (S.layer === "light") { const lv = a.light; fill = lv >= 100 ? "rgba(250,204,21,.28)" : lv >= 70 ? "rgba(250,204,21,.15)" : lv > 0 ? "rgba(100,116,139,.15)" : "rgba(51,65,85,.26)";
+      put(lv ? `${lv}%` : "Off", "var(--ink)"); }
+    if (S.layer === "hvac" && HV[a.mode]) { fill = `color-mix(in srgb, ${HV[a.mode][1]} 20%, transparent)`; put(HV[a.mode][0], "var(--ink)"); }
+    if (fill) el("rect", { x:a.x+.08, y:a.y+.08, width:a.w-.16, height:a.h-.16, fill, "pointer-events":"none" }, G);
+  });
+}
+const dotNodes = {};
+function dots() {
+  const G = L.dots; G.style.display = S.view === "sim" ? "" : "none"; if (S.view !== "sim") return;
+  const seen = new Set(), add = (key, x, y, c) => { seen.add(key); let n = dotNodes[key];
+    if (!n || !n.isConnected) { n = el("circle", { class:"dot", r:.3, fill:c, stroke:"var(--paper)", "stroke-width":.09 }, G); n.style.transition = "transform .9s cubic-bezier(.4,0,.2,1)"; dotNodes[key] = n; }
+    n.style.transform = `translate(${x}px, ${y}px)`; };
+  DESKS.forEach(d => d.state === "occ" && add("d" + d.workspace_id, d.x + .75, d.facing === "N" ? d.y - .35 : d.y + 1.1, DEPTS[d.dept]));
+  AREAS.filter(a => a.count).forEach(a => { for (let i = 0; i < a.count; i++) { const t = i / a.count * Math.PI * 2;
+    add("a" + a.id + i, a.x + a.w/2 + Math.min(a.w*.3, 2.4)*Math.cos(t), a.y + a.h/2 + .45 + Math.min(a.h*.22, 1.2)*Math.sin(t), Object.values(DEPTS)[(i*3 + a.name.length) % 7]); } });
+  for (const k in dotNodes) if (!seen.has(k)) { dotNodes[k].remove(); delete dotNodes[k]; }
+}
+
+/* ---------- panels ---------- */
+function ops() {
+  const occ = DESKS.filter(d => d.state === "occ").length, held = DESKS.filter(d => d.state === "held").length;
+  const inUse = AREAS.filter(a => a.kind === "room" && a.cap > 1 && a.count > 0).length, inRooms = AREAS.filter(a => a.count).reduce((s, a) => s + a.count, 0);
+  const hot = AREAS.filter(a => a.temp >= 25.5 && people(a) > 0).length;
+  const cells = [[`${Math.round(100*occ/DESKS.length)}%`,"Desk utilisation"],[`${occ} · ${held}`,"Desks occupied · held"],[`${inUse}/8`,"Meeting rooms in use"],
+    [occ + inRooms,"Estimated people"],[hot,"Warm spots (≥ 25.5 °C)"]];
+  if (S.view === "sim") cells.push([occ + inRooms + 6, "True headcount", true]);
+  document.getElementById("ops").innerHTML = cells.map(([v,l,t]) => `<div class="${t ? "truth" : ""}"><b>${v}</b><span>${l}</span></div>`).join("");
+}
+function legend() {
+  const sw = (bg, bd, x = "") => `<i class="sw" style="background:${bg};border-color:${bd};${x}"></i>`;
+  const sets = {
+    occ:[[sw("var(--desk-occ)","var(--desk-occ-line)"),"Occupied"],[sw("var(--desk-held)","var(--desk-held-line)"),"Held, away"],[sw("var(--desk-vacant)","var(--desk-vacant-line)"),"Available"],
+      [sw("color-mix(in srgb, var(--accent) 32%, var(--paper))","var(--room-line)"),"Room in use"],[`<b style="color:var(--warm);font-weight:500">25.9° ▲</b>`,"Warm and rising"]],
+    temp:[[sw("#3B7DD8","#3B7DD8"),"21°"],[sw("#EEF1F5","#B4BDC8"),"22.5–24.5° comfort"],[sw("#F0903A","#F0903A"),"26°"],[sw("#D23B2A","#D23B2A"),"27.5°"],
+      [`<b style="color:var(--warm);font-weight:500">▲</b><b style="color:var(--cool);font-weight:500">▼</b>`,"Change in last 15 min"]],
+    light:[[sw("rgba(250,204,21,.4)","#C9A10A"),"Full"],[sw("rgba(250,204,21,.2)","#C9A10A"),"Daylight dimmed"],[sw("rgba(100,116,139,.2)","#8E98A5"),"Dimmed, empty"],[sw("rgba(51,65,85,.32)","#5A6674"),"Off"]],
+    hvac:[[sw("color-mix(in srgb,#1F9D7A 28%,transparent)","#1F9D7A"),"Eco"],[sw("color-mix(in srgb,#3B7DD8 28%,transparent)","#3B7DD8"),"Pre-cool"],[sw("color-mix(in srgb,#E07A1F 28%,transparent)","#E07A1F"),"High / vent boost"]] };
+  let html = sets[S.layer].map(([s,l]) => `<span>${s}${l}</span>`).join("");
+  if (S.view === "sim") html += Object.entries(DEPTS).map(([d,c]) => `<span><i class="sw" style="background:${c};border-color:${c};border-radius:50%;width:10px"></i>${d}</span>`).join("");
+  document.getElementById("legend").innerHTML = html;
+  document.getElementById("note").textContent = S.view === "sim" ? "Dots are ground truth from the simulation. Figures above stay sensor- and badge-based; the striped cell is truth."
+    : "Shows only what building systems report: desk sensors, logins, room counters, badge readers and zone sensors.";
+}
+function spark(a) {
+  const W = 280, H = 64, vals = [...a.hist, a.setpoint], lo = Math.min(...vals) - .3, hi = Math.max(...vals) + .3;
+  const X = i => i / (a.hist.length - 1) * (W - 8) + 4, Y = v => H - 6 - (v - lo) / (hi - lo) * (H - 14);
+  const path = a.hist.map((v, i) => `${i ? "L" : "M"}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join("");
+  return `<div class="spark"><svg width="100%" viewBox="0 0 ${W} ${H}" role="img" aria-label="Temperature over the last hour">
+    <line x1="4" x2="${W-4}" y1="${Y(a.setpoint)}" y2="${Y(a.setpoint)}" stroke="var(--ink-3)" stroke-dasharray="4 3" stroke-width="1"/>
+    <path d="${path}" fill="none" stroke="var(--warm)" stroke-width="2"/><circle cx="${X(a.hist.length-1)}" cy="${Y(a.temp)}" r="3" fill="var(--warm)"/></svg>
+    <small>Last hour · dashed line = setpoint ${f1(a.setpoint)} °C</small></div>`;
+}
+function select(o) {
+  S.sel = o; rooms(); desks(); const box = document.getElementById("detail"); let rows, extra = "";
+  if (o.workspace_id) {
+    rows = [["Desk", o.workspace_id.replace("DESK_BLD01_F02_","")], ["Area", AREAS.find(a => a.code === o.zone_code).name],
+      ["Sensor", o.state === "occ" ? `Occupied since ${o.since}` : o.state === "off" ? "Offline" : "Vacant"],
+      ["Workstation", o.state === "occ" || o.state === "held" ? `${o.emp} logged in` : "No login"]];
+  } else {
+    const [arr] = arrow(trend(o)), n = people(o);
+    const why = o.kind === "room" ? { released:"Booking auto-released, lights off, eco", over:"Ventilation boosted", oversized:"Right-size suggestion", booked:"Pre-cooling for 11:00", free:"Lights off, eco" }[o.status] : null;
+    rows = [[o.kind === "room" ? "Room" : "Area", o.name], ["People", `${n} of ${o.cap}`], ["Temperature", `${f1(o.temp)} °C <span class="${arr.startsWith("▲") ? "up" : arr.startsWith("▼") ? "down" : ""}">${arr}</span>`],
+      ["CO₂", `${Math.round(o.co2)} ppm`], ["HVAC", (HV[o.mode] || ["Normal"])[0]], ["Lighting", o.light ? `${o.light}%` : "Off"]];
+    if (why) rows.push(["Automation", why]);
+    extra = spark(o);
+  }
+  box.innerHTML = `<h2>Selection</h2><dl>${rows.map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>${extra}`;
+}
+const LOG = [
+  ["10:41","room","Workshop booking released","No one arrived 10 min after start."],
+  ["10:38","hvac","Noyyal ventilation boosted","5 people in a 4-seat room, CO₂ 1,180 ppm."],
+  ["10:35","hvac","Amaravathi pre-cooling","Booked for 11:00, 7 attendees."],
+  ["10:05","light","Team hub dimmed to 30%","Empty for 15 min."],
+];
+function log() { const tag = { hvac:["HVAC","t-hvac"], light:["Lighting","t-light"], room:["Rooms","t-room"] };
+  document.getElementById("log").innerHTML = LOG.slice(0, 4).map(([t,k,a,b]) => `<li><time>${t}</time><div><span class="tag ${tag[k][1]}">${tag[k][0]}</span>${a}<small>${b}</small></div></li>`).join(""); }
+
+/* ---------- crowd-driven environment + automation (demo of the algorithm) ---------- */
+let minute = 42;
+function step() {
+  minute += 5;
+  const hhmm = `${10 + Math.floor(minute/60)}:${String(minute % 60).padStart(2, "0")}`;
+  for (let i = 0; i < 5; i++) { const d = DESKS[Math.floor(rnd()*DESKS.length)]; if (d.state === "off") continue;
+    d.state = d.state === "occ" ? (rnd() < .5 ? "held" : "vacant") : d.state === "held" ? "occ" : (rnd() < .55 ? "occ" : "vacant"); }
+  AREAS.forEach(a => {
+    if (a.kind === "room" && a.status === "in_use" && a.cap > 1) a.count = Math.max(1, Math.min(a.cap, a.count + (rnd() < .5 ? -1 : 1)));
+    const n = people(a), load = Math.min(1.5, n / Math.max(1, a.cap));
+    const target = a.setpoint + 1.3 * load, vent = a.mode === "BOOST" ? .12 : a.mode === "HIGH" ? .08 : a.mode === "ECO" ? .02 : .05;
+    a.temp = a.temp + (target - a.temp) * .35 + (rnd() - .5) * .06;
+    a.co2 = 420 + (a.co2 - 420) * Math.exp(-vent * 5) + (24 * load / vent) * (1 - Math.exp(-vent * 5));
+    a.hist.push(a.temp); a.hist.shift();
+    /* rules act on observed values only */
+    if (n === 0 && a.mode !== "ECO" && a.mode !== "PRECOOL") { a.mode = "ECO"; a.setpoint = 25.5; a.light = a.kind === "room" ? 0 : 30;
+      LOG.unshift([hhmm, "light", `${a.name} set to eco`, a.kind === "room" ? "Room empty. Lights off." : "Area empty for 15 min. Lights 30%."]); }
+    else if (n > 0 && a.mode === "ECO") { a.mode = "NORMAL"; a.setpoint = 23.5; a.light = a.daylight ? 70 : 100; LOG.unshift([hhmm, "hvac", `${a.name} back to normal`, "People detected."]); }
+    else if (a.temp >= 25.5 && n > 0 && a.setpoint > 22.5) { a.setpoint -= 1; LOG.unshift([hhmm, "hvac", `Cooling increased in ${a.name}`, `${f1(a.temp)} °C with ${n} people. Setpoint now ${f1(a.setpoint)} °C.`]); }
+    else if (a.co2 > 1000 && a.mode !== "BOOST") { a.mode = "BOOST"; LOG.unshift([hhmm, "hvac", `${a.name} ventilation boosted`, `CO₂ ${Math.round(a.co2)} ppm.`]); }
+  });
+  document.getElementById("clock").textContent = `Wed 23 Sep · ${hhmm}`;
+  shell(); ops(); log(); if (S.sel) select(S.sel);
+}
+
+/* ---------- controls ---------- */
+document.querySelectorAll("[data-view]").forEach(b => b.onclick = () => { S.view = b.dataset.view; document.querySelectorAll("[data-view]").forEach(x => x.setAttribute("aria-pressed", x === b)); dots(); ops(); legend(); });
+document.querySelectorAll("[data-layer]").forEach(b => b.onclick = () => { S.layer = b.dataset.layer; document.querySelectorAll("[data-layer]").forEach(x => x.setAttribute("aria-pressed", x === b)); shell(); legend(); });
+document.getElementById("theme").onclick = e => { const dark = document.documentElement.dataset.theme !== "dark"; document.documentElement.dataset.theme = dark ? "dark" : "light";
+  e.target.textContent = dark ? "Light" : "Dark"; e.target.setAttribute("aria-label", `Switch to ${dark ? "light" : "dark"} theme`); };
+let timer = null;
+document.getElementById("play").onclick = e => { if (timer) { clearInterval(timer); timer = null; e.target.textContent = "Play demo"; e.target.setAttribute("aria-pressed","false"); return; }
+  e.target.textContent = "Pause demo"; e.target.setAttribute("aria-pressed","true"); timer = setInterval(step, 1800); };
+shell(); ops(); legend(); log();
+</script>
+</body>
+</html>

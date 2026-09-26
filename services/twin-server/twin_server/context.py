@@ -16,7 +16,9 @@ from twin_server.masterdata.service import MasterDataService
 from twin_server.processor import EventProcessorService
 from twin_server.processor.live_state import LiveState
 from twin_server.settings import Settings
+from twin_server.v2.world import V2World, build_v2_world
 from workplace_domain.config import WorkplaceConfig
+from workplace_domain.config.v2 import load_v2_config
 from workplace_domain.models import MasterData
 
 
@@ -31,6 +33,8 @@ class AppContext:
     processor: EventProcessorService
     runner: LiveRunner | None = None
     live: LiveService | None = field(default=None)
+    # Live Simulation v2 world (separate from v1; None when config/v2 is absent).
+    v2: V2World | None = None
 
     @classmethod
     def build(cls, settings: Settings, config: WorkplaceConfig) -> AppContext:
@@ -56,6 +60,11 @@ class AppContext:
         self.runner = LiveRunner(sim, master, self.bus, state, truth)
         self.processor.live_state = state
         self.live = LiveService(master, self.runner, state, truth)
+
+    def attach_v2(self) -> None:
+        """Build the v2 world from config/v2 (optional; v1 never depends on it)."""
+        v2_cfg, plan = load_v2_config(self.settings.config_dir)
+        self.v2 = build_v2_world(self.config, v2_cfg, plan)
 
     def start(self) -> None:
         self.processor.start()
