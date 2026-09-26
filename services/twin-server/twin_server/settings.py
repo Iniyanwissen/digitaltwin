@@ -28,6 +28,9 @@ class Settings(BaseSettings):
     # Wall-clock interval for service heartbeat log lines (operational only).
     heartbeat_interval_s: float = 30.0
 
+    # Seconds to wait for open connections (UI proxy, WebSockets) on shutdown/reload.
+    shutdown_timeout_s: int = 3
+
     # Apply database migrations at startup (also after auto-reload).
     auto_migrate: bool = True
 

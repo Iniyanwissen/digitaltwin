@@ -297,3 +297,15 @@ def test_device_type_mix_is_exact(config: WorkplaceConfig, master: MasterData) -
     counts = Counter(w.device_type for w in workspaces)
     for device, share in config.simulation.office.device_type_mix.items():
         assert abs(counts[DeviceType(device)] - share * len(workspaces)) < 1
+
+
+def test_assigned_desks_respect_restricted_zones(master: MasterData) -> None:
+    allowed = defaultdict(set)
+    for rule in master.zone_access_rules:
+        allowed[rule.zone_id].add(rule.team_id)
+    zone_of = {w.workspace_id: w.zone_id for w in master.layout.workspaces}
+    team_of = {e.employee_id: e.team_id for e in master.employees}
+    for a in master.assignments:
+        zone = zone_of[a.workspace_id]
+        if zone in allowed:
+            assert team_of[a.employee_id] in allowed[zone]

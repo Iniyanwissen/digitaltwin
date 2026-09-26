@@ -1,6 +1,7 @@
 # Smart Workplace Digital Twin - simulation configuration.
 # Validated at startup by workplace_domain.config.schema.SimulationConfig.
-# Unknown keys are rejected, so typos fail fast.
+# Unknown keys are rejected, so typos fail fast. Behaviour values are ported from the kit
+# reference config (reference/config/simulation.yaml). Hours are decimal (9.5 = 09:30).
 
 # Root seed for every random stream (RngFactory). Same seed + same config = same simulation.
 seed: 12345
@@ -20,7 +21,7 @@ employees:
   count: 1000
   # Share of employees per work mode. Must sum to 1.0.
   work_mode_mix: { OFFICE: 0.25, HYBRID: 0.60, REMOTE: 0.15 }
-  # Share of employees per behavioral profile (config/profiles.yaml). Must sum to 1.0.
+  # Share of employees per behavioral profile (see `profiles`). Must sum to 1.0.
   profile_mix:
     EARLY_BIRD: 0.12
     STANDARD: 0.45
@@ -29,38 +30,160 @@ employees:
     REMOTE_HEAVY: 0.08
     MOBILE_WORKER: 0.10
 
+# Behavioral profiles: arrival hour (+ sd minutes), workday length hours (+ sd minutes),
+# meeting load multiplier and probability of switching desk after a break.
+profiles:
+  EARLY_BIRD:    { arrival: 7.5,  arrival_sd_min: 20, workday_h: 8.3, workday_sd_min: 40, meeting_factor: 1.0, desk_switch_p: 0.02 }
+  STANDARD:      { arrival: 9.0,  arrival_sd_min: 30, workday_h: 8.8, workday_sd_min: 45, meeting_factor: 1.0, desk_switch_p: 0.02 }
+  LATE_STARTER:  { arrival: 10.5, arrival_sd_min: 30, workday_h: 8.8, workday_sd_min: 45, meeting_factor: 0.9, desk_switch_p: 0.02 }
+  MEETING_HEAVY: { arrival: 9.0,  arrival_sd_min: 25, workday_h: 9.0, workday_sd_min: 45, meeting_factor: 2.0, desk_switch_p: 0.02 }
+  REMOTE_HEAVY:  { arrival: 9.5,  arrival_sd_min: 40, workday_h: 7.0, workday_sd_min: 60, meeting_factor: 0.8, desk_switch_p: 0.02 }
+  MOBILE_WORKER: { arrival: 9.25, arrival_sd_min: 35, workday_h: 8.5, workday_sd_min: 50, meeting_factor: 1.1, desk_switch_p: 0.25 }
+
 simulation:
   # Default live speed multiplier (sim seconds per wall second).
-  speed: 30
+  speed: 60
   # Speeds offered in the Simulation Control panel.
-  allowed_speeds: [1, 5, 10, 30, 60]
-  # Fast-forward through empty nights in live mode.
+  allowed_speeds: [1, 5, 10, 30, 60, 120, 300]
+  # Fast-forward through empty nights in live mode: when nobody is inside after
+  # night_starts_hour (or before morning_hour), jump to morning_hour.
   skip_night: true
+  night_starts_hour: 20.5
+  morning_hour: 6.0
+  # Live runner tick (wall milliseconds between engine advances).
+  tick_ms: 50
+  # First simulated day of a live run (null = today in the building timezone, moved forward
+  # to the next working day if today is a weekend or holiday).
+  live_start_date: null
   # Core hours used by utilization metrics.
   core_hours: { start: "08:00", end: "18:00" }
+  # Arrival/departure clamps (hours) and minimum workday length.
+  earliest_arrival: 6.0
+  latest_arrival: 12.0
+  latest_departure: 21.5
+  min_workday_h: 3.0
+  # Hour at which everyone still inside is sent home and the day is closed.
+  day_end_hour: 23.5
+
+calendar:
+  # ISO weekdays that are weekends (6 = Saturday, 7 = Sunday).
+  weekend_days: [6, 7]
+  holidays: ["2026-10-02", "2026-10-20", "2026-12-25"]
+  # Share of OFFICE-mode employees coming in on weekends and holidays.
+  weekend_attendance: 0.02
+  # Leave type mix for generated leave records.
+  leave_type_weights: { ANNUAL: 0.6, SICK: 0.3, OTHER: 0.1 }
 
 attendance:
   # Target average share of active employees in the office on a working day (percent).
   average_daily_percentage: 65
   # Sigma of the per-team, per-day log-normal attendance multiplier (team correlation).
   team_correlation_sigma: 0.15
+  # Multiplier on a team's configured office days.
+  team_office_day_boost: 1.25
+  # Base attendance probability by work mode (hybrid split by planned mode for the weekday).
+  base: { OFFICE: 0.92, HYBRID_OFFICE: 0.85, HYBRID_REMOTE: 0.08, HYBRID_FLEX: 0.35, REMOTE: 0.03 }
   # Multiplier on attendance probability per weekday.
   weekday_factor: { MON: 0.90, TUE: 1.05, WED: 1.10, THU: 1.05, FRI: 0.75 }
   # Probability an employee is on leave on a given working day.
   leave_rate: 0.04
+  # Cap on any individual daily attendance probability after calibration.
+  max_probability: 0.98
+
+activities:
+  # Log-normal dwell times (minutes): time at desk between moves, and each away activity.
+  desk_block: { median: 45, p90: 110 }
+  lunch: { median: 35, p90: 55 }
+  coffee: { median: 10, p90: 20 }
+  break: { median: 8, p90: 18 }
+  collaboration: { median: 25, p90: 60 }
+  other: { median: 5, p90: 12 }
+  # Relative weights of away-from-desk activities.
+  weights: { CAFETERIA: 1.0, BREAK: 1.2, COLLABORATION_AREA: 0.8, OTHER_AREA: 1.5 }
+  # Lunch happens in this window; people without lunch by then may still go until late_lunch_until.
+  lunch_window: { start: 12.0, end: 14.0 }
+  late_lunch_until: 15.0
+  lunch_boost: 4.0
+  # Desk blocks are shorter by this factor during the lunch window.
+  lunch_leave_rate_factor: 1.5
+  # Probability of returning to the desk to pack up before leaving.
+  pack_up_return_p: 0.8
+  # Probability a hot-desker picks their favourite desk again when it is free.
+  favourite_desk_p: 0.6
 
 meetings:
-  # Average meetings per attending employee per day.
+  # Average meetings per attending employee (scaled by profile meeting_factor) and spread.
   average_per_employee: 2.3
-  # Probability a participant does not show up.
+  per_employee_sd: 1.0
+  # Where participants are drawn from: own team, hidden partner teams, own department, else anyone.
+  team_share: 0.55
+  partner_share: 0.20
+  department_share: 0.15
+  # Meeting size (people) and duration (minutes) weights.
+  size_weights: { 2: 0.25, 3: 0.20, 4: 0.20, 5: 0.10, 6: 0.08, 8: 0.08, 10: 0.05, 14: 0.03, 20: 0.01 }
+  duration_weights: { 30: 0.45, 60: 0.45, 90: 0.10 }
+  # Start-time slots and time-of-day weighting.
+  slot_first_hour: 8.5
+  slot_last_hour: 17.5
+  slot_step_h: 0.5
+  peak_windows: [{ start: 10.0, end: 12.0 }, { start: 14.0, end: 16.0 }]
+  peak_boost: 1.5
+  quiet_window: { start: 12.5, end: 13.5 }
+  quiet_weight: 0.1
+  # Realism: no-shows, ghost bookings (booked, nobody comes), early ends, late starts.
   no_show_probability: 0.08
-  # Probability a booked meeting is attended by nobody.
   ghost_booking_probability: 0.07
-  # Share of room usage that happens without a booking.
+  early_end_probability: 0.20
+  early_end_s: { min: 300, max: 1200 }
+  late_start_s: { mean: 180, sd: 120 }
+  min_duration_s: 600
+  # Probability the organizer checks in on the room panel (rooms with a panel), and its delay.
+  room_check_in_probability: 0.70
+  check_in_delay_s: { min: 30, max: 180 }
+  # Share of room usage without a booking (walk-ins; used from the data-quality phase).
   walk_in_share: 0.05
+  # Hidden cross-team collaboration pairs (ground truth for the Team Collaboration analysis).
+  collaboration:
+    # Number of strong team pairs; each pair's teams draw partner_share of participants from each other.
+    pair_count: 12
+    # Share of pairs whose teams sit on different floors (so the analysis has moves to suggest).
+    cross_floor_share: 0.75
+
+timings:
+  # Seconds between states: badge-in to desk, meeting end to desk, packing up, walking out.
+  entry_to_desk_s: { min: 120, max: 480 }
+  meeting_to_desk_s: { min: 60, max: 180 }
+  pack_up_s: { min: 120, max: 420 }
+  exit_walk_s: { min: 60, max: 240 }
+  # People do not start a new away-activity this close to their departure time.
+  leave_before_departure_s: 300
+
+access:
+  # Share of arrivals without an ACCESS_IN (tailgating) and departures without ACCESS_OUT.
+  tailgate_probability: 0.015
+  missed_badge_out_probability: 0.04
+  # Share of internal reader passes (floor lobby, room door) actually badged. Secure zones: always.
+  internal_badge_compliance: 0.95
+  # Reader timing (seconds after the true movement).
+  entry_delay_s: { mean: 10, sd: 5 }
+  exit_delay_s: { mean: 8, sd: 4 }
+  min_delay_s: 2
+  area_reader_spacing_s: 20
+  area_reader_jitter_s: 5
+
+workstation:
+  explicit_logout_probability: 0.70
+  no_login_probability: 0.03
+  # Sessions not closed explicitly end by idle timeout, or at the end-of-day sweep (hour).
+  idle_timeout_minutes: 120
+  end_of_day_sweep: 23.0
+  login_delay_s: { mean: 60, sd: 30 }
+  min_login_delay_s: 10
+  logout_delay_s: { mean: 20, sd: 10 }
+  min_logout_delay_s: 3
 
 sensors:
-  # Heartbeat interval for desk sensors (seconds).
+  # Heartbeat interval for desk sensors (seconds); also the live heartbeat sweep interval.
   desk_poll_interval: 300
   # Heartbeat interval for room/common-area count sensors (seconds).
   room_poll_interval: 300
@@ -68,10 +191,59 @@ sensors:
   environment_poll_interval: 60
   # Seconds without presence before a desk sensor reports vacant.
   desk_vacancy_timeout_s: 180
+  # Desk sensor detection delay when someone sits down.
+  desk_detection_delay_s: { mean: 30, sd: 15 }
+  min_detection_delay_s: 5
+  # Room count sensor reporting lag and +/-1 count noise.
+  room_report_lag_s: { mean: 20, sd: 10 }
+  min_room_lag_s: 3
+  room_count_noise_probability: 0.05
+  count_confidence: 0.9
   # Share of desks fitted with an occupancy sensor (0-1).
   desk_sensor_coverage: 1.0
   # Installation date recorded on every generated sensor.
   installed_at: "2025-01-01"
+
+environment:
+  # Starting values per zone.
+  initial: { temperature_c: 24.0, co2_ppm: 450.0, humidity_pct: 50.0 }
+  # HVAC setpoints and dynamics per mode.
+  setpoint_c: { ECO: 26.0, NORMAL: 23.5, HIGH: 22.5 }
+  mean_reversion_per_min: { ECO: 0.03, NORMAL: 0.08, HIGH: 0.12 }
+  ventilation_per_min: { ECO: 0.02, NORMAL: 0.05, HIGH: 0.08, BOOST: 0.12 }
+  # Heat added at full occupancy load, and a daily outdoor sinusoid peaking at outdoor_peak_hour + 6.
+  occupancy_heat_c: 1.5
+  outdoor_amplitude_c: 0.8
+  outdoor_peak_hour: 9.0
+  # Zone capacity floor for load calculations, and the load cap.
+  min_zone_capacity: 10
+  max_load: 1.5
+  temperature_bounds_c: { min: 16, max: 32 }
+  temperature_noise_c: 0.03
+  outdoor_co2_ppm: 420
+  co2_per_load: 24
+  co2_noise_ppm: 3
+  humidity_base_pct: 48
+  humidity_per_load: 4
+  humidity_reversion_per_min: 0.05
+  humidity_noise_pct: 0.2
+  light_on_lux: { mean: 450, sd: 15 }
+  light_off_lux: { mean: 5, sd: 1 }
+  noise_base_dba: 35
+  noise_per_log_occupant: 8
+  noise_sd_dba: 1
+
+bms:
+  # Rules evaluated on every environment tick using OBSERVED sensor values only.
+  eco_after_empty_minutes: 15
+  high_above_pct: 70
+  high_exit_below_pct: 55
+  hot_threshold_c: 25.0
+  max_setpoint_drop_c: 2.0
+  setpoint_step_c: 1.0
+  co2_threshold_ppm: 1000
+  co2_recovery_margin_ppm: 250
+  cooldown_minutes: 10
 
 batch:
   # Environment reading interval for historical generation (seconds).
@@ -81,9 +253,15 @@ batch:
   # Worker processes for parallel day generation.
   parallel_workers: 4
 
-bms:
-  # How often the building management system evaluates automation rules (seconds).
-  evaluation_interval_s: 60
+delivery:
+  # Transport delay from device to ingestion (seconds).
+  transport_delay_s: { mean: 1.0, sd: 0.5 }
+  min_transport_delay_s: 0.1
+  # Late events (anomaly): extra delay is log-normal with this median and sigma.
+  late_delay_median_s: 600
+  late_delay_sigma: 0.8
+  # Duplicates are redelivered up to this many seconds later.
+  duplicate_delay_max_s: 120
 
 # Delivery anomalies. All 0 until the data-quality phase (Phase 9).
 anomalies:
@@ -96,7 +274,16 @@ anomalies:
 processing:
   # Max entries retained per in-memory event stream. The raw archive is the durable history.
   stream_maxlen: 200000
-  # How often live events and state deltas are flushed to WebSocket clients (wall ms).
+  # How often live frames are sent to WebSocket clients (wall ms).
   live_flush_ms: 500
   # Events whose ingest_time - event_time exceeds this are flagged late downstream (seconds).
   late_threshold_seconds: 300
+  # Versioned change log length kept for delta frames (older clients resync).
+  change_log_max: 200000
+  # Live event feed: rows kept in memory and rows sent per frame.
+  feed_buffer: 300
+  feed_per_frame: 40
+  # Number of recent event ids kept for de-duplication.
+  dedupe_window: 500000
+  # Recent automation actions kept for the UI.
+  automation_log: 50

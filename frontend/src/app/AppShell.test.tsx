@@ -12,7 +12,7 @@ const HEALTHY: Health = {
   checked_at: "2026-09-25T10:00:00Z",
   components: {
     database: { status: "ok", detail: "sqlite reachable", info: {} },
-    simulation_engine: { status: "ok", detail: "running", info: { run_status: "NO_RUN" } },
+    simulation_engine: { status: "ok", detail: "running", info: { status: "STOPPED" } },
   },
 };
 
@@ -36,7 +36,7 @@ describe("AppShell", () => {
     renderAt("/", okFetch as unknown as typeof fetch);
     expect(await screen.findByText("Healthy")).toBeInTheDocument();
     expect(screen.getByTestId("health-dot")).toHaveClass("bg-emerald-500");
-    expect(screen.getByText(/Simulation: no run/i)).toBeInTheDocument();
+    expect(screen.getByText(/Simulation: stopped/i)).toBeInTheDocument();
   });
 
   it("shows API unreachable when the request fails", async () => {

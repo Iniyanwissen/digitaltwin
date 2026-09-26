@@ -5,7 +5,7 @@ import type { NavSection } from "./navigation";
 
 export function Header({ section }: { section: NavSection | undefined }) {
   const { data } = useHealth();
-  const runStatus = data?.components.simulation_engine?.info.run_status;
+  const runStatus = data?.components.simulation_engine?.info.status;
 
   return (
     <header className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-3">

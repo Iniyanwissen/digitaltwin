@@ -38,6 +38,15 @@ EVENT_TYPE_SPECS: dict[EventType, EventTypeSpec] = {
     EventType.ACCESS_OUT: _spec(
         IdentityClass.IDENTIFIED, {Source.ACCESS_CONTROL}, _PERSON, Stream.ACCESS
     ),
+    EventType.AREA_ACCESS: _spec(
+        IdentityClass.IDENTIFIED, {Source.ACCESS_CONTROL}, _PERSON, Stream.ACCESS
+    ),
+    EventType.ACCESS_DENIED: _spec(
+        IdentityClass.IDENTIFIED, {Source.ACCESS_CONTROL}, _PERSON, Stream.ACCESS
+    ),
+    EventType.ROOM_CHECK_IN: _spec(
+        IdentityClass.IDENTIFIED, {Source.ROOM_PANEL}, {EntityType.EMPLOYEE}, Stream.ACCESS
+    ),
     EventType.WORKSPACE_LOGIN: _spec(
         IdentityClass.IDENTIFIED, {Source.WORKSTATION}, {EntityType.EMPLOYEE}, Stream.WORKSPACE
     ),

@@ -14,6 +14,7 @@ from twin_server.masterdata.store import MasterDataStore, config_id_for
 from workplace_domain.config import WorkplaceConfig
 from workplace_domain.enums import ComponentStatus
 from workplace_domain.interfaces import ComponentHealth
+from workplace_domain.models import MasterData
 
 log = structlog.get_logger("master-data")
 
@@ -30,6 +31,8 @@ class MasterDataService:
         self._config = config
         self.store = MasterDataStore(engine)
         self.reader = MasterDataReader(engine)
+        # Latest generated master data (identical to the stored version after ensure()).
+        self.current: MasterData | None = None
 
     def is_current(self) -> bool:
         version = self.store.current_version()
@@ -42,6 +45,7 @@ class MasterDataService:
         generator code changes that leave the config untouched.
         """
         master = generate_master_data(self._config)
+        self.current = master
         version = self.store.current_version()
         if (
             not force

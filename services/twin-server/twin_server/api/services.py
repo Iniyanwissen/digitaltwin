@@ -28,6 +28,12 @@ def _master_health(ctx: AppContext) -> ComponentHealth:
         return ComponentHealth(ComponentStatus.DOWN, f"{type(exc).__name__}: {exc}")
 
 
+async def _engine_health(ctx: AppContext) -> ComponentHealth:
+    if ctx.runner is None:
+        return ComponentHealth(ComponentStatus.DOWN, "waiting for master data")
+    return await ctx.runner.health()
+
+
 async def get_health(ctx: AppContext) -> HealthOut:
     config = ComponentHealth(
         ComponentStatus.OK, "config valid", {"content_hash": ctx.config.content_hash[:12]}
@@ -37,7 +43,7 @@ async def get_health(ctx: AppContext) -> HealthOut:
         run_in_threadpool(_master_health, ctx),
         ctx.bus.health(),
         ctx.state.health(),
-        ctx.engine.health(),
+        _engine_health(ctx),
         ctx.processor.health(),
     )
     components = {

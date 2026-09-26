@@ -79,3 +79,18 @@ Imported from the Local Kit v0.2 (`reference/`, `prompts/`, `mock-data/`, v0.2 d
 4. **New tables/columns (migration `0003`):** `master_zone.is_restricted`, `master_zone_access_rule`, `master_workspace.device_type`, `master_room.has_badge_reader/has_panel`, `master_access_point.reader_type/target_id`, `sim_floor_snapshot`.
 5. **Startup:** migrations are applied automatically (`auto_migrate`, also after auto-reload). Master data is regenerated when the generated content hash differs from the stored one, so generator code changes are picked up without a config change.
 6. **Directory UI:** columns kept; added Restricted badge (zones), Door reader and Check-in panel (rooms), a Badge readers table (Spaces) and Secure access (Teams).
+
+## 2026-09-26: Part B, engine and processor ported from the kit
+
+**Decisions**
+1. **Engine** (`twin_server/engine/simulation.py`) is a typed port of `reference/refsim/engine.py` running on our `MasterData`. It emits validated `EventEnvelope`s (privacy rules enforced on every event) and typed truth records. Hybrid adaptations: hot-desk zones = OPEN_WORKSPACE + TEAM_NEIGHBORHOOD; cabins only via assignment; common areas resolved on the nearest floor that has them; restricted zones use `zone_access_rule`; heartbeat source per sensor type (per event-model v0.2, not SENSOR_GATEWAY).
+2. **Config:** the kit's behaviour sections were added to `config/simulation.yaml` with a typed schema, and the kit's hardcoded timings (walks, reader delays, meeting slots, environment constants) became config keys. BMS rules run on every environment tick; `bms.evaluation_interval_s` was dropped.
+3. **RNG:** `RngFactory.py_stream()` returns a stdlib `Random` derived from the same seed sequence as the numpy streams (faster for the engine's many scalar draws). Still the only source of randomness.
+4. **Hidden collaboration map** (`engine/collaboration.py`): `meetings.collaboration.pair_count` disjoint team pairs, `cross_floor_share` of them on different floors, seeded. Meeting participants: `team_share` own team, `partner_share` partner teams (folds into own team when there is no partner), `department_share` department, rest anyone. Exposed only via `/api/v1/simulation/truth/collaboration`.
+5. **Processor:** `processor/live_state.py` ports `refsim/state.py` (dedupe, event-time guards, identity only from identified events, KPIs, versioned change log). It is the current-state model for now; the `StateStore` adapter remains for a later Redis option. Truth positions live in `live/truth_view.py`, never in LiveState; truth never travels on the event bus.
+6. **Live runner and API:** scaled clock with night skip as a background task; `POST /api/v1/simulation/commands`, `GET /api/v1/simulation/status`, `/api/v1/live/{layout,snapshot,desks/{id},rooms/{id}}`, `WS /ws/live?truth=0|1` (snapshot on connect, then delta frames every `processing.live_flush_ms`; resync by snapshot). Truth only when requested and labelled.
+7. **Live start date:** today in the building timezone, rolled forward to the next working day when today is a weekend or holiday (unless `simulation.live_start_date` is set).
+8. **Dev reload:** `scripts/dev.py` watches code/config and restarts the server process itself; `uvicorn --reload` on Windows could leave the old process serving. `shutdown_timeout_s` bounds graceful shutdown.
+9. **Assigned desks never overflow into restricted zones** a team may not enter (bug found by the new engine test).
+
+**Performance:** one medium weekday in batch mode ≈ 1.2 s (target < 30 s).

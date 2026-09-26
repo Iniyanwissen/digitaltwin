@@ -30,6 +30,8 @@ def _serve(settings: Settings, reload: bool) -> int:
         else None,
         reload_includes=["*.py", "*.yaml"] if reload else None,
         log_level=settings.log_level.lower(),
+        # Don't let keep-alive/WebSocket clients block shutdown and auto-reload.
+        timeout_graceful_shutdown=settings.shutdown_timeout_s,
     )
     return 0
 

@@ -11,6 +11,7 @@ from fastapi.concurrency import run_in_threadpool
 
 from twin_server import __version__
 from twin_server.api.routes import api_v1_router, system_router
+from twin_server.api.routes_live import live_router, live_ws_router
 from twin_server.api.routes_master import master_router
 from twin_server.context import AppContext
 from twin_server.db import run_migrations
@@ -38,6 +39,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             except Exception:
                 # Surfaced through /health (e.g. migrations not applied); keep serving.
                 log.exception("master_data_seed_failed")
+        if ctx.master.current is not None:
+            ctx.attach_live(ctx.master.current)
         ctx.start()
         log.info("twin_server_started", port=settings.port)
         try:
@@ -49,4 +52,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(system_router)
     app.include_router(api_v1_router)
     app.include_router(master_router)
+    app.include_router(live_router)
+    app.include_router(live_ws_router)
     return app

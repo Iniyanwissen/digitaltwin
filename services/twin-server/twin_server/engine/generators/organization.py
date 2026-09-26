@@ -184,8 +184,20 @@ def _restrict_zones(
 
 
 def _assign_desks(
-    employees: list[Employee], floors: list[Floor], layout: Layout, leads: set[str]
+    employees: list[Employee],
+    floors: list[Floor],
+    layout: Layout,
+    leads: set[str],
+    rules: list[ZoneAccessRule],
 ) -> list[WorkspaceAssignment]:
+    """Assign desks on ASSIGNED floors: leads get cabins, others their preferred zone first.
+
+    Overflow never lands in a restricted zone the employee's team may not enter.
+    """
+    allowed: dict[str, set[str]] = defaultdict(set)
+    for rule in rules:
+        allowed[rule.zone_id].add(rule.team_id)
+
     assignments: list[WorkspaceAssignment] = []
     for floor in floors:
         if floor.desk_policy is not DeskPolicy.ASSIGNED:
@@ -212,7 +224,14 @@ def _assign_desks(
             elif free_desks.get(emp.preferred_zone_id):
                 workspace_id = free_desks[emp.preferred_zone_id].pop(0)
             else:
-                zone = next((z for z in sorted(free_desks) if free_desks[z]), None)
+                zone = next(
+                    (
+                        z
+                        for z in sorted(free_desks)
+                        if free_desks[z] and (z not in allowed or emp.team_id in allowed[z])
+                    ),
+                    None,
+                )
                 if zone is not None:
                     workspace_id = free_desks[zone].pop(0)
             if workspace_id is not None:
@@ -333,5 +352,5 @@ def generate_organization(config: WorkplaceConfig, layout: Layout, rng: RngFacto
                 mode = PlannedMode.REMOTE if remote else PlannedMode.FLEX
             patterns.append(EmployeeWorkPattern(emp.employee_id, day, mode))
 
-    assignments = _assign_desks(employees, floors, layout, leads)
+    assignments = _assign_desks(employees, floors, layout, leads, access_rules)
     return OrgData(departments, teams, allocations, access_rules, employees, patterns, assignments)
